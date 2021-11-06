@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SafariWalletCore
 
 struct TransactionsView: View {
     @ObservedObject var Transactions: TransactionsViewModel
@@ -34,7 +35,7 @@ struct TransactionsView: View {
 }
 
 struct TransactionRow: View {
-    var tx: Transaction
+    var tx: Covalent.Transaction
     var body: some View {
         VStack {
             HStack {
