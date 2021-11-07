@@ -11,9 +11,7 @@ browser.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
 
     switch (request.message.message) {
         case `eth_requestAccounts`: // * Return requested data from native app to popup.js
-            const address = await browser.runtime.sendNativeMessage({
-                message: `eth_requestAccounts`,
-            });
+            const address = await browser.runtime.sendNativeMessage(`eth_requestAccounts`);
             browser.runtime.sendMessage({
                 message: address,
             });
@@ -39,12 +37,8 @@ browser.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
             });
             break;
         case `get_state`: // * Send current method, address, balance, and network (?) to popup.js
-            const currentAddress = await browser.runtime.sendNativeMessage({
-                message: `eth_getAccounts`,
-            });
-            const balance = await browser.runtime.sendNativeMessage({
-                message: `eth_getBalance`,
-            });
+            const currentAddress = await browser.runtime.sendNativeMessage(`eth_getAccounts`);
+            const balance = await browser.runtime.sendNativeMessage(`eth_getBalance`);
             console.log(`currentAddress response: `, currentAddress)
             console.log(`currentBalance response: `, balance)
             browser.runtime.sendMessage({

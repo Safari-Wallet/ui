@@ -33,6 +33,8 @@ struct ContentView: View {
                     .tabItem { Label("Shortcuts", systemImage: "square.grid.3x2") }
                 TransactionsView(Transactions: TransactionsViewModel(chain: "1", address: "ric.eth", currency: "USD", symbol: "$"))
                     .tabItem { Label("Transactions", systemImage: "repeat") }
+                SettingsView()
+                    .tabItem { Label("Settings", systemImage: "gear") }
                 #if DEBUG
                 DeveloperView()
                     .tabItem { Label("Developer", systemImage: "exclamationmark.triangle.fill") }

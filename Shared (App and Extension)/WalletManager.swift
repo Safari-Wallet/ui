@@ -8,6 +8,7 @@
 import Foundation
 import MEWwalletKit
 import SafariWalletCore
+import Alamofire
 
 class WalletManager {
 
@@ -31,6 +32,19 @@ class WalletManager {
         set {
             guard let wallet = newValue,  let sharedContainer = UserDefaults(suiteName: APP_GROUP) else { return }
             sharedContainer.set(wallet, forKey: "DefaultWallet")
+            sharedContainer.synchronize()
+        }
+    }
+    
+    var defaultNetwork: Network {
+        get {
+            guard let sharedContainer = UserDefaults(suiteName: APP_GROUP), let network = sharedContainer.string(forKey: "DefaultNetwork") else { return .ethereum }
+            if network == "Ropsten" { return .ropsten }
+            return .ethereum
+        }
+        set {
+            guard let sharedContainer = UserDefaults(suiteName: APP_GROUP) else { return }
+            sharedContainer.set(newValue.name, forKey: "DefaultNetwork")
             sharedContainer.synchronize()
         }
     }

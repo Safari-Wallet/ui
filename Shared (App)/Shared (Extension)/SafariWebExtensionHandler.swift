@@ -15,6 +15,7 @@ let SFSFExtensionResponseErrorKey = "error"
 class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
     
     let walletManager = WalletManager()
+    let logger = Logger()
     
     func beginRequest(with context: NSExtensionContext) {
         
@@ -24,62 +25,47 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
             let response = NSExtensionItem()
             defer { context.completeRequest(returningItems: [response], completionHandler: nil) }
 
-            // Parse message
+            // Sanity check
             let item = context.inputItems[0] as! NSExtensionItem
-            let message = item.userInfo?[SFExtensionMessageKey]
-            guard let messageDictionary = message as? [String: String], let message = messageDictionary["message"] else {
-                response.userInfo = errorResponse(error: "Received empty message.")
-                os_log(.default, "Safari-wallet SafariWebExtensionHandler: received empty message")
+            guard let message = item.userInfo?[SFExtensionMessageKey] else {
+                response.userInfo = errorResponse(error: "No message key in message.\(String(describing: item.userInfo))")
+                logger.critical("Safari-wallet SafariWebExtensionHandler: No message key in message")
                 return
             }
+                        
+            logger.critical("Safari-wallet SafariWebExtensionHandler: Received message from browser.runtime.sendNativeMessage: \(String(describing: message))")
             
-//            os_log(.default, "Safari-wallet SafariWebExtensionHandler: Received message from browser.runtime.sendNativeMessage: %@", message as CVarArg)
-            let logger = Logger() //label: "com.starlingprotocol.wallet")
-            logger.critical("Safari-wallet SafariWebExtensionHandler: Received message from browser.runtime.sendNativeMessage: \(message)")
+            // Parse message
             do {
                 let returnValue = try await handle(message: message)
                 response.userInfo = [SFExtensionMessageKey: returnValue]
+                logger.critical("Safari-wallet SafariWebExtensionHandler received \(String(describing: returnValue))")
             } catch {
                 response.userInfo = errorResponse(error: error.localizedDescription)
-                os_log(.error, "Safari-wallet SafariWebExtensionHandler: %@", error.localizedDescription as CVarArg)
+                logger.critical("Safari-wallet SafariWebExtensionHandler error: \(error.localizedDescription))")
             }
-//            os_log(.default, "Safari-wallet SafariWebExtensionHandler: Sending response %@", response.userInfo[SFExtensionMessageKey] as Any)
-            logger.critical("Safari-wallet SafariWebExtensionHandler response: \(String(describing: response.userInfo!))")
         }
-
     }
-}
-
-// MARK: - Message handling
-
-extension SafariWebExtensionHandler {
-        
+    
     fileprivate func errorResponse(error: String) -> [String: Any] {
         return [SFExtensionMessageKey: [SFSFExtensionResponseErrorKey: error]]
     }
-    
-    // web3 handler
-    func handle(message: String, parameters: [String: Any]? = nil) async throws -> Any {
-        
-        guard let client = AlchemyClient(key: alchemyMainnetKey) else { throw WalletError.gatewayConnectionError } // TODO: fix
-        guard let walletName = walletManager.defaultWallet else { throw WalletError.noDefaultWalletSet }
-        guard let address = walletManager.defaultAddress else { throw WalletError.noDefaultAddressSet }
-        
-        switch message {
-                        
-        case "eth_getAccounts", "get_current_address":
-            // Returns the address currently selected in the containing app and stored in NSUserDefaults
-            return [address]
 
-        case "eth_getBalance":
-            // Returns the balance of the currently selected address
-            return try await client.ethGetBalance(address: address).description
+    // MARK: - Web3 Message handling
+
+    func handle(message: Any) async throws -> Any {
+        let providerAPI = ProviderAPI(delegate: walletManager)
         
-        default:
-            os_log(.default, "Safari-wallet SafariWebExtensionHandler: received unknown command '%@'", message as CVarArg)
-            return [SFSFExtensionResponseErrorKey: "Unknown command in message"]
+        // Parse method and params
+        if let message = message as? String {
+            return try await providerAPI.parseMessage(method: message, params: nil)
+        } else if let message = message as? [String: Any] {
+//            logger.critical("Safari-wallet SafariWebExtensionHandler parsing dictionary: \(String(describing: message))")
+            guard let method = message["method"] as? String else { throw WalletError.noMethod }
+            let params = message["params"]
+            return try await providerAPI.parseMessage(method: method, params: params)
+        } else {
+            throw WalletError.invalidInput
         }
-
     }
-    
 }
