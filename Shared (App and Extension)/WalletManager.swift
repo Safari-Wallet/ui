@@ -48,6 +48,16 @@ class WalletManager {
             sharedContainer.synchronize()
         }
     }
+    
+    // MARK: - Lifecycle
+    
+    init() {
+        SafariWalletCore.shared.delegate = self
+    }
+    
+    deinit {
+        SafariWalletCore.shared.delegate = nil
+    }
       
     // MARK: - Restore wallet
     
