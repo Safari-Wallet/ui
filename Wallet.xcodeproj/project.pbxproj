@@ -77,6 +77,8 @@
 		F8812B5F27192AA600D1B231 /* ShortcutItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8812B5D27192AA600D1B231 /* ShortcutItem.swift */; };
 		F8812B6227193E8B00D1B231 /* DeveloperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8812B6127193E8B00D1B231 /* DeveloperView.swift */; };
 		F8812B6327193E8B00D1B231 /* DeveloperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8812B6127193E8B00D1B231 /* DeveloperView.swift */; };
+		F89E258327382C3B00596610 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89E258227382C3B00596610 /* SettingsView.swift */; };
+		F89E258427382C3B00596610 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89E258227382C3B00596610 /* SettingsView.swift */; };
 		F8ABEEC927124A8C007F7D11 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ABEEC327124A8C007F7D11 /* Constants.swift */; };
 		F8ABEECA27124A8C007F7D11 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ABEEC327124A8C007F7D11 /* Constants.swift */; };
 		F8ABEECB27124A8C007F7D11 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ABEEC327124A8C007F7D11 /* Constants.swift */; };
@@ -229,6 +231,7 @@
 		F8812B5A271923A300D1B231 /* ShortcutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutView.swift; sourceTree = "<group>"; };
 		F8812B5D27192AA600D1B231 /* ShortcutItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutItem.swift; sourceTree = "<group>"; };
 		F8812B6127193E8B00D1B231 /* DeveloperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperView.swift; sourceTree = "<group>"; };
+		F89E258227382C3B00596610 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsView.swift; path = "Shared (App)/SettingsTab/SettingsView.swift"; sourceTree = SOURCE_ROOT; };
 		F8ABEEC327124A8C007F7D11 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F8ABEEC427124A8C007F7D11 /* BiometricsAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiometricsAuthentication.swift; sourceTree = "<group>"; };
 		F8ABEEC527124A8C007F7D11 /* FileObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileObserver.swift; sourceTree = "<group>"; };
@@ -322,6 +325,7 @@
 				F8321B57271698EB00F12938 /* Onboarding */,
 				F8812B562719235B00D1B231 /* TransactionsTab */,
 				F8812B552719234A00D1B231 /* ShortcutTab */,
+				F89E258127382C2A00596610 /* SettingsTab */,
 				F8812B6027193E7E00D1B231 /* DeveloperTab */,
 				F8ABEF3427125F16007F7D11 /* ContentView.swift */,
 				F8ABEEC427124A8C007F7D11 /* BiometricsAuthentication.swift */,
@@ -479,6 +483,15 @@
 				F8812B6127193E8B00D1B231 /* DeveloperView.swift */,
 			);
 			path = DeveloperTab;
+			sourceTree = "<group>";
+		};
+		F89E258127382C2A00596610 /* SettingsTab */ = {
+			isa = PBXGroup;
+			children = (
+				F89E258227382C3B00596610 /* SettingsView.swift */,
+			);
+			name = SettingsTab;
+			path = ShortcutTab/SettingsTab;
 			sourceTree = "<group>";
 		};
 		F8ABEEE827125105007F7D11 /* Frameworks */ = {
@@ -829,6 +842,7 @@
 				F8321B622717768400F12938 /* SummaryView.swift in Sources */,
 				F8ABEF3827129797007F7D11 /* WalletManager.swift in Sources */,
 				F8812B482717E18600D1B231 /* RecoveryPhrase.swift in Sources */,
+				F89E258327382C3B00596610 /* SettingsView.swift in Sources */,
 				F8C5B0022723BC5900B54FBD /* keys.swift in Sources */,
 				0A8BB794272E719800DFC647 /* TransactionsViewModel.swift in Sources */,
 				F8ABEED127124A8C007F7D11 /* FileObserver.swift in Sources */,
@@ -867,6 +881,7 @@
 				F8321B632717768400F12938 /* SummaryView.swift in Sources */,
 				F8ABEF3927129797007F7D11 /* WalletManager.swift in Sources */,
 				F8ABEECA27124A8C007F7D11 /* Constants.swift in Sources */,
+				F89E258427382C3B00596610 /* SettingsView.swift in Sources */,
 				F8C5B0032723BC5900B54FBD /* keys.swift in Sources */,
 				0A8BB795272E719800DFC647 /* TransactionsViewModel.swift in Sources */,
 				F8ABEF3F27129DEB007F7D11 /* AppDelegate.swift in Sources */,
