@@ -61,7 +61,7 @@ extension SafariWebExtensionHandler {
     // web3 handler
     func handle(message: String, parameters: [String: Any]? = nil) async throws -> Any {
         
-        guard let client = AlchemyClient(key: alchemyMainnetKey) else { throw WalletError.gatewayConnectionError } // TODO: fix
+        guard let client = EthereumClient(provider: .alchemy(key: alchemyMainnetKey)) else { throw WalletError.gatewayConnectionError }
         guard let walletName = walletManager.defaultWallet else { throw WalletError.noDefaultWalletSet }
         guard let address = walletManager.defaultAddress else { throw WalletError.noDefaultAddressSet }
         
