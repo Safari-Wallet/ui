@@ -40,9 +40,15 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
                 let returnValue = try await handle(message: message)
                 response.userInfo = [SFExtensionMessageKey: returnValue]
                 logger.critical("Safari-wallet SafariWebExtensionHandler received \(String(describing: returnValue))")
+            } catch WalletError.noMethod {
+                response.userInfo = errorResponse(error: "No method found")
+            } catch WalletError.invalidInput {
+                response.userInfo = errorResponse(error: "Error parsing input")
+            } catch WalletCoreError.noClient {
+                response.userInfo = errorResponse(error: "No Client")
             } catch {
                 response.userInfo = errorResponse(error: error.localizedDescription)
-                logger.critical("Safari-wallet SafariWebExtensionHandler error: \(error.localizedDescription))")
+//                logger.critical("Safari-wallet SafariWebExtensionHandler error: \(error.localizedDescription))")
             }
         }
     }
@@ -60,7 +66,6 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
         if let message = message as? String {
             return try await providerAPI.parseMessage(method: message, params: nil)
         } else if let message = message as? [String: Any] {
-//            logger.critical("Safari-wallet SafariWebExtensionHandler parsing dictionary: \(String(describing: message))")
             guard let method = message["method"] as? String else { throw WalletError.noMethod }
             let params = message["params"]
             return try await providerAPI.parseMessage(method: method, params: params)
