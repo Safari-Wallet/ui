@@ -27,15 +27,15 @@ class TransactionsViewModel: ObservableObject {
                                  symbol: String) {
         Task {
             do {
-                guard let client = CovalentClient(covalentKey: covalentKey) else {
-                    //TODO: Error handling
-                    fatalError("TODO: Error handling")
-                }
-                let transactions = try await client.getTransactions(chain: chain,
-                                                                    address: address,
-                                                                    currency: currency,
-                                                                    symbol: symbol)
-                self.transactions = transactions
+//                guard let client = CovalentClient(covalentKey: covalentKey) else {
+//                    //TODO: Error handling
+//                    fatalError("TODO: Error handling")
+//                }
+//                let transactions = try await client.getTransactions(chain: chain,
+//                                                                    address: address,
+//                                                                    currency: currency,
+//                                                                    symbol: symbol)
+//                self.transactions = transactions
             } catch {
                 //TODO: Error handling
                 fatalError("TODO: Error handling")
