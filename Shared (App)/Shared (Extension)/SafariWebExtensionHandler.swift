@@ -42,6 +42,8 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
                 logger.critical("Safari-wallet SafariWebExtensionHandler received \(String(describing: returnValue))")
             } catch WalletError.noMethod {
                 response.userInfo = errorResponse(error: "No method found")
+            } catch WalletCoreError.noParameters {
+                response.userInfo = errorResponse(error: "Missing paramaters")
             } catch WalletError.invalidInput {
                 response.userInfo = errorResponse(error: "Error parsing input")
             } catch WalletCoreError.noClient {
