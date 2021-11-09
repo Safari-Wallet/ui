@@ -42,8 +42,7 @@ struct DeveloperView: View {
             Button("get balance") {
                 Task {
                     do {
-                        let baseURL = ClientBaseURL.alchemy(key: alchemyMainnetKey) // TODO: Fix
-                        let client = Client(baseURL: baseURL)!
+                        let client = EthereumClient(provider: .alchemy(key: alchemyMainnetKey))!
                         let balance = try await client.ethGetBalance(address: "0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B", blockNumber: .latest)
                         print(balance.description)
                         let height = try await client.ethBlockNumber()
@@ -53,6 +52,26 @@ struct DeveloperView: View {
                     }
                 }
             }
+           
+           Button("Call alchemy_getAssetTransfers") {
+              Task {
+                 do {
+                    let client = AlchemyClient(key: alchemyMainnetKey)!
+                    //https://docs.alchemy.com/alchemy/documentation/enhanced-apis/transfers-api
+                    let transfers = try await client.alchemyAssetTransfers(fromBlock: Block(rawValue: "A97AB8"),
+                                                                           toBlock: Block(rawValue: "A97CAC"),
+                                                                           fromAddress: Address(address: "3f5CE5FBFe3E9af3971dD833D26bA9b5C936f0bE"),
+                                                                           contractAddresses: [
+                                                                              Address(address: "7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9")!
+                                                                           ],
+                                                                           excludeZeroValue: true,
+                                                                           maxCount: 5)
+                    print(transfers)
+                 } catch {
+                    print(error)
+                 }
+              }
+           }
             
             Button("Create a new wallet") {
                 isOnBoardingPresented = true
