@@ -24,6 +24,7 @@ extension ShortcutItem {
     static func tokens() -> [ShortcutItem] {
         return [
             ShortcutItem(name: "Test Dev App", id: -1, url: URL(string: "https://safari-wallet-test-dapp.vercel.app")!),
+            ShortcutItem(name: "Local Test App", id: -2, url: URL(string: "https://localhost:3000")!),
             ShortcutItem(name: "Uniswap", id: 1027, url: URL(string: "https://app.uniswap.org/")!),
             ShortcutItem(name: "Aave", id: 7278, url: URL(string: "https://app.aave.com")!),
             ShortcutItem(name: "Maker", id: 1518, url: URL(string: "https://oasis.app")!),
