@@ -79,4 +79,20 @@ window.addEventListener(`load`, () => {
         }
     });
 
+    $(`call`).addEventListener(`click`, async () => {
+        if (currentAccounts.length > 0) {
+            try {
+                await window.ethereum.request({
+                    method: `eth_call`,
+                    params: ``,
+                    from: currentAccounts[0],
+                });
+            } catch (e) {
+                alert(`Something went wrong with eth_call.`);
+            }
+        } else {
+            alert(`Please connect a wallet first.`);
+        }
+    });
+
 });
