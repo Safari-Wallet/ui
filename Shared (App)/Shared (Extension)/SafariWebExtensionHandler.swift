@@ -28,7 +28,7 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
             // Sanity check
             let item = context.inputItems[0] as! NSExtensionItem
             guard let message = item.userInfo?[SFExtensionMessageKey] else {
-                response.userInfo = errorResponse(error: "No message key in message.\(String(describing: item.userInfo))")
+                response.userInfo = errorResponse(error: "No message key in message or message is not a string.\(String(describing: item.userInfo))")
                 logger.critical("Safari-wallet SafariWebExtensionHandler: No message key in message")
                 return
             }
@@ -63,13 +63,13 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
 
     func handle(message: Any) async throws -> Any {
         let providerAPI = ProviderAPI(delegate: walletManager)
-        
         // Parse method and params
         if let message = message as? String {
             return try await providerAPI.parseMessage(method: message, params: nil)
         } else if let message = message as? [String: Any] {
             guard let method = message["method"] as? String else { throw WalletError.noMethod }
             let params = message["params"]
+            logger.critical("Safari-wallet SafariWebExtensionHandler: Received object with method \(method) and params \(String(describing: params))")
             return try await providerAPI.parseMessage(method: method, params: params)
         } else {
             throw WalletError.invalidInput

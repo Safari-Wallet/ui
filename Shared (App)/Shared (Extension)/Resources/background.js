@@ -43,10 +43,14 @@ browser.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
             break;
         case `eth_call`:
             console.log(`background.js has received eth_call`);
-            const data = await browser.runtime.sendNativeMessage(JSON.stringify({
+//            const data = await browser.runtime.sendNativeMessage(JSON.stringify({
+//                method: `eth_call`,
+//                params: ``,
+//            }));
+            const data = await browser.runtime.sendNativeMessage({
                 method: `eth_call`,
-                params: ``,
-            }));
+                params: `this is a mock parameter`,
+            });
             console.table(data);
             break;
         case `cancel`: // * Cancel current method and notify popup.js of cancellation

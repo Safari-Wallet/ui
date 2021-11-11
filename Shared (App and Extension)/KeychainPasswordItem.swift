@@ -128,7 +128,7 @@ struct KeychainPasswordItem {
                 #endif
             }
             
-            // Add a the new item to the keychain.
+            // Add the new item to the keychain.
             let status = SecItemAdd(newItem as CFDictionary, nil)
 
             // Throw an error if an unexpected status was returned.
