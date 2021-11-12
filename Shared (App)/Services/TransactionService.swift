@@ -42,11 +42,11 @@ final class TransactionService: TransactionFetchable {
                               symbol: String) async throws -> [AlchemyAssetTransfer] {
         guard let client = client else { throw TransactionError.networkConnectionFailed }
         let sentTxs = try await client.alchemyAssetTransfers(
-            fromBlock: Block(rawValue: 0),
+            fromBlock: .genesis,
             fromAddress: Address(address: address)
         )
         let receivedTxs = try await client.alchemyAssetTransfers(
-            fromBlock: Block(rawValue: 0),
+            fromBlock: .genesis,
             toAddress: Address(address: address)
         )
         return sentTxs + receivedTxs
@@ -59,7 +59,7 @@ final class TransactionService: TransactionFetchable {
                                symbol: String) async throws -> [AlchemyAssetTransfer] {
         guard let client = client else { throw TransactionError.networkConnectionFailed }
         let sentTxs = try await client.alchemyAssetTransfers(
-            fromBlock: Block(rawValue: 0),
+            fromBlock: .genesis,
             fromAddress: Address(address: address)
         )
         return sentTxs
@@ -72,7 +72,7 @@ final class TransactionService: TransactionFetchable {
                                    symbol: String) async throws -> [AlchemyAssetTransfer] {
         guard let client = client else { throw TransactionError.networkConnectionFailed }
         let receivedTxs = try await client.alchemyAssetTransfers(
-            fromBlock: Block(rawValue: 0),
+            fromBlock: .genesis,
             toAddress: Address(address: address)
         )
         return receivedTxs
@@ -81,4 +81,8 @@ final class TransactionService: TransactionFetchable {
 
 enum TransactionError: Error {
     case networkConnectionFailed
+}
+
+private extension Block {
+    static let genesis = Block(rawValue: 0)
 }
