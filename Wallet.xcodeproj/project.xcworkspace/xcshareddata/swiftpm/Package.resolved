@@ -32,8 +32,8 @@
         "package": "SafariWalletCore",
         "repositoryURL": "https://github.com/Safari-Wallet/core",
         "state": {
-          "branch": "main",
-          "revision": "e6b3e81c0067945357997461ab8e55f53926fa7e",
+          "branch": "develop",
+          "revision": "d7c9459b69126ba4822d8c5f31db26eaa7ef31c2",
           "version": null
         }
       },

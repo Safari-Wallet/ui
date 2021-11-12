@@ -61,6 +61,8 @@
 		F8321B632717768400F12938 /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8321B612717768400F12938 /* SummaryView.swift */; };
 		F83FBA1E2730DBF300F864A7 /* SafariWalletCore in Frameworks */ = {isa = PBXBuildFile; productRef = F83FBA1D2730DBF300F864A7 /* SafariWalletCore */; };
 		F83FBA202730DD1F00F864A7 /* SafariWalletCore in Frameworks */ = {isa = PBXBuildFile; productRef = F83FBA1F2730DD1F00F864A7 /* SafariWalletCore */; };
+		F84CFF29273842B200193E1B /* WalletManager+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89E2585273833AC00596610 /* WalletManager+Core.swift */; };
+		F84CFF2A273842B200193E1B /* WalletManager+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89E2585273833AC00596610 /* WalletManager+Core.swift */; };
 		F8812B482717E18600D1B231 /* RecoveryPhrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8812B472717E18600D1B231 /* RecoveryPhrase.swift */; };
 		F8812B4A2717E2F700D1B231 /* RecoveryPhrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8812B472717E18600D1B231 /* RecoveryPhrase.swift */; };
 		F8812B4C2718B91600D1B231 /* Intro1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8812B4B2718B91600D1B231 /* Intro1View.swift */; };
@@ -77,6 +79,10 @@
 		F8812B5F27192AA600D1B231 /* ShortcutItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8812B5D27192AA600D1B231 /* ShortcutItem.swift */; };
 		F8812B6227193E8B00D1B231 /* DeveloperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8812B6127193E8B00D1B231 /* DeveloperView.swift */; };
 		F8812B6327193E8B00D1B231 /* DeveloperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8812B6127193E8B00D1B231 /* DeveloperView.swift */; };
+		F88801CF273A392A00094849 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88801CE273A392A00094849 /* SettingsView.swift */; };
+		F88801D0273A392A00094849 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88801CE273A392A00094849 /* SettingsView.swift */; };
+		F89E2586273833AC00596610 /* WalletManager+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89E2585273833AC00596610 /* WalletManager+Core.swift */; };
+		F89E2587273833AC00596610 /* WalletManager+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89E2585273833AC00596610 /* WalletManager+Core.swift */; };
 		F8ABEEC927124A8C007F7D11 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ABEEC327124A8C007F7D11 /* Constants.swift */; };
 		F8ABEECA27124A8C007F7D11 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ABEEC327124A8C007F7D11 /* Constants.swift */; };
 		F8ABEECB27124A8C007F7D11 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ABEEC327124A8C007F7D11 /* Constants.swift */; };
@@ -229,6 +235,8 @@
 		F8812B5A271923A300D1B231 /* ShortcutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutView.swift; sourceTree = "<group>"; };
 		F8812B5D27192AA600D1B231 /* ShortcutItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutItem.swift; sourceTree = "<group>"; };
 		F8812B6127193E8B00D1B231 /* DeveloperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperView.swift; sourceTree = "<group>"; };
+		F88801CE273A392A00094849 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsView.swift; path = "Shared (App)/SettingsTab/SettingsView.swift"; sourceTree = SOURCE_ROOT; };
+		F89E2585273833AC00596610 /* WalletManager+Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalletManager+Core.swift"; sourceTree = "<group>"; };
 		F8ABEEC327124A8C007F7D11 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F8ABEEC427124A8C007F7D11 /* BiometricsAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiometricsAuthentication.swift; sourceTree = "<group>"; };
 		F8ABEEC527124A8C007F7D11 /* FileObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileObserver.swift; sourceTree = "<group>"; };
@@ -299,7 +307,6 @@
 		0A0E1E7F270687AA00061EA6 = {
 			isa = PBXGroup;
 			children = (
-				F83FBA212730DEF100F864A7 /* Deprecated */,
 				F8ABEEE227124C5D007F7D11 /* Wallet Extension (iOS).entitlements */,
 				F8ABEEE127124C30007F7D11 /* Wallet (iOS).entitlements */,
 				F8ABEF3A271297A3007F7D11 /* Shared (App and Extension) */,
@@ -322,6 +329,7 @@
 				F8321B57271698EB00F12938 /* Onboarding */,
 				F8812B562719235B00D1B231 /* TransactionsTab */,
 				F8812B552719234A00D1B231 /* ShortcutTab */,
+				F88801CD273A391800094849 /* SettingsTab */,
 				F8812B6027193E7E00D1B231 /* DeveloperTab */,
 				F8ABEF3427125F16007F7D11 /* ContentView.swift */,
 				F8ABEEC427124A8C007F7D11 /* BiometricsAuthentication.swift */,
@@ -431,13 +439,6 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
-		F83FBA212730DEF100F864A7 /* Deprecated */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Deprecated;
-			sourceTree = "<group>";
-		};
 		F8812B462717E07000D1B231 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -481,6 +482,15 @@
 			path = DeveloperTab;
 			sourceTree = "<group>";
 		};
+		F88801CD273A391800094849 /* SettingsTab */ = {
+			isa = PBXGroup;
+			children = (
+				F88801CE273A392A00094849 /* SettingsView.swift */,
+			);
+			name = SettingsTab;
+			path = ShortcutTab/SettingsTab;
+			sourceTree = "<group>";
+		};
 		F8ABEEE827125105007F7D11 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -493,6 +503,7 @@
 			children = (
 				F8ABEF40271389CD007F7D11 /* Extensions */,
 				F8ABEF3727129797007F7D11 /* WalletManager.swift */,
+				F89E2585273833AC00596610 /* WalletManager+Core.swift */,
 				F8ABEEC327124A8C007F7D11 /* Constants.swift */,
 				F8ABEEC627124A8C007F7D11 /* SharedDocument.swift */,
 				F8ABEEC727124A8C007F7D11 /* WalletError.swift */,
@@ -821,9 +832,11 @@
 				F8ABEECD27124A8C007F7D11 /* BiometricsAuthentication.swift in Sources */,
 				F8ABEF3227125EFA007F7D11 /* WalletApp.swift in Sources */,
 				F8ABEF42271389D9007F7D11 /* URL.swift in Sources */,
+				F89E2586273833AC00596610 /* WalletManager+Core.swift in Sources */,
 				F8ABEED527124A8C007F7D11 /* SharedDocument.swift in Sources */,
 				F8ABEEDD27124A8C007F7D11 /* KeychainPasswordItem.swift in Sources */,
 				F8ABEEC927124A8C007F7D11 /* Constants.swift in Sources */,
+				F88801CF273A392A00094849 /* SettingsView.swift in Sources */,
 				F8812B6227193E8B00D1B231 /* DeveloperView.swift in Sources */,
 				F8812B5E27192AA600D1B231 /* ShortcutItem.swift in Sources */,
 				F8321B622717768400F12938 /* SummaryView.swift in Sources */,
@@ -859,9 +872,11 @@
 				F8ABEED227124A8C007F7D11 /* FileObserver.swift in Sources */,
 				F8ABEEDE27124A8C007F7D11 /* KeychainPasswordItem.swift in Sources */,
 				F8ABEF43271389D9007F7D11 /* URL.swift in Sources */,
+				F89E2587273833AC00596610 /* WalletManager+Core.swift in Sources */,
 				F8ABEED627124A8C007F7D11 /* SharedDocument.swift in Sources */,
 				F8ABEF3627125F16007F7D11 /* ContentView.swift in Sources */,
 				F8ABEECE27124A8C007F7D11 /* BiometricsAuthentication.swift in Sources */,
+				F88801D0273A392A00094849 /* SettingsView.swift in Sources */,
 				F8812B6327193E8B00D1B231 /* DeveloperView.swift in Sources */,
 				F8812B5F27192AA600D1B231 /* ShortcutItem.swift in Sources */,
 				F8321B632717768400F12938 /* SummaryView.swift in Sources */,
@@ -891,6 +906,7 @@
 				F8ABEEDB27124A8C007F7D11 /* WalletError.swift in Sources */,
 				F8ABEED727124A8C007F7D11 /* SharedDocument.swift in Sources */,
 				F8ABEF49271389F5007F7D11 /* NSFileCoordinator.swift in Sources */,
+				F84CFF29273842B200193E1B /* WalletManager+Core.swift in Sources */,
 				0A8BB79B272E729200DFC647 /* Transaction.swift in Sources */,
 				F8ABEF44271389D9007F7D11 /* URL.swift in Sources */,
 			);
@@ -911,6 +927,7 @@
 				F8ABEEDC27124A8C007F7D11 /* WalletError.swift in Sources */,
 				F8ABEED827124A8C007F7D11 /* SharedDocument.swift in Sources */,
 				F8ABEF4A271389F5007F7D11 /* NSFileCoordinator.swift in Sources */,
+				F84CFF2A273842B200193E1B /* WalletManager+Core.swift in Sources */,
 				0A8BB79C272E729200DFC647 /* Transaction.swift in Sources */,
 				F8ABEF45271389D9007F7D11 /* URL.swift in Sources */,
 			);

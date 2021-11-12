@@ -21,4 +21,6 @@ enum WalletError: Error {
     case noDefaultAddressSet
     case unexpectedResponse(String)
     case gatewayConnectionError
+    case noMethod
+    case expectedDictionary
 }
