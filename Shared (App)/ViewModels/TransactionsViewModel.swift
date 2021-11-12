@@ -51,11 +51,26 @@ final class TransactionsListViewModel: ObservableObject {
                 
                 switch self.filter {
                 case .sent:
-                    transactions = try await service.fetchSentTransactions(chain: chain, address: address, currency: currency, symbol: symbol)
+                    transactions = try await service.fetchSentTransactions(
+                        chain: chain,
+                        address: address,
+                        currency: currency,
+                        symbol: symbol
+                    )
                 case .received:
-                    transactions = try await service.fetchReceivedTransactions(chain: chain, address: address, currency: currency, symbol: symbol)
+                    transactions = try await service.fetchReceivedTransactions(
+                        chain: chain,
+                        address: address,
+                        currency: currency,
+                        symbol: symbol
+                    )
                 default:
-                    transactions = try await service.fetchAllTransactions(chain: chain, address: address, currency: currency, symbol: symbol)
+                    transactions = try await service.fetchAllTransactions(
+                        chain: chain,
+                        address: address,
+                        currency: currency,
+                        symbol: symbol
+                    )
                 }
                 
                 let viewModels = transactions
@@ -65,7 +80,6 @@ final class TransactionsListViewModel: ObservableObject {
                 state = .fetched(txs: viewModels)
             } catch let error {
                 //TODO: Error handling / Define error cases and appropriate error messages
-                print(error)
                 state = .error(message: error.localizedDescription)
             }
         }

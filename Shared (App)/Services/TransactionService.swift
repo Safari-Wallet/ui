@@ -37,12 +37,18 @@ final class TransactionService: TransactionFetchable {
     
     @MainActor
     func fetchAllTransactions(chain: String,
-                           address: String,
-                           currency: String,
-                           symbol: String) async throws -> [AlchemyAssetTransfer] {
+                              address: String,
+                              currency: String,
+                              symbol: String) async throws -> [AlchemyAssetTransfer] {
         guard let client = client else { throw TransactionError.networkConnectionFailed }
-        let sentTxs = try await client.alchemyAssetTransfers(fromBlock: Block(rawValue: 0), fromAddress: Address(address: address))
-        let receivedTxs = try await client.alchemyAssetTransfers(fromBlock: Block(rawValue: 0), toAddress: Address(address: address))
+        let sentTxs = try await client.alchemyAssetTransfers(
+            fromBlock: Block(rawValue: 0),
+            fromAddress: Address(address: address)
+        )
+        let receivedTxs = try await client.alchemyAssetTransfers(
+            fromBlock: Block(rawValue: 0),
+            toAddress: Address(address: address)
+        )
         return sentTxs + receivedTxs
     }
     
@@ -52,7 +58,10 @@ final class TransactionService: TransactionFetchable {
                                currency: String,
                                symbol: String) async throws -> [AlchemyAssetTransfer] {
         guard let client = client else { throw TransactionError.networkConnectionFailed }
-        let sentTxs = try await client.alchemyAssetTransfers(fromBlock: Block(rawValue: 0), fromAddress: Address(address: address))
+        let sentTxs = try await client.alchemyAssetTransfers(
+            fromBlock: Block(rawValue: 0),
+            fromAddress: Address(address: address)
+        )
         return sentTxs
     }
     
@@ -62,7 +71,10 @@ final class TransactionService: TransactionFetchable {
                                    currency: String,
                                    symbol: String) async throws -> [AlchemyAssetTransfer] {
         guard let client = client else { throw TransactionError.networkConnectionFailed }
-        let receivedTxs = try await client.alchemyAssetTransfers(fromBlock: Block(rawValue: 0), toAddress: Address(address: address))
+        let receivedTxs = try await client.alchemyAssetTransfers(
+            fromBlock: Block(rawValue: 0),
+            toAddress: Address(address: address)
+        )
         return receivedTxs
     }
 }
