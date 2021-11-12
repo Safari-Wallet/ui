@@ -55,4 +55,5 @@ let alchemyMainnetKey: String = "<YOUR ALCHEMY MAINNET KEY HERE>"
 let infuraRopstenKey: String = "<YOUR INFURA ROPSTEN KEY HERE>"
 let infuraMainnetKey: String = "<YOUR INFURA MAINNET KEY HERE>"
 let covalentKey: String = "<YOUR COVALENT KEY HERE>"
+let unmarshalKey: String = "<YOUR UNMARSCHAL KEY HERE>"
 ```

@@ -39,13 +39,13 @@ struct TransactionRow: View {
     var body: some View {
         VStack {
             HStack {
-                Text(tx.from_address!)
+                Text(tx.from_address!.address)
                     .lineLimit(1)
                     .truncationMode(.middle)
                 if tx.to_address != nil {
                     Image(systemName: "arrow.right")
                         .foregroundColor(.blue)
-                    Text(tx.to_address!)
+                    Text(tx.to_address!.address)
                         .lineLimit(1)
                         .truncationMode(.middle)
                 }
