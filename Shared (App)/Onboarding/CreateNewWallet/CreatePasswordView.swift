@@ -93,7 +93,7 @@ extension CreatePasswordView {
         print(addresses)
         #endif
         manager.defaultAddress = addresses.first!
-        manager.defaultWallet = name
+        try await manager.setDefaultWallet(to: name)        
     }
 }
 

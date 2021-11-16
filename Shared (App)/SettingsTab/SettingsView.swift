@@ -35,14 +35,14 @@ struct SettingsView: View {
                 .labelsHidden()
                 .pickerStyle(.inline)
                 .onChange(of: selectedWalletIndex) { tag in
-                    print(tag)
-                    // TODO: wallet
+                    Task {
+                        try? await manager.setDefaultWallet(to: wallets[tag])
+                        await reloadWallet()
+                    }
                 }
             }
             .task {
-                guard let defaultWallet = manager.defaultWallet, let wallets = try? manager.listWalletFiles() else { return }
-                self.wallets = wallets
-                self.selectedWalletIndex = wallets.firstIndex(of: defaultWallet) ?? 0
+                await self.reloadWallet(firstPass: true)
             }
             
             // MARK: - Accounts selection
@@ -54,15 +54,10 @@ struct SettingsView: View {
                 }
                 .labelsHidden()
                 .pickerStyle(.inline)
-                .onChange(of: selectedAddressIndex) { tag in
+                .onChange(of: selectedAddressIndex) { tag in                    
                     manager.defaultAddress = self.addresses[tag]
                 }
             }
-            .task {
-                guard let defaultWallet = manager.defaultWallet, let addresses = try? await manager.loadAddresses(name: defaultWallet), let defaultAddress = manager.defaultAddress else { return }
-                self.addresses = addresses
-                self.selectedAddressIndex = addresses.firstIndex(of: defaultAddress) ?? 0
-             }
 
             // MARK: - Network selection
             Section(header: Text("Network")) {
@@ -90,6 +85,23 @@ struct SettingsView: View {
                 }
             }
         }
+    }
+    
+    func reloadWallet(firstPass: Bool = false) async {
+        guard let defaultWallet = manager.defaultWallet,
+              let wallets = try? manager.listWalletFiles(),
+              let addresses = try? await manager.loadAddresses(name: defaultWallet),
+              let defaultAddress = manager.defaultAddress,
+              let selectedWalletIndex = wallets.firstIndex(of: defaultWallet),
+              let selectedAddressIndex = addresses.firstIndex(of: defaultAddress)
+        else {
+            print("Error reloading wallet")
+            return
+        }
+        self.wallets = wallets
+        self.addresses = addresses
+        self.selectedWalletIndex = selectedWalletIndex
+        self.selectedAddressIndex = selectedAddressIndex
     }
     
 }

@@ -39,43 +39,65 @@ struct DeveloperView: View {
             
             Spacer()
             
-            Button("get balance") {
-                Task {
-                    do {
-                        let client = EthereumClient(provider: .alchemy(key: alchemyMainnetKey))!
-                        let balance = try await client.ethGetBalance(address: "0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B", blockNumber: .latest)
-                        print(balance.description)
-                        let height = try await client.ethBlockNumber()
-                        print(height)
-                    } catch {
-                        print(error)
+            Group {
+                Text("Web3 test calls")
+                    .font(.title3)
+                    .padding()
+                
+                Button("sign message") {
+                    Task {
+                        try await manager.fetchAccount()
                     }
                 }
+                .buttonStyle(.bordered)
+                .padding()
+                
+                Button("get balance") {
+                    Task {
+                        do {
+                            let client = EthereumClient(provider: .alchemy(key: alchemyMainnetKey))!
+                            let balance = try await client.ethGetBalance(address: "0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B", blockNumber: .latest)
+                            print(balance.description)
+                            let height = try await client.ethBlockNumber()
+                            print(height)
+                        } catch {
+                            print(error)
+                        }
+                    }
+                }
+                .buttonStyle(.bordered)
+               
+                Button("Call alchemy_getAssetTransfers") {
+                  Task {
+                     do {
+                        let client = AlchemyClient(key: alchemyMainnetKey)!
+                        //https://docs.alchemy.com/alchemy/documentation/enhanced-apis/transfers-api
+                        let transfers = try await client.alchemyAssetTransfers(fromBlock: Block(rawValue: "A97AB8"),
+                                                                               toBlock: Block(rawValue: "A97CAC"),
+                                                                               fromAddress: Address(address: "3f5CE5FBFe3E9af3971dD833D26bA9b5C936f0bE"),
+                                                                               contractAddresses: [
+                                                                                  Address(address: "7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9")!
+                                                                               ],
+                                                                               excludeZeroValue: true,
+                                                                               maxCount: 5)
+                        print(transfers)
+                     } catch {
+                        print(error)
+                     }
+                   }
+                }
+                .buttonStyle(.bordered)
             }
-           
-           Button("Call alchemy_getAssetTransfers") {
-              Task {
-                 do {
-                    let client = AlchemyClient(key: alchemyMainnetKey)!
-                    //https://docs.alchemy.com/alchemy/documentation/enhanced-apis/transfers-api
-                    let transfers = try await client.alchemyAssetTransfers(fromBlock: Block(rawValue: "A97AB8"),
-                                                                           toBlock: Block(rawValue: "A97CAC"),
-                                                                           fromAddress: Address(address: "3f5CE5FBFe3E9af3971dD833D26bA9b5C936f0bE"),
-                                                                           contractAddresses: [
-                                                                              Address(address: "7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9")!
-                                                                           ],
-                                                                           excludeZeroValue: true,
-                                                                           maxCount: 5)
-                    print(transfers)
-                 } catch {
-                    print(error)
-                 }
-              }
-           }
+            
+            Text("Wallet")
+                .font(.title3)
+                .padding()
             
             Button("Create a new wallet") {
                 isOnBoardingPresented = true
             }
+            .buttonStyle(.bordered)
+            
             Text("Shows new wallet popup")
                 .padding(.bottom)
             
@@ -97,6 +119,7 @@ struct DeveloperView: View {
                 try? manager.deleteAllAddresses()
                 countWallets()
             }
+            .buttonStyle(.borderedProminent)
             .padding()
             
         }
@@ -124,10 +147,8 @@ extension DeveloperView {
         let mnemonic = root.mnemonic!.joined(separator: " ")
         let manager = WalletManager()
         let name = try await manager.saveWallet(mnemonic: mnemonic, password: "password123")
-        let addresses = try await manager.saveAddresses(mnemonic: mnemonic, addressCount: 5, name: name)        
-        print(addresses)
-        manager.defaultAddress = addresses.first!
-        manager.defaultWallet = name
+        let addresses = try await manager.saveAddresses(mnemonic: mnemonic, addressCount: 5, name: name)     
+        try await manager.setDefaultWallet(to: name)
         countWallets()
     }
     

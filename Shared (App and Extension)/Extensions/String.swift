@@ -12,7 +12,7 @@ extension String {
     func appendPathExtension(_ fileExt: String) throws -> String {
         
         guard let name = (self as NSString).appendingPathExtension(fileExt) else {
-            throw WalletError.invalidInput
+            throw WalletError.invalidInput(fileExt)
         }
         return name
     }

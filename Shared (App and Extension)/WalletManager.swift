@@ -29,11 +29,14 @@ class WalletManager {
             guard let sharedContainer = UserDefaults(suiteName: APP_GROUP), let wallet = sharedContainer.string(forKey: "DefaultWallet") else { return nil }
             return wallet
         }
-        set {
-            guard let wallet = newValue,  let sharedContainer = UserDefaults(suiteName: APP_GROUP) else { return }
-            sharedContainer.set(wallet, forKey: "DefaultWallet")
-            sharedContainer.synchronize()
-        }
+    }
+    
+    func setDefaultWallet(to wallet: String) async throws {
+        guard let sharedContainer = UserDefaults(suiteName: APP_GROUP) else { throw WalletError.invalidAppGroupIdentifier(APP_GROUP) }
+        guard let address = try await loadAddresses(name: wallet).first else { throw WalletError.AddressFileError }
+        sharedContainer.set(wallet, forKey: "DefaultWallet")
+        sharedContainer.synchronize()
+        self.defaultAddress = address
     }
     
     var defaultNetwork: Network {
@@ -89,7 +92,7 @@ class WalletManager {
             let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
                                                     account: filename,
                                                     accessGroup: KeychainConfiguration.accessGroup)
-            try passwordItem.savePassword(password, userPresence: true, reusableDuration: 0)
+            try passwordItem.savePassword(password, userPresence: true, reusableDuration: 1200) // 20 minutes
         }
                 
         return filename
@@ -105,7 +108,7 @@ class WalletManager {
                 let passwordData = password.data(using: .utf8)?.sha256(),
                 let keystore = try await KeystoreV3(privateKey: phraseData, passwordData: passwordData)?.encodedData()
         else {
-            throw WalletError.invalidInput
+            throw WalletError.invalidInput(nil)
         }
         let hdWalletFile = try SharedDocument(filename: name.deletingPathExtension().appendPathExtension(HDWALLET_FILE_EXTENSION))
         try await hdWalletFile.write(keystore)
@@ -113,7 +116,6 @@ class WalletManager {
     
     // MARK: - Load wallet from disk
 
-    
     /// Loads wallet from disk. Use to sign a transaction
     /// - Parameters:
     ///   - name: filename
@@ -238,36 +240,22 @@ class WalletManager {
                 return privateKey
             }
         }
-        throw WalletError.addressNotFound
-    }    
+        throw WalletError.addressNotFound(address)
+    }
+    
+    func fetchAccount(password: String? = nil, network: Network = .ethereum) async throws {
+        guard let address = defaultAddress else { throw WalletError.noDefaultAddressSet }
+        guard let wallet = defaultWallet else { throw WalletError.noDefaultWalletSet }
+        let privateKey = try await fetchPrivateKeyFor(address: address, walletName: wallet, password: password, network: network)
+        let data = Data(hex: "0xdeadbeaf").hashPersonalMessage()!
+
+        guard let signedMessage = data.sign(key: privateKey, leadingV: false)?.toHexString().addHexPrefix() else { /// WORKS!
+            throw WalletError.addressGenerationError // WalletCoreError.signingError
+        }
+        print("{\"address\": \"\(address)\", \"msg\": \"0xdeadbeaf\", \"sig\": \"\(signedMessage)\", \"version\": \"2\"}")
+    }
     
 }
-
-// MARK: - NSUserDefaults
-//extension WalletManager {
-//
-//    func setDefaultAddress(_ address: String) {
-//        guard let sharedContainer = UserDefaults(suiteName: APP_GROUP) else { return }
-//        sharedContainer.set(address, forKey: "DefaultAddress")
-//        sharedContainer.synchronize()
-//    }
-//
-//    func defaultAddress() -> String? {
-//        guard let sharedContainer = UserDefaults(suiteName: APP_GROUP), let address = sharedContainer.string(forKey: "DefaultAddress") else { return nil }
-//        return address
-//    }
-//
-//    func setDefaultHDWallet(_ wallet: String) {
-//        guard let sharedContainer = UserDefaults(suiteName: APP_GROUP) else { return }
-//        sharedContainer.set(wallet, forKey: "DefaultWallet")
-//        sharedContainer.synchronize()
-//    }
-//
-//    func defaultHDWallet() -> String? {
-//        guard let sharedContainer = UserDefaults(suiteName: APP_GROUP), let wallet = sharedContainer.string(forKey: "DefaultWallet") else { return nil }
-//        return wallet
-//    }
-//}
 
 // MARK: - Debugging methods
 #if DEBUG
