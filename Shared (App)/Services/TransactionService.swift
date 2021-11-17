@@ -33,14 +33,16 @@ protocol TransactionFetchable {
 
 final class TransactionService: TransactionFetchable {
     
-    private let client: AlchemyClient? = AlchemyClient(key: alchemyMainnetKey)
+    private let alchemyClient: AlchemyClient? = AlchemyClient(key: ApiKeys.alchemyMainnet)
+    private let covalentClient: CovalentClient? = CovalentClient(apiKey: ApiKeys.covalent)
+    private let unmarshalClient: UnmarshalClient? = UnmarshalClient(apiKey: ApiKeys.unmarshal)
     
     @MainActor
     func fetchAllTransactions(chain: String,
                               address: String,
                               currency: String,
                               symbol: String) async throws -> [AlchemyAssetTransfer] {
-        guard let client = client else { throw TransactionError.networkConnectionFailed }
+        guard let client = alchemyClient else { throw TransactionError.networkConnectionFailed }
         let sentTxs = try await client.alchemyAssetTransfers(
             fromBlock: .genesis,
             fromAddress: Address(address: address)
@@ -57,10 +59,11 @@ final class TransactionService: TransactionFetchable {
                                address: String,
                                currency: String,
                                symbol: String) async throws -> [AlchemyAssetTransfer] {
-        guard let client = client else { throw TransactionError.networkConnectionFailed }
+        guard let client = alchemyClient else { throw TransactionError.networkConnectionFailed }
         let sentTxs = try await client.alchemyAssetTransfers(
             fromBlock: .genesis,
-            fromAddress: Address(address: address)
+            fromAddress: Address(address: address),
+            toAddress: Address(address: address)
         )
         return sentTxs
     }
@@ -70,13 +73,32 @@ final class TransactionService: TransactionFetchable {
                                    address: String,
                                    currency: String,
                                    symbol: String) async throws -> [AlchemyAssetTransfer] {
-        guard let client = client else { throw TransactionError.networkConnectionFailed }
+        guard let client = alchemyClient else { throw TransactionError.networkConnectionFailed }
         let receivedTxs = try await client.alchemyAssetTransfers(
             fromBlock: .genesis,
             toAddress: Address(address: address)
         )
         return receivedTxs
     }
+    
+    func fetchTransactions(network: Network, address: Address) async throws -> [WalletTransactionType] {
+        async let alchemyOutgoingTransactions = self.alchemyClient!.alchemyAssetTransfers(fromBlock: .genesis,
+                                                                                          toBlock: .latest,
+                                                                                          fromAddress: address)
+        async let alchemyIncomingTransactions = self.alchemyClient!.alchemyAssetTransfers(fromBlock: .genesis,
+                                                                                          toBlock: .latest,
+                                                                                          toAddress: address)
+        async let covalentTransactions = self.covalentClient!.getTransactions(network: .ethereum, address: address)
+        async let unmarshalTransactions = self.unmarshalClient!.getTransactions(address: address)
+
+        var walletTransaction =  [WalletTransaction]()
+        walletTransaction.append(contentsOf: try await alchemyOutgoingTransactions)
+        walletTransaction.append(contentsOf: try await alchemyIncomingTransactions)
+        walletTransaction.append(contentsOf: try await covalentTransactions)
+        walletTransaction.append(contentsOf: try await unmarshalTransactions)
+        return walletTransaction.map({ WalletTransactionType(transaction: $0) })
+    }
+    
 }
 
 enum TransactionError: Error {

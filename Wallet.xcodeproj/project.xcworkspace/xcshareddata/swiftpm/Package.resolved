@@ -29,15 +29,6 @@
         }
       },
       {
-        "package": "SafariWalletCore",
-        "repositoryURL": "https://github.com/Safari-Wallet/core",
-        "state": {
-          "branch": "develop",
-          "revision": "d7c9459b69126ba4822d8c5f31db26eaa7ef31c2",
-          "version": null
-        }
-      },
-      {
         "package": "CryptoSwift",
         "repositoryURL": "https://github.com/krzyzanowskim/CryptoSwift.git",
         "state": {

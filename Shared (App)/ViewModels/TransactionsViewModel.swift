@@ -15,7 +15,7 @@ final class TransactionsListViewModel: ObservableObject {
     
     enum State {
         case loading
-        case fetched(txs: [TransactionViewModel])
+        case fetched(txs: [WalletTransactionType])
         case error(message: String)
     }
     
@@ -45,44 +45,47 @@ final class TransactionsListViewModel: ObservableObject {
     
     func fetchTransactions() {
         state = .loading
-        Task {
-            do {
-                var transactions = [AlchemyAssetTransfer]()
-                
-                switch self.filter {
-                case .sent:
-                    transactions = try await service.fetchSentTransactions(
-                        chain: chain,
-                        address: address,
-                        currency: currency,
-                        symbol: symbol
-                    )
-                case .received:
-                    transactions = try await service.fetchReceivedTransactions(
-                        chain: chain,
-                        address: address,
-                        currency: currency,
-                        symbol: symbol
-                    )
-                default:
-                    transactions = try await service.fetchAllTransactions(
-                        chain: chain,
-                        address: address,
-                        currency: currency,
-                        symbol: symbol
-                    )
-                }
-                
-                let viewModels = transactions
-                    .sorted { ($0.blockNum.intValue ?? 0) > ($1.blockNum.intValue ?? 0) }
-                    .map(TransactionViewModel.init)
-                
-                state = .fetched(txs: viewModels)
-            } catch let error {
-                //TODO: Error handling / Define error cases and appropriate error messages
-                state = .error(message: error.localizedDescription)
-            }
-        }
+        
+        
+        
+//        Task {
+//            do {
+//                var transactions = [AlchemyAssetTransfer]()
+//
+//                switch self.filter {
+//                case .sent:
+//                    transactions = try await service.fetchSentTransactions(
+//                        chain: chain,
+//                        address: address,
+//                        currency: currency,
+//                        symbol: symbol
+//                    )
+//                case .received:
+//                    transactions = try await service.fetchReceivedTransactions(
+//                        chain: chain,
+//                        address: address,
+//                        currency: currency,
+//                        symbol: symbol
+//                    )
+//                default:
+//                    transactions = try await service.fetchAllTransactions(
+//                        chain: chain,
+//                        address: address,
+//                        currency: currency,
+//                        symbol: symbol
+//                    )
+//                }
+//
+//                let viewModels = transactions
+//                    .sorted { ($0.blockNum.intValue ?? 0) > ($1.blockNum.intValue ?? 0) }
+//                    .map(TransactionViewModel.init)
+//
+//                state = .fetched(txs: viewModels)
+//            } catch let error {
+//                //TODO: Error handling / Define error cases and appropriate error messages
+//                state = .error(message: error.localizedDescription)
+//            }
+//        }
     }
     
     func handleFilterChange() {
@@ -113,8 +116,8 @@ extension TransactionViewModel {
             hash: tx.hash,
             blockNum: tx.blockNum.intValue.flatMap(String.init) ?? "",
             fromAddress: tx.from.address,
-            toAddress: tx.to?.address,
-            value: String(tx.value ?? 0.0), // TODO: Handle formatting
+            toAddress: tx.to.address,
+            value: tx.value, // TODO: Handle formatting
             erc721TokenId: tx.erc721TokenId,
             asset: tx.asset ?? "",
             category: tx.category?.rawValue ?? ""

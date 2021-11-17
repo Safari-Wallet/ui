@@ -26,8 +26,8 @@ struct TransactionsView: View {
                     switch viewModel.state {
                     case .loading:
                         ForEach(1..<6) { tx in
-                            TransactionRow(tx: .placeholder)
-                                .redacted(reason: .placeholder)
+//                            TransactionRow(tx: .placeholder)
+//                                .redacted(reason: .placeholder)
                         }
                     case .fetched(txs: let txs):
                         ForEach(txs) { tx in
@@ -49,15 +49,15 @@ struct TransactionsView: View {
 
 struct TransactionRow: View {
     
-    let tx: TransactionViewModel
+    let tx: WalletTransactionType
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Tx type: \(tx.category)")
+            Text("Tx type: \(tx.transaction.type)")
                 .font(.headline)
                 .bold()
             HStack {
-                Text(tx.fromAddress)
+                Text(tx.transaction.from.address)
                     .lineLimit(1)
                     .truncationMode(.middle)
                 Spacer()
@@ -65,11 +65,11 @@ struct TransactionRow: View {
                     .foregroundColor(.blue)
                     .unredacted()
                 Spacer()
-                Text(tx.toAddress ?? "")
+                Text(tx.transaction.to.address)
                     .lineLimit(1)
                     .truncationMode(.middle)
             }
-            Text("\(tx.value) \(tx.asset)")
+            Text("\(tx.transaction.value) \("USD")")
                 .font(.system(size: 24.0, weight: .bold, design: .rounded))
         }
         .frame(maxWidth: .infinity)
@@ -79,6 +79,9 @@ struct TransactionRow: View {
 
 struct TransactionsView_Previews: PreviewProvider {
     static var previews: some View {
-        TransactionsView(viewModel: TransactionsListViewModel(chain: "1", address: "ric.eth", currency: "USD", symbol: "$"))
+        TransactionsView(viewModel: TransactionsListViewModel(chain: "1",
+                                                              address: "ric.eth",
+                                                              currency: "USD",
+                                                              symbol: "$"))
     }
 }
