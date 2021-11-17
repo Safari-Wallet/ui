@@ -11,29 +11,15 @@ import SafariWalletCore
 
 protocol WalletTransaction {
     var from: Address { get }
-    var to: Address { get }
-    var type: String { get }
-    var value: String { get }
+    var to: Address? { get }
+    var type: String? { get }
+    var transactionValue: String? { get }
     var source: String { get }
     
     var hash: String { get }
     var block: Block { get }
     
     var underlyingObject: Any { get}
-}
-
-
-struct WalletTransactionType: Identifiable {
-
-    let transaction: WalletTransaction
-    let id = UUID()
-    
-}
-
-struct WalletTransactionV2 {
-    
-    
-    
 }
 
 extension AlchemyAssetTransfer: WalletTransaction {   
@@ -46,24 +32,20 @@ extension AlchemyAssetTransfer: WalletTransaction {
         self
     }
     
-    var to: Address {
-        Address(raw: "hello.world")
+    var type: String? {
+        self.category?.rawValue
     }
     
-    var from: Address {
-        Address(raw: "hello.world")
-    }
-    
-    var type: String {
-        "Type"
-    }
-    
-    var value: String {
-        "Value"
+    var transactionValue: String? {
+        if let value = self.value {
+            return String(value)
+        } else {
+            return nil
+        }
     }
     
     var source: String {
-        "Source"
+        "Alchemy"
     }
     
 }
@@ -78,24 +60,12 @@ extension Unmarshal.TokenTransaction: WalletTransaction {
         self
     }
     
-    var to: Address {
-        Address(raw: "hello.world")
-    }
-    
-    var from: Address {
-        Address(raw: "hello.world")
-    }
-    
-    var type: String {
-        "Type"
-    }
-    
-    var value: String {
-        "Value"
+    var transactionValue: String? {
+        self.value
     }
     
     var source: String {
-        "Source"
+        "Unmarshal"
     }
     
 }
@@ -114,24 +84,24 @@ extension Covalent.Transaction: WalletTransaction {
         return tx_hash
     }
     
-    var to: Address {
-        Address(raw: "hello.world")
+    var to: Address? {
+        self.to_address
     }
     
     var from: Address {
-        Address(raw: "hello.world")
+        self.from_address
     }
     
-    var type: String {
-        "Type"
+    var type: String? {
+        nil
     }
     
-    var value: String {
-        "Value"
+    var transactionValue: String? {
+        self.value
     }
     
     var source: String {
-        "Source"
+        "Covalent"
     }
     
 }

@@ -16,7 +16,7 @@ final class TransactionsListViewModel: ObservableObject {
     
     enum State {
         case loading
-        case fetched(txs: [WalletTransactionType])
+        case fetched(txs: [TransactionGroup])
         case error(message: String)
     }
     
@@ -46,57 +46,32 @@ final class TransactionsListViewModel: ObservableObject {
     
     func fetchTransactions() {
         state = .loading
+        
         Task {
             do {
-                let transactions = try await self.service.fetchTransactions(network: .ethereum,
-                                                                            address: Address(ethereumAddress: "0x225E9B54F41F44F42150b6aAA730Da5f2d23FAf2")!)
-                
-                
-                
-                print(transactions)
-            } catch {
-                print(error)
+                switch self.filter {
+                    case .all:
+                        let transactions = try await self.service.fetchTransactions(network: .ethereum,
+                                                                                    address: Address(ethereumAddress: "0x225E9B54F41F44F42150b6aAA730Da5f2d23FAf2")!)
+                        state = .fetched(txs: transactions)
+                    case .sent:
+                        //TODO: Implement me!
+                        state = .error(message: "Not yet implemented!")
+                    case .received:
+                        //TODO: Implement me!
+                        state = .error(message: "Not yet implemented!")
+                    case .interactions:
+                        //TODO: Implement me!
+                        state = .error(message: "Not yet implemented!")
+                    case .failed:
+                        //TODO: Implement me!
+                        state = .error(message: "Not yet implemented!")
+                }
+            } catch let error {
+                //TODO: Error handling / Define error cases and appropriate error messages
+                state = .error(message: error.localizedDescription)
             }
         }
-        
-//        Task {
-//            do {
-//                var transactions = [AlchemyAssetTransfer]()
-//
-//                switch self.filter {
-//                case .sent:
-//                    transactions = try await service.fetchSentTransactions(
-//                        chain: chain,
-//                        address: address,
-//                        currency: currency,
-//                        symbol: symbol
-//                    )
-//                case .received:
-//                    transactions = try await service.fetchReceivedTransactions(
-//                        chain: chain,
-//                        address: address,
-//                        currency: currency,
-//                        symbol: symbol
-//                    )
-//                default:
-//                    transactions = try await service.fetchAllTransactions(
-//                        chain: chain,
-//                        address: address,
-//                        currency: currency,
-//                        symbol: symbol
-//                    )
-//                }
-//
-//                let viewModels = transactions
-//                    .sorted { ($0.blockNum.intValue ?? 0) > ($1.blockNum.intValue ?? 0) }
-//                    .map(TransactionViewModel.init)
-//
-//                state = .fetched(txs: viewModels)
-//            } catch let error {
-//                //TODO: Error handling / Define error cases and appropriate error messages
-//                state = .error(message: error.localizedDescription)
-//            }
-//        }
     }
     
     func handleFilterChange() {
@@ -120,34 +95,34 @@ struct TransactionViewModel: Identifiable {
     let category: String
 }
 
-extension TransactionViewModel {
-
-    init(tx: AlchemyAssetTransfer) {
-        self.init(
-            hash: tx.hash,
-            blockNum: tx.blockNum.intValue.flatMap(String.init) ?? "",
-            fromAddress: tx.from.address,
-            toAddress: tx.to.address,
-            value: tx.value, // TODO: Handle formatting
-            erc721TokenId: tx.erc721TokenId,
-            asset: tx.asset ?? "",
-            category: tx.category?.rawValue ?? ""
-        )
-    }
-    
-    static var placeholder: TransactionViewModel {
-        .init(
-            hash: "",
-            blockNum: "",
-            fromAddress: "0x225e9b54f41f44f42150b6aaa730da5f2d23faf2",
-            toAddress: "0x225e9b54f41f44f42150b6aaa730da5f2d23faf2",
-            value: "0.0",
-            erc721TokenId: nil,
-            asset: "ETH",
-            category: "external"
-        )
-    }
-}
+//extension TransactionViewModel {
+//
+//    init(tx: AlchemyAssetTransfer) {
+//        self.init(
+//            hash: tx.hash,
+//            blockNum: tx.blockNum.intValue.flatMap(String.init) ?? "",
+//            fromAddress: tx.from.address,
+//            toAddress: tx.to.address,
+//            value: tx.value, // TODO: Handle formatting
+//            erc721TokenId: tx.erc721TokenId,
+//            asset: tx.asset ?? "",
+//            category: tx.category?.rawValue ?? ""
+//        )
+//    }
+//    
+//    static var placeholder: TransactionViewModel {
+//        .init(
+//            hash: "",
+//            blockNum: "",
+//            fromAddress: "0x225e9b54f41f44f42150b6aaa730da5f2d23faf2",
+//            toAddress: "0x225e9b54f41f44f42150b6aaa730da5f2d23faf2",
+//            value: "0.0",
+//            erc721TokenId: nil,
+//            asset: "ETH",
+//            category: "external"
+//        )
+//    }
+//}
 
 enum TransactionFilter: Int {
     case all

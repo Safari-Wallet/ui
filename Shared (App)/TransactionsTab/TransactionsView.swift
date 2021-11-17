@@ -18,20 +18,20 @@ struct TransactionsView: View {
                     Text("All").tag(TransactionFilter.all)
                     Text("Sent").tag(TransactionFilter.sent)
                     Text("Received").tag(TransactionFilter.received)
-                    //                        Text("Interactions").tag(TransactionFilter.interactions)
-                    //                        Text("Failed").tag(TransactionFilter.failed)
+                    Text("Interactions").tag(TransactionFilter.interactions)
+                    Text("Failed").tag(TransactionFilter.failed)
                 })
                     .pickerStyle(SegmentedPickerStyle())
                 List {
                     switch viewModel.state {
                     case .loading:
-                        ForEach(1..<6) { tx in
+                        ForEach(1..<6) { transactionGroup in
 //                            TransactionRow(tx: .placeholder)
 //                                .redacted(reason: .placeholder)
                         }
                     case .fetched(txs: let txs):
-                        ForEach(txs) { tx in
-                            TransactionRow(tx: tx)
+                        ForEach(txs) { transactionGroup in
+                            TransactionRow(transactionGroup: transactionGroup)
                         }
                     case .error(message: let message):
                         // Simple error msg for now
@@ -49,15 +49,15 @@ struct TransactionsView: View {
 
 struct TransactionRow: View {
     
-    let tx: WalletTransactionType
+    let transactionGroup: TransactionGroup
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Tx type: \(tx.transaction.type)")
+            Text("Tx type: \(transactionGroup.type)")
                 .font(.headline)
                 .bold()
             HStack {
-                Text(tx.transaction.from.address)
+                Text(transactionGroup.fromAddress)
                     .lineLimit(1)
                     .truncationMode(.middle)
                 Spacer()
@@ -65,11 +65,11 @@ struct TransactionRow: View {
                     .foregroundColor(.blue)
                     .unredacted()
                 Spacer()
-                Text(tx.transaction.to.address)
+                Text(transactionGroup.toAddress)
                     .lineLimit(1)
                     .truncationMode(.middle)
             }
-            Text("\(tx.transaction.value) \("USD")")
+            Text("\(transactionGroup.value) \("USD")")
                 .font(.system(size: 24.0, weight: .bold, design: .rounded))
         }
         .frame(maxWidth: .infinity)
