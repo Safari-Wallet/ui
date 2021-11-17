@@ -81,7 +81,10 @@ final class TransactionService: TransactionFetchable {
         return receivedTxs
     }
     
+    @MainActor
     func fetchTransactions(network: Network, address: Address) async throws -> [WalletTransactionType] {
+        //If Address is ENS only this method throws an error.
+        //SafariWalletCore.JsonRpcError(code: -32602, message: "Invalid string address in object param: fromAddress")
         async let alchemyOutgoingTransactions = self.alchemyClient!.alchemyAssetTransfers(fromBlock: .genesis,
                                                                                           toBlock: .latest,
                                                                                           fromAddress: address)

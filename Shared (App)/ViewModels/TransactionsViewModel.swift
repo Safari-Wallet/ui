@@ -8,6 +8,7 @@
 import Combine
 import Foundation
 import SafariWalletCore
+import MEWwalletKit
 
 // TODO:
 // - Implement paging
@@ -26,27 +27,34 @@ final class TransactionsListViewModel: ObservableObject {
     private let address: String
     private let currency: String
     private let symbol: String
-    private let service: TransactionFetchable
+    private let service: TransactionService
     private var cancellables = Set<AnyCancellable>()
     
     init(chain: String,
          address: String,
          currency: String,
          symbol: String,
-         service: TransactionFetchable = TransactionService()) {
+         service: TransactionService = TransactionService()) {
         self.chain = chain
         self.address = address
         self.currency = currency
         self.symbol = symbol
         self.service = service
-        fetchTransactions()
+//        fetchTransactions()
         handleFilterChange()
     }
     
     func fetchTransactions() {
         state = .loading
-        
-        
+        Task {
+            do {
+                let transactions = try await self.service.fetchTransactions(network: .ethereum,
+                                                                            address: Address(ethereumAddress: "0x225E9B54F41F44F42150b6aAA730Da5f2d23FAf2")!)
+                print(transactions)
+            } catch {
+                print(error)
+            }
+        }
         
 //        Task {
 //            do {
