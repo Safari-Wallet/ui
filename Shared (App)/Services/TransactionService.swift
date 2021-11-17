@@ -82,7 +82,7 @@ final class TransactionService: TransactionFetchable {
     }
     
     @MainActor
-    func fetchTransactions(network: Network, address: Address) async throws -> [WalletTransactionType] {
+    func fetchTransactions(network: Network, address: Address) async throws -> [TransactionGroup] {
         //If Address is ENS only this method throws an error.
         //SafariWalletCore.JsonRpcError(code: -32602, message: "Invalid string address in object param: fromAddress")
         async let alchemyOutgoingTransactions = self.alchemyClient!.alchemyAssetTransfers(fromBlock: .genesis,
@@ -94,12 +94,24 @@ final class TransactionService: TransactionFetchable {
         async let covalentTransactions = self.covalentClient!.getTransactions(network: .ethereum, address: address)
         async let unmarshalTransactions = self.unmarshalClient!.getTransactions(address: address)
 
-        var walletTransaction =  [WalletTransaction]()
-        walletTransaction.append(contentsOf: try await alchemyOutgoingTransactions)
-        walletTransaction.append(contentsOf: try await alchemyIncomingTransactions)
-        walletTransaction.append(contentsOf: try await covalentTransactions)
-        walletTransaction.append(contentsOf: try await unmarshalTransactions)
-        return walletTransaction.map({ WalletTransactionType(transaction: $0) })
+        var walletTransactions =  [WalletTransaction]()
+        walletTransactions.append(contentsOf: try await alchemyOutgoingTransactions)
+        walletTransactions.append(contentsOf: try await alchemyIncomingTransactions)
+        walletTransactions.append(contentsOf: try await covalentTransactions)
+        walletTransactions.append(contentsOf: try await unmarshalTransactions)
+        
+        var hashGroup = [String: TransactionGroup]()
+        for transaction in walletTransactions {
+            if var group = hashGroup[transaction.hash] {
+                group.transactions.append(transaction)
+                hashGroup[transaction.hash] = group
+            } else {
+                let newGroup = TransactionGroup(transactionHash: transaction.hash, transactions: [transaction])
+                hashGroup[transaction.hash] = newGroup
+            }
+        }
+        
+        return Array(hashGroup.values.sorted())
     }
     
 }

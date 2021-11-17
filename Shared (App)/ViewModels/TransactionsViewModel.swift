@@ -50,6 +50,9 @@ final class TransactionsListViewModel: ObservableObject {
             do {
                 let transactions = try await self.service.fetchTransactions(network: .ethereum,
                                                                             address: Address(ethereumAddress: "0x225E9B54F41F44F42150b6aAA730Da5f2d23FAf2")!)
+                
+                
+                
                 print(transactions)
             } catch {
                 print(error)

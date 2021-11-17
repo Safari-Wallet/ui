@@ -15,6 +15,11 @@ protocol WalletTransaction {
     var type: String { get }
     var value: String { get }
     var source: String { get }
+    
+    var hash: String { get }
+    var block: Block { get }
+    
+    var underlyingObject: Any { get}
 }
 
 
@@ -25,7 +30,21 @@ struct WalletTransactionType: Identifiable {
     
 }
 
-extension AlchemyAssetTransfer: WalletTransaction {
+struct WalletTransactionV2 {
+    
+    
+    
+}
+
+extension AlchemyAssetTransfer: WalletTransaction {   
+    
+    var block: Block {
+        return self.blockNum
+    }
+    
+    var underlyingObject: Any {
+        self
+    }
     
     var to: Address {
         Address(raw: "hello.world")
@@ -47,11 +66,17 @@ extension AlchemyAssetTransfer: WalletTransaction {
         "Source"
     }
     
-    
-    
 }
 
 extension Unmarshal.TokenTransaction: WalletTransaction {
+    
+    var block: Block {
+        return Block(rawValue: self.blockNumber)
+    }
+    
+    var underlyingObject: Any {
+        self
+    }
     
     var to: Address {
         Address(raw: "hello.world")
@@ -76,6 +101,18 @@ extension Unmarshal.TokenTransaction: WalletTransaction {
 }
 
 extension Covalent.Transaction: WalletTransaction {
+    
+    var underlyingObject: Any {
+        self
+    }
+    
+    var block: Block {
+        return Block(rawValue: self.block_height)
+    }
+    
+    var hash: String {
+        return tx_hash
+    }
     
     var to: Address {
         Address(raw: "hello.world")
