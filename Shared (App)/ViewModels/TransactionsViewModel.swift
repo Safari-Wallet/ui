@@ -51,20 +51,28 @@ final class TransactionsListViewModel: ObservableObject {
                 switch self.filter {
                     case .all:
                         let transactions = try await self.service.fetchTransactions(network: .ethereum,
-                                                                                    address: Address(ethereumAddress: "0x225E9B54F41F44F42150b6aAA730Da5f2d23FAf2")!)
+                                                                                    address: Address(ethereumAddress: "0x1FF1af1934DF4e772F2A8a998FEA635704B77836")!)
                         state = .fetched(txs: transactions)
                     case .sent:
                         //TODO: Implement me!
-                        state = .error(message: "Not yet implemented!")
+                        DispatchQueue.main.async { [weak self] in
+                            self?.state = .error(message: "Not yet implemented!")
+                        }
                     case .received:
                         //TODO: Implement me!
-                        state = .error(message: "Not yet implemented!")
+                        DispatchQueue.main.async { [weak self] in
+                            self?.state = .error(message: "Not yet implemented!")
+                        }
                     case .interactions:
                         //TODO: Implement me!
-                        state = .error(message: "Not yet implemented!")
+                        DispatchQueue.main.async { [weak self] in
+                            self?.state = .error(message: "Not yet implemented!")
+                        }
                     case .failed:
                         //TODO: Implement me!
-                        state = .error(message: "Not yet implemented!")
+                        DispatchQueue.main.async { [weak self] in
+                            self?.state = .error(message: "Not yet implemented!")
+                        }
                 }
             } catch let error {
                 //TODO: Error handling / Define error cases and appropriate error messages
