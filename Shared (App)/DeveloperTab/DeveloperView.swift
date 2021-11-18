@@ -52,38 +52,6 @@ struct DeveloperView: View {
                     }
                 }
             }
-           
-            Button("Call alchemy_getAssetTransfers") {
-                Task {
-                    do {
-                        let client = AlchemyClient(key: ApiKeys.alchemyMainnet)!
-                        //https://docs.alchemy.com/alchemy/documentation/enhanced-apis/transfers-api
-                        let transfers = try await client.alchemyAssetTransfers(fromBlock: Block(rawValue: "A97AB8"),
-                                                                               toBlock: Block(rawValue: "A97CAC"),
-                                                                               fromAddress: Address(address: "3f5CE5FBFe3E9af3971dD833D26bA9b5C936f0bE"),
-                                                                               contractAddresses: [
-                                                                                Address(address: "7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9")!
-                                                                               ],
-                                                                               excludeZeroValue: true,
-                                                                               maxCount: 5)
-                        print(transfers)
-                    } catch {
-                        print(error)
-                    }
-                }
-            }
-            
-            Button("Call unmarshal_tokenTransactionsApi") {
-                Task {
-                  do {
-                      let client = UnmarshalClient(apiKey: ApiKeys.unmarshal)
-                      let transaction = try await client?.getTransactions(address: Address(raw: "ric.eth"))
-                      print(transaction)
-                  } catch {
-                     print(error)
-                  }
-               }
-            }
             
             Button("Create a new wallet") {
                 isOnBoardingPresented = true
@@ -104,12 +72,12 @@ struct DeveloperView: View {
             
             Text("Instantly creates a new wallet with the default password 'password123' and makes it the default wallet. Takes up to 5 seconds in debug mode.")
                 
-//            Button("Delete all wallets on disk", role: .destructive) {
-//                try? manager.deleteAllWallets()
-//                try? manager.deleteAllAddresses()
-//                countWallets()
-//            }
-//            .padding()
+            Button("Delete all wallets on disk", role: .destructive) {
+                try? manager.deleteAllWallets()
+                try? manager.deleteAllAddresses()
+                countWallets()
+            }
+            .padding()
             
         }
         .padding()
