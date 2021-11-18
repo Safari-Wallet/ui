@@ -53,9 +53,11 @@ struct TransactionRow: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Tx type: \(transactionGroup.type)")
+            Text("Hash: \(transactionGroup.transactionHash)")
                 .font(.headline)
                 .bold()
+                .lineLimit(1)
+                .truncationMode(.tail)
             HStack {
                 Text(transactionGroup.fromAddress)
                     .lineLimit(1)
@@ -69,8 +71,7 @@ struct TransactionRow: View {
                     .lineLimit(1)
                     .truncationMode(.middle)
             }
-            Text("\(transactionGroup.value) \("USD")")
-                .font(.system(size: 24.0, weight: .bold, design: .rounded))
+            Text("\(transactionGroup.transactions.count) sources")
         }
         .frame(maxWidth: .infinity)
         .padding()
