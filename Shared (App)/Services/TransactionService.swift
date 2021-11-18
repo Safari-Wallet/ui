@@ -103,6 +103,7 @@ final class TransactionService: TransactionFetchable {
         var hashGroup = [String: TransactionGroup]()
         for transaction in walletTransactions {
             if var group = hashGroup[transaction.hash] {
+                
                 group.transactions.append(transaction)
                 hashGroup[transaction.hash] = group
             } else {

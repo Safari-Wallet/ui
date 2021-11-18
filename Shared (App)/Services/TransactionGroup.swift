@@ -36,11 +36,11 @@ struct TransactionGroup: Comparable, Identifiable {
     
     
     static func < (lhs: TransactionGroup, rhs: TransactionGroup) -> Bool {
-        guard let lhsBlock = lhs.transactions.first?.block,
-              let rhsBlock = rhs.transactions.first?.block else {
+        guard let lhsBlock = lhs.transactions.first?.block.intValue,
+              let rhsBlock = rhs.transactions.first?.block.intValue else {
                   return false
               }
-        return lhsBlock < rhsBlock
+        return lhsBlock > rhsBlock
     }
     
     static func == (lhs: TransactionGroup, rhs: TransactionGroup) -> Bool {

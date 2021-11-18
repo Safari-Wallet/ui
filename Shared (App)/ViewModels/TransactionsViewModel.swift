@@ -40,7 +40,6 @@ final class TransactionsListViewModel: ObservableObject {
         self.currency = currency
         self.symbol = symbol
         self.service = service
-//        fetchTransactions()
         handleFilterChange()
     }
     

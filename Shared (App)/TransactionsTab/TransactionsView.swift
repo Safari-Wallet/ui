@@ -12,37 +12,41 @@ struct TransactionsView: View {
     @ObservedObject var viewModel: TransactionsListViewModel
     
     var body: some View {
-        VStack {
-            Section {
-                Picker("Mode", selection: $viewModel.filter, content: {
-                    Text("All").tag(TransactionFilter.all)
-                    Text("Sent").tag(TransactionFilter.sent)
-                    Text("Received").tag(TransactionFilter.received)
-                    Text("Interactions").tag(TransactionFilter.interactions)
-                    Text("Failed").tag(TransactionFilter.failed)
-                })
-                    .pickerStyle(SegmentedPickerStyle())
-                List {
-                    switch viewModel.state {
-                    case .loading:
-                        ForEach(1..<6) { transactionGroup in
-//                            TransactionRow(tx: .placeholder)
-//                                .redacted(reason: .placeholder)
+        NavigationView {
+            VStack {
+                Section {
+                    Picker("Mode", selection: $viewModel.filter, content: {
+                        Text("All").tag(TransactionFilter.all)
+                        Text("Sent").tag(TransactionFilter.sent)
+                        Text("Received").tag(TransactionFilter.received)
+                        Text("Interactions").tag(TransactionFilter.interactions)
+                        Text("Failed").tag(TransactionFilter.failed)
+                    })
+                        .pickerStyle(SegmentedPickerStyle())
+                    List {
+                        switch viewModel.state {
+                            case .loading:
+                                ForEach(1..<6) { transactionGroup in
+                                    //                            TransactionRow(tx: .placeholder)
+                                    //                                .redacted(reason: .placeholder)
+                                }
+                            case .fetched(txs: let txs):
+                                ForEach(txs) { transactionGroup in
+                                    NavigationLink(destination: TransactionDetailsView(group: transactionGroup)) {
+                                        TransactionRow(transactionGroup: transactionGroup)
+                                    }
+                                }
+                            case .error(message: let message):
+                                // Simple error msg for now
+                                Text(message)
+                                Spacer()
                         }
-                    case .fetched(txs: let txs):
-                        ForEach(txs) { transactionGroup in
-                            TransactionRow(transactionGroup: transactionGroup)
-                        }
-                    case .error(message: let message):
-                        // Simple error msg for now
-                        Text(message)
-                        Spacer()
+                    }
+                    .refreshable {
+                        viewModel.fetchTransactions()
                     }
                 }
-                .refreshable {
-                    viewModel.fetchTransactions()
-                }
-            }
+            }.navigationBarHidden(true)
         }
     }
 }
