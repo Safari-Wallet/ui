@@ -12,52 +12,58 @@ struct TransactionsView: View {
     @ObservedObject var viewModel: TransactionsListViewModel
     
     var body: some View {
-        VStack {
-            Section {
-                Picker("Mode", selection: $viewModel.filter, content: {
-                    Text("All").tag(TransactionFilter.all)
-                    Text("Sent").tag(TransactionFilter.sent)
-                    Text("Received").tag(TransactionFilter.received)
-                    //                        Text("Interactions").tag(TransactionFilter.interactions)
-                    //                        Text("Failed").tag(TransactionFilter.failed)
-                })
-                    .pickerStyle(SegmentedPickerStyle())
-                List {
-                    switch viewModel.state {
-                    case .loading:
-                        ForEach(1..<6) { tx in
-                            TransactionRow(tx: .placeholder)
-                                .redacted(reason: .placeholder)
+        NavigationView {
+            VStack {
+                Section {
+                    Picker("Mode", selection: $viewModel.filter, content: {
+                        Text("All").tag(TransactionFilter.all)
+                        Text("Sent").tag(TransactionFilter.sent)
+                        Text("Received").tag(TransactionFilter.received)
+                        Text("Interactions").tag(TransactionFilter.interactions)
+                        Text("Failed").tag(TransactionFilter.failed)
+                    })
+                        .pickerStyle(SegmentedPickerStyle())
+                    List {
+                        switch viewModel.state {
+                            case .loading:
+                                ForEach(1..<6) { transactionGroup in
+                                    //                            TransactionRow(tx: .placeholder)
+                                    //                                .redacted(reason: .placeholder)
+                                }
+                            case .fetched(txs: let txs):
+                                ForEach(txs) { transactionGroup in
+                                    NavigationLink(destination: TransactionDetailsView(group: transactionGroup)) {
+                                        TransactionRow(transactionGroup: transactionGroup)
+                                    }
+                                }
+                            case .error(message: let message):
+                                // Simple error msg for now
+                                Text(message)
+                                Spacer()
                         }
-                    case .fetched(txs: let txs):
-                        ForEach(txs) { tx in
-                            TransactionRow(tx: tx)
-                        }
-                    case .error(message: let message):
-                        // Simple error msg for now
-                        Text(message)
-                        Spacer()
+                    }
+                    .refreshable {
+                        viewModel.fetchTransactions()
                     }
                 }
-                .refreshable {
-                    viewModel.fetchTransactions()
-                }
-            }
+            }.navigationBarHidden(true)
         }
     }
 }
 
 struct TransactionRow: View {
     
-    let tx: TransactionViewModel
+    let transactionGroup: TransactionGroup
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Tx type: \(tx.category)")
+            Text("Hash: \(transactionGroup.transactionHash)")
                 .font(.headline)
                 .bold()
+                .lineLimit(1)
+                .truncationMode(.tail)
             HStack {
-                Text(tx.fromAddress)
+                Text(transactionGroup.fromAddress)
                     .lineLimit(1)
                     .truncationMode(.middle)
                 Spacer()
@@ -65,12 +71,11 @@ struct TransactionRow: View {
                     .foregroundColor(.blue)
                     .unredacted()
                 Spacer()
-                Text(tx.toAddress ?? "")
+                Text(transactionGroup.toAddress)
                     .lineLimit(1)
                     .truncationMode(.middle)
             }
-            Text("\(tx.value) \(tx.asset)")
-                .font(.system(size: 24.0, weight: .bold, design: .rounded))
+            Text("\(transactionGroup.transactions.count) sources")
         }
         .frame(maxWidth: .infinity)
         .padding()
@@ -79,6 +84,9 @@ struct TransactionRow: View {
 
 struct TransactionsView_Previews: PreviewProvider {
     static var previews: some View {
-        TransactionsView(viewModel: TransactionsListViewModel(chain: "1", address: "ric.eth", currency: "USD", symbol: "$"))
+        TransactionsView(viewModel: TransactionsListViewModel(chain: "1",
+                                                              address: "ric.eth",
+                                                              currency: "USD",
+                                                              symbol: "$"))
     }
 }
