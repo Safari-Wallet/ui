@@ -239,7 +239,6 @@
 		275C299327117F7D00DA2773 /* ethereum */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ethereum; sourceTree = "<group>"; };
 		3D97705E273CD4AE0014CAC7 /* TransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionService.swift; sourceTree = "<group>"; };
 		4A19E6DF271E673C0096027F /* JsonRpcClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonRpcClientTest.swift; sourceTree = "<group>"; };
-		4AAE2E5F2743EDB900696FBE /* core */ = {isa = PBXFileReference; lastKnownFileType = folder; name = core; path = ../core; sourceTree = "<group>"; };
 		4AAE2E60274400D500696FBE /* WalletTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTransaction.swift; sourceTree = "<group>"; };
 		4AAE2E652744ADA600696FBE /* TransactionGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionGroup.swift; sourceTree = "<group>"; };
 		4AAE2E6A2745EE8B00696FBE /* TransactionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsView.swift; sourceTree = "<group>"; };
@@ -328,7 +327,6 @@
 		0A0E1E7F270687AA00061EA6 = {
 			isa = PBXGroup;
 			children = (
-				4AAE2E5F2743EDB900696FBE /* core */,
 				F8ABEEE227124C5D007F7D11 /* Wallet Extension (iOS).entitlements */,
 				F8ABEEE127124C30007F7D11 /* Wallet (iOS).entitlements */,
 				F8ABEF3A271297A3007F7D11 /* Shared (App and Extension) */,
