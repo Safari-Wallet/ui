@@ -44,14 +44,6 @@ struct DeveloperView: View {
                     .font(.title3)
                     .padding()
                 
-                Button("sign message") {
-                    Task {
-                        try await manager.fetchAccount()
-                    }
-                }
-                .buttonStyle(.bordered)
-                .padding()
-                
                 Button("get balance") {
                     Task {
                         do {
@@ -148,7 +140,10 @@ extension DeveloperView {
         let manager = WalletManager()
         let name = try await manager.saveWallet(mnemonic: mnemonic, password: "password123")
         let addresses = try await manager.saveAddresses(mnemonic: mnemonic, addressCount: 5, name: name)     
-        try await manager.setDefaultWallet(to: name)
+        try await manager.setDefaultWallet(name)
+        if let defaultAddress = addresses.first {
+            manager.setDefaultAddress(defaultAddress)
+        }
         countWallets()
     }
     

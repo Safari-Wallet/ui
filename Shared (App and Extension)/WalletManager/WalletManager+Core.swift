@@ -26,13 +26,13 @@ extension WalletManager: SafariWalletCoreDelegate {
         return AlchemyClient(network: defaultNetwork, key: key)
     }
     
-//    func account(address: String, password: String?) async throws -> Account {
-//        guard let defaultAddress = self.defaultAddress, let defaultWallet = self.defaultWallet, address == defaultAddress else {
-//            // FIXME: if address used by extension is out of sync with wallet,
-//            throw WalletError.addressNotFound
-//        }
-//        let wallet = await try loadWallet(name: defaultWallet, password: password, network: defaultNetwork)
-//    }
+    func account(address: String, password: String?) async throws -> Account {
+        guard self.defaultAddress != address else {
+            throw WalletCoreError.addressGenerationError // FIXME: change error
+            // TODO: what do we do if the default address is out of sync with the extensions?        
+        }
+        return try await fetchAccount()
+    }
     
     func network() -> Network {
         return defaultNetwork

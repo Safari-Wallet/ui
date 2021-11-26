@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MEWwalletKit
 
 struct SharedDocument {
 
@@ -23,6 +24,18 @@ struct SharedDocument {
     func write(_ data: Data) async throws {
         let url = try await  NSFileCoordinator().coordinate(writingItemAt: self.url)
         return try data.write(to: url, options: .atomic)
+    }
+    
+    static func list(fileExtension: String) throws -> [SharedDocument] {
+        let container = try URL.sharedContainer()
+        return try FileManager.default.contentsOfDirectory(atPath: container.path).filter{ $0.pathExtension == fileExtension }.compactMap { try? SharedDocument(filename: $0) }
+    }
+    
+    static func listAddressBundles(network: Network) throws -> [SharedDocument] {
+        let networkExtension = network.symbol
+        return try list(fileExtension: ADDRESSBUNDLE_FILE_EXTENSION).filter {
+            $0.url.deletingPathExtension().pathExtension == networkExtension
+        }
     }
 }
 

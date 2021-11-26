@@ -12,6 +12,7 @@ import SwiftUI
 @main
 struct WalletApp: App {
     
+    @StateObject var manager = WalletManager()
     @State private var shouldPresentOnboarding = false
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
@@ -25,8 +26,10 @@ struct WalletApp: App {
                     } catch {
                         print(error.localizedDescription)
                     }
+                    await manager.setup()
                 }
                 .onOpenURL { url in handle(url: url) }
+                .environmentObject(manager)
         }
         
     }

@@ -10,15 +10,19 @@ import MEWwalletKit
 
 struct SettingsView: View {
     
-    private let manager = WalletManager()
+    @EnvironmentObject var manager: WalletManager
+    
+//    @ObservedObject var manager = await WalletManager()
+    
+//    private let manager = WalletManager()
     
     private let networks: [String] = ["Mainnet", "Ropsten"]
     @State private var selectedNetworkIndex = 0
     
-    @State private var wallets: [String] = []
+//    @State private var wallets: [String] = []
     @State private var selectedWalletIndex = 0
     
-    @State private var addresses: [String] = []
+//    @State private var addresses: [String] = []
     @State private var selectedAddressIndex = 0
         
     var body: some View {
@@ -27,6 +31,7 @@ struct SettingsView: View {
             
             // MARK: - Wallet selection
             Section(header: Text("Wallet")) {
+                let wallets = manager.wall
                 Picker(selection: $selectedWalletIndex, label: Text("")) {
                     ForEach(0 ..< wallets.count, id: \.self) { i in
                         Text(wallets[i]).tag(i)
@@ -36,7 +41,7 @@ struct SettingsView: View {
                 .pickerStyle(.inline)
                 .onChange(of: selectedWalletIndex) { tag in
                     Task {
-                        try? await manager.setDefaultWallet(to: wallets[tag])
+                        try? await manager.setDefaultWallet(wallets[tag])
                         await reloadWallet()
                     }
                 }
@@ -55,7 +60,7 @@ struct SettingsView: View {
                 .labelsHidden()
                 .pickerStyle(.inline)
                 .onChange(of: selectedAddressIndex) { tag in                    
-                    manager.defaultAddress = self.addresses[tag]
+                    manager.setDefaultAddress(self.addresses[tag])
                 }
             }
 
@@ -70,9 +75,9 @@ struct SettingsView: View {
                 .pickerStyle(.inline)
                 .onChange(of: selectedNetworkIndex) { tag in
                     if tag == 1 {
-                        manager.defaultNetwork = .ropsten
+                        manager.setDefaultNetwork(.ropsten)
                     } else {
-                        manager.defaultNetwork = .ethereum
+                        manager.setDefaultNetwork(.ethereum)
                     }
                 }
                 .onAppear {
@@ -87,22 +92,22 @@ struct SettingsView: View {
         }
     }
     
-    func reloadWallet(firstPass: Bool = false) async {
-        guard let defaultWallet = manager.defaultWallet,
-              let wallets = try? manager.listWalletFiles(),
-              let addresses = try? await manager.loadAddresses(name: defaultWallet),
-              let defaultAddress = manager.defaultAddress,
-              let selectedWalletIndex = wallets.firstIndex(of: defaultWallet),
-              let selectedAddressIndex = addresses.firstIndex(of: defaultAddress)
-        else {
-            print("Error reloading wallet")
-            return
-        }
-        self.wallets = wallets
-        self.addresses = addresses
-        self.selectedWalletIndex = selectedWalletIndex
-        self.selectedAddressIndex = selectedAddressIndex
-    }
+//    func reloadWallet(firstPass: Bool = false) async {
+//        guard let defaultWallet = manager.defaultWallet,
+//              let wallets = try? manager.listWalletFiles(),
+//              let addresses = try? await manager.loadAddresses(name: defaultWallet),
+//              let defaultAddress = manager.defaultAddress,
+//              let selectedWalletIndex = wallets.firstIndex(of: defaultWallet),
+//              let selectedAddressIndex = addresses.firstIndex(of: defaultAddress)
+//        else {
+//            print("Error reloading wallet")
+//            return
+//        }
+//        self.wallets = wallets
+//        self.addresses = addresses
+//        self.selectedWalletIndex = selectedWalletIndex
+//        self.selectedAddressIndex = selectedAddressIndex
+//    }
     
 }
 

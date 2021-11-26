@@ -92,8 +92,8 @@ extension CreatePasswordView {
         #if DEBUG
         print(addresses)
         #endif
-        manager.defaultAddress = addresses.first!
-        try await manager.setDefaultWallet(to: name)        
+        manager.setDefaultAddress(addresses.first!)
+        try await manager.setDefaultWallet(name)        
     }
 }
 

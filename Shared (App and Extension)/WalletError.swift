@@ -21,6 +21,10 @@ enum WalletError: Error {
     case noDefaultAddressSet
     case unexpectedResponse(String)
     case noMethod
+    case errorOpeningKeyStore(String)
+    case viewOnly
+    case notImplemented
+    case outOfBounds
 }
 
 extension WalletError: LocalizedError {
@@ -54,6 +58,14 @@ extension WalletError: LocalizedError {
             return "Unexpected response: \(response)"
         case .noMethod:
             return "Call with no method"
+        case .errorOpeningKeyStore(let name):
+            return "Error opening keystore file \(name)"
+        case .viewOnly:
+            return "This wallet is view-only"
+        case .notImplemented:
+            return "Method not implemented"
+        case .outOfBounds:
+            return "Out of bounds"
         }
     }
 
