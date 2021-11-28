@@ -34,6 +34,9 @@ struct TransactionGroup: Comparable, Identifiable {
         return transactions.first?.transactionValue ?? "n/a"
     }
     
+    var description: String {
+        return transactions.first?.transactionDescription ?? "n/a"
+    }
     
     static func < (lhs: TransactionGroup, rhs: TransactionGroup) -> Bool {
         guard let lhsBlock = lhs.transactions.first?.block.intValue,

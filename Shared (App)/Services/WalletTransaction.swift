@@ -14,6 +14,7 @@ protocol WalletTransaction {
     var to: Address? { get }
     var type: String? { get }
     var transactionValue: String? { get }
+    var transactionDescription: String? { get }
     var source: String { get }
     
     var hash: String { get }
@@ -22,7 +23,7 @@ protocol WalletTransaction {
     var underlyingObject: Any { get}
 }
 
-extension AlchemyAssetTransfer: WalletTransaction {   
+extension AlchemyAssetTransfer: WalletTransaction {
     
     var block: Block {
         return self.blockNum
@@ -44,6 +45,10 @@ extension AlchemyAssetTransfer: WalletTransaction {
         }
     }
     
+    var transactionDescription: String? {
+        nil
+    }
+    
     var source: String {
         "Alchemy"
     }
@@ -61,7 +66,13 @@ extension Unmarshal.TokenTransaction: WalletTransaction {
     }
     
     var transactionValue: String? {
-        self.value
+        let wei = Double(self.value) ?? 0
+        let eth = (wei / 1000000000000000000).rounded(toPlaces: 4)
+        return String(eth)
+    }
+    
+    var transactionDescription: String? {
+        self.details
     }
     
     var source: String {
@@ -100,8 +111,20 @@ extension Covalent.Transaction: WalletTransaction {
         self.value
     }
     
+    var transactionDescription: String? {
+        nil
+    }
+    
     var source: String {
         "Covalent"
     }
     
+}
+
+extension Double {
+
+    func rounded(toPlaces places:Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
+    }
 }
