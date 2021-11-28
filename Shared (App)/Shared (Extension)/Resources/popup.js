@@ -1,10 +1,8 @@
 `use strict`;
 
-let chain = 1;
-let address = `0x`;
-let balance = 0.00;
+// - MARK: Setup / Global State
 
-let method = ``;
+const chainId = 1;
 
 // For message signing:
 let from = ``;
@@ -16,6 +14,54 @@ const chains = {
     },
 };
 
+// - MARK: Utils
+
+const log = (message, ...others) =>
+    console.log(`[popup.js] ${message}`, ...others)
+
+const error = (message, ...others) =>
+    console.error(`[popup.js] ${message}`, ...others)
+
+const emitMessage = (destination, method, params = {}) => {
+    let message = { destination, method, params };
+    
+    log(`Emitting message: ${JSON.stringify(message)}`);
+    
+    if (destination === 'background') {
+        browser.runtime.sendMessage(message);
+        return;
+    }
+
+    browser.tabs.query({
+        active: true,
+        currentWindow: true,
+    }, (tabs) => {
+        const [tab] = tabs;
+        browser.tabs.sendMessage(tab.id, message);
+    });
+}
+
+const $ = (query) =>
+    query[0] === (`#`)
+    ? document.querySelector(query)
+    : document.querySelectorAll(query);
+
+const onMessage = (methodName, handler) => {
+    log(`Listening to popup.${methodName}`)
+
+    browser.runtime.onMessage.addListener((request, e) => {
+        const { destination, method, params } = request;
+
+        if (destination !== `popup`) return;
+        if (method !== methodName) return;
+
+        log(`Received method '${method}' with params: ${JSON.stringify(params)}`);
+        handler(params);
+    })
+}
+
+// - MARK: Views
+
 const views = {
     default: () => `
         <h1>Safari Wallet</h1>
@@ -24,7 +70,7 @@ const views = {
                 <button id="connect" class="button button--primary">Connect</button>
             </div>
     `,
-    connectWallet: () => `
+    connectWallet: ({ address, balance }) => `
         <h1>Connect to <span id="title"></span></h1>
         <p class="subtitle"><span id="host"></span></p>
         <p>When you connect your wallet, this dapp will be able to view the contents:</p>
@@ -34,7 +80,7 @@ const views = {
         </div>
         <div class="field">
             <label class="field__label" for="balance">ETH Balance</label>
-            <input id="balance" class="field__input" type="text" value="${balance} ${chains[chain].gasToken}" disabled>
+            <input id="balance" class="field__input" type="text" value="${balance} ${chains[chainId].gasToken}" disabled>
         </div>
         <div class="flex">
             <button id="cancel" class="button button--secondary">Cancel</button>
@@ -48,98 +94,76 @@ const views = {
             <button id="sign" class="button button--primary">Sign</button>
         </div>
     `,
+    loading: () => `
+        <h1>Loading...</h1>
+    `,
 };
 
-const $ = (query) =>
-    query[0] === (`#`)
-    ? document.querySelector(query)
-    : document.querySelectorAll(query);
-
-const closeWindow = () =>
-    window.close();
-
-const connectWallet = () => {
-    browser.runtime.sendMessage({
-        message: {
-            message: `eth_requestAccounts`,
-        },
-    });
-    closeWindow();
-};
-
-const signMessage = () => {
-    /*
-    TODO
-    browser.runtime.sendMessage({
-        message: {
-            from,
-            message: `eth_signTypedData_v3`,
-            params,
-        },
-    });
-    */
-    closeWindow();
-};
-
-const refreshView = () => {
-    switch (method) {
-        case `eth_requestAccounts`:
-            $(`#body`).innerHTML = views.connectWallet();
-            $(`#cancel`).addEventListener(`click`, closeWindow);
-            $(`#connect`).addEventListener(`click`, connectWallet);
-            browser.tabs.query({
-                active: true,
-                currentWindow: true,
-            }, (tabs) => {
-                const tab = tabs[0];
-                $(`#title`).textContent = tab.title;
-                $(`#host`).textContent = new URL(tab.url).host;
-            });
-            break;
-        case `eth_signTypedData_v3`:
-            $(`#body`).innerHTML = views.signMessage();
-            $(`#cancel`).addEventListener(`click`, closeWindow);
-            $(`#sign`).addEventListener(`click`, signMessage);
-            break;
-        default:
-            $(`#body`).innerHTML = views.default();
-    }
-};
-
-document.addEventListener(`DOMContentLoaded`, () => {
-    browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
+const viewHandlers = {
+    default: () => {},
+    connectWallet: ({ onConnectWallet }) => {
+        $(`#cancel`).addEventListener(`click`, closeWindow);
+        $(`#connect`).addEventListener(`click`, onConnectWallet);
         browser.tabs.query({
             active: true,
             currentWindow: true,
         }, (tabs) => {
-            // * This updates the default address
-            if (typeof request.message.address !== `undefined`) {
-                address = request.message.address;
-            }
-            // * This updates the gas token balance of the default address on the selected network
-            if (typeof request.message.balance !== `undefined`) {
-                balance = request.message.balance;
-            }
-            // * This updates the view based on the current method
-            if (typeof request.message.method !== `undefined`) {
-                method = request.message.method;
-                if (method === `eth_signTypedData_v3`) {
-                    from = request.message.from;
-                    params = request.message.params;
-                }
-                refreshView();
-            }
-            // * This forwards messages from background.js to content.js
-            if (typeof request.message.message !== `undefined`) {
-                browser.tabs.sendMessage(tabs[0].id, {
-                    message: request.message.message,
-                });
-            }
+            const tab = tabs[0];
+            $(`#title`).textContent = tab.title;
+            $(`#host`).textContent = new URL(tab.url).host;
         });
+    },
+    eth_signTypedData_v3: () => {
+        $(`#body`).innerHTML = views.signMessage();
+        $(`#cancel`).addEventListener(`click`, closeWindow);
+        $(`#sign`).addEventListener(`click`, signMessage);
+    }
+}
+
+const getViewContents = (viewName, params = {}) =>
+    views[viewName](params);
+
+const render = (viewName = 'default', params = {}) => {
+    if (!viewName || !Object.keys(views).includes(viewName) || !Object.keys(viewHandlers).includes(viewName)) {
+        error(`Invalid view name: ${viewName}.`);
+        return;
+    }
+
+    log(`Rendering view '${viewName}' with ${JSON.stringify(params)}`);
+    log(`View contents: ${getViewContents(viewName, params)}`);
+    log(`View handlers: ${JSON.stringify(viewHandlers[viewName])}`);
+    log(`existing html: ${$(`#body`).innerHTML}`);
+    
+    $(`#body`).innerHTML = getViewContents(viewName, params);
+
+    log(`updated html: ${$(`#body`).innerHTML}`);
+    
+    viewHandlers[viewName](params);
+};
+
+// - MARK: Actions
+
+const closeWindow = () =>
+    window.close();
+
+const signMessage = () => {
+    closeWindow();
+};
+
+// - MARK: Go
+
+document.addEventListener(`DOMContentLoaded`, () => {
+    onMessage('updateState', ({ address, balance }) => {
+        const onConnectWallet = () => {
+            emitMessage('content', 'forwardToEthereumJs', { method: 'walletConnected', params: { address, balance, chainId } });
+            closeWindow();
+        }
+
+        render('connectWallet', { address, balance, onConnectWallet })
     });
-    browser.runtime.sendMessage({
-        message: {
-            message: `get_state`,
-        },
-    });
+
+    render('loading');
+    emitMessage('background', 'getState');
+    
+    log(`loaded`);
 });

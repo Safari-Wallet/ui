@@ -3,11 +3,10 @@ import eth_requestAccounts from './methods/eth_requestAccounts.js';
 import eth_signTypedData_v3 from './methods/eth_signTypedData_v3.js';
 
 function Ethereum() {
-
     this.opened = false;
 
     this.close = () => {
-        window.postMessage(`cancel`);
+        window.postMessage({ method: `cancel` });
         this.overlay.style.opacity = 0;
         this.div.style.transform = `translateY(100%)`;
         this.overlay.remove();
@@ -105,20 +104,25 @@ Ethereum.prototype.request = (payload) => {
 
         switch (method) {
             case `eth_requestAccounts`:
-                window.postMessage(`eth_requestAccounts`);
+                window.postMessage({ method: `eth_requestAccounts` });
                 window.addEventListener(`message`, (event) => {
-                    if (event.data === `cancel`) {
+                    const { method, params } = event.data;
+
+                    if (method === `cancel`) {
                         resolve([]);
-                    } else if (typeof event.data !== `string`) {
-                        resolve(event.data);
+                    }
+                    
+                    if (method === `walletConnected`) {
+                        resolve([params.address]);
                         window.ethereum.close();
                     }
                 });
                 showPrompt(`Open the wallet extension to connect`);
                 break;
             case `eth_signTypedData_v3`:
-                window.postMessage(`eth_signTypedData_v3`);
+                window.postMessage({ method: `eth_signTypedData_v3` });
                 window.addEventListener(`message`, (event) => {
+                    const { method, params } = event.data;
                     if (event.data === `cancel`) {
                         resolve([]);
                     } else if (typeof event.data !== `string`) {

@@ -13,7 +13,9 @@ var $2e3bb91a262fecd5$export$2e2bcd8739ae039 // TODO
 function $4fa0c73a46e81912$var$Ethereum() {
     this.opened = false;
     this.close = ()=>{
-        window.postMessage(`cancel`);
+        window.postMessage({
+            method: `cancel`
+        });
         this.overlay.style.opacity = 0;
         this.div.style.transform = `translateY(100%)`;
         this.overlay.remove();
@@ -72,8 +74,8 @@ $4fa0c73a46e81912$var$Ethereum.prototype.on = (event, callback)=>{
 };
 $4fa0c73a46e81912$var$Ethereum.prototype.request = (payload)=>{
     return new Promise((resolve, reject)=>{
-        let method = typeof payload.method !== `undefined` ? payload.method : null;
-        let params = typeof payload.params !== `undefined` ? payload.params : null;
+        let method1 = typeof payload.method !== `undefined` ? payload.method : null;
+        let params1 = typeof payload.params !== `undefined` ? payload.params : null;
         let from = typeof payload.from !== `undefined` ? payload.from : null;
         const showPrompt = (message)=>{
             if (window.ethereum.opened === false) {
@@ -87,21 +89,29 @@ $4fa0c73a46e81912$var$Ethereum.prototype.request = (payload)=>{
                 }, 1);
             }
         };
-        switch(method){
+        switch(method1){
             case `eth_requestAccounts`:
-                window.postMessage(`eth_requestAccounts`);
+                window.postMessage({
+                    method: `eth_requestAccounts`
+                });
                 window.addEventListener(`message`, (event)=>{
-                    if (event.data === `cancel`) resolve([]);
-                    else if (typeof event.data !== `string`) {
-                        resolve(event.data);
+                    const { method: method , params: params  } = event.data;
+                    if (method === `cancel`) resolve([]);
+                    if (method === `walletConnected`) {
+                        resolve([
+                            params.address
+                        ]);
                         window.ethereum.close();
                     }
                 });
                 showPrompt(`Open the wallet extension to connect`);
                 break;
             case `eth_signTypedData_v3`:
-                window.postMessage(`eth_signTypedData_v3`);
+                window.postMessage({
+                    method: `eth_signTypedData_v3`
+                });
                 window.addEventListener(`message`, (event)=>{
+                    const { method: method , params: params  } = event.data;
                     if (event.data === `cancel`) resolve([]);
                     else if (typeof event.data !== `string`) {
                         resolve(event.data);
