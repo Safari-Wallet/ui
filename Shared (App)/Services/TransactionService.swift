@@ -83,19 +83,19 @@ final class TransactionService: TransactionFetchable {
     
     @MainActor
     func fetchTransactions(network: Network, address: Address) async throws -> [TransactionGroup] {
-        async let alchemyOutgoingTransactions = self.alchemyClient!.alchemyAssetTransfers(fromBlock: .genesis,
-                                                                                          toBlock: .latest,
-                                                                                          fromAddress: address)
-        async let alchemyIncomingTransactions = self.alchemyClient!.alchemyAssetTransfers(fromBlock: .genesis,
-                                                                                          toBlock: .latest,
-                                                                                          toAddress: address)
-        async let covalentTransactions = self.covalentClient!.getTransactions(network: .ethereum, address: address)
+//        async let alchemyOutgoingTransactions = self.alchemyClient!.alchemyAssetTransfers(fromBlock: .genesis,
+//                                                                                          toBlock: .latest,
+//                                                                                          fromAddress: address)
+//        async let alchemyIncomingTransactions = self.alchemyClient!.alchemyAssetTransfers(fromBlock: .genesis,
+//                                                                                          toBlock: .latest,
+//                                                                                          toAddress: address)
+//        async let covalentTransactions = self.covalentClient!.getTransactions(network: .ethereum, address: address)
         async let unmarshalTransactions = self.unmarshalClient!.getTransactions(address: address)
 
         var walletTransactions =  [WalletTransaction]()
-        walletTransactions.append(contentsOf: try await alchemyOutgoingTransactions)
-        walletTransactions.append(contentsOf: try await alchemyIncomingTransactions)
-        walletTransactions.append(contentsOf: try await covalentTransactions)
+//        walletTransactions.append(contentsOf: try await alchemyOutgoingTransactions)
+//        walletTransactions.append(contentsOf: try await alchemyIncomingTransactions)
+//        walletTransactions.append(contentsOf: try await covalentTransactions)
         walletTransactions.append(contentsOf: try await unmarshalTransactions)
         
         var hashGroup = [String: TransactionGroup]()
