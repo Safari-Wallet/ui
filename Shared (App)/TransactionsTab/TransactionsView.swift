@@ -25,27 +25,29 @@ struct TransactionsView: View {
                         .pickerStyle(SegmentedPickerStyle())
                     List {
                         switch viewModel.state {
-                            case .loading:
-                                ForEach(1..<6) { transactionGroup in
-                                    //                            TransactionRow(tx: .placeholder)
-                                    //                                .redacted(reason: .placeholder)
-                                }
-                            case .fetched(txs: let txs):
-                                ForEach(txs) { transactionGroup in
-                                    NavigationLink(destination: TransactionDetailsView(group: transactionGroup)) {
-//                                        TransactionRow(transactionGroup: transactionGroup)
-                                        TransactionRowView(
-                                            txType: TransactionType(transactionGroup.type),
-                                            description: transactionGroup.description,
-                                            toAddress: transactionGroup.toAddress,
-                                            amount: transactionGroup.value
-                                        )
+                        case .loading:
+                            ForEach(1..<6) { transactionGroup in
+                                //                            TransactionRow(tx: .placeholder)
+                                //                                .redacted(reason: .placeholder)
+                            }
+                        case .fetched(txs: let txs):
+                            ForEach(txs) { transactionGroup in
+                                NavigationLink(destination: TransactionDetailsView(group: transactionGroup)) {
+                                    TransactionRowView(
+                                        txType: TransactionType(transactionGroup.type),
+                                        description: transactionGroup.description,
+                                        toAddress: transactionGroup.toAddress,
+                                        amount: transactionGroup.value
+                                    )
+                                    .onAppear {
+                                        viewModel.fetchTransactionsIfNeeded(currentTransaction: transactionGroup)
                                     }
                                 }
-                            case .error(message: let message):
-                                // Simple error msg for now
-                                Text(message)
-                                Spacer()
+                            }
+                        case .error(message: let message):
+                            // Simple error msg for now
+                            Text(message)
+                            Spacer()
                         }
                     }
                     .refreshable {

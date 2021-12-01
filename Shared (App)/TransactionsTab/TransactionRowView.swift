@@ -86,7 +86,6 @@ extension TransactionType {
         case "approve":
             self = .approve
         default:
-            print(type)
             self = .unknown
         }
     }

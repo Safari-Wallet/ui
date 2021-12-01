@@ -11,10 +11,10 @@ import SafariWalletCore
 import MEWwalletKit
 
 // TODO:
-// - Implement paging
+// - Check how many pages available
 final class TransactionsListViewModel: ObservableObject {
     
-    enum State {
+    enum State: Equatable {
         case loading
         case fetched(txs: [TransactionGroup])
         case error(message: String)
@@ -22,19 +22,24 @@ final class TransactionsListViewModel: ObservableObject {
     
     @Published var state: State = .loading
     @Published var filter: TransactionFilter = .all
+    private var transactions: [TransactionGroup] = []
     
     private let chain: String
     private let address: String
     private let currency: String
     private let symbol: String
-    private let service: TransactionService
+    
+    private var currentPage = 1
+    private var isFetching = false
+    
+    private let service: TransactionFetchable
     private var cancellables = Set<AnyCancellable>()
     
     init(chain: String,
          address: String,
          currency: String,
          symbol: String,
-         service: TransactionService = TransactionService()) {
+         service: TransactionFetchable = TransactionService()) {
         self.chain = chain
         self.address = address
         self.currency = currency
@@ -44,35 +49,46 @@ final class TransactionsListViewModel: ObservableObject {
     }
     
     func fetchTransactions() {
-        state = .loading
-        
+        guard let address = Address(ethereumAddress: address) else { return }
+        print(currentPage)
+        isFetching = true
         Task {
             do {
                 switch self.filter {
-                    case .all:
-                        let transactions = try await self.service.fetchTransactions(network: .ethereum,
-                                                                                    address: Address(ethereumAddress: "0x1FF1af1934DF4e772F2A8a998FEA635704B77836")!)
-                        state = .fetched(txs: transactions)
-                    case .sent:
-                        //TODO: Implement me!
-                        DispatchQueue.main.async { [weak self] in
-                            self?.state = .error(message: "Not yet implemented!")
-                        }
-                    case .received:
-                        //TODO: Implement me!
-                        DispatchQueue.main.async { [weak self] in
-                            self?.state = .error(message: "Not yet implemented!")
-                        }
-                    case .interactions:
-                        //TODO: Implement me!
-                        DispatchQueue.main.async { [weak self] in
-                            self?.state = .error(message: "Not yet implemented!")
-                        }
-                    case .failed:
-                        //TODO: Implement me!
-                        DispatchQueue.main.async { [weak self] in
-                            self?.state = .error(message: "Not yet implemented!")
-                        }
+                case .all:
+                    let fetchedTransactions = try await self.service.fetchTransactions(
+                        network: .ethereum,
+                        address: address,
+                        page: currentPage
+                    )
+//                    transactions.forEach {
+//                        print($0.description)
+//                        print($0.transactionHash)
+//                    }
+                    self.transactions.append(contentsOf: fetchedTransactions)
+                    state = .fetched(txs: self.transactions)
+                    currentPage += 1
+                    isFetching = false
+                case .sent:
+                    //TODO: Implement me!
+                    DispatchQueue.main.async { [weak self] in
+                        self?.state = .error(message: "Not yet implemented!")
+                    }
+                case .received:
+                    //TODO: Implement me!
+                    DispatchQueue.main.async { [weak self] in
+                        self?.state = .error(message: "Not yet implemented!")
+                    }
+                case .interactions:
+                    //TODO: Implement me!
+                    DispatchQueue.main.async { [weak self] in
+                        self?.state = .error(message: "Not yet implemented!")
+                    }
+                case .failed:
+                    //TODO: Implement me!
+                    DispatchQueue.main.async { [weak self] in
+                        self?.state = .error(message: "Not yet implemented!")
+                    }
                 }
             } catch let error {
                 //TODO: Error handling / Define error cases and appropriate error messages
@@ -87,6 +103,17 @@ final class TransactionsListViewModel: ObservableObject {
                 self?.fetchTransactions()
             }
             .store(in: &cancellables)
+    }
+    
+    func fetchTransactionsIfNeeded(currentTransaction transaction: TransactionGroup) {
+        guard canLoadNextPage(atTransaction: transaction) else { return }
+        fetchTransactions()
+    }
+    
+    private func canLoadNextPage(atTransaction transaction: TransactionGroup) -> Bool {
+        guard let index: Int = transactions.firstIndex(of: transaction) else { return false }
+        let reachedThreshold = Double(index) / Double(transactions.count) > 0.7
+        return !isFetching && reachedThreshold // TODO: check if end has been reached
     }
 }
 
