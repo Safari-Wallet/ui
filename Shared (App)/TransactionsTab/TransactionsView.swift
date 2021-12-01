@@ -33,7 +33,13 @@ struct TransactionsView: View {
                             case .fetched(txs: let txs):
                                 ForEach(txs) { transactionGroup in
                                     NavigationLink(destination: TransactionDetailsView(group: transactionGroup)) {
-                                        TransactionRow(transactionGroup: transactionGroup)
+//                                        TransactionRow(transactionGroup: transactionGroup)
+                                        TransactionRowView(
+                                            txType: TransactionType(transactionGroup.type),
+                                            description: transactionGroup.description,
+                                            toAddress: transactionGroup.toAddress,
+                                            amount: transactionGroup.value
+                                        )
                                     }
                                 }
                             case .error(message: let message):
@@ -45,6 +51,7 @@ struct TransactionsView: View {
                     .refreshable {
                         viewModel.fetchTransactions()
                     }
+                    .listStyle(.plain)
                 }
             }.navigationBarHidden(true)
         }
