@@ -10,8 +10,6 @@ import Foundation
 import SafariWalletCore
 import MEWwalletKit
 
-// TODO:
-// - Check how many pages available
 final class TransactionsListViewModel: ObservableObject {
     
     enum State: Equatable {
@@ -29,7 +27,6 @@ final class TransactionsListViewModel: ObservableObject {
     private let currency: String
     private let symbol: String
     
-    private var currentPage = 1
     private var isFetching = false
     
     private let service: TransactionFetchable
@@ -57,12 +54,10 @@ final class TransactionsListViewModel: ObservableObject {
                 case .all:
                     let fetchedTransactions = try await self.service.fetchTransactions(
                         network: .ethereum,
-                        address: address,
-                        page: currentPage
+                        address: address
                     )
                     self.transactions.append(contentsOf: fetchedTransactions)
                     state = .fetched(txs: self.transactions)
-                    currentPage += 1
                     isFetching = false
                 case .sent:
                     //TODO: Implement me!

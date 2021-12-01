@@ -9,21 +9,25 @@ import MEWwalletKit
 import SafariWalletCore
 
 protocol TransactionFetchable {
-    func fetchTransactions(network: Network, address: Address, page: Int) async throws -> [TransactionGroup]
+    func fetchTransactions(network: Network, address: Address) async throws -> [TransactionGroup]
 }
 
 final class TransactionService: TransactionFetchable {
     
+    private var currentPage = 1
     private let unmarshalClient: UnmarshalClient? = UnmarshalClient(apiKey: ApiKeys.unmarshal)
     
     @MainActor
-    func fetchTransactions(network: Network, address: Address, page: Int) async throws -> [TransactionGroup] {
+    func fetchTransactions(network: Network, address: Address) async throws -> [TransactionGroup] {
 
         guard let client = unmarshalClient else { throw TransactionError.networkConnectionFailed }
-        async let unmarshalTransactions = client.getTransactions(address: address, page: page)
+        
+        let unmarshalResponse = try await client.getTransactions(address: address, page: currentPage)
 
+        guard currentPage < unmarshalResponse.total_pages else { return [] }
+        
         var walletTransactions =  [WalletTransaction]()
-        walletTransactions.append(contentsOf: try await unmarshalTransactions)
+        walletTransactions.append(contentsOf: unmarshalResponse.transactions)
         
         var hashGroup = [String: TransactionGroup]()
         for transaction in walletTransactions {
@@ -36,7 +40,7 @@ final class TransactionService: TransactionFetchable {
                 hashGroup[transaction.hash] = newGroup
             }
         }
-        
+        currentPage += 1
         return Array(hashGroup.values.sorted())
     }
     
