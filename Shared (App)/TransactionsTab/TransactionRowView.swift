@@ -35,9 +35,8 @@ struct TransactionRowView: View {
                 }
                 .lineLimit(1)
             }
-            .frame(maxWidth: 180)
             Spacer()
-            VStack(spacing: 5) {
+            VStack(alignment: .trailing, spacing: 5) {
                 Group {
                     Text(amount) + Text(" ") + Text("ETH")
                 }
