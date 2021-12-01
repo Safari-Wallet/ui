@@ -45,12 +45,11 @@ final class TransactionsListViewModel: ObservableObject {
         self.currency = currency
         self.symbol = symbol
         self.service = service
-        handleFilterChange()
+        bindTransactionFilter()
     }
     
     func fetchTransactions() {
         guard let address = Address(ethereumAddress: address) else { return }
-        print(currentPage)
         isFetching = true
         Task {
             do {
@@ -61,10 +60,6 @@ final class TransactionsListViewModel: ObservableObject {
                         address: address,
                         page: currentPage
                     )
-//                    transactions.forEach {
-//                        print($0.description)
-//                        print($0.transactionHash)
-//                    }
                     self.transactions.append(contentsOf: fetchedTransactions)
                     state = .fetched(txs: self.transactions)
                     currentPage += 1
@@ -97,7 +92,7 @@ final class TransactionsListViewModel: ObservableObject {
         }
     }
     
-    func handleFilterChange() {
+    func bindTransactionFilter() {
         $filter
             .sink { [weak self] _ in
                 self?.fetchTransactions()
