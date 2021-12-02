@@ -16,19 +16,16 @@
     },
 
     "background": {
-        "scripts": [
-            "background.js"
-        ],
+        "scripts": ["background.js"],
         "persistent": false
     },
 
-    "content_scripts": [{
-        "js": [
-            "content.js",
-            "ethereum/dist.js"
-        ],
-        "matches": [ "<all_urls>" ]
-    }],
+    "content_scripts": [
+        {
+            "js": ["content.js", "ethereum/index.js"],
+            "matches": ["<all_urls>"]
+        }
+    ],
 
     "browser_action": {
         "default_popup": "popup.html",
@@ -40,13 +37,7 @@
         }
     },
 
-    "web_accessible_resources": [
-        "fonts/*",
-        "ethereum/*"
-    ],
+    "web_accessible_resources": ["fonts/*", "ethereum/*"],
 
-    "permissions": [
-        "nativeMessaging",
-        "tabs"
-    ]
+    "permissions": ["nativeMessaging", "tabs"]
 }
