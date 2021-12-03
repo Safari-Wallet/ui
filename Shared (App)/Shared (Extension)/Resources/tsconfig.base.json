@@ -9,22 +9,8 @@
         "strict": true,
         "skipLibCheck": true,
         "baseUrl": ".",
-        "paths": {
-            "*": [
-                "*",
-                "events/*",
-                "methods/*"
-            ]
-        }
+        "lib": ["DOM", "ES2015", "ES2016", "ES2017", "ESNext"]
     },
-    "exclude": [
-        "./dist.js",
-        "./dist.js.map",
-        "./node_modules"
-    ],
-    "include": [
-        "./events",
-        "./methods",
-        "./*"
-    ]
+    "exclude": ["*.js", "node_modules"],
+    "include": ["./src/**/*.ts"]
 }
