@@ -57,6 +57,7 @@
 		3DACED5B2751D5B2004050B7 /* keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DACED592751D5B2004050B7 /* keys.swift */; };
 		3DACED5C2751D5B2004050B7 /* keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DACED592751D5B2004050B7 /* keys.swift */; };
 		3DACED5D2751D5B2004050B7 /* keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DACED592751D5B2004050B7 /* keys.swift */; };
+		3DFFFBA9275C57ED00056A69 /* Contract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFFFBA8275C57ED00056A69 /* Contract.swift */; };
 		4A19E6E0271E673C0096027F /* JsonRpcClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A19E6DF271E673C0096027F /* JsonRpcClientTest.swift */; };
 		4AAE2E61274400D500696FBE /* WalletTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAE2E60274400D500696FBE /* WalletTransaction.swift */; };
 		4AAE2E62274400D500696FBE /* WalletTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAE2E60274400D500696FBE /* WalletTransaction.swift */; };
@@ -242,6 +243,7 @@
 		3D216A1427539F4700620BB9 /* TransactionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionType.swift; sourceTree = "<group>"; };
 		3D97705E273CD4AE0014CAC7 /* TransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionService.swift; sourceTree = "<group>"; };
 		3DACED592751D5B2004050B7 /* keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keys.swift; sourceTree = "<group>"; };
+		3DFFFBA8275C57ED00056A69 /* Contract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contract.swift; sourceTree = "<group>"; };
 		4A19E6DF271E673C0096027F /* JsonRpcClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonRpcClientTest.swift; sourceTree = "<group>"; };
 		4AAE2E60274400D500696FBE /* WalletTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTransaction.swift; sourceTree = "<group>"; };
 		4AAE2E652744ADA600696FBE /* TransactionGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionGroup.swift; sourceTree = "<group>"; };
@@ -464,8 +466,6 @@
 			isa = PBXGroup;
 			children = (
 				3D97705E273CD4AE0014CAC7 /* TransactionService.swift */,
-				4AAE2E60274400D500696FBE /* WalletTransaction.swift */,
-				4AAE2E652744ADA600696FBE /* TransactionGroup.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -486,9 +486,12 @@
 		F8812B462717E07000D1B231 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3DFFFBA8275C57ED00056A69 /* Contract.swift */,
 				F8812B472717E18600D1B231 /* RecoveryPhrase.swift */,
 				0A8BB798272E729200DFC647 /* Transaction.swift */,
+				4AAE2E652744ADA600696FBE /* TransactionGroup.swift */,
 				3D216A1427539F4700620BB9 /* TransactionType.swift */,
+				4AAE2E60274400D500696FBE /* WalletTransaction.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -884,6 +887,7 @@
 				F8ABEF3227125EFA007F7D11 /* WalletApp.swift in Sources */,
 				F8ABEF42271389D9007F7D11 /* URL.swift in Sources */,
 				F89E2586273833AC00596610 /* WalletManager+Core.swift in Sources */,
+				3DFFFBA9275C57ED00056A69 /* Contract.swift in Sources */,
 				F8ABEED527124A8C007F7D11 /* SharedDocument.swift in Sources */,
 				F8ABEEDD27124A8C007F7D11 /* KeychainPasswordItem.swift in Sources */,
 				F8ABEEC927124A8C007F7D11 /* Constants.swift in Sources */,
