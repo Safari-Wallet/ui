@@ -21,6 +21,8 @@ final class TransactionsListViewModel: ObservableObject {
     @Published var state: State = .loading
     @Published var filter: TransactionFilter = .all
     private var transactions: [TransactionGroup] = []
+    // TODO: Implement contract caching
+    private var contracts: [String: ContractDetail] = [:]
     
     private let chain: String
     private let address: String
@@ -29,19 +31,23 @@ final class TransactionsListViewModel: ObservableObject {
     
     private var isFetching = false
     
-    private let service: TransactionFetchable
+    private let txService: TransactionFetchable
+    private let contractService: ContractFetchable
     private var cancellables = Set<AnyCancellable>()
     
     init(chain: String,
          address: String,
          currency: String,
          symbol: String,
-         service: TransactionFetchable = TransactionService()) {
+         txService: TransactionFetchable = TransactionService(),
+         contractService: ContractFetchable = ContractService()
+    ) {
         self.chain = chain
         self.address = address
         self.currency = currency
         self.symbol = symbol
-        self.service = service
+        self.txService = txService
+        self.contractService = contractService
         bindTransactionFilter()
     }
     
@@ -52,11 +58,17 @@ final class TransactionsListViewModel: ObservableObject {
             do {
                 switch self.filter {
                 case .all:
-                    let fetchedTransactions = try await self.service.fetchTransactions(
+                    let fetchedTransactions = try await self.txService.fetchTransactions(
                         network: .ethereum,
                         address: address
                     )
-                    self.transactions.append(contentsOf: fetchedTransactions)
+                    await fetchContracts()
+                    let txs = fetchedTransactions.map { tx -> TransactionGroup in
+                        var tx = tx
+                        tx.contractName = contracts[tx.toAddress]?.contractName ?? tx.toAddress
+                        return tx
+                    }
+                    self.transactions.append(contentsOf: txs)
                     state = .fetched(txs: self.transactions)
                     isFetching = false
                 case .sent:
@@ -103,7 +115,20 @@ final class TransactionsListViewModel: ObservableObject {
     private func canLoadNextPage(atTransaction transaction: TransactionGroup) -> Bool {
         guard let index: Int = transactions.firstIndex(of: transaction) else { return false }
         let reachedThreshold = Double(index) / Double(transactions.count) > 0.7
-        return !isFetching && reachedThreshold // TODO: check if end has been reached
+        return !isFetching && reachedThreshold
+    }
+    
+    private func fetchContracts() async {
+        for tx in transactions {
+            guard let contractAddress = tx.transactions.first?.to else { return }
+            if contracts[tx.toAddress] == nil {
+                let contractDetail = try? await contractService.fetchContractDetails(forAddress: contractAddress)
+                print(TransactionType(tx.type))
+                print(tx.toAddress)
+                print(contractDetail?.contractName)
+                contracts[tx.toAddress] = contractDetail
+            }
+        }
     }
 }
 
