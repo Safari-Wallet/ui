@@ -33,6 +33,20 @@ class AddressItem: Codable, Identifiable, ObservableObject {
         case derivationIndex
     }
     
+    init(address: Address, derivationIndex: Int, bundleUUID: UUID, accountName: String?) {
+        self.id = derivationIndex
+        self.accountName = accountName
+        self.bundleUUID = bundleUUID
+        self.address = address
+        self.derivationIndex = derivationIndex
+    }
+    
+    func fetchENSname() async {
+        // TODO: add ENS support
+    }
+
+    // MARK: - Codable
+    
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         ensName = try container.decode(String?.self, forKey: .ensName)

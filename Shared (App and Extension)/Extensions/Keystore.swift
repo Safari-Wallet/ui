@@ -7,34 +7,19 @@
 
 import Foundation
 import SafariWalletCore
+import MEWwalletKit
 
 extension KeystoreV3 {
     
-    convenience init?(mnemonic: String, password: String) async throws {
+    convenience init(bip39: BIP39, password: String) async throws {
         
         // 1. Create keystore V3
-        guard let phraseData = mnemonic.data(using: .utf8),
+        guard let entropy = bip39.entropy,
               let passwordData = password.data(using: .utf8)?.sha256()
         else {
             throw WalletError.invalidInput(nil)
         }
-        try await self.init(privateKey: phraseData, passwordData: passwordData)
-    }
-    
-    /// Saves keystore to disk
-    /// - Parameters:
-    ///   - name: filename (without file extension)
-    ///   - storePasswordInKeychain: if true, password will be stored. Default is true.
-    ///   - resuableDuration: Time password can be used without FaceID/TouchID verification. Default is 1200 seconds (20 minutes)
-    func save(name: String, password: String, storePasswordInKeychain: Bool = true, resuableDuration: TimeInterval = 1200) async throws {
-        try await save(name: name)
-
-        if storePasswordInKeychain == true {
-            let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
-                                                    account: name,
-                                                    accessGroup: KeychainConfiguration.accessGroup)
-            try passwordItem.savePassword(password, userPresence: true, reusableDuration: resuableDuration)
-        }
+        try await self.init(privateKey: entropy, passwordData: passwordData)
     }
     
     func save(name: String) async throws {
@@ -42,13 +27,11 @@ extension KeystoreV3 {
         try await hdWalletFile.write(try self.encodedData())
     }
  
-    static func loadMnemonic(name: String, password: String? = nil) async throws -> String {
+    static func load(name: String, password: String? = nil, language: BIP39Wordlist = .english) async throws -> BIP39 {
         
         // 1. Load keystore
         let keystoreData = try await SharedDocument(filename: name.deletingPathExtension().appendPathExtension(KEYSTORE_FILE_EXTENSION)).read()
-        guard let keystore = try KeystoreV3(keystore: keystoreData) else {
-            throw WalletError.errorOpeningKeyStore(name)
-        }
+        let keystore = try KeystoreV3(keystore: keystoreData)
         
         // 2. Fetch password from keychain
         let pw: String
@@ -62,11 +45,11 @@ extension KeystoreV3 {
             throw WalletError.invalidPassword
         }
         
-        // 3. Decrypt mnemonic
-        guard let mnemonicData = try await keystore.getDecryptedKeystore(passwordData: pwData) else {
+        // 3. Decrypt entropy
+        guard let entropy = try await keystore.getDecryptedKeystore(passwordData: pwData) else {
             throw WalletError.wrongPassword
         }
-        return String(decoding: mnemonicData, as: UTF8.self)
+        return BIP39(entropy: entropy, language: language)
     }
 }
  

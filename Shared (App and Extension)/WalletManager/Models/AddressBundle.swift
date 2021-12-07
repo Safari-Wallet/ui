@@ -24,12 +24,29 @@ class AddressBundle: Identifiable, ObservableObject, Codable {
     
     let network: Network // Supported: "Ropsten", "Ethereum", "Ethereum - Ledger Live"
     
-    init(walletName: String? = nil, type: PrivateKeyType, network: Network, addresses: [AddressItem]) {
-        id = UUID()
+    /// Initialize new address bundle
+    /// - Parameters:
+    ///   - walletName: Human readable name (e.g. "Ledger 1 Wallet")
+    ///   - type: Private key type (keystore, hardware, etc)
+    ///   - network: Network (e.g. Ethereum or Ropston)
+    ///   - addresses: AddressItems
+    init(id: UUID, walletName: String? = nil, type: PrivateKeyType, network: Network = .ethereum, addresses: [AddressItem]) {
+        self.id = id
         self.walletName = walletName
         self.addresses = addresses
         self.type = type
         self.network = network
+    }
+    
+    init(id: UUID, type: PrivateKeyType, network: Network = .ethereum, addresses: [Address]) {
+        self.id = id
+        self.type = type
+        self.network = network
+        self.addresses = []
+        let items = addresses.enumerated().map { (index, address) in
+            AddressItem(address: address, derivationIndex: index, bundleUUID: id, accountName: nil)
+        }
+        self.addresses = items
     }
     
     enum CodingKeys: CodingKey {
@@ -94,7 +111,7 @@ extension AddressBundle {
         return FileManager.default.fileExists(atPath: walletURL.path)
     }
     
-    static func loadAddressBundles(network: Network) async throws -> [AddressBundle]? {
+    static func loadAddressBundles(network: Network) async throws -> [AddressBundle] {
         let documents = try SharedDocument.listAddressBundles(network: network)
         var bundles = [AddressBundle]()
         for document in documents {
@@ -102,6 +119,12 @@ extension AddressBundle {
             bundles.append(bundle)
         }
         return bundles
+    }
+    
+    static func loadAddressBundle(id: UUID, network: Network) async throws -> AddressBundle {
+        let document = try SharedDocument(filename: id.uuidString.appendPathExtension(network.symbol).appendPathExtension(ADDRESSBUNDLE_FILE_EXTENSION))
+        guard let data = try? await document.read(), let bundle = try? JSONDecoder().decode(AddressBundle.self, from: data) else { throw WalletError.unexpectedResponse("") }
+        return bundle
     }
     
     func save() async throws {
@@ -118,15 +141,17 @@ extension AddressBundle {
         // 1. Sanity check
         guard canSign == true else { throw WalletError.viewOnly }
         guard forAddressIndex < self.addresses.count else { throw WalletError.outOfBounds }
-        
-        // 2. Fetch mnemonic
-        let mnemonic: String
+                
         switch type {
         case .keystoreSecureEnclave:
             throw WalletError.notImplemented
         case .keystorePassword:
-            mnemonic = try await KeystoreV3.loadMnemonic(name: id.uuidString, password: password)
-            
+            let bip39 = try await KeystoreV3.load(name: id.uuidString, password: password)
+            guard let seed = try bip39.seed() else { throw WalletError.seedError }
+            let wallet = try Wallet<PrivateKeyEth1>(seed: seed)
+            let account = try Account(privateKey: wallet.privateKey, wallet: id.uuidString, derivationpath: "123") // FIXME: derivationpath
+            assert(account.addresss == addresses[forAddressIndex].address)
+            return account
         case .viewOnly:
             throw WalletError.viewOnly
         case .nanoLedgerX(id: _, bip44: _):
@@ -136,14 +161,5 @@ extension AddressBundle {
         case .trezor(id: _):
             throw WalletError.notImplemented
         }
-        
-        // 2. Restore wallet from mnemonic
-        guard let seed = try BIP39(mnemonic: mnemonic.components(separatedBy: " ")).seed() else { throw WalletError.seedError }
-        let wallet = try Wallet<PrivateKeyEth1>(seed: seed)
-                
-        // 3. Create account based on derivation path
-        let account = try Account(privateKey: wallet.privateKey, wallet: id.uuidString, derivationpath: "123")
-        assert(account.addresss == addresses[forAddressIndex].address)
-        return account
     }
 }
