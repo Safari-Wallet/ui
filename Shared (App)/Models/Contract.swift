@@ -6,21 +6,23 @@
 //
 
 struct Contract {
+    let address: String
+    let name: String
+    let abi: String
+    let nameTag: String?
+}
+
+struct ContractInfo {
     let contractAddress: String
     let contractName: String
     let nameTag: String
 }
 
-extension Contract: Decodable {
+extension ContractInfo: Decodable {
     
     enum CodingKeys : String, CodingKey {
         case contractAddress = "Address"
         case contractName = "NameTagContractDetails"
         case nameTag = "NameTag"
     }
-}
-
-struct ContractDetail: Hashable {
-    let contractName: String
-    let abi: String
 }

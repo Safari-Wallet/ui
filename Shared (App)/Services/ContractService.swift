@@ -10,8 +10,8 @@ import MEWwalletKit
 import SafariWalletCore
 
 protocol ContractFetchable {
-    func name(forAddress address: RawAddress) -> Contract?
-    func fetchContractDetails(forAddress: Address) async throws -> ContractDetail?
+    func name(forAddress address: RawAddress) -> ContractInfo?
+    func fetchContractDetails(forAddress: Address) async throws -> Contract?
 }
 
 typealias RawAddress = String
@@ -21,33 +21,29 @@ final class ContractService: ContractFetchable {
     private let client: EtherscanClient = EtherscanClient(apiKey: ApiKeys.etherscan)
     
     /// Address string to contract lookup
-    private lazy var contractNameLookup: [RawAddress: Contract] = {
+    private lazy var contractNameLookup: [RawAddress: ContractInfo] = {
         let decoder = PropertyListDecoder()
-        guard let url = Bundle.main.url(forResource: "ContractNameTags", withExtension: "plist"),
+        guard let url = Bundle.main.url(forResource: "ContractInfo", withExtension: "plist"),
               let data = try? Data(contentsOf: url),
-              let contracts = try? decoder.decode([Contract].self, from: data) else { return [:] }
+              let contracts = try? decoder.decode([ContractInfo].self, from: data) else { return [:] }
         return Dictionary(uniqueKeysWithValues: contracts.map { ($0.contractAddress, $0) })
     }()
     
-    func name(forAddress address: RawAddress) -> Contract? {
+    func name(forAddress address: RawAddress) -> ContractInfo? {
         return contractNameLookup[address]
     }
     
     @MainActor
-    func fetchContractDetails(forAddress address: Address) async throws -> ContractDetail? {
+    func fetchContractDetails(forAddress address: Address) async throws -> Contract? {
         let response = try await client.getContractDetails(forAddress: address)
-        let contract = ContractDetail(response: response)
-        return contract
-    }
-}
-
-extension ContractDetail {
-    
-    init?(response: Etherscan.ContractResponse) {
-        guard let contract = response.result.first else { return nil }
-        self.init(
-            contractName: contract.contractName,
-            abi: contract.abi
+        guard let contractDetails = response.result.first else { return nil }
+        let contractInfo = name(forAddress: address.address)
+        let contract = Contract(
+            address: address.address,
+            name: contractDetails.contractName,
+            abi: contractDetails.abi,
+            nameTag: contractInfo?.nameTag
         )
+        return contract
     }
 }

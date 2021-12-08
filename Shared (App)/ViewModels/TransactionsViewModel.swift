@@ -22,7 +22,6 @@ final class TransactionsListViewModel: ObservableObject {
     @Published var filter: TransactionFilter = .all
     private var transactions: [TransactionGroup] = []
     // TODO: Implement contract caching
-//    private var contracts: [String: ContractDetail] = [:]
     private var contracts: [String: Contract] = [:]
     
     private let chain: String
@@ -63,20 +62,20 @@ final class TransactionsListViewModel: ObservableObject {
                         network: .ethereum,
                         address: address
                     )
-                    //                    await fetchContracts()
+                    await fetchContracts(fromTxs: fetchedTransactions)
                     let txs = fetchedTransactions.map { tx -> TransactionGroup in
                         var tx = tx
-                        let type = TransactionType(tx.type)
-                        if let name = contractService.name(forAddress: tx.toAddress)?.contractName {
-                            print("available: ", name, "(\(tx.toAddress)")
-                        } else {
-                            if type == .contractExecution || type == .swap {
-                                print("contract is nil: ", tx.toAddress, " ", tx.type, tx.description)
-                            } else {
-                                print("other is nil: ", tx.toAddress, " ", tx.type, tx.description)
-                            }
+                        let contract = contracts[tx.toAddress]
+                        if contract?.nameTag == nil || contract?.name == nil {
+                            print(tx.toAddress)
                         }
-                        tx.contractName = contractService.name(forAddress: tx.toAddress)?.contractName ?? tx.toAddress//contracts[tx.toAddress]?.contractName ?? tx.toAddress
+                        if let nameTag = contract?.nameTag, !nameTag.isEmpty {
+                            tx.contractName = nameTag
+                        } else if let contractName = contract?.name, !contractName.isEmpty {
+                            tx.contractName = contractName
+                        } else {
+                            tx.contractName = tx.toAddress
+                        }
                         return tx
                     }
                     self.transactions.append(contentsOf: txs)
@@ -129,16 +128,19 @@ final class TransactionsListViewModel: ObservableObject {
         return !isFetching && reachedThreshold
     }
     
-    private func fetchContracts() async {
-        for tx in transactions {
-            guard let contractAddress = tx.transactions.first?.to else { return }
-            if contracts[tx.toAddress] == nil {
-//                let contractDetail = try? await contractService.fetchContractDetails(forAddress: contractAddress)
-//                print(TransactionType(tx.type))
-//                print(tx.toAddress)
-//                print(contractDetail?.contractName)
-                guard let contractDetail = contractService.name(forAddress: contractAddress.address) else { return }
-                contracts[tx.toAddress] = contractDetail
+    @MainActor
+    private func fetchContracts(fromTxs txs: [TransactionGroup]) async {
+        await withTaskGroup(of: Void.self) { [weak self] group in
+            guard let self = self else { return }
+            for tx in txs {
+                group.addTask {
+                    guard let contractAddress = tx.transactions.first?.to else { return }
+                    if self.contracts[tx.toAddress] == nil {
+                        let contractDetail = try? await self.contractService.fetchContractDetails(forAddress: contractAddress)
+                        guard let contractDetail = contractDetail else { return }
+                        self.contracts[tx.toAddress] = contractDetail
+                    }
+                }
             }
         }
     }
