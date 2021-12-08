@@ -22,7 +22,8 @@ final class TransactionsListViewModel: ObservableObject {
     @Published var filter: TransactionFilter = .all
     private var transactions: [TransactionGroup] = []
     // TODO: Implement contract caching
-    private var contracts: [String: ContractDetail] = [:]
+//    private var contracts: [String: ContractDetail] = [:]
+    private var contracts: [String: Contract] = [:]
     
     private let chain: String
     private let address: String
@@ -62,10 +63,20 @@ final class TransactionsListViewModel: ObservableObject {
                         network: .ethereum,
                         address: address
                     )
-                    await fetchContracts()
+                    //                    await fetchContracts()
                     let txs = fetchedTransactions.map { tx -> TransactionGroup in
                         var tx = tx
-                        tx.contractName = contracts[tx.toAddress]?.contractName ?? tx.toAddress
+                        let type = TransactionType(tx.type)
+                        if let name = contractService.name(forAddress: tx.toAddress)?.contractName {
+                            print("available: ", name, "(\(tx.toAddress)")
+                        } else {
+                            if type == .contractExecution || type == .swap {
+                                print("contract is nil: ", tx.toAddress, " ", tx.type, tx.description)
+                            } else {
+                                print("other is nil: ", tx.toAddress, " ", tx.type, tx.description)
+                            }
+                        }
+                        tx.contractName = contractService.name(forAddress: tx.toAddress)?.contractName ?? tx.toAddress//contracts[tx.toAddress]?.contractName ?? tx.toAddress
                         return tx
                     }
                     self.transactions.append(contentsOf: txs)
@@ -122,10 +133,11 @@ final class TransactionsListViewModel: ObservableObject {
         for tx in transactions {
             guard let contractAddress = tx.transactions.first?.to else { return }
             if contracts[tx.toAddress] == nil {
-                let contractDetail = try? await contractService.fetchContractDetails(forAddress: contractAddress)
-                print(TransactionType(tx.type))
-                print(tx.toAddress)
-                print(contractDetail?.contractName)
+//                let contractDetail = try? await contractService.fetchContractDetails(forAddress: contractAddress)
+//                print(TransactionType(tx.type))
+//                print(tx.toAddress)
+//                print(contractDetail?.contractName)
+                guard let contractDetail = contractService.name(forAddress: contractAddress.address) else { return }
                 contracts[tx.toAddress] = contractDetail
             }
         }

@@ -10,12 +10,28 @@ import MEWwalletKit
 import SafariWalletCore
 
 protocol ContractFetchable {
+    func name(forAddress address: RawAddress) -> Contract?
     func fetchContractDetails(forAddress: Address) async throws -> ContractDetail?
 }
+
+typealias RawAddress = String
 
 final class ContractService: ContractFetchable {
     
     private let client: EtherscanClient = EtherscanClient(apiKey: ApiKeys.etherscan)
+    
+    /// Address string to contract lookup
+    private lazy var contractNameLookup: [RawAddress: Contract] = {
+        let decoder = PropertyListDecoder()
+        guard let url = Bundle.main.url(forResource: "ContractNameTags", withExtension: "plist"),
+              let data = try? Data(contentsOf: url),
+              let contracts = try? decoder.decode([Contract].self, from: data) else { return [:] }
+        return Dictionary(uniqueKeysWithValues: contracts.map { ($0.contractAddress, $0) })
+    }()
+    
+    func name(forAddress address: RawAddress) -> Contract? {
+        return contractNameLookup[address]
+    }
     
     @MainActor
     func fetchContractDetails(forAddress address: Address) async throws -> ContractDetail? {
@@ -34,9 +50,4 @@ extension ContractDetail {
             abi: contract.abi
         )
     }
-}
-
-struct Contract: Decodable {
-    let contractAddress: String
-    let contractName: String
 }

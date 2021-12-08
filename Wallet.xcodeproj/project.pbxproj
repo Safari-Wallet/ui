@@ -57,6 +57,10 @@
 		3DACED5B2751D5B2004050B7 /* keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DACED592751D5B2004050B7 /* keys.swift */; };
 		3DACED5C2751D5B2004050B7 /* keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DACED592751D5B2004050B7 /* keys.swift */; };
 		3DACED5D2751D5B2004050B7 /* keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DACED592751D5B2004050B7 /* keys.swift */; };
+		3DEAA23A275DAB4200EB8370 /* ContractNameTags.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DEAA239275DAB4200EB8370 /* ContractNameTags.plist */; };
+		3DEAA23B275DAB4200EB8370 /* ContractNameTags.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DEAA239275DAB4200EB8370 /* ContractNameTags.plist */; };
+		3DEAA23C275DAB4200EB8370 /* ContractNameTags.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DEAA239275DAB4200EB8370 /* ContractNameTags.plist */; };
+		3DEAA23D275DAB4200EB8370 /* ContractNameTags.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DEAA239275DAB4200EB8370 /* ContractNameTags.plist */; };
 		3DFFFBA9275C57ED00056A69 /* Contract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFFFBA8275C57ED00056A69 /* Contract.swift */; };
 		3DFFFBAB275C588800056A69 /* ContractService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFFFBAA275C588800056A69 /* ContractService.swift */; };
 		3DFFFBAC275C5F1000056A69 /* Contract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFFFBA8275C57ED00056A69 /* Contract.swift */; };
@@ -256,6 +260,7 @@
 		3D216A1427539F4700620BB9 /* TransactionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionType.swift; sourceTree = "<group>"; };
 		3D97705E273CD4AE0014CAC7 /* TransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionService.swift; sourceTree = "<group>"; };
 		3DACED592751D5B2004050B7 /* keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keys.swift; sourceTree = "<group>"; };
+		3DEAA239275DAB4200EB8370 /* ContractNameTags.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ContractNameTags.plist; sourceTree = "<group>"; };
 		3DFFFBA8275C57ED00056A69 /* Contract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contract.swift; sourceTree = "<group>"; };
 		3DFFFBAA275C588800056A69 /* ContractService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractService.swift; sourceTree = "<group>"; };
 		4A19E6DF271E673C0096027F /* JsonRpcClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonRpcClientTest.swift; sourceTree = "<group>"; };
@@ -507,6 +512,7 @@
 				4AAE2E652744ADA600696FBE /* TransactionGroup.swift */,
 				3D216A1427539F4700620BB9 /* TransactionType.swift */,
 				4AAE2E60274400D500696FBE /* WalletTransaction.swift */,
+				3DEAA239275DAB4200EB8370 /* ContractNameTags.plist */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -794,6 +800,7 @@
 			files = (
 				0A0E1ECD270687AE00061EA6 /* Icon.png in Resources */,
 				0A0E1ECB270687AE00061EA6 /* Main.html in Resources */,
+				3DEAA23A275DAB4200EB8370 /* ContractNameTags.plist in Resources */,
 				0A0E1ED1270687AE00061EA6 /* Script.js in Resources */,
 				0A0E1ED5270687AE00061EA6 /* Assets.xcassets in Resources */,
 				0A0E1ECF270687AE00061EA6 /* Style.css in Resources */,
@@ -806,6 +813,7 @@
 			files = (
 				0A0E1ECE270687AE00061EA6 /* Icon.png in Resources */,
 				0A0E1ED0270687AE00061EA6 /* Style.css in Resources */,
+				3DEAA23B275DAB4200EB8370 /* ContractNameTags.plist in Resources */,
 				0A0E1ED2270687AE00061EA6 /* Script.js in Resources */,
 				0A0E1ED6270687AE00061EA6 /* Assets.xcassets in Resources */,
 				0A0E1ECC270687AE00061EA6 /* Main.html in Resources */,
@@ -824,6 +832,7 @@
 				0A0E1EDD270687AE00061EA6 /* manifest.json in Resources */,
 				0A0E1ED9270687AE00061EA6 /* _locales in Resources */,
 				0A0E1EE1270687AE00061EA6 /* content.js in Resources */,
+				3DEAA23C275DAB4200EB8370 /* ContractNameTags.plist in Resources */,
 				0A0E1EE7270687AE00061EA6 /* popup.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -840,6 +849,7 @@
 				0A0E1EDE270687AE00061EA6 /* manifest.json in Resources */,
 				0A0E1EDA270687AE00061EA6 /* _locales in Resources */,
 				0A0E1EE2270687AE00061EA6 /* content.js in Resources */,
+				3DEAA23D275DAB4200EB8370 /* ContractNameTags.plist in Resources */,
 				0A0E1EE8270687AE00061EA6 /* popup.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
