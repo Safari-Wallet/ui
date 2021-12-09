@@ -58,10 +58,7 @@ final class TransactionsListViewModel: ObservableObject {
             do {
                 switch self.filter {
                 case .all:
-                    let fetchedTransactions = try await self.txService.fetchTransactions(
-                        network: .ethereum,
-                        address: address
-                    )
+                    let fetchedTransactions = try await self.txService.fetchTransactions(network: .ethereum, address: address)
                     await fetchContracts(fromTxs: fetchedTransactions)
                     let txs = fetchedTransactions.map { tx -> TransactionGroup in
                         var tx = tx
@@ -136,7 +133,7 @@ final class TransactionsListViewModel: ObservableObject {
                 group.addTask {
                     guard let contractAddress = tx.transactions.first?.to else { return }
                     if self.contracts[tx.toAddress] == nil {
-                        let contractDetail = try? await self.contractService.fetchContractDetails(forAddress: contractAddress)
+                        let contractDetail = try? await self.contractService.fetchContractDetails(forAddress: contractAddress) // TODO: handle error properly
                         guard let contractDetail = contractDetail else { return }
                         self.contracts[tx.toAddress] = contractDetail
                     }
