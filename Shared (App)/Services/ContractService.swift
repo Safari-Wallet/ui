@@ -33,15 +33,15 @@ final class ContractService: ContractFetchable {
         return contractNameLookup[address]
     }
     
-    @MainActor
     func fetchContractDetails(forAddress address: Address) async throws -> Contract? {
-        let response = try await client.getContractDetails(forAddress: address)
-        guard let contractDetails = response.result.first else { return nil }
+        // TODO: fetch contract details (ABI & Contract name)
+//        let response = try await client.getContractDetails(forAddress: address)
+//        guard let contractDetails = response.result.first else { return nil }
         let contractInfo = name(forAddress: address.address)
         let contract = Contract(
             address: address.address,
-            name: contractDetails.contractName,
-            abi: contractDetails.abi,
+            name: "", //contractDetails.contractName,
+            abi: "", //contractDetails.abi,
             nameTag: contractInfo?.nameTag
         )
         return contract

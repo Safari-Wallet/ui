@@ -63,6 +63,7 @@ final class TransactionsListViewModel: ObservableObject {
                     let txs = fetchedTransactions.map { tx -> TransactionGroup in
                         var tx = tx
                         let contract = contracts[tx.toAddress]
+                        // TODO: remove print of addresses without name tags
                         if contract?.nameTag == nil || contract?.name == nil {
                             print(tx.toAddress)
                         }
@@ -127,18 +128,26 @@ final class TransactionsListViewModel: ObservableObject {
     
     @MainActor
     private func fetchContracts(fromTxs txs: [TransactionGroup]) async {
-        await withTaskGroup(of: Void.self) { [weak self] group in
+        var contracts = [Contract]()
+        await withTaskGroup(of: Contract?.self) { [weak self] group in
             guard let self = self else { return }
             for tx in txs {
                 group.addTask {
-                    guard let contractAddress = tx.transactions.first?.to else { return }
-                    if self.contracts[tx.toAddress] == nil {
-                        let contractDetail = try? await self.contractService.fetchContractDetails(forAddress: contractAddress) // TODO: handle error properly
-                        guard let contractDetail = contractDetail else { return }
-                        self.contracts[tx.toAddress] = contractDetail
-                    }
+                    guard let contractAddress = tx.transactions.first?.to,
+                          self.contracts[tx.toAddress] == nil else { return nil }
+                    // TODO: Fetch tx input and decode with ABI fetched here
+                    // Discuss if we want to fetch tx input and contract details on list or on tx detail screen
+                    // If we want to show all details on the list, performance may be laggy because of the numerous fetches
+                    return try? await self.contractService.fetchContractDetails(forAddress: contractAddress)
+                }
+                for await contract in group {
+                    guard let contract = contract else { return }
+                    contracts.append(contract)
                 }
             }
+        }
+        for contract in contracts {
+            self.contracts[contract.address] = contract
         }
     }
 }

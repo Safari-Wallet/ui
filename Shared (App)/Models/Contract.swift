@@ -9,7 +9,7 @@ struct Contract {
     let address: String
     let name: String
     let abi: String
-    let nameTag: String?
+    let nameTag: String? // Could be an array of name tags
 }
 
 struct ContractInfo {
