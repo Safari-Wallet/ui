@@ -459,66 +459,241 @@ function hmrAcceptRun(bundle, id) {
 }
 
 },{}],"hrbmU":[function(require,module,exports) {
+var _messaging = require("../messaging");
+var _utils = require("../utils");
+const log = _utils.getLogger('background');
+const Messenger = _messaging.getMessenger('background', {
+    logger: log
+});
 (async ()=>{
-    let method = ``;
-    // For message signing:
-    let from = ``;
-    let params = {
-    };
     browser.runtime.onMessage.addListener(async (request, sender, sendResponse)=>{
-        if (typeof request.message === `undefined`) return;
-        switch(request.message.message){
-            case `eth_requestAccounts`:
-                const address = await browser.runtime.sendNativeMessage('ignored', `eth_requestAccounts`);
-                // TODO: address could return a { error: 'error message' } object. We need to check for that
-                //            if address['error'] = `undefined` {
-                //                ...
-                //            }
-                browser.runtime.sendMessage({
-                    message: address
-                });
-                break;
-            case `eth_signTypedData_v3`:
-                break;
-            case `cancel`:
-                browser.runtime.sendMessage({
-                    message: {
-                        message: `cancel`
-                    }
-                });
-                break;
-            case `get_state`:
-                const currentAddress = await browser.runtime.sendNativeMessage('ignored', `eth_getAccounts`);
-                const balance = await browser.runtime.sendNativeMessage('ignored', `eth_getBalance`);
-                console.log(`currentAddress response: `, currentAddress);
-                console.log(`currentBalance response: `, balance);
-                // TODO: address could return a { error: 'error message' } object. We need to check for that
-                browser.runtime.sendMessage({
-                    message: {
-                        address: currentAddress[0],
-                        balance: balance,
-                        from,
-                        method,
-                        params
-                    }
-                });
-                break;
-            case `update_method`:
-                method = request.message.method === `cancel` ? `` : request.message.method;
-                break;
-            case `update_from`:
-                from = request.message.from;
-                break;
-            case `update_params`:
-                params = request.message.params;
-                break;
-            default:
-                // * Unimplemented or invalid method
-                console.log(`background [unimplemented]:`, request.message.message);
-        }
+        log(`Received message from browser runtime: ${JSON.stringify(request)}`);
+        const onMethod = async (methodName, handler)=>{
+            const { destination , method , sessionId , params  } = request;
+            if (destination !== `background`) return;
+            if (method !== methodName) return;
+            log(`Received method '${method}' with params: ${JSON.stringify(params)}`);
+            await handler(params, sessionId);
+        };
+        onMethod('getState', async (_params, sessionId)=>{
+            const [address] = await Messenger.sendToNative('eth_getAccounts', sessionId);
+            const balance = await Messenger.sendToNative('eth_getBalance', sessionId);
+            // TODO: address could return a { error: 'error message' } object. We need to check for that
+            sendResponse({
+                address,
+                balance
+            });
+            Messenger.sendToPopup('updateState', {
+                address,
+                balance
+            });
+        });
+    //         case `eth_signTypedData_v3`: // * Return requested data from native app to popup.js
+    //             /*
+    //             TODO
+    //             const signature = await browser.runtime.sendNativeMessage({
+    //                 from: request.message.from,
+    //                 message: `eth_signTypedData_v3`,
+    //                 params: request.message.params,
+    //             });
+    //             browser.runtime.sendMessage({
+    //                 message: signature.message,
+    //             });
+    //             */
+    //             break;
+    //         case `cancel`: // * Cancel current method and notify popup.js of cancellation
+    //             browser.runtime.sendMessage({
+    //                 message: {
+    //                     message: `cancel`,
+    //                 },
+    //             });
+    //             break;
     });
 })();
+log(`loaded`);
 
-},{}]},["31izw","hrbmU"], "hrbmU", "parcelRequireae3a")
+},{"../utils":"jxYDB","../messaging":"3eVzl"}],"jxYDB":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "getLogger", ()=>getLogger
+);
+parcelHelpers.export(exports, "getErrorLogger", ()=>getErrorLogger
+);
+parcelHelpers.export(exports, "$", ()=>$
+);
+const getLogger = (fileName)=>(message, ...others)=>console.log(`[${fileName}.js] ${message}`, ...others)
+;
+const getErrorLogger = (fileName)=>(message, ...others)=>console.error(`[${fileName}.js] ${message}`, ...others)
+;
+const $ = (query)=>query[0] === `#` ? document.querySelector(query) : document.querySelectorAll(query)
+;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV"}],"ciiiV":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, '__esModule', {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === 'default' || key === '__esModule' || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"3eVzl":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "getSendNativeMessage", ()=>getSendNativeMessage
+);
+parcelHelpers.export(exports, "getSendBrowserRuntimeMessage", ()=>getSendBrowserRuntimeMessage
+);
+parcelHelpers.export(exports, "getSendBrowserTabMessage", ()=>getSendBrowserTabMessage
+);
+parcelHelpers.export(exports, "getSendMessageToEthereumJs", ()=>getSendMessageToEthereumJs
+);
+parcelHelpers.export(exports, "getSendWindowMessage", ()=>getSendWindowMessage
+);
+parcelHelpers.export(exports, "getMessenger", ()=>getMessenger
+);
+parcelHelpers.export(exports, "getBackgroundMessenger", ()=>getBackgroundMessenger
+);
+parcelHelpers.export(exports, "getPopupMessenger", ()=>getPopupMessenger
+);
+parcelHelpers.export(exports, "getContentMessenger", ()=>getContentMessenger
+);
+const getSendNativeMessage = (logger)=>(method, sessionId, params = {
+    })=>{
+        const message = {
+            method,
+            sessionId,
+            params
+        };
+        logger(`Sending message to SafariWebExtensionHandler: ${JSON.stringify(message)}`);
+        return browser.runtime.sendNativeMessage('ignored', message.method); // tmp
+    }
+;
+const getSendBrowserRuntimeMessage = (logger, sessionId)=>(destination, method, params = {
+    })=>{
+        const message = {
+            destination,
+            method,
+            params,
+            sessionId
+        };
+        logger(`Sending message to browser runtime: ${JSON.stringify(message)}`);
+        return browser.runtime.sendMessage(message);
+    }
+;
+const getSendBrowserTabMessage = (logger, sessionId)=>(destination, method, params = {
+    })=>{
+        const message = {
+            destination,
+            method,
+            params,
+            sessionId
+        };
+        logger(`Sending message to browser tabs: ${JSON.stringify(message)}`);
+        browser.tabs.query({
+            active: true,
+            currentWindow: true
+        }, (tabs)=>{
+            const [tab] = tabs;
+            if (tab && tab.id) browser.tabs.sendMessage(tab.id, message);
+        });
+    }
+;
+const getSendMessageToEthereumJs = (logger, conduit)=>(method, params = {
+    })=>{
+        const message = {
+            method,
+            params
+        };
+        logger(`Sending message to Ethereum.js: ${JSON.stringify(message)}`);
+        return conduit(message);
+    }
+;
+const getSendWindowMessage = (logger)=>(destination, method, params = {
+    })=>window.postMessage({
+            destination,
+            method,
+            params
+        })
+;
+const getMessenger = (origin, params)=>{
+    if (origin === 'background') return getBackgroundMessenger(params);
+    if (origin === 'popup') return getPopupMessenger(params);
+    if (origin === 'content') return getContentMessenger(params);
+    throw new Error(`Unknown origin: ${origin}`);
+};
+const getBackgroundMessenger = ({ logger  })=>{
+    const sendToContent = ({ method , params  })=>getSendBrowserTabMessage(logger)('content', method, params)
+    ;
+    const sendToEthereumJs = getSendMessageToEthereumJs(logger, (params)=>sendToContent({
+            method: 'forwardToEthereumJs',
+            params
+        })
+    );
+    const sendToPopup = (method, params = {
+    })=>getSendBrowserRuntimeMessage(logger)('popup', method, params)
+    ;
+    return {
+        sendToContent,
+        sendToEthereumJs,
+        sendToPopup,
+        sendToNative: getSendNativeMessage(logger)
+    };
+};
+const getPopupMessenger = ({ logger  })=>{
+    const sendToContent = ({ method , params  })=>getSendBrowserTabMessage(logger)('content', method, params)
+    ;
+    const sendToEthereumJs = getSendMessageToEthereumJs(logger, (params)=>sendToContent({
+            method: 'forwardToEthereumJs',
+            params
+        })
+    );
+    const sendToBackground = (method, params = {
+    })=>getSendBrowserRuntimeMessage(logger)('background', method, params)
+    ;
+    return {
+        sendToContent,
+        sendToEthereumJs,
+        sendToBackground,
+        sendToNative: getSendNativeMessage(logger)
+    };
+};
+const getContentMessenger = ({ logger , sessionId  })=>{
+    const sendToPopup = ({ method , params  })=>getSendBrowserRuntimeMessage(logger, sessionId)('popup', method, params)
+    ;
+    const sendToEthereumJs = ({ method , params  })=>getSendWindowMessage(logger)('ethereum', method, params)
+    ;
+    const sendToBackground = (method, params = {
+    })=>getSendBrowserRuntimeMessage(logger, sessionId)('background', method, params)
+    ;
+    return {
+        sendToPopup,
+        sendToEthereumJs,
+        sendToBackground
+    };
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV"}]},["31izw","hrbmU"], "hrbmU", "parcelRequireae3a")
 
 //# sourceMappingURL=background.js.map

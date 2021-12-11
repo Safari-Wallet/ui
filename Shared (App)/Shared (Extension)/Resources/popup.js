@@ -461,140 +461,201 @@ function hmrAcceptRun(bundle, id) {
 },{}],"kN1CH":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "log", ()=>log
+);
+parcelHelpers.export(exports, "error", ()=>error
+);
+parcelHelpers.export(exports, "Messenger", ()=>Messenger
+);
+parcelHelpers.export(exports, "chains", ()=>chains
+);
+parcelHelpers.export(exports, "chainId", ()=>chainId
+);
+var _messaging = require("../messaging");
+var _utils = require("../utils");
+var _templating = require("./templating");
+var _utils1 = require("./utils");
+const log = _utils.getLogger('popup');
+const error = _utils.getErrorLogger('popup');
+const Messenger = _messaging.getMessenger('popup', {
+    logger: log
+});
+const chains = {
+    1: {
+        gasToken: `ETH`
+    }
+};
+const chainId = 1;
+// - MARK: Main
 const main = ()=>{
-    let address = `0x`;
-    let balance = 0;
-    let method = ``;
-    // For message signing:
-    let from = ``;
-    let params = {
-    };
-    const chains = {
-        1: {
-            gasToken: `ETH`
-        }
-    };
-    let chain = 1;
-    const views = {
-        default: ()=>`
-            <h1>Safari Wallet</h1>
-                <div class="flex">
-                    <button id="cancel" class="button button--secondary">Cancel</button>
-                    <button id="connect" class="button button--primary">Connect</button>
-                </div>
-        `
-        ,
-        connectWallet: ()=>`
-            <h1>Connect to <span id="title"></span></h1>
-            <p class="subtitle"><span id="host"></span></p>
-            <p>When you connect your wallet, this dapp will be able to view the contents:</p>
-            <div class="field">
-                <label class="field__label" for="address">Address</label>
-                <input id="address" class="field__input" type="text" value="${address}" disabled>
-            </div>
-            <div class="field">
-                <label class="field__label" for="balance">ETH Balance</label>
-                <input id="balance" class="field__input" type="text" value="${balance} ${chains[chain].gasToken}" disabled>
-            </div>
-            <div class="flex">
-                <button id="cancel" class="button button--secondary">Cancel</button>
-                <button id="connect" class="button button--primary">Connect</button>
-            </div>
-        `
-        ,
-        signMessage: ()=>`
-            <h1>Sign Message</h1>
-            <div class="flex">
-                <button id="cancel" class="button button--secondary">Cancel</button>
-                <button id="sign" class="button button--primary">Sign</button>
-            </div>
-        `
-    };
-    const $ = (query)=>query[0] === `#` ? document.querySelector(query) : document.querySelectorAll(query)
-    ;
-    const closeWindow = ()=>window.close()
-    ;
-    const connectWallet = ()=>{
-        browser.runtime.sendMessage({
-            message: {
-                message: `eth_requestAccounts`
-            }
+    const onMessage = (methodName, handler)=>{
+        log(`Listening to popup.${methodName}`);
+        browser.runtime.onMessage.addListener((request, e)=>{
+            const { destination , method , params  } = request;
+            if (destination !== `popup`) return;
+            if (method !== methodName) return;
+            log(`Received method '${method}' with params: ${JSON.stringify(params)}`);
+            handler(params, '');
         });
-        closeWindow();
-    };
-    const signMessage = ()=>{
-        /*
-        TODO
-        browser.runtime.sendMessage({
-            message: {
-                from,
-                message: `eth_signTypedData_v3`,
-                params,
-            },
-        });
-        */ closeWindow();
-    };
-    const refreshView = ()=>{
-        const $body = $(`#body`);
-        switch(method){
-            case `eth_requestAccounts`:
-                if ($body) $body.innerHTML = views.connectWallet();
-                $(`#cancel`)?.addEventListener(`click`, closeWindow);
-                $(`#connect`)?.addEventListener(`click`, connectWallet);
-                browser.tabs.query({
-                    active: true,
-                    currentWindow: true
-                }, (tabs)=>{
-                    const tab = tabs[0];
-                    const $title = $(`#title`);
-                    if ($title && tab.title) $title.textContent = tab.title;
-                    const $host = $(`#host`);
-                    if ($host && tab.url) $host.textContent = new URL(tab.url).host;
-                });
-                break;
-            case `eth_signTypedData_v3`:
-                if ($body) $body.innerHTML = views.signMessage();
-                $(`#cancel`)?.addEventListener(`click`, closeWindow);
-                $(`#sign`)?.addEventListener(`click`, signMessage);
-                break;
-            default:
-                if ($body) $body.innerHTML = views.default();
-        }
     };
     document.addEventListener(`DOMContentLoaded`, ()=>{
-        browser.runtime.onMessage.addListener((request, sender, sendResponse)=>{
-            browser.tabs.query({
-                active: true,
-                currentWindow: true
-            }, (tabs)=>{
-                if (tabs.length === 0) return;
-                // * This updates the default address
-                if (typeof request.message.address !== `undefined`) address = request.message.address;
-                // * This updates the gas token balance of the default address on the selected network
-                if (typeof request.message.balance !== `undefined`) balance = request.message.balance;
-                // * This updates the view based on the current method
-                if (typeof request.message.method !== `undefined`) {
-                    method = request.message.method;
-                    if (method === `eth_signTypedData_v3`) {
-                        from = request.message.from;
-                        params = request.message.params;
-                    }
-                    refreshView();
-                }
-                // * This forwards messages from background.js to content.js
-                if (typeof request.message.message !== `undefined` && tabs[0].id) browser.tabs.sendMessage(tabs[0].id, {
-                    message: request.message.message
+        onMessage('updateState', ({ address , balance  })=>{
+            const onConnectWallet = ()=>{
+                Messenger.sendToEthereumJs('walletConnected', {
+                    address,
+                    balance,
+                    chainId
                 });
+                _utils1.closeWindow();
+            };
+            _templating.render('connectWallet', {
+                address,
+                balance,
+                onConnectWallet
             });
         });
-        browser.runtime.sendMessage({
-            message: {
-                message: `get_state`
-            }
-        });
+        _templating.render('loading');
+        Messenger.sendToBackground('getState');
+        log(`loaded`);
     });
 };
 main();
+
+},{"../messaging":"3eVzl","../utils":"jxYDB","./utils":"jdNV5","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","./templating":"jAmhJ"}],"3eVzl":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "getSendNativeMessage", ()=>getSendNativeMessage
+);
+parcelHelpers.export(exports, "getSendBrowserRuntimeMessage", ()=>getSendBrowserRuntimeMessage
+);
+parcelHelpers.export(exports, "getSendBrowserTabMessage", ()=>getSendBrowserTabMessage
+);
+parcelHelpers.export(exports, "getSendMessageToEthereumJs", ()=>getSendMessageToEthereumJs
+);
+parcelHelpers.export(exports, "getSendWindowMessage", ()=>getSendWindowMessage
+);
+parcelHelpers.export(exports, "getMessenger", ()=>getMessenger
+);
+parcelHelpers.export(exports, "getBackgroundMessenger", ()=>getBackgroundMessenger
+);
+parcelHelpers.export(exports, "getPopupMessenger", ()=>getPopupMessenger
+);
+parcelHelpers.export(exports, "getContentMessenger", ()=>getContentMessenger
+);
+const getSendNativeMessage = (logger)=>(method, sessionId, params = {
+    })=>{
+        const message = {
+            method,
+            sessionId,
+            params
+        };
+        logger(`Sending message to SafariWebExtensionHandler: ${JSON.stringify(message)}`);
+        return browser.runtime.sendNativeMessage('ignored', message.method); // tmp
+    }
+;
+const getSendBrowserRuntimeMessage = (logger, sessionId)=>(destination, method, params = {
+    })=>{
+        const message = {
+            destination,
+            method,
+            params,
+            sessionId
+        };
+        logger(`Sending message to browser runtime: ${JSON.stringify(message)}`);
+        return browser.runtime.sendMessage(message);
+    }
+;
+const getSendBrowserTabMessage = (logger, sessionId)=>(destination, method, params = {
+    })=>{
+        const message = {
+            destination,
+            method,
+            params,
+            sessionId
+        };
+        logger(`Sending message to browser tabs: ${JSON.stringify(message)}`);
+        browser.tabs.query({
+            active: true,
+            currentWindow: true
+        }, (tabs)=>{
+            const [tab] = tabs;
+            if (tab && tab.id) browser.tabs.sendMessage(tab.id, message);
+        });
+    }
+;
+const getSendMessageToEthereumJs = (logger, conduit)=>(method, params = {
+    })=>{
+        const message = {
+            method,
+            params
+        };
+        logger(`Sending message to Ethereum.js: ${JSON.stringify(message)}`);
+        return conduit(message);
+    }
+;
+const getSendWindowMessage = (logger)=>(destination, method, params = {
+    })=>window.postMessage({
+            destination,
+            method,
+            params
+        })
+;
+const getMessenger = (origin, params)=>{
+    if (origin === 'background') return getBackgroundMessenger(params);
+    if (origin === 'popup') return getPopupMessenger(params);
+    if (origin === 'content') return getContentMessenger(params);
+    throw new Error(`Unknown origin: ${origin}`);
+};
+const getBackgroundMessenger = ({ logger  })=>{
+    const sendToContent = ({ method , params  })=>getSendBrowserTabMessage(logger)('content', method, params)
+    ;
+    const sendToEthereumJs = getSendMessageToEthereumJs(logger, (params)=>sendToContent({
+            method: 'forwardToEthereumJs',
+            params
+        })
+    );
+    const sendToPopup = (method, params = {
+    })=>getSendBrowserRuntimeMessage(logger)('popup', method, params)
+    ;
+    return {
+        sendToContent,
+        sendToEthereumJs,
+        sendToPopup,
+        sendToNative: getSendNativeMessage(logger)
+    };
+};
+const getPopupMessenger = ({ logger  })=>{
+    const sendToContent = ({ method , params  })=>getSendBrowserTabMessage(logger)('content', method, params)
+    ;
+    const sendToEthereumJs = getSendMessageToEthereumJs(logger, (params)=>sendToContent({
+            method: 'forwardToEthereumJs',
+            params
+        })
+    );
+    const sendToBackground = (method, params = {
+    })=>getSendBrowserRuntimeMessage(logger)('background', method, params)
+    ;
+    return {
+        sendToContent,
+        sendToEthereumJs,
+        sendToBackground,
+        sendToNative: getSendNativeMessage(logger)
+    };
+};
+const getContentMessenger = ({ logger , sessionId  })=>{
+    const sendToPopup = ({ method , params  })=>getSendBrowserRuntimeMessage(logger, sessionId)('popup', method, params)
+    ;
+    const sendToEthereumJs = ({ method , params  })=>getSendWindowMessage(logger)('ethereum', method, params)
+    ;
+    const sendToBackground = (method, params = {
+    })=>getSendBrowserRuntimeMessage(logger, sessionId)('background', method, params)
+    ;
+    return {
+        sendToPopup,
+        sendToEthereumJs,
+        sendToBackground
+    };
+};
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV"}],"ciiiV":[function(require,module,exports) {
 exports.interopDefault = function(a) {
@@ -626,6 +687,171 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}]},["8wWJj","kN1CH"], "kN1CH", "parcelRequireae3a")
+},{}],"jxYDB":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "getLogger", ()=>getLogger
+);
+parcelHelpers.export(exports, "getErrorLogger", ()=>getErrorLogger
+);
+parcelHelpers.export(exports, "$", ()=>$
+);
+const getLogger = (fileName)=>(message, ...others)=>console.log(`[${fileName}.js] ${message}`, ...others)
+;
+const getErrorLogger = (fileName)=>(message, ...others)=>console.error(`[${fileName}.js] ${message}`, ...others)
+;
+const $ = (query)=>query[0] === `#` ? document.querySelector(query) : document.querySelectorAll(query)
+;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV"}],"jdNV5":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "closeWindow", ()=>closeWindow
+);
+const closeWindow = ()=>window.close()
+;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV"}],"jAmhJ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "views", ()=>views
+);
+parcelHelpers.export(exports, "getViewContents", ()=>getViewContents
+);
+parcelHelpers.export(exports, "render", ()=>render
+);
+var _root = require("./views/root");
+var _rootDefault = parcelHelpers.interopDefault(_root);
+var _loading = require("./views/loading");
+var _loadingDefault = parcelHelpers.interopDefault(_loading);
+var _connectWallet = require("./views/connectWallet");
+var _connectWalletDefault = parcelHelpers.interopDefault(_connectWallet);
+var _signMessage = require("./views/signMessage");
+var _signMessageDefault = parcelHelpers.interopDefault(_signMessage);
+var _popup = require("./popup");
+var _utils = require("../utils");
+const views = {
+    loading: _loadingDefault.default,
+    root: _rootDefault.default,
+    connectWallet: _connectWalletDefault.default,
+    signMessage: _signMessageDefault.default
+};
+const getViewContents = (viewName, params)=>views[viewName].render(params)
+;
+const render = (viewName, params = {
+})=>{
+    if (!viewName || !Object.keys(views).includes(viewName)) {
+        _popup.error(`Invalid view name: ${viewName}.`);
+        return;
+    }
+    const view = views[viewName];
+    if (!view || !view.render) {
+        _popup.error(`Invalid view: ${viewName}.`);
+        return;
+    }
+    const $body = _utils.$(`#body`);
+    if (!$body) {
+        _popup.error(`Could not find body element.`);
+        return;
+    }
+    const viewContents = getViewContents(viewName, params);
+    _popup.log(`Rendering view '${viewName}' with ${JSON.stringify(params)}`);
+    _popup.log(`View contents: ${viewContents}`);
+    _popup.log(`Existing HTML: ${$body.innerHTML}`);
+    $body.innerHTML = viewContents;
+    _popup.log(`Updated HTML: ${$body.innerHTML}`);
+    if (view.onRender) view.onRender(params);
+};
+
+},{"./views/root":"lh4jL","./views/loading":"GQsK4","./views/connectWallet":"ehgVS","./views/signMessage":"d8kI2","./popup":"kN1CH","../utils":"jxYDB","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV"}],"lh4jL":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const view = {
+    render: ()=>`
+        <h1>Safari Wallet</h1>
+        <div class="flex">
+            <button id="cancel" class="button button--secondary">Cancel</button>
+            <button id="connect" class="button button--primary">Connect</button>
+        </div>
+    `
+};
+exports.default = view;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV"}],"GQsK4":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const view = {
+    render: ()=>`
+        <h1>Loading...</h1>
+    `
+};
+exports.default = view;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV"}],"ehgVS":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _utils = require("../../utils");
+var _popup = require("../popup");
+var _utils1 = require("../utils");
+const view = {
+    render: ({ address , balance  })=>`
+        <h1>Connect to <span id="title"></span></h1>
+        <p class="subtitle"><span id="host"></span></p>
+        <p>When you connect your wallet, this dapp will be able to view the contents:</p>
+        <div class="field">
+            <label class="field__label" for="address">Address</label>
+            <input id="address" class="field__input" type="text" value="${address}" disabled>
+        </div>
+        <div class="field">
+            <label class="field__label" for="balance">ETH Balance</label>
+            <input id="balance" class="field__input" type="text" value="${balance} ${_popup.chains[_popup.chainId].gasToken}" disabled>
+        </div>
+        <div class="flex">
+            <button id="cancel" class="button button--secondary">Cancel</button>
+            <button id="connect" class="button button--primary">Connect</button>
+        </div>
+    `
+    ,
+    onRender: ({ onConnectWallet  })=>{
+        _utils.$('#cancel')?.addEventListener('click', _utils1.closeWindow);
+        _utils.$('#connect')?.addEventListener('click', onConnectWallet);
+        browser.tabs.query({
+            active: true,
+            currentWindow: true
+        }, (tabs)=>{
+            const tab = tabs[0];
+            const $title = _utils.$('#title');
+            const $host = _utils.$('#host');
+            if ($title && tab.title) $title.textContent = tab.title;
+            if ($host && tab.url) $host.textContent = new URL(tab.url).host;
+        });
+    }
+};
+exports.default = view;
+
+},{"../../utils":"jxYDB","../utils":"jdNV5","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","../popup":"kN1CH"}],"d8kI2":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _utils = require("../../utils");
+var _utils1 = require("../utils");
+const view = {
+    render: ()=>`
+        <h1>Sign Message</h1>
+        <div class="flex">
+            <button id="cancel" class="button button--secondary">Cancel</button>
+            <button id="sign" class="button button--primary">Sign</button>
+        </div>
+    `
+    ,
+    onRender: ({ signMessage  })=>{
+        const $cancel = _utils.$('#cancel');
+        const $sign = _utils.$('#sign');
+        if ($cancel) $cancel.addEventListener(`click`, _utils1.closeWindow);
+        if ($sign) $sign.addEventListener(`click`, signMessage);
+    }
+};
+exports.default = view;
+
+},{"../../utils":"jxYDB","../utils":"jdNV5","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV"}]},["8wWJj","kN1CH"], "kN1CH", "parcelRequireae3a")
 
 //# sourceMappingURL=popup.js.map
