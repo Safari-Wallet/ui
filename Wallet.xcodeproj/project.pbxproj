@@ -45,8 +45,6 @@
 		0A8BB79A272E729200DFC647 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8BB798272E729200DFC647 /* Transaction.swift */; };
 		0A8BB79B272E729200DFC647 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8BB798272E729200DFC647 /* Transaction.swift */; };
 		0A8BB79C272E729200DFC647 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8BB798272E729200DFC647 /* Transaction.swift */; };
-		0A8BB79F272F55F600DFC647 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0A8BB79E272F55F600DFC647 /* Alamofire */; };
-		0A8BB7A1272F565500DFC647 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0A8BB7A0272F565500DFC647 /* Alamofire */; };
 		3D216A132753246600620BB9 /* TransactionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D216A122753246600620BB9 /* TransactionRowView.swift */; };
 		3D216A1527539F4700620BB9 /* TransactionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D216A1427539F4700620BB9 /* TransactionType.swift */; };
 		3D97705F273CD4AE0014CAC7 /* TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D97705E273CD4AE0014CAC7 /* TransactionService.swift */; };
@@ -312,7 +310,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F83FBA1E2730DBF300F864A7 /* SafariWalletCore in Frameworks */,
-				0A8BB79F272F55F600DFC647 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,7 +325,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F83FBA202730DD1F00F864A7 /* SafariWalletCore in Frameworks */,
-				0A8BB7A1272F565500DFC647 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -653,7 +649,6 @@
 			);
 			name = "Wallet (iOS)";
 			packageProductDependencies = (
-				0A8BB79E272F55F600DFC647 /* Alamofire */,
 				F83FBA1D2730DBF300F864A7 /* SafariWalletCore */,
 			);
 			productName = "Wallet (iOS)";
@@ -695,7 +690,6 @@
 			);
 			name = "Wallet Extension (iOS)";
 			packageProductDependencies = (
-				0A8BB7A0272F565500DFC647 /* Alamofire */,
 				F83FBA1F2730DD1F00F864A7 /* SafariWalletCore */,
 			);
 			productName = "Wallet Extension (iOS)";
@@ -777,7 +771,6 @@
 			);
 			mainGroup = 0A0E1E7F270687AA00061EA6;
 			packageReferences = (
-				0A8BB79D272F55F500DFC647 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				F83FBA1C2730DBF300F864A7 /* XCRemoteSwiftPackageReference "core" */,
 			);
 			productRefGroup = 0A0E1E9D270687AE00061EA6 /* Products */;
@@ -1596,14 +1589,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		0A8BB79D272F55F500DFC647 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.4.0;
-			};
-		};
 		F83FBA1C2730DBF300F864A7 /* XCRemoteSwiftPackageReference "core" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Safari-Wallet/core";
@@ -1615,16 +1600,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0A8BB79E272F55F600DFC647 /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0A8BB79D272F55F500DFC647 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
-		};
-		0A8BB7A0272F565500DFC647 /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0A8BB79D272F55F500DFC647 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
-		};
 		F83FBA1D2730DBF300F864A7 /* SafariWalletCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F83FBA1C2730DBF300F864A7 /* XCRemoteSwiftPackageReference "core" */;

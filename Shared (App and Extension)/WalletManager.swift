@@ -8,7 +8,6 @@
 import Foundation
 import MEWwalletKit
 import SafariWalletCore
-import Alamofire
 
 class WalletManager {
 
