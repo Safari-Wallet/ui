@@ -68,7 +68,7 @@ struct ConfirmMnemonicView: View {
             }
             
             #if DEBUG
-            Text("hint: \(bip39.mnemonic!.description)")
+            Text("hint: \(bip39.mnemonic!.joined(separator: " "))")
                 .font(.footnote)
             #endif
             HStack(spacing: 8) {
