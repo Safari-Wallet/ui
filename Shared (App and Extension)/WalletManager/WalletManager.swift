@@ -35,7 +35,7 @@ final class WalletManager: ObservableObject {
             saveUserDefault(key: "DefaultAddressIndex", value: defaultAddressIndex)
         }
     }
-    @Published private (set) var defaultAddress: String?
+    @Published private (set) var defaultAddress: AddressItem?
     @Published private (set) var defaultAddressBundle: AddressBundle?
     @Published private (set) var defaultNetwork: Network = .ethereum
     {
@@ -47,7 +47,8 @@ final class WalletManager: ObservableObject {
     // MARK: - Lifecycle
     
     func setup() async throws {
-        if let sharedContainer = UserDefaults(suiteName: APP_GROUP), let networkName = sharedContainer.string(forKey: "DefaultNetwork"), let network = Network(name: networkName) {
+        if let sharedContainer = UserDefaults(suiteName: APP_GROUP), let networkName = sharedContainer.string(forKey: "DefaultNetwork") {
+            let network = Network(name: networkName)
             try await setup(network: network)
         } else {
             try await setup(network: .ethereum)
@@ -55,34 +56,47 @@ final class WalletManager: ObservableObject {
     }
     
     func setup(network: Network) async throws {
-        addressBundles = nil
+        
+        // 1. Reset defaults
+        self.addressBundles = nil
+        self.defaultAddress = nil
+        self.defaultAddressBundle = nil
+        self.defaultAddressIndex = nil
+        self.defaultAddressBundleIndex = nil
+        self.defaultNetwork = network
+        
+        // 2. Load address bundles
         do {
             self.addressBundles = try await AddressBundle.loadAddressBundles(network: network)
         } catch {
             self.addressBundles = nil
             throw error
         }
-            
-        let defaultAddressBundleIndex: Int?
-        let defaultAddressIndex: Int?
         
-        if let sharedContainer = UserDefaults(suiteName: APP_GROUP) {
-            defaultAddressBundleIndex = sharedContainer.integer(forKey: "DefaultAddressBundleIndex")
-            defaultAddressIndex = sharedContainer.integer(forKey: "DefaultAddressIndex")
-        } else if self.addressBundles!.count > 0 {
-            defaultAddressBundleIndex = 0
-            defaultAddressIndex = self.addressBundles!.first!.lastSelectedIndex
-        } else {
-            // addressBundles.count is 0
+        // 3. If there are no address bundles, we're done
+        guard let addressBundles = self.addressBundles, addressBundles.count > 0 else {
             return
         }
-
-        self.defaultAddressBundleIndex = defaultAddressBundleIndex
-        self.defaultAddressIndex = defaultAddressIndex
-        self.defaultNetwork = network
+            
+        // 4. Restore previous defaults from NSUserDefaults
+        if let sharedContainer = UserDefaults(suiteName: APP_GROUP) {
+            let bundleIndex = sharedContainer.integer(forKey: "DefaultAddressBundleIndex")
+            let addressIndex = sharedContainer.integer(forKey: "DefaultAddressIndex")
+            if addressBundles.count > bundleIndex && addressBundles[bundleIndex].addresses.count > addressIndex {
+                self.defaultAddressBundleIndex = bundleIndex
+                self.defaultAddressIndex = addressIndex
+            }
+        }
         
-        self.defaultAddress = self.addressBundles![defaultAddressBundleIndex!].addresses[defaultAddressIndex!].address.debugDescription
-        self.defaultAddressBundle = self.addressBundles![defaultAddressBundleIndex!]
+        // 5. If no valid default address was found, default to first address bundle
+        if self.defaultAddressBundleIndex == nil {
+            self.defaultAddressBundleIndex = 0
+            self.defaultAddressIndex = addressBundles[0].lastSelectedIndex
+        }
+                
+        // 6. Set indices
+        self.defaultAddress = addressBundles[defaultAddressBundleIndex!].addresses[defaultAddressIndex!]
+        self.defaultAddressBundle = addressBundles[defaultAddressBundleIndex!]
     }
     
     // MARK: - Set Defaults
@@ -101,7 +115,7 @@ final class WalletManager: ObservableObject {
             return
         }
         self.defaultAddressIndex = index
-        self.defaultAddress = addressBundles[defaultAddressBundleIndex].addresses[index].address.debugDescription
+        self.defaultAddress = addressBundles[defaultAddressBundleIndex].addresses[index]
         addressBundles[defaultAddressBundleIndex].lastSelectedIndex = index
     }
     
@@ -109,26 +123,6 @@ final class WalletManager: ObservableObject {
         try await setup(network: network)
     }
 }
-
-// MARK: -
-//extension WalletManager {
-//    
-//    func createNewWallet(mnemonic: String, accountsCount: Int, password: String, storePasswordInKeychain: Bool = true, filename: String = UUID().uuidString) async throws -> String {
-//        
-//        // 1. Store HDWallet recovery phrase
-//        try await saveKeystore(mnemonic: mnemonic, password: password, name: filename)
-//        
-//        // 2. Store password in keychain
-//        if storePasswordInKeychain == true {
-//            let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
-//                                                    account: filename,
-//                                                    accessGroup: KeychainConfiguration.accessGroup)
-//            try passwordItem.savePassword(password, userPresence: true, reusableDuration: 1200) // 20 minutes
-//        }
-//                
-//        return filename
-//    }
-//}
 
 // MARK: - NSUserDefaults
 extension WalletManager {

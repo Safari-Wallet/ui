@@ -75,6 +75,22 @@ browser.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
                     params,
                 },
             });
+//            break;
+//        case `eth_sign`: // * Sings message. Send as hex string
+            const signature = await browser.runtime.sendNativeMessage({
+                method: `eth_sign`,
+                params: [`0xdeadbeaf`], // optional second item: password of the wallet
+            });
+            console.log(`eth_sign response: `, signature);
+            // TODO: address could return a { error: 'error message' } object. We need to check for that
+//            browser.runtime.sendMessage({
+//                message: {
+//                    signature: signature,
+//                    from,
+//                    method,
+//                    params,
+//                },
+//            });
             break;
         case `update_method`: // * Update current method from content.js
             method = request.message.method === `cancel`

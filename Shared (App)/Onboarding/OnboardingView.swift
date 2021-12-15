@@ -24,7 +24,8 @@ struct OnboardingView: View {
     @State var title = "Set up Safari Wallet" // set to "Create new wallet"
     
     /// New mnemonic generated in the onAppear of the title
-    @State private var mnemonic: String = ""
+    @State private var bip39: BIP39?
+    @State private var shuffledPhrase: [String] = []
     
     /// If true, RestoreOrCreateWalletView will show a cancel button
     @State var isCancelable: Bool = false
@@ -44,13 +45,13 @@ struct OnboardingView: View {
                 // Show Restore or Create Wallet view
                 RestoreOrCreateWalletView(state: $state, isCancelable: self.isCancelable)
 
-            } else if state == .createWallet {
+            } else if state == .createWallet, let bip39 = bip39 {
 
                 // Show and confirm new mnemonic
                 TabView(selection: $tabIndex) {
-                    ShowMnemonicView(state: $state, tabIndex: $tabIndex, mnemonic: RecoveryPhrase(mnemonic: mnemonic))
+                    ShowMnemonicView(state: $state, tabIndex: $tabIndex, bip39: bip39)
                         .tag(0)
-                    ConfirmMnemonicView(state: $state, tabIndex: $tabIndex, mnemonic: RecoveryPhrase(mnemonic: mnemonic))
+                    ConfirmMnemonicView(state: $state, tabIndex: $tabIndex, bip39: bip39, shuffledPhrase: shuffledPhrase)
                         .tag(1)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -98,17 +99,22 @@ struct OnboardingView: View {
         }
         .interactiveDismissDisabled(true)
         .onAppear {
+            print("⚠️on appear was called")
             do {
-                let root = try BIP39(bitsOfEntropy: 128)            
-                self.mnemonic = root.mnemonic!.joined(separator: " ")
+                self.bip39 = try BIP39(bitsOfEntropy: 128)
+                guard let _ = bip39?.mnemonic, let shuffledPhrase = bip39?.shuffle() else { throw WalletError.addressGenerationError }
+                self.shuffledPhrase = shuffledPhrase
             } catch {
                 print("Error: \(error)")
+                state = .dismiss // TODO: show error
             }
         }
     }    
 }
 
-
-extension OnboardingView {
-
+struct OnboardingView_Previews: PreviewProvider {
+    @State static var state: OnboardingState = .initial
+    static var previews: some View {
+        OnboardingView(isCancelable: true)
+    }
 }

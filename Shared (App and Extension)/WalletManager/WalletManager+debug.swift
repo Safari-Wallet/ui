@@ -11,34 +11,39 @@ import Foundation
 #if DEBUG
 extension WalletManager {
     
-    func deleteAllWallets() throws {
-        self.addressBundles = nil
-        let directory = try URL.sharedContainer()
+    func deleteAllWalletsAndBundles() async throws {
+
+        // 1. Delete wallet files and remove keychain items
         let wallets = try SharedDocument.list(fileExtension: ADDRESSBUNDLE_FILE_EXTENSION).map{ $0.url }
-        
         for wallet in wallets {
-            try FileManager.default.removeItem(at: directory.appendingPathComponent(wallet))
+            try FileManager.default.removeItem(at: wallet)
             let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
-                                                    account: wallet,
+                                                    account: wallet.deletingPathExtension().lastPathComponent,
                                                     accessGroup: KeychainConfiguration.accessGroup)
             try passwordItem.deleteItem()
         }
+        
+        // 2. Delete address bundles
+        let ethereumAddresses = try SharedDocument.listAddressBundles(network: .ethereum)
+        for address in ethereumAddresses {
+            try FileManager.default.removeItem(at: address.url)
+        }
+        let ropstenAddresses = try SharedDocument.listAddressBundles(network: .ropsten)
+        for address in ropstenAddresses {
+            try FileManager.default.removeItem(at: address.url)
+        }
+        let bitcoinAddresses = try SharedDocument.listAddressBundles(network: .bitcoin)
+        for address in bitcoinAddresses {
+            try FileManager.default.removeItem(at: address.url)
+        }
+        
+        // 3. Reset userdefaults
         guard let sharedContainer = UserDefaults(suiteName: APP_GROUP) else { throw WalletError.invalidAppGroupIdentifier(APP_GROUP) }
         sharedContainer.removeObject(forKey: "DefaultWallet")
+        sharedContainer.removeObject(forKey: "DefaultAddressBundleIndex")
+        sharedContainer.removeObject(forKey: "DefaultAddressIndex")
         sharedContainer.synchronize()
-    }
-    
-    func deleteAllAddresses() throws {
-        self.defaultAddress = nil
-        let directory = try URL.sharedContainer()
-        let addresses = try listAddressFiles()
-        
-        for address in addresses {
-            try FileManager.default.removeItem(at: directory.appendingPathComponent(address))
-        }
-        guard let sharedContainer = UserDefaults(suiteName: APP_GROUP) else { throw WalletError.invalidAppGroupIdentifier(APP_GROUP) }
-        sharedContainer.removeObject(forKey: "DefaultAddress")
-        sharedContainer.synchronize()
+        try await self.setup()
     }
 }
 #endif

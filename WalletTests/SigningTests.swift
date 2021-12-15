@@ -7,6 +7,7 @@
 
 import XCTest
 import MEWwalletKit
+import SafariWalletCore
 @testable import Safari_Wallet
 
 // Based on ShapeShift unit tests: https://github.com/shapeshift/hdwallet/blob/master/packages/hdwallet-native/src/ethereum.test.ts
@@ -23,7 +24,7 @@ class SigningTests: XCTestCase {
         self.manager = WalletManager()
         try manager.deleteAllWallets()
         try manager.deleteAllAddresses()
-        self.seed = try BIP39(mnemonic: mnemonic.components(separatedBy: " ")).seed()
+        self.seed = try BIP39(mnemonic: mnemonic).seed()
         self.wallet = try Wallet(seed: seed, network: .ethereum)
     }
 

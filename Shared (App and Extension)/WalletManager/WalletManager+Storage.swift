@@ -9,21 +9,21 @@ import Foundation
 import SafariWalletCore
 
 extension WalletManager {
-    func createNewWallet(mnemonic: String, password: String, storePasswordInKeychain: Bool = true, filename: String = UUID().uuidString) async throws -> String {
-        
-        // 1. Store HDWallet recovery phrase
-        try await saveKeystore(mnemonic: mnemonic, password: password, name: filename)
-        
-        // 2. Store password in keychain
-        if storePasswordInKeychain == true {
-            let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
-                                                    account: filename,
-                                                    accessGroup: KeychainConfiguration.accessGroup)
-            try passwordItem.savePassword(password, userPresence: true, reusableDuration: 1200) // 20 minutes
-        }
-                
-        return filename
-    }
+//    func createNewWallet(mnemonic: String, password: String, storePasswordInKeychain: Bool = true, filename: String = UUID().uuidString) async throws -> String {
+//        
+//        // 1. Store HDWallet recovery phrase
+//        try await saveKeystore(mnemonic: mnemonic, password: password, name: filename)
+//        
+//        // 2. Store password in keychain
+//        if storePasswordInKeychain == true {
+//            let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
+//                                                    account: filename,
+//                                                    accessGroup: KeychainConfiguration.accessGroup)
+//            try passwordItem.savePassword(password, userPresence: true, reusableDuration: 1200) // 20 minutes
+//        }
+//                
+//        return filename
+//    }
 
     
       
@@ -110,10 +110,10 @@ extension WalletManager {
     ///   - addressCount: Number of address to generate and save. Always starts with index 0
     ///   - name: filename
     /// - Returns: Array of generated addresses
-    func saveAddresses(mnemonic: String, addressCount: Int, name: String) async throws -> [String] {
-        let wallet: Wallet<PrivateKeyEth1> = try restoreWallet(mnemonic: mnemonic)
-        return try await saveAddresses(wallet: wallet, addressCount: addressCount, name: name)
-    }
+//    func saveAddresses(mnemonic: String, addressCount: Int, name: String) async throws -> [String] {
+//        let wallet: Wallet<PrivateKeyEth1> = try restoreWallet(mnemonic: mnemonic)
+//        return try await saveAddresses(wallet: wallet, addressCount: addressCount, name: name)
+//    }
     
     
     /// Saves addresses as an array of strings to disk. Set default address in NSUserDefaults by using setDefaultAddress()
@@ -132,37 +132,37 @@ extension WalletManager {
 //        return addresses
 //    }
     
-    func loadAddresses(name: String, network: Network = .ethereum) async throws -> [String] {
-        let networkExtension = network.symbol
-        let addressesFile = try SharedDocument(filename: name.deletingPathExtension().appendPathExtension(networkExtension).appendPathExtension(ADDRESSBUNDLE_FILE_EXTENSION))
-        let data = try await addressesFile.read()
-        return try JSONDecoder().decode([String].self, from: data)
-    }
-    
-    // MARK: List files
-    
-    func listWalletFiles() throws -> [String] {
-        return try listFiles(filter: KEYSTORE_FILE_EXTENSION)
-    }
-    
-    func listAddressFiles(network: Network = .ethereum) throws -> [String] {
-        return try listFiles(filter: ADDRESSBUNDLE_FILE_EXTENSION)
-    }
-    
-    private func listFiles(filter fileExtension: String? = nil) throws -> [String] {
-        let directory = try URL.sharedContainer()
-        let files = try FileManager.default.contentsOfDirectory(atPath: directory.path)
-        
-        guard let fileExtension = fileExtension else {
-            return files
-        }
-        return files.filter { $0.pathExtension == fileExtension }
-    }
-
-    // MARK: - Manager state
-    func hasAccounts() throws -> Bool {
-        return try self.listAddressFiles().count > 0
-    }
+//    func loadAddresses(name: String, network: Network = .ethereum) async throws -> [String] {
+//        let networkExtension = network.symbol
+//        let addressesFile = try SharedDocument(filename: name.deletingPathExtension().appendPathExtension(networkExtension).appendPathExtension(ADDRESSBUNDLE_FILE_EXTENSION))
+//        let data = try await addressesFile.read()
+//        return try JSONDecoder().decode([String].self, from: data)
+//    }
+//
+//    // MARK: List files
+//
+//    func listWalletFiles() throws -> [String] {
+//        return try listFiles(filter: KEYSTORE_FILE_EXTENSION)
+//    }
+//
+//    func listAddressFiles(network: Network = .ethereum) throws -> [String] {
+//        return try listFiles(filter: ADDRESSBUNDLE_FILE_EXTENSION)
+//    }
+//
+//    private func listFiles(filter fileExtension: String? = nil) throws -> [String] {
+//        let directory = try URL.sharedContainer()
+//        let files = try FileManager.default.contentsOfDirectory(atPath: directory.path)
+//
+//        guard let fileExtension = fileExtension else {
+//            return files
+//        }
+//        return files.filter { $0.pathExtension == fileExtension }
+//    }
+//
+//    // MARK: - Manager state
+//    func hasAccounts() throws -> Bool {
+//        return try self.listAddressFiles().count > 0
+//    }
 
     // MARK: - Keychain
     
@@ -191,27 +191,27 @@ extension WalletManager {
     ///   - password: password of the wallet file
     ///   - network: default is .ethereum
     /// - Returns: the private key belonging to address
-    func fetchPrivateKeyFor(address: String, walletName: String, password: String? = nil, network: Network = .ethereum) async throws -> PrivateKeyEth1 {
-        let wallet = try await loadWallet(name: walletName, password: password, network: network)
-        // FIXME: We're only scanning the first 50
-        for i in 0 ..< 50 {
-            let privateKey = try wallet.derive(network, index: UInt32(i)).privateKey
-            guard let generatedAddress = privateKey.address()?.address else { continue }
-            if generatedAddress == address {
-                return privateKey
-            }
-        }
-        throw WalletError.addressNotFound(address)
-    }
-    
-    func fetchAccount(password: String? = nil, network: Network = .ethereum) async throws -> Account {
-        guard let address = defaultAddress else { throw WalletError.noDefaultAddressSet }
-        guard let wallet = defaultWallet else { throw WalletError.noDefaultWalletSet }
-        let privateKey = try await fetchPrivateKeyFor(address: address, walletName: wallet, password: password, network: network)
-        return try Account(privateKey: privateKey, wallet: wallet, derivationpath: "") // FIXME: derivationpath
-    }
-    
-    func renameWallet() {
-        
-    }
+//    func fetchPrivateKeyFor(address: String, walletName: String, password: String? = nil, network: Network = .ethereum) async throws -> PrivateKeyEth1 {
+//        let wallet = try await loadWallet(name: walletName, password: password, network: network)
+//        // FIXME: We're only scanning the first 50
+//        for i in 0 ..< 50 {
+//            let privateKey = try wallet.derive(network, index: UInt32(i)).privateKey
+//            guard let generatedAddress = privateKey.address()?.address else { continue }
+//            if generatedAddress == address {
+//                return privateKey
+//            }
+//        }
+//        throw WalletError.addressNotFound(address)
+//    }
+//
+//    func fetchAccount(password: String? = nil, network: Network = .ethereum) async throws -> Account {
+//        guard let address = defaultAddress else { throw WalletError.noDefaultAddressSet }
+//        guard let wallet = defaultWallet else { throw WalletError.noDefaultWalletSet }
+//        let privateKey = try await fetchPrivateKeyFor(address: address, walletName: wallet, password: password, network: network)
+//        return try Account(privateKey: privateKey, wallet: wallet, derivationpath: "") // FIXME: derivationpath
+//    }
+//
+//    func renameWallet() {
+//
+//    }
 }

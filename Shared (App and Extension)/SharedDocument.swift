@@ -27,8 +27,12 @@ struct SharedDocument {
     }
     
     static func list(fileExtension: String) throws -> [SharedDocument] {
+        return try listFiles().filter{ $0.url.pathExtension == fileExtension }
+    }
+    
+    static func listFiles() throws -> [SharedDocument] {
         let container = try URL.sharedContainer()
-        return try FileManager.default.contentsOfDirectory(atPath: container.path).filter{ $0.pathExtension == fileExtension }.compactMap { try? SharedDocument(filename: $0) }
+        return try FileManager.default.contentsOfDirectory(atPath: container.path).compactMap { try? SharedDocument(filename: $0) }
     }
     
     static func listAddressBundles(network: Network) throws -> [SharedDocument] {

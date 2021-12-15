@@ -16,7 +16,7 @@ struct RestoreWalletView: View {
     
     var body: some View {
         
-        VStack {
+        VStack { /*
             Text("Restore existing password")
                 .font(.title)                
             
@@ -45,7 +45,7 @@ struct RestoreWalletView: View {
                         }
                 }
             }
-            .padding(.bottom, 32)
+            .padding(.bottom, 32) */
         }
         .padding()
     }

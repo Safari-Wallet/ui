@@ -107,9 +107,10 @@ struct DeveloperView: View {
             Text("Instantly creates a new wallet with the default password 'password123' and makes it the default wallet. Takes up to 5 seconds in debug mode.")
                 
             Button("Delete all wallets on disk", role: .destructive) {
-                try? manager.deleteAllWallets()
-                try? manager.deleteAllAddresses()
-                countWallets()
+                Task {
+                    try? await manager.deleteAllWalletsAndBundles()
+                }
+                
             }
             .buttonStyle(.borderedProminent)
             .padding()
@@ -127,7 +128,7 @@ extension DeveloperView {
     
     func countWallets() {
         do {
-            walletCount = try manager.listWalletFiles().count
+            walletCount = try SharedDocument.listAddressBundles(network: .ethereum).count
         } catch {
             walletCount = -1
             errorMessage = error.localizedDescription
@@ -135,15 +136,29 @@ extension DeveloperView {
     }
 
     func createTestWallet() async throws {
+        // 1. Create HDWallet
         let root = try BIP39(bitsOfEntropy: 128)
-        let mnemonic = root.mnemonic!.joined(separator: " ")
-        let manager = WalletManager()
-        let name = try await manager.saveWallet(mnemonic: mnemonic, password: "password123")
-        let addresses = try await manager.saveAddresses(mnemonic: mnemonic, addressCount: 5, name: name)     
-        try await manager.setDefaultWallet(name)
-        if let defaultAddress = addresses.first {
-            manager.setDefaultAddress(defaultAddress)
-        }
+        guard let seed = try root.seed() else { throw WalletError.addressGenerationError }
+        let wallet: Wallet<PrivateKeyEth1> = try Wallet(seed: seed, network: .ethereum)
+        
+        // 2. Generate mainnet, Ropsten addresses
+        let addresses = try wallet.generateAddresses(count: 5)
+        let ropstenAddresses = try wallet.generateAddresses(count: 5, network: .ropsten)
+        
+        // 2. Save address bundles
+        let id = UUID()
+        let bundle = AddressBundle(id: id, type: .keystorePassword, network: .ethereum, addresses: addresses)
+        try await bundle.save()
+        let ropstenBundle = AddressBundle(id: id, type: .keystorePassword, network: .ropsten, addresses: ropstenAddresses)
+        try await ropstenBundle.save()
+        
+        // 3. Save seed
+        let keystore = try await KeystoreV3(bip39: root, password: "password123")
+        try await keystore.save(name: id.uuidString)
+        
+        // 4. Store password in keychain
+        try await KeychainPasswordItem.store(password: "password123", account: id.uuidString)
+        
         countWallets()
     }
     

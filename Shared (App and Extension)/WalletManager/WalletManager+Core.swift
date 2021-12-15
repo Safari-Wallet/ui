@@ -13,7 +13,7 @@ extension WalletManager: SafariWalletCoreDelegate {
     
     func addresses() -> [String]? {
         guard let address = defaultAddress else { return nil }
-        return [address]
+        return [address.address.debugDescription]
     }
     
     func client() -> EthereumClient? {
@@ -27,11 +27,16 @@ extension WalletManager: SafariWalletCoreDelegate {
     }
     
     func account(address: String, password: String?) async throws -> Account {
-        guard self.defaultAddress != address else {
-            throw WalletCoreError.addressGenerationError // FIXME: change error
-            // TODO: what do we do if the default address is out of sync with the extensions?        
+        guard let bundles = self.addressBundles else { throw WalletError.addressNotFound(address) }
+        
+        for bundle in bundles {
+            for (index, bundleAddress) in bundle.addresses.enumerated() {
+                if address == bundleAddress.address.address {
+                    return try await bundle.account(forAddressIndex: index, password: password)
+                }
+            }
         }
-        return try await fetchAccount()
+        throw WalletError.addressNotFound(address)
     }
     
     func network() -> Network {

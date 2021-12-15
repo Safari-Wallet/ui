@@ -12,10 +12,6 @@ struct SettingsView: View {
     
     @EnvironmentObject var manager: WalletManager
     
-//    @ObservedObject var manager = await WalletManager()
-    
-//    private let manager = WalletManager()
-    
     private let networks: [String] = ["Mainnet", "Ropsten"]
     @State private var selectedNetworkIndex = 0
     
@@ -28,7 +24,7 @@ struct SettingsView: View {
     var body: some View {
 
         Form {
-            
+            /*
             // MARK: - Wallet selection
             Section(header: Text("Wallet")) {
                 let wallets = manager.wall
@@ -53,7 +49,7 @@ struct SettingsView: View {
             // MARK: - Accounts selection
             Section(header: Text("Selected account in wallet")) {
                 Picker(selection: $selectedAddressIndex, label: Text("")) {
-                    ForEach(0..<addresses.count, id: \.self) { i in
+                    ForEach(0 ..< manager.addresses()?.count addresses.count, id: \.self) { i in
                         Text(addresses[i]).tag(i)
                     }
                 }
@@ -88,7 +84,7 @@ struct SettingsView: View {
                     }
                     
                 }
-            }
+            } */
         }
     }
     

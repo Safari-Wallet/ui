@@ -163,3 +163,10 @@ extension AddressBundle {
         }
     }
 }
+
+extension AddressBundle: Equatable {
+    
+    static func == (lhs: AddressBundle, rhs: AddressBundle) -> Bool {
+        lhs.id == rhs.id
+    }    
+}

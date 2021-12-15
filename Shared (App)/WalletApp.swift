@@ -22,11 +22,11 @@ struct WalletApp: App {
             ContentView(isOnBoardingPresented: $shouldPresentOnboarding)
                 .task {
                     do {
-                        shouldPresentOnboarding = try isOnboardingNeeded()
+                        shouldPresentOnboarding = try await isOnboardingNeeded()
                     } catch {
                         print(error.localizedDescription)
                     }
-                    await manager.setup()
+                 
                 }
                 .onOpenURL { url in handle(url: url) }
                 .environmentObject(manager)
@@ -49,8 +49,10 @@ struct WalletApp: App {
 
 extension WalletApp {
     
-    func isOnboardingNeeded() throws -> Bool {
-        return try !WalletManager().hasAccounts()
+    func isOnboardingNeeded() async throws -> Bool {
+        try await manager.setup()
+        guard let bundles = manager.addressBundles else { return false }
+        return bundles.count > 0
     }
 }
 
