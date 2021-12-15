@@ -51,8 +51,8 @@ extension WalletApp {
     
     func isOnboardingNeeded() async throws -> Bool {
         try await manager.setup()
-        guard let bundles = manager.addressBundles else { return false }
-        return bundles.count > 0
+        guard let bundles = manager.addressBundles else { return true }
+        return bundles.count == 0
     }
 }
 
