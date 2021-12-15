@@ -92,9 +92,6 @@ struct ConfirmMnemonicView: View {
             .padding(.bottom, 32)
         }
         .padding()
-        .onAppear {
-            self.shuffledPhrase = bip39.shuffle()
-        }
     }
         
     var userSelectedGrid: some View {

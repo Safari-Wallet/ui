@@ -25,7 +25,6 @@ struct OnboardingView: View {
     
     /// New mnemonic generated in the onAppear of the title
     @State private var bip39: BIP39?
-    @State private var shuffledPhrase: [String] = []
     
     /// If true, RestoreOrCreateWalletView will show a cancel button
     @State var isCancelable: Bool = false
@@ -51,7 +50,7 @@ struct OnboardingView: View {
                 TabView(selection: $tabIndex) {
                     ShowMnemonicView(state: $state, tabIndex: $tabIndex, bip39: bip39)
                         .tag(0)
-                    ConfirmMnemonicView(state: $state, tabIndex: $tabIndex, bip39: bip39, shuffledPhrase: shuffledPhrase)
+                    ConfirmMnemonicView(state: $state, tabIndex: $tabIndex, bip39: bip39, shuffledPhrase: bip39.shuffle())
                         .tag(1)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -99,11 +98,9 @@ struct OnboardingView: View {
         }
         .interactiveDismissDisabled(true)
         .onAppear {
-            print("⚠️on appear was called")
+//            print("⚠️ OnboardingView: on appear was called")
             do {
                 self.bip39 = try BIP39(bitsOfEntropy: 128)
-                guard let _ = bip39?.mnemonic, let shuffledPhrase = bip39?.shuffle() else { throw WalletError.addressGenerationError }
-                self.shuffledPhrase = shuffledPhrase
             } catch {
                 print("Error: \(error)")
                 state = .dismiss // TODO: show error
