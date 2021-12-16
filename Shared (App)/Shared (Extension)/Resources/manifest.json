@@ -5,7 +5,7 @@
     "name": "__MSG_extension_name__",
     "description": "__MSG_extension_description__",
     "version": "1.0",
-    "homepage_url": "https://safari-wallet-test-dapp.vercel.app",
+    "homepage_url": "https://safariwallet.org",
 
     "icons": {
         "48": "images/icon-48.png",
