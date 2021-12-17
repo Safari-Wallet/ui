@@ -1,0 +1,4366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<array>
+		<dict>
+			<key>Address</key>
+			<string>0xf8317bd5f48b6fe608a52b48c856d3367540b73b</string>
+			<key>NameTag</key>
+			<string>Alchemix Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Alchemix Finance: alETH Alchemist</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x9fd9946e526357b35d95bcb4b388614be4cfd4ac</string>
+			<key>NameTag</key>
+			<string>Alchemix Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Alchemix Finance: alETH Transmuter</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x6d75657771256c7a8cb4d475fdf5047b70160132</string>
+			<key>NameTag</key>
+			<string>Alchemix Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Alchemix Finance: alETH Transmuter Vault Adaptor</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x546e6711032ec744a7708d4b7b283a210a85b3bc</string>
+			<key>NameTag</key>
+			<string>Alchemix Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Alchemix Finance: alETH Vault Adaptor</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xc21d353ff4ee73c572425697f4f5aad2109fe35b</string>
+			<key>NameTag</key>
+			<string>Alchemix Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Alchemix Finance: alUSD Alchemist</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xee69bd81bd056339368c97c4b2837b4dc4b796e7</string>
+			<key>NameTag</key>
+			<string>Alchemix Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Alchemix Finance: alUSD Transmuter</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x6fe02be0ec79dcf582cbdb936d7037d2eb17f661</string>
+			<key>NameTag</key>
+			<string>Alchemix Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Alchemix Finance: alUSD Transmuter Vault Adaptor</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xb039ea6153c827e59b620bdcd974f7bbfe68214a</string>
+			<key>NameTag</key>
+			<string>Alchemix Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Alchemix Finance: alUSD Vault Adaptor</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x9e2b6378ee8ad2a4a95fe481d63caba8fb0ebbf9</string>
+			<key>NameTag</key>
+			<string>Alchemix Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Alchemix Finance: Dev Multisig</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xab8e74017a8cc7c15ffccd726603790d26d7deca</string>
+			<key>NameTag</key>
+			<string>Alchemix Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Alchemix Finance: Staking Pool</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x8392f6669292fa56123f71949b52d883ae57e225</string>
+			<key>NameTag</key>
+			<string>Alchemix Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Alchemix Finance: Treasury</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x011b6e24ffb0b5f5fcc564cf4183c5bbbc96d515</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: Bridge</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x2f06e43d850ac75926fa2866e40139475b58cb16</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: Bridge 2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x9a28e783c47bbeb813f32b861a431d0776681e95</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: Bridge 3</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x84efa170dc6d521495d7942e372b8e4b2fb918ec</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: Bridge Utils</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x6ad1dc4ab5475d9f8cd10118c9d28b06f0c8a2d9</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: Challenge</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x1e13bb8cf5f44c4c7fc585797336eaae3935113c</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: Challenge Factory</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x1fccbe3369eada96887a3b2857b57bba65e83dc1</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: Deployer</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x4dbd4fc535ac27206064b68ffcf827b0a60bab3f</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: Inbox</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x048cc108763de75e080ad717bd284003aa49ea15</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: Inbox 2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xcee284f754e854890e311e3280b767f80797180d</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: L1 Custom Gateway</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x98659bdffa4fef82cd37771cdbff3ddda21ee8e9</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: L1 Custom Gateway 2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xd3b5b60020504bc3489d6949d545893982ba3011</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: L1 DAI Gateway</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xa3a7b6f88361f48403514059f1f16c8e78d60eec</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: L1 ERC20 Gateway</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x0acb04878b3675ef40b2e9392622ce3c1e9cc99e</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: L1 ERC20 Gateway 2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x72ce9c846789fdb6fc1f34ac4ad25dd9ef7031ef</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: L1 Gateway Router</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x62285266b5ec3d5b8867c84b807b79b2c13892ec</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: L1 Gateway Router 2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x27a6cf5e8350b44273fb10f98d78525c5dad6d8a</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: Node Factory</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x4812be53be02b9f38063cf55fef0a19d2ba8bb3a</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: One Step Proof</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x2df287a3b2fd0916c0b3d4882201ff360acd6ec3</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: One Step Proof 2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xce81e7d009e53c02242b724819df1869da5e9fd8</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: One Step Proof Hash</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x667e23abd27e623c11d4cc00ca3ec4d0bd63337a</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: Outbox</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xb91f4be773f5a1b9b0dc1085663b3535a6ebeee2</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: Outbox 2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x760723cd2e632826c38fef8cd438a4cc7e7e1a40</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: Outbox 3</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x14797f5432f699cb4d4db04df599b74952d78d7b</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: Outbox Entry</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x171a2624302775ef943f4f62e76fd22a6813d7c4</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: Proxy Admin</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x9ad46fac0cf7f790e5be05a0f15223935a0c0ada</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: Proxy Admin 2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xc12ba48c781f6e392b49db2e25cd0c28cd77531a</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: Rollup</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x637e1cd58ad3f0071cecb281395e1823a96a553f</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: Rollup 2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xc8c3194ed3be7b2393fefe811a2cc39297442c0b</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: Rollup Event Bridge</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xb872ea300edba3872873fa1aa33db897c4d2cb66</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: Rollup Event Bridge 2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x4c6f947ae67f572afa4ae0730947de7c874f95ef</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: Sequencer Inbox</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x9685e7281fb1507b6f141758d80b08752faf0c43</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: Sequencer Inbox 2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x2b36f23ce0babd57553b26da4c7a0585bac65dc1</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: Validator Utils</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xe17d8fa6bc62590f840c5dd35f300f77d55cc178</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: Validator Wallet Creator</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xd92023e9d9911199a6711321d1277285e6d4e2db</string>
+			<key>NameTag</key>
+			<string>Arbitrum</string>
+			<key>NameTagContractDetails</key>
+			<string>Arbitrum: Wrapped Ether Gateway</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x3e66b66fd1d0b02fda6c811da9e0547970db2f21</string>
+			<key>NameTag</key>
+			<string>Balancer</string>
+			<key>NameTagContractDetails</key>
+			<string>Balancer: Exchange Proxy 2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xba100000625a3754423978a60c9317c58a424e3d</string>
+			<key>NameTag</key>
+			<string>Balancer</string>
+			<key>NameTagContractDetails</key>
+			<string>Balancer: BAL Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x6317c5e82a06e1d8bf200d21f4510ac2c038ac81</string>
+			<key>NameTag</key>
+			<string>Balancer</string>
+			<key>NameTagContractDetails</key>
+			<string>Balancer: Exchange Proxy</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xf5dce57282a584d2746faf1593d3121fcac444dc</string>
+			<key>NameTag</key>
+			<string>Compound</string>
+			<key>NameTagContractDetails</key>
+			<string>Compound: cSAI Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x70e36f6bf80a52b3b46b3af8e106cc0ed743e8e4</string>
+			<key>NameTag</key>
+			<string>Compound</string>
+			<key>NameTagContractDetails</key>
+			<string>Compound: cCOMP Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xccf4429db6322d5c611ee964527d42e5d685dd6a</string>
+			<key>NameTag</key>
+			<string>Compound</string>
+			<key>NameTagContractDetails</key>
+			<string>Compound: cWBTC2 Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xface851a4921ce59e912d19329929ce6da6eb0c7</string>
+			<key>NameTag</key>
+			<string>Compound</string>
+			<key>NameTagContractDetails</key>
+			<string>Compound: cLink Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x12392f67bdf24fae0af363c24ac620a2f67dad86</string>
+			<key>NameTag</key>
+			<string>Compound</string>
+			<key>NameTagContractDetails</key>
+			<string>Compound: cTUSD Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x4b0181102a0112a2ef11abee5563bb4a3176c9d7</string>
+			<key>NameTag</key>
+			<string>Compound</string>
+			<key>NameTagContractDetails</key>
+			<string>Compound: cSushi Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xe65cdb6479bac1e22340e4e755fae7e509ecd06c</string>
+			<key>NameTag</key>
+			<string>Compound</string>
+			<key>NameTagContractDetails</key>
+			<string>Compound: cAAVE Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x95b4ef2869ebd94beb4eee400a99824bf5dc325b</string>
+			<key>NameTag</key>
+			<string>Compound</string>
+			<key>NameTagContractDetails</key>
+			<string>Compound: cMKR Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x80a2ae356fc9ef4305676f7a3e2ed04e12c33946</string>
+			<key>NameTag</key>
+			<string>Compound</string>
+			<key>NameTagContractDetails</key>
+			<string>Compound: cYFI Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x6d903f6003cca6255d85cca4d3b5e5146dc33925</string>
+			<key>NameTag</key>
+			<string>Compound</string>
+			<key>NameTagContractDetails</key>
+			<string>Compound: Timelock</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x55bc991b2edf3ddb4c520b222be4f378418ff0fa</string>
+			<key>NameTag</key>
+			<string>Lido</string>
+			<key>NameTagContractDetails</key>
+			<string>Lido: Deployer 1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xb8ffc3cd6e7cf5a098a1c92f48009765b24088dc</string>
+			<key>NameTag</key>
+			<string>Lido</string>
+			<key>NameTagContractDetails</key>
+			<string>Lido: Deployer 2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xe19fc582dd93fa876cf4061eb5456f310144f57b</string>
+			<key>NameTag</key>
+			<string>Lido</string>
+			<key>NameTagContractDetails</key>
+			<string>Lido: Deployer 3</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x5a98fcbea516cf06857215779fd812ca3bef1b32</string>
+			<key>NameTag</key>
+			<string>Lido</string>
+			<key>NameTagContractDetails</key>
+			<string>Lido: LDO Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x55032650b14df07b85bf18a3a3ec8e0af2e028d5</string>
+			<key>NameTag</key>
+			<string>Lido</string>
+			<key>NameTagContractDetails</key>
+			<string>Lido: Node Operators Registry</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xae7ab96520de3a18e5e111b5eaab095312d7fe84</string>
+			<key>NameTag</key>
+			<string>Lido</string>
+			<key>NameTagContractDetails</key>
+			<string>Lido: stETH Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0</string>
+			<key>NameTag</key>
+			<string>Lido</string>
+			<key>NameTagContractDetails</key>
+			<string>Lido: wstETH Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xc4e0f3ec24972c75df7c716922096f4270b7bb4e</string>
+			<key>NameTag</key>
+			<string>Mirror</string>
+			<key>NameTagContractDetails</key>
+			<string>Mirror: CROWDFUND_EDITIONS Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x3527a204a5260a0e36ca695312379370328e4e6c</string>
+			<key>NameTag</key>
+			<string>Mirror</string>
+			<key>NameTagContractDetails</key>
+			<string>Mirror: Deployer</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x15312b97389a1dc3bcaba7ae58ebbd552e606ed2</string>
+			<key>NameTag</key>
+			<string>Mirror</string>
+			<key>NameTagContractDetails</key>
+			<string>Mirror: Factory Contract</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x9651b2a7aa9ed9635ce896a1af1a7d6294d5e902</string>
+			<key>NameTag</key>
+			<string>Mirror</string>
+			<key>NameTagContractDetails</key>
+			<string>Mirror: Mirror Team</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x835f86ff1670917a786b72d1fd8dcc385e27dd77</string>
+			<key>NameTag</key>
+			<string>Mirror</string>
+			<key>NameTagContractDetails</key>
+			<string>Mirror: Reserve Auction V3</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x138c3d30a724de380739aad9ec94e59e613a9008</string>
+			<key>NameTag</key>
+			<string>Mirror</string>
+			<key>NameTagContractDetails</key>
+			<string>Mirror: Treasury</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x6da5f047b1ec9e822f132efdf02e76eddf29dbf5</string>
+			<key>NameTag</key>
+			<string>Mirror</string>
+			<key>NameTagContractDetails</key>
+			<string>Mirror: Write Distributor V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x622236bb180256b6ae1a935dae08dc0356141632</string>
+			<key>NameTag</key>
+			<string>Mirror</string>
+			<key>NameTagContractDetails</key>
+			<string>Mirror: WRITE Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x55fe002aeff02f77364de339a1292923a15844b8</string>
+			<key>NameTag</key>
+			<string>USDC</string>
+			<key>NameTagContractDetails</key>
+			<string>Circle</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x5392bd00571157fa11103b0ee6d492c9563a6799</string>
+			<key>NameTag</key>
+			<string>USDC</string>
+			<key>NameTagContractDetails</key>
+			<string>Circle: Deposit</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48</string>
+			<key>NameTag</key>
+			<string>USDC</string>
+			<key>NameTagContractDetails</key>
+			<string>USD Coin</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x5db0115f3b72d19cea34dd697cf412ff86dc7e1b</string>
+			<key>NameTag</key>
+			<string>USDC</string>
+			<key>NameTagContractDetails</key>
+			<string>USDC: Blacklister</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xe982615d461dd5cd06575bbea87624fda4e3de17</string>
+			<key>NameTag</key>
+			<string>USDC</string>
+			<key>NameTagContractDetails</key>
+			<string>USDC: Master Minter</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xfcb19e6a322b27c06842a71e8c725399f049ae3a</string>
+			<key>NameTag</key>
+			<string>USDC</string>
+			<key>NameTagContractDetails</key>
+			<string>USDC: Owner</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xf0d160dec1749afaf5a831668093b1431f7c8527</string>
+			<key>NameTag</key>
+			<string>USDC</string>
+			<key>NameTagContractDetails</key>
+			<string>USDC: Pauser</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x4374d3d032b3c96785094ec9f384f07077792768</string>
+			<key>NameTag</key>
+			<string>Loopring</string>
+			<key>NameTagContractDetails</key>
+			<string>Loopring: Deployer 2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x5593b2b8dc63d0ed68aa8f885707b2dc5787e391</string>
+			<key>NameTag</key>
+			<string>Loopring</string>
+			<key>NameTagContractDetails</key>
+			<string>Loopring: Deployer 3</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x0baba1ad5be3a5c0a66e7ac838a129bf948f1ea4</string>
+			<key>NameTag</key>
+			<string>Loopring</string>
+			<key>NameTagContractDetails</key>
+			<string>Loopring: Exchange v2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x674bdf20a0f284d710bc40872100128e2d66bd3f</string>
+			<key>NameTag</key>
+			<string>Loopring</string>
+			<key>NameTagContractDetails</key>
+			<string>Loopring: Exchange v2 Deposit</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xec3cc6cf0252565b56fc7ac396017df5b9b78a31</string>
+			<key>NameTag</key>
+			<string>Loopring</string>
+			<key>NameTagContractDetails</key>
+			<string>Loopring: Exchange v2 Fast Withdrawal</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x4b89f8996892d137c3de1312d1dd4e4f4ffca171</string>
+			<key>NameTag</key>
+			<string>Loopring</string>
+			<key>NameTagContractDetails</key>
+			<string>Loopring: Fee Vault</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x6325d247696d39ee59ffd931a87e022a68bbbe4f</string>
+			<key>NameTag</key>
+			<string>Loopring</string>
+			<key>NameTagContractDetails</key>
+			<string>Loopring: Guardian 1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xbbbbca6a901c926f240b89eacb641d8aec7aeafd</string>
+			<key>NameTag</key>
+			<string>Loopring</string>
+			<key>NameTagContractDetails</key>
+			<string>Loopring: LRC Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xf4662bb1c4831fd411a95b8050b3a5998d8a4a5b</string>
+			<key>NameTag</key>
+			<string>Loopring</string>
+			<key>NameTagContractDetails</key>
+			<string>Loopring: Staking Pool</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x944644ea989ec64c2ab9ef341d383cef586a5777</string>
+			<key>NameTag</key>
+			<string>Loopring</string>
+			<key>NameTagContractDetails</key>
+			<string>LoopringDEX: Beta 1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x6d4ee35d70ad6331000e370f079ad7df52e75005</string>
+			<key>NameTag</key>
+			<string>Loopring</string>
+			<key>NameTagContractDetails</key>
+			<string>Vite: Deployer 1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x04f2694c8fcee23e8fd0dfea1d4f5bb8c352111f</string>
+			<key>NameTag</key>
+			<string>OlympusDAO</string>
+			<key>NameTagContractDetails</key>
+			<string>OlympusDAO: sOHM V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x956c43998316b6a2f21f89a1539f73fb5b78c151</string>
+			<key>NameTag</key>
+			<string>OlympusDAO</string>
+			<key>NameTagContractDetails</key>
+			<string>OlympusDAO: OHM/DAI LP Bond V4</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x575409f8d77c12b05fed8b455815f0e54797381c</string>
+			<key>NameTag</key>
+			<string>OlympusDAO</string>
+			<key>NameTagContractDetails</key>
+			<string>OlympusDAO: DAI Bond V3</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x31932e6e45012476ba3a3a4953cba62aee77fbbe</string>
+			<key>NameTag</key>
+			<string>OlympusDAO</string>
+			<key>NameTagContractDetails</key>
+			<string>OlympusDAO: sOHM V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xe6295201cd1ff13ced5f063a5421c39a1d236f1c</string>
+			<key>NameTag</key>
+			<string>OlympusDAO</string>
+			<key>NameTagContractDetails</key>
+			<string>OlympusDAO: ETH Bond V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xc20cfff07076858a7e642e396180ec390e5a02f7</string>
+			<key>NameTag</key>
+			<string>OlympusDAO</string>
+			<key>NameTagContractDetails</key>
+			<string>OlympusDAO: OHM/FRAX LP Bond V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x10c0f93f64e3c8d0a1b0f4b87d6155fd9e89d08d</string>
+			<key>NameTag</key>
+			<string>OlympusDAO</string>
+			<key>NameTagContractDetails</key>
+			<string>OlympusDAO: LUSD Bond V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x8510c8c2b6891e04864fa196693d44e6b6ec2514</string>
+			<key>NameTag</key>
+			<string>OlympusDAO</string>
+			<key>NameTagContractDetails</key>
+			<string>OlympusDAO: FRAX Bond V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xe1e83825613de12e8f0502da939523558f0b819e</string>
+			<key>NameTag</key>
+			<string>OlympusDAO</string>
+			<key>NameTagContractDetails</key>
+			<string>OlympusDAO: Redeem Helper</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xfb1776299e7804dd8016303df9c07a65c80f67b6</string>
+			<key>NameTag</key>
+			<string>OlympusDAO</string>
+			<key>NameTagContractDetails</key>
+			<string>OlympusDAO: OHM/LUSD LP Bond V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xd27001d1aaed5f002c722ad729de88a91239ff29</string>
+			<key>NameTag</key>
+			<string>OlympusDAO</string>
+			<key>NameTagContractDetails</key>
+			<string>OlympusDAO: OHM/DAI LP Bond V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x24ecfd535675f36ba1ab9c5d39b50dc097b0792e</string>
+			<key>NameTag</key>
+			<string>OlympusDAO</string>
+			<key>NameTagContractDetails</key>
+			<string>OlympusDAO: aOHM V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xa64ed1b66cb2838ef2a198d8345c0ce6967a2a3c</string>
+			<key>NameTag</key>
+			<string>OlympusDAO</string>
+			<key>NameTagContractDetails</key>
+			<string>OlympusDAO: DAI Bond V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xd03056323b7a63e2095ae97fa1ad92e4820ff045</string>
+			<key>NameTag</key>
+			<string>OlympusDAO</string>
+			<key>NameTagContractDetails</key>
+			<string>OlympusDAO: DAI Bond V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x1e5b7412f4b4b713b93d0e82260bd27810984b6e</string>
+			<key>NameTag</key>
+			<string>OlympusDAO</string>
+			<key>NameTagContractDetails</key>
+			<string>OlympusDAO: Alchemix Custom Bond</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x11ac5c608c6b2c57ed58ee43281f7ba52205b17a</string>
+			<key>NameTag</key>
+			<string>OlympusDAO</string>
+			<key>NameTagContractDetails</key>
+			<string>OlympusDAO: Pendle Custom Bond</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x996668c46fc0b764afda88d83eb58afc933a1626</string>
+			<key>NameTag</key>
+			<string>OlympusDAO</string>
+			<key>NameTagContractDetails</key>
+			<string>OlympusDAO: OHM/DAI LP Bond V3</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x4cbd58469c964f999a380fd8180e1c645de35801</string>
+			<key>NameTag</key>
+			<string>OlympusDAO</string>
+			<key>NameTagContractDetails</key>
+			<string>OlympusDAO: Abracadabra Custom Bond</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x13e8484a86327f5882d1340ed0d7643a29548536</string>
+			<key>NameTag</key>
+			<string>OlympusDAO</string>
+			<key>NameTagContractDetails</key>
+			<string>OlympusDAO: OHM/DAI LP Bond V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x245cc372c84b3645bf0ffe6538620b04a217988b</string>
+			<key>NameTag</key>
+			<string>OlympusDAO</string>
+			<key>NameTagContractDetails</key>
+			<string>OlympusDAO: DAO Funds</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x903de5b04b9878696ffa08bd300cc06b260fc5c9</string>
+			<key>NameTag</key>
+			<string>OlympusDAO</string>
+			<key>NameTagContractDetails</key>
+			<string>OlympusDAO: StakeDAO Custom Bond</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x539b6c906244ac34e348bbe77885cdfa994a3776</string>
+			<key>NameTag</key>
+			<string>OlympusDAO</string>
+			<key>NameTagContractDetails</key>
+			<string>OlympusDAO: OHM/FRAX LP Bond V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x36994486c6e97c170065899d8659a28d7371c800</string>
+			<key>NameTag</key>
+			<string>OlympusDAO</string>
+			<key>NameTagContractDetails</key>
+			<string>OlympusDAO: pOHM V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xc9ce759c809e8026c8fc1b66536031d81d6c3d1c</string>
+			<key>NameTag</key>
+			<string>OlympusDAO</string>
+			<key>NameTagContractDetails</key>
+			<string>OlympusDAO: Float Protocol Custom Bond</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x0cf30dc0d48604a301df8010cdc028c055336b2e</string>
+			<key>NameTag</key>
+			<string>OlympusDAO</string>
+			<key>NameTagContractDetails</key>
+			<string>OlympusDAO: Policy</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x042065416c5c665dc196076745326af3cd840d15</string>
+			<key>NameTag</key>
+			<string>Optimism</string>
+			<key>NameTagContractDetails</key>
+			<string>Optimism: Fraud Verifier</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x99c9fc46f92e8a1c0dec1b1747d010903e884be1</string>
+			<key>NameTag</key>
+			<string>Optimism</string>
+			<key>NameTagContractDetails</key>
+			<string>Optimism: Gateway</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xde1fcfb0851916ca5101820a69b13a4e276bd81f</string>
+			<key>NameTag</key>
+			<string>Optimism</string>
+			<key>NameTagContractDetails</key>
+			<string>Optimism: Lib Address Manager</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xcd76de5c57004d47d0216ec7dabd3c72d8c49057</string>
+			<key>NameTag</key>
+			<string>Optimism</string>
+			<key>NameTagContractDetails</key>
+			<string>Optimism: Mock OVM Bond Manager</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x4bf681894abec828b212c906082b444ceb2f6cf6</string>
+			<key>NameTag</key>
+			<string>Optimism</string>
+			<key>NameTagContractDetails</key>
+			<string>Optimism: OVM Canonical Transaction Chain</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x3ea1a3839d8ca9a7ff3c567a9f36f4c4dbecc3ee</string>
+			<key>NameTag</key>
+			<string>Optimism</string>
+			<key>NameTagContractDetails</key>
+			<string>Optimism: OVM Chain Storage Container CTC Batches</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xa0b912b3ea71a04065ff82d3936d518ed6e38039</string>
+			<key>NameTag</key>
+			<string>Optimism</string>
+			<key>NameTagContractDetails</key>
+			<string>Optimism: OVM Chain Storage Container CTC Queue</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x77ebfdfcc906ddcda0c42b866f26a8d5a2bb0572</string>
+			<key>NameTag</key>
+			<string>Optimism</string>
+			<key>NameTagContractDetails</key>
+			<string>Optimism: OVM Chain Storage Container SCC Batches</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x2745c24822f542bbffb41c6cb20edf766b5619f5</string>
+			<key>NameTag</key>
+			<string>Optimism</string>
+			<key>NameTagContractDetails</key>
+			<string>Optimism: OVM Execution Manager</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xf26391fbb1f77481f80a7d646ac08ba3817ea891</string>
+			<key>NameTag</key>
+			<string>Optimism</string>
+			<key>NameTagContractDetails</key>
+			<string>Optimism: OVM L1 Multi Message Relayer</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xfe1f9cf28ecdb12110aa8086e6fd343ea06035cc</string>
+			<key>NameTag</key>
+			<string>Optimism</string>
+			<key>NameTagContractDetails</key>
+			<string>Optimism: OVM Safety Checker</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xe969c2724d2448f1d1a6189d3e2aa1f37d5998c1</string>
+			<key>NameTag</key>
+			<string>Optimism</string>
+			<key>NameTagContractDetails</key>
+			<string>Optimism: OVM State Commitment Chain</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xd0e3e318154716bd9d007e1e6b021eab246ff98d</string>
+			<key>NameTag</key>
+			<string>Optimism</string>
+			<key>NameTagContractDetails</key>
+			<string>Optimism: OVM State Manager Factory</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x38a6ed6fd76035684cadef38cf49a2fffa782b67</string>
+			<key>NameTag</key>
+			<string>Optimism</string>
+			<key>NameTagContractDetails</key>
+			<string>Optimism: OVM State Transitioner Factory</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x25ace71c97b33cc4729cf772ae268934f7ab5fa1</string>
+			<key>NameTag</key>
+			<string>Optimism</string>
+			<key>NameTagContractDetails</key>
+			<string>Optimism: Proxy OVM L1 Cross Domain Messenger</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xa0c68c638235ee32657e8f720a23cec1bfc77c77</string>
+			<key>NameTag</key>
+			<string>Polygon (Matic)</string>
+			<key>NameTagContractDetails</key>
+			<string>Polygon (Matic): Bridge</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x40ec5b33f54e0e8a33a975908c5ba1c14e5bbbdf</string>
+			<key>NameTag</key>
+			<string>Polygon (Matic)</string>
+			<key>NameTagContractDetails</key>
+			<string>Polygon (Matic): ERC20 Bridge</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x8484ef722627bf18ca5ae6bcf031c23e6e922b30</string>
+			<key>NameTag</key>
+			<string>Polygon (Matic)</string>
+			<key>NameTagContractDetails</key>
+			<string>Polygon (Matic): Ether Bridge</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xb316fa9fa91700d7084d377bfdc81eb9f232f5ff</string>
+			<key>NameTag</key>
+			<string>Polygon (Matic)</string>
+			<key>NameTagContractDetails</key>
+			<string>Polygon (Matic): Foundation Contract</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x0305c18771cd11b36dcfa610bcc8837f814746f1</string>
+			<key>NameTag</key>
+			<string>Polygon (Matic)</string>
+			<key>NameTagContractDetails</key>
+			<string>Polygon (Matic): HEZ to MATIC</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xccb04768f3abcf1af1e749085ef67d8ec7c5fdd2</string>
+			<key>NameTag</key>
+			<string>Polygon (Matic)</string>
+			<key>NameTagContractDetails</key>
+			<string>Polygon (Matic): Marketing &amp; Ecosystem</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0</string>
+			<key>NameTag</key>
+			<string>Polygon (Matic)</string>
+			<key>NameTagContractDetails</key>
+			<string>Polygon (Matic): Matic Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x50d669f43b484166680ecc3670e4766cdb0945ce</string>
+			<key>NameTag</key>
+			<string>Polygon (Matic)</string>
+			<key>NameTagContractDetails</key>
+			<string>Polygon (Matic): Mining &amp; Seeding</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x401f6c983ea34274ec46f84d70b31c151321188b</string>
+			<key>NameTag</key>
+			<string>Polygon (Matic)</string>
+			<key>NameTagContractDetails</key>
+			<string>Polygon (Matic): Plasma Bridge</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x5e3ef299fddf15eaa0432e6e66473ace8c13d908</string>
+			<key>NameTag</key>
+			<string>Polygon (Matic)</string>
+			<key>NameTagContractDetails</key>
+			<string>Polygon (Matic): PoS Staking Contract</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x28e4f3a7f651294b9564800b2d01f35189a5bfbe</string>
+			<key>NameTag</key>
+			<string>Polygon (Matic)</string>
+			<key>NameTagContractDetails</key>
+			<string>Polygon (Matic): State Syncer</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xcbfe11b78c2e6cb25c6eda2c6ff46cd4755c8fca</string>
+			<key>NameTag</key>
+			<string>Polygon (Matic)</string>
+			<key>NameTagContractDetails</key>
+			<string>Polygon (Matic): Vesting Contract</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x67db14e73c2dce786b5bbbfa4d010deab4bbfcf9</string>
+			<key>NameTag</key>
+			<string>Rari Capital</string>
+			<key>NameTagContractDetails</key>
+			<string>Rari Capital: cERC20 Implementation</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xd77e28a1b9a9cfe1fc2eee70e391c05d25853cbf</string>
+			<key>NameTag</key>
+			<string>Rari Capital</string>
+			<key>NameTagContractDetails</key>
+			<string>Rari Capital: cEther Implementation</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xe102421a85d9c0e71c0ef1870dac658eb43e1493</string>
+			<key>NameTag</key>
+			<string>Rari Capital</string>
+			<key>NameTagContractDetails</key>
+			<string>Rari Capital: Chainlink Price Oracle</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xe16db319d9da7ce40b666dd2e365a4b8b3c18217</string>
+			<key>NameTag</key>
+			<string>Rari Capital</string>
+			<key>NameTagContractDetails</key>
+			<string>Rari Capital: Comptroller Implementation</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x96ce4c781edf07f4e3d210c919ca4f9a7ad82a7f</string>
+			<key>NameTag</key>
+			<string>Rari Capital</string>
+			<key>NameTagContractDetails</key>
+			<string>Rari Capital: DAI Dari Pool Price Consumer</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xafd2aade64e6ea690173f6de59fc09f5c9190d74</string>
+			<key>NameTag</key>
+			<string>Rari Capital</string>
+			<key>NameTagContractDetails</key>
+			<string>Rari Capital: DAI Rari Pool Controller</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xb465baf04c087ce3ed1c266f96ca43f4847d9635</string>
+			<key>NameTag</key>
+			<string>Rari Capital</string>
+			<key>NameTagContractDetails</key>
+			<string>Rari Capital: DAI Rari Pool Manager</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x3f579f097f2ce8696ae8c417582cfafde9ec9966</string>
+			<key>NameTag</key>
+			<string>Rari Capital</string>
+			<key>NameTagContractDetails</key>
+			<string>Rari Capital: DAI Rari Pool Proxy</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x0833cfcb11a5ba89fbaf73a407831c98ad2d7648</string>
+			<key>NameTag</key>
+			<string>Rari Capital</string>
+			<key>NameTagContractDetails</key>
+			<string>Rari Capital: DAI Rari Pool Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x3f4931a8e9d4cdf8f56e7e8a8cfe3bede0e43657</string>
+			<key>NameTag</key>
+			<string>Rari Capital</string>
+			<key>NameTagContractDetails</key>
+			<string>Rari Capital: Ether Rari Pool Controller</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xa731585ab05fc9f83555cf9bff8f58ee94e18f85</string>
+			<key>NameTag</key>
+			<string>Rari Capital</string>
+			<key>NameTagContractDetails</key>
+			<string>Rari Capital: Fuse Fee Distributor</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x835482fe0532f169024d5e9410199369aad5c77e</string>
+			<key>NameTag</key>
+			<string>Rari Capital</string>
+			<key>NameTagContractDetails</key>
+			<string>Rari Capital: Fuse Pool Directory</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x6dc585ad66a10214ef0502492b0cc02f0e836eec</string>
+			<key>NameTag</key>
+			<string>Rari Capital</string>
+			<key>NameTagContractDetails</key>
+			<string>Rari Capital: Fuse Pool Lens</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xc76190e04012f26a364228cfc41690429c44165d</string>
+			<key>NameTag</key>
+			<string>Rari Capital</string>
+			<key>NameTagContractDetails</key>
+			<string>Rari Capital: Fuse Pool Lens Secondary</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xf0f3a1494ae00b5350535b7777abb2f499fc13d4</string>
+			<key>NameTag</key>
+			<string>Rari Capital</string>
+			<key>NameTagContractDetails</key>
+			<string>Rari Capital: Fuse Safe Liquidator</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x9c0caeb986c003417d21a7daaf30221d61fc1043</string>
+			<key>NameTag</key>
+			<string>Rari Capital</string>
+			<key>NameTagContractDetails</key>
+			<string>Rari Capital: Governance Token Distributor</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x91d9c2b5cf81d55a5f2ecc0fc84e62f9cd2cefd6</string>
+			<key>NameTag</key>
+			<string>Rari Capital</string>
+			<key>NameTagContractDetails</key>
+			<string>Rari Capital: Governor Bravo Delegator</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x14ee0270c80bed60bdc117d4f218dee0a4909f28</string>
+			<key>NameTag</key>
+			<string>Rari Capital</string>
+			<key>NameTagContractDetails</key>
+			<string>Rari Capital: Interest Rate Model ETH</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x7ecaf96c79c2b263afe4f486ec9a74f8e563e0a6</string>
+			<key>NameTag</key>
+			<string>Rari Capital</string>
+			<key>NameTagContractDetails</key>
+			<string>Rari Capital: Interest Rate Model WBTC</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x58c3e7119ec200c09b2b3a9f8ce3bd77b6b47012</string>
+			<key>NameTag</key>
+			<string>Rari Capital</string>
+			<key>NameTagContractDetails</key>
+			<string>Rari Capital: Jump Rate Model ALCX</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x640dce7c7c6349e254b20eccfa2bb902b354c317</string>
+			<key>NameTag</key>
+			<string>Rari Capital</string>
+			<key>NameTagContractDetails</key>
+			<string>Rari Capital: Jump Rate Model DAI</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xcdc0a449e011249482824effcfa05c883d36cfc7</string>
+			<key>NameTag</key>
+			<string>Rari Capital</string>
+			<key>NameTagContractDetails</key>
+			<string>Rari Capital: Jump Rate Model Gov Seeds</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xb579d2761470bba14018959d6dffcc681c09c04b</string>
+			<key>NameTag</key>
+			<string>Rari Capital</string>
+			<key>NameTagContractDetails</key>
+			<string>Rari Capital: Jump Rate Model Stables Majors</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xc35db333ef7ce4f246de9de11cc1929d6aa11672</string>
+			<key>NameTag</key>
+			<string>Rari Capital</string>
+			<key>NameTagContractDetails</key>
+			<string>Rari Capital: Jump Rate Model UNI</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xbf2f341ea21aad9f1935636258e67f06c72353dd</string>
+			<key>NameTag</key>
+			<string>Rari Capital</string>
+			<key>NameTagContractDetails</key>
+			<string>Rari Capital: Marketing</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x0bc529c00c6401aef6d220be8c6ea1667f6ad93e</string>
+			<key>NameTag</key>
+			<string>Yearn.Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Ygov.finance: YFI Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x5dbcf33d8c2e976c6b560249878e6f1491bca25c</string>
+			<key>NameTag</key>
+			<string>Yearn.Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>yearn: yCRV Vault</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x0001fb050fe7312791bf6475b96569d83f695c9f</string>
+			<key>NameTag</key>
+			<string>Yearn.Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Ygov.finance: yearn</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xba2e7fed597fd0e3e70f5130bcdbbfe06bb94fe1</string>
+			<key>NameTag</key>
+			<string>Yearn.Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>yearn: yYFI Vault</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x3a22df48d84957f907e67f4313e3d43179040d6e</string>
+			<key>NameTag</key>
+			<string>Yearn.Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Ygov.finance: Governance</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x16de59092dae5ccf4a1e6439d611fd0653f0bd01</string>
+			<key>NameTag</key>
+			<string>Yearn.Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>yearn: yDAI Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x29e240cfd7946ba20895a7a02edb25c210f9f324</string>
+			<key>NameTag</key>
+			<string>Yearn.Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>yearn: yaLINK Vault</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x597ad1e0c13bfe8025993d9e79c69e1c0233522e</string>
+			<key>NameTag</key>
+			<string>Yearn.Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>yearn: yUSDC Vault</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x033e52f513f9b98e129381c6708f9faa2dee5db5</string>
+			<key>NameTag</key>
+			<string>Yearn.Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Ygov.finance: Balancer</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xd6ad7a6750a7593e092a9b218d66c0a814a3436e</string>
+			<key>NameTag</key>
+			<string>Yearn.Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>yearn: yUSDC Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x83f798e925bcd4017eb265844fddabb448f1707d</string>
+			<key>NameTag</key>
+			<string>Yearn.Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>yearn: yUSDT Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xb01419e74d8a2abb1bbad82925b19c36c191a701</string>
+			<key>NameTag</key>
+			<string>Yearn.Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Ygov.finance: Fee Rewards</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x73a052500105205d34daf004eab301916da8190f</string>
+			<key>NameTag</key>
+			<string>Yearn.Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>yearn: yTUSD Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xf61718057901f84c4eec4339ef8f0d86d2b45600</string>
+			<key>NameTag</key>
+			<string>Yearn.Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>yearn: ySUSD Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xa069e33994dcc24928d99f4bbeda83aaef00b5f3</string>
+			<key>NameTag</key>
+			<string>Yearn.Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>yearn: Strategy Curve YCRV</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x975f1bc238303593efab00d63cf0fc5f519a8de0</string>
+			<key>NameTag</key>
+			<string>Yearn.Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>yearn: yCurve Zap In</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x04bc0ab673d88ae9dbc9da2380cb6b79c4bca9ae</string>
+			<key>NameTag</key>
+			<string>Yearn.Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>yearn: yBUSD Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xed03415e5705c5abbf8e94c491b715df526cad55</string>
+			<key>NameTag</key>
+			<string>Yearn.Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>yearn: yCurve Zap Out</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x93a62da5a14c80f265dabc077fcee437b1a0efde</string>
+			<key>NameTag</key>
+			<string>Yearn.Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>yearn: Treasury Vault</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x2c3a2558e9b91e893e53bce94de3457a29f6b262</string>
+			<key>NameTag</key>
+			<string>Yearn.Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>yearn: yCurve Zap Swap</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: AAVE Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x80fb784b7ed66730e8b1dbd9820afd29931aab03</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: LEND Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x398ec7346dcd622edc5ae82352f02be94c62d119</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: Lending Pool V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x3a3a65aab0dd2a17e3f1947ba16138cd37d08c04</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aETH Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x030ba81f1c18d280636f32af80b9aad02cf0854e</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aWETH Token V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x317625234562b1526ea2fac4030ea499c5291de4</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: LEND To AAVE Migrator</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xa64bd6c70cb9051f6a9ba1f163fdc07e0dfb5f84</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aLINK Token V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xfc1e690f61efd961294b3e1ce3313fbd8aa4f85d</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aDAI Token V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x9ba00d6856a4edf4665bca2c2309936572473b7e</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aUSDC Token V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x328c4c80bc7aca0834db37e6600a6c49e12da4de</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aSNX Token V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xbcca60bb61934080951369a648fb03df4f96263c</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aUSDC Token V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xfc4b8ed459e00e5400be803a9bb3954234fd50e3</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aWBTC Token V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x12e51e77daaa58aa0e9247db7510ea4b46f9bead</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aYFI Token V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x7d2d3688df45ce7c552e19c27e007673da9204b8</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aLEND Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x71fc860f7d3a592a4a98740e39db31d25db65ae8</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aUSDT Token V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xf63b34710400cad3e044cffdcab00a0f32e33ecf</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: WETH Variable Debt V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x028171bca77440897b824ca71d1c56cac55b68a3</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aDAI Token V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x9d91be44c06d373a8a226e1f3b146956083803eb</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aKNC Token V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x9ff58f4ffb29fa2266ab25e75e2a8b3503311656</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aWBTC Token V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xa06bc25b5805d5f8d82847d191cb4af5a3e873e0</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aLINK Token V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x625ae63000f46200499120b906716420bd059240</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aSUSD Token V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xba3d9687cf50fe253cd2e1cfeede1d6787344ed5</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aAAVE Token V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x3ed3b47dd13ec9a98b44e6204a523e766b225811</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aUSDT Token V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xffc97d72e13e01096502cb8eb52dee56f74dad7b</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aAAVE Token V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xe1ba0fb44ccb0d11b80f92f4f8ed94ca3ff51d00</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aBAT Token V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x7deb5e830be29f91e298ba5ff1356bb7f8146998</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aMKR Token V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xb9d7cb55f463405cdfbe4e90a6d2df01c2b92bf1</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aUNI Token V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x4da9b813057d04baef4e5800e36083717b4a0341</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aTUSD Token V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x35f6b052c598d933d69a4eec4d04c73a191fe6c2</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aSNX Token V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xb124541127a0a657f056d9dd06188c4f1b0e5aab</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aUNI Token V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x8dae6cb04688c62d939ed9b68d32bc62e49970b1</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aCRV Token V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x5165d24277cd063f5ac44efd447b27025e888f37</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aYFI Token V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x6fb0855c404e09c47c3fbca25f08d4e41f9f062f</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aZRX Token V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x6ee0f7bb50a54ab5253da0667b0dc2ee526c30a8</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aBUSD Token V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x6fce4a401b6b80ace52baaefe4421bd188e76f6f</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aMANA Token V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x4e977830ba4bd783c0bb7f15d3e243f73ff57121</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: WETH Stable Debt V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xc713e5e149d5d0715dcd1c156a020976e7e56b88</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aMKR Token V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xcc12abe4ff81c9378d670de1b57f8e0dd228d77a</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aREN Token V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xac6df26a590f08dcc95d5a4705ae8abbc88509ef</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aENJ Token V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xa685a61171bb30d4072b338c80cb7b2c865c873e</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aMANA Token V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x6c5024cd4f8a59110119c56f8933403a539555eb</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aSUSD Token V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x101cc05f4a51c0319f570d5e146a8c625198e636</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aTUSD Token V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xa361718326c15715591c299427c62086f69923d9</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aBUSD Token V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x6c3c78838c761c6ac7be9f59fe808ea2a6e4379d</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: DAI Variable Debt V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x05ec93c0365baaeabf7aeffb0972ea7ecdd39cf1</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aBAT Token V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x619beb58998ed2278e08620f97007e1116d5d25b</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: USDC Variable Debt V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x39c6b3e42d6a679d7d776778fe880bc9487c2eda</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aKNC Token V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x71010a9d003445ac60c4e6a7017c1e89a477b438</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aREP Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xdf7ff54aacacbff42dfe29dd6144a69b629f8c9e</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: aZRX Token V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x531842cebbdd378f8ee36d171d6cc9c4fcf475ec</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: USDT Variable Debt V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x4965f6fa20fe9728decf5165016fc338a5a85abf</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: Proxy</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x9c39809dec7f95f5e0713634a4d0701329b3b4d2</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: WBTC Variable Debt V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x778a13d3eeb110a4f7bb6529f99c000119a08e92</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: DAI Stable Debt V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xe4922afab0bbadd8ab2a88e0c79d884ad337fca6</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: USDC Stable Debt V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xba429f7011c9fa04cdd46a2da24dc0ff0ac6099c</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: BUSD Variable Debt V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x279af5b99540c1a3a7e3cdd326e19659401ef99e</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: GUSD Variable Debt V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xe91d55ab2240594855abd11b3faae801fd4c4687</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: USDT Stable Debt V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x24a42fd28c976a61df5d00d0599c34c4f90748c8</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: Lending Pool Provider V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xdc6a3ab17299d9c2a412b0e0a4c1f55446ae0817</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: SUSD Variable Debt V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x0b8f12b1788bfde65aa1ca52e3e9f3ba401be16d</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: Link Variable Debt V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x3dfd23a6c5e8bbcfc9581d2e864a68feb6a076d3</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: Lending Pool Core V1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xfc218a6dfe6901cb34b1a5281fc6f1b8e7e56877</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: BAT Variable Debt V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x00ad8ebf64f141f1c81e9f8f792d3d1631c6c684</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: CRV Variable Debt V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x01c0eb1f8c6f1c1bf74ae028697ce7aa2a8b0e92</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: TUSD Variable Debt V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x5bdb050a92cadccfcdcccbfc17204a1c9cc0ab73</string>
+			<key>NameTag</key>
+			<string>Aave</string>
+			<key>NameTagContractDetails</key>
+			<string>Aave: UNI Variable Debt V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x7b7473a76d6ae86ce19f7352a1e89f6c9dc39020</string>
+			<key>NameTag</key>
+			<string>Abracadabra.Money</string>
+			<key>NameTagContractDetails</key>
+			<string>Abracadabra.Money: ALCX Market</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x806e16ec797c69afa8590a55723ce4cc1b54050e</string>
+			<key>NameTag</key>
+			<string>Abracadabra.Money</string>
+			<key>NameTagContractDetails</key>
+			<string>Abracadabra.Money: Cvx3pool Market</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x4eaed76c3a388f4a841e9c765560bbe7b3e4b3a0</string>
+			<key>NameTag</key>
+			<string>Abracadabra.Money</string>
+			<key>NameTagContractDetails</key>
+			<string>Abracadabra.Money: cvxtricrypto2 Market</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x05500e2ee779329698df35760bedcaac046e7c27</string>
+			<key>NameTag</key>
+			<string>Abracadabra.Money</string>
+			<key>NameTagContractDetails</key>
+			<string>Abracadabra.Money: FTM Market</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x5f0dee98360d8200b20812e174d139a1a633edd2</string>
+			<key>NameTag</key>
+			<string>Abracadabra.Money</string>
+			<key>NameTagContractDetails</key>
+			<string>Abracadabra.Money: Multisig</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xc319eea1e792577c319723b5e60a15da3857e7da</string>
+			<key>NameTag</key>
+			<string>Abracadabra.Money</string>
+			<key>NameTagContractDetails</key>
+			<string>Abracadabra.Money: sSPELL Market</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x003d5a75d284824af736df51933be522de9eed0f</string>
+			<key>NameTag</key>
+			<string>Abracadabra.Money</string>
+			<key>NameTagContractDetails</key>
+			<string>Abracadabra.Money: wsOHM Market</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x98a84eff6e008c5ed0289655ccdca899bcb6b99f</string>
+			<key>NameTag</key>
+			<string>Abracadabra.Money</string>
+			<key>NameTagContractDetails</key>
+			<string>Abracadabra.Money: xSUSHI Market</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xebfde87310dc22404d918058faa4d56dc4e93f0a</string>
+			<key>NameTag</key>
+			<string>Abracadabra.Money</string>
+			<key>NameTagContractDetails</key>
+			<string>Abracadabra.Money: yvcrvIB Market</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x0bca8ebcb26502b013493bf8fe53aa2b1ed401c1</string>
+			<key>NameTag</key>
+			<string>Abracadabra.Money</string>
+			<key>NameTagContractDetails</key>
+			<string>Abracadabra.Money: yvstETH Market</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x6cbafee1fab76ca5b5e144c43b3b50d42b7c8c8f</string>
+			<key>NameTag</key>
+			<string>Abracadabra.Money</string>
+			<key>NameTagContractDetails</key>
+			<string>Abracadabra.Money: yvUSDC v2 Market</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x551a7cff4de931f32893c928bbc3d25bf1fc5147</string>
+			<key>NameTag</key>
+			<string>Abracadabra.Money</string>
+			<key>NameTagContractDetails</key>
+			<string>Abracadabra.Money: yvUSDT v2 Market</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x920d9bd936da4eafb5e25c6bdc9f6cb528953f9f</string>
+			<key>NameTag</key>
+			<string>Abracadabra.Money</string>
+			<key>NameTagContractDetails</key>
+			<string>Abracadabra.Money: yvWETH v2 Market</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xffbf4892822e0d552cff317f65e1ee7b5d3d9ae6</string>
+			<key>NameTag</key>
+			<string>Abracadabra.Money</string>
+			<key>NameTagContractDetails</key>
+			<string>Abracadabra.Money: yvYFI Market</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xf5b0a3efb8e8e4c201e2a935f110eaaf3ffecb8d</string>
+			<key>NameTag</key>
+			<string>Axie Infinity</string>
+			<key>NameTagContractDetails</key>
+			<string>Axie Infinity: AXIE Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x997fc821368154f52469c794a66135e19e64589c</string>
+			<key>NameTag</key>
+			<string>Axie Infinity</string>
+			<key>NameTagContractDetails</key>
+			<string>Axie Infinity: AXS Presale</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xbb0e17ef65f82ab018d8edd776e8dd940327b28b</string>
+			<key>NameTag</key>
+			<string>Axie Infinity</string>
+			<key>NameTagContractDetails</key>
+			<string>Axie Infinity: AXS Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x73b1714fb3bfaefa12f3707befcba3205f9a1162</string>
+			<key>NameTag</key>
+			<string>Axie Infinity</string>
+			<key>NameTagContractDetails</key>
+			<string>Axie Infinity: AXS Token Swap</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x01bf1d7c5e192313c26414e134584275f46271cf</string>
+			<key>NameTag</key>
+			<string>Axie Infinity</string>
+			<key>NameTagContractDetails</key>
+			<string>Axie Infinity: Deployer</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xf5997bea71e1b66434eff247b3c584508df69895</string>
+			<key>NameTag</key>
+			<string>Axie Infinity</string>
+			<key>NameTagContractDetails</key>
+			<string>Axie Infinity: Deployer 2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x93a0d0b23c3d045f395e26850c1b64df7f3ab783</string>
+			<key>NameTag</key>
+			<string>Axie Infinity</string>
+			<key>NameTagContractDetails</key>
+			<string>Axie Infinity: LUNA-AXS Token Swap</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xab4e5b618fb8f1f3503689dfbdf801478ff6c252</string>
+			<key>NameTag</key>
+			<string>Axie Infinity</string>
+			<key>NameTagContractDetails</key>
+			<string>Axie Infinity: Multisig</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xf5d669627376ebd411e34b98f19c868c8aba5ada</string>
+			<key>NameTag</key>
+			<string>Axie Infinity</string>
+			<key>NameTagContractDetails</key>
+			<string>Axie Infinity: Old AXS Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x1a2a1c938ce3ec39b6d47113c7955baa9dd454f2</string>
+			<key>NameTag</key>
+			<string>Axie Infinity</string>
+			<key>NameTagContractDetails</key>
+			<string>Axie Infinity: Ronin Bridge</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xcc8fa225d80b9c7d42f96e9570156c65d6caaa25</string>
+			<key>NameTag</key>
+			<string>Axie Infinity</string>
+			<key>NameTagContractDetails</key>
+			<string>Axie Infinity: SLP Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xea1aa8035b766562e2bea7e63a4a1949f2bea31b</string>
+			<key>NameTag</key>
+			<string>Axie Infinity</string>
+			<key>NameTagContractDetails</key>
+			<string>Axie Infinity: SLP Token Swap</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x65919fb2fea8a131129badec56e126ecc1bea979</string>
+			<key>NameTag</key>
+			<string>Axie Infinity</string>
+			<key>NameTagContractDetails</key>
+			<string>Axie Infinity: Token Vesting</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xec0a0915a7c3443862b678b0d4721c7ab133fdcf</string>
+			<key>NameTag</key>
+			<string>Axie Infinity</string>
+			<key>NameTagContractDetails</key>
+			<string>Wrapped Origin Axie : WOA Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x2e088a0a19dda628b4304301d1ea70b114e4accd</string>
+			<key>NameTag</key>
+			<string>Convex Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Convex Finance: Airdrop</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xa1bc2cf69d474b39b91665e24e7f2606ed142991</string>
+			<key>NameTag</key>
+			<string>Convex Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Convex Finance: Airdrop Factory</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x25e12482a25cf36ec70fda2a09c1ed077fc21616</string>
+			<key>NameTag</key>
+			<string>Convex Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Convex Finance: Arbitrator Vault</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xf403c135812408bfbe8713b5a23a04b3d48aae31</string>
+			<key>NameTag</key>
+			<string>Convex Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Convex Finance: Booster</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x92cf9e5e4d1dfbf7da0d2bb3e884a68416a65070</string>
+			<key>NameTag</key>
+			<string>Convex Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Convex Finance: Claim Zap</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x5f465e9fcffc217c5849906216581a657cd60605</string>
+			<key>NameTag</key>
+			<string>Convex Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Convex Finance: Convex Master Chef</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x8014595f2ab54cd7c604b00e9fb932176fdc86ae</string>
+			<key>NameTag</key>
+			<string>Convex Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Convex Finance: CRV Depositor</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xd18140b4b819b895a3dba5442f959fa44994af50</string>
+			<key>NameTag</key>
+			<string>Convex Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Convex Finance: CVX Locker (vICVX)</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xcf50b810e57ac33b91dcf525c6ddd9881b139332</string>
+			<key>NameTag</key>
+			<string>Convex Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Convex Finance: CVX Rewards</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xe096ccec4a1d36f191189fe61e803d8b2044dfc3</string>
+			<key>NameTag</key>
+			<string>Convex Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Convex Finance: CVX Staking Proxy</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x3fe65692bfcd0e6cf84cb1e7d24108e434a7587e</string>
+			<key>NameTag</key>
+			<string>Convex Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Convex Finance: cvxCRV Rewards</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x947b7742c403f20e5faccdac5e092c943e7d0277</string>
+			<key>NameTag</key>
+			<string>Convex Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Convex Finance: Deployer</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xa3c5a1e09150b75ff251c1a7815a07182c3de2fb</string>
+			<key>NameTag</key>
+			<string>Convex Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Convex Finance: Multisig</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xae5f315a5b5dd4dbacd38862562a51490e500183</string>
+			<key>NameTag</key>
+			<string>Convex Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Convex Finance: Pool Manager</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xedccb35798fae4925718a43cc608ae136208aa8d</string>
+			<key>NameTag</key>
+			<string>Convex Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Convex Finance: Reward Factory</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x877288c4e6eba4f635ba7428706447353b47de75</string>
+			<key>NameTag</key>
+			<string>Convex Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Convex Finance: Stash Factory</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x3c995e43e6ddd551e226f4c5544c77bfed147ab9</string>
+			<key>NameTag</key>
+			<string>Convex Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Convex Finance: Token Factory</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x1389388d01708118b497f59521f6943be2541bb7</string>
+			<key>NameTag</key>
+			<string>Convex Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Convex Finance: Treasury Vault</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xe98984ad858075813ada4261af47e68a64e28fcc</string>
+			<key>NameTag</key>
+			<string>Convex Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Convex Finance: Vested Escrow</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xdecc7d761496d30f30b92bdf764fb8803c79360d</string>
+			<key>NameTag</key>
+			<string>Convex Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Convex Finance: vlCVX Extra Rewards</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x989aeb4d175e16225e39e87d0d97a3360524ad80</string>
+			<key>NameTag</key>
+			<string>Convex Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Convex Finance: Voter Proxy</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x9a6ebe7e2a7722f8200d0ffb63a1f6406a0d7dce</string>
+			<key>NameTag</key>
+			<string>Decentraland</string>
+			<key>NameTagContractDetails</key>
+			<string>Decentraland: DAO Agent</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x959e104e1a4db6317fa58f8295f586e1a978c297</string>
+			<key>NameTag</key>
+			<string>Decentraland</string>
+			<key>NameTagContractDetails</key>
+			<string>Decentraland: Estate</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d</string>
+			<key>NameTag</key>
+			<string>Decentraland</string>
+			<key>NameTagContractDetails</key>
+			<string>Decentraland: LAND</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x0f5d2fb29fb7d3cfee444a200298f468908cc942</string>
+			<key>NameTag</key>
+			<string>Decentraland</string>
+			<key>NameTagContractDetails</key>
+			<string>Decentraland: MANA Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x55ed2910cc807e4596024266ebdf7b1753405a11</string>
+			<key>NameTag</key>
+			<string>Decentraland</string>
+			<key>NameTagContractDetails</key>
+			<string>Decentraland: MultiSig 1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xe5d0c3fea1e5f01ca4098e9580b93b3b5d0ea768</string>
+			<key>NameTag</key>
+			<string>Decentraland</string>
+			<key>NameTagContractDetails</key>
+			<string>Decentraland: MultiSig 2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x5bd48309926121370da1cbbd5b958926e8bdb328</string>
+			<key>NameTag</key>
+			<string>Decentraland</string>
+			<key>NameTagContractDetails</key>
+			<string>Decentraland: MultiSig 3</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xebde1cfefbdf9eae2eea69a145ddb82cb71e7651</string>
+			<key>NameTag</key>
+			<string>Decentraland</string>
+			<key>NameTagContractDetails</key>
+			<string>Decentraland: Registry</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xa66d83716c7cfe425b44d0f7ef92de263468fb3d</string>
+			<key>NameTag</key>
+			<string>Decentraland</string>
+			<key>NameTagContractDetails</key>
+			<string>Decentraland: Token Sale</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xfe95e04a628087fcdd5f278e61f148b47471af4a</string>
+			<key>NameTag</key>
+			<string>Decentraland</string>
+			<key>NameTagContractDetails</key>
+			<string>Decentraland: Wallet</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x3c337fa1bf8725f59f73db6db719c792c5e8ae74</string>
+			<key>NameTag</key>
+			<string>Decentraland</string>
+			<key>NameTagContractDetails</key>
+			<string>Decentraland: Whitelist Sale</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xfd09cf7cfffa9932e33668311c4777cb9db3c9be</string>
+			<key>NameTag</key>
+			<string>Decentraland</string>
+			<key>NameTagContractDetails</key>
+			<string>Decentraland: wMANA Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x89714d3ac9149426219a3568543200d1964101c4</string>
+			<key>NameTag</key>
+			<string>Fei Protocol</string>
+			<key>NameTagContractDetails</key>
+			<string>Fei protocol: Bonding Curve Oracle</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x8d5ed43dca8c2f7dfb20cf7b53cc7e593635d7b9</string>
+			<key>NameTag</key>
+			<string>Fei Protocol</string>
+			<key>NameTagContractDetails</key>
+			<string>Fei Protocol: Deployer</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xe1578b4a32eaefcd563a9e6d0dc02a4213f673b7</string>
+			<key>NameTag</key>
+			<string>Fei Protocol</string>
+			<key>NameTagContractDetails</key>
+			<string>Fei Protocol: Eth Bonding Curve</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x7a165f8518a9ec7d5da15f4b77b1d7128b5d9188</string>
+			<key>NameTag</key>
+			<string>Fei Protocol</string>
+			<key>NameTagContractDetails</key>
+			<string>Fei Protocol: Eth Uniswap PCV Controller</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x9b0c6299d08fe823f2c0598d97a1141507e4ad86</string>
+			<key>NameTag</key>
+			<string>Fei Protocol</string>
+			<key>NameTagContractDetails</key>
+			<string>Fei Protocol: Eth Uniswap PCV Deposit</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xe087f94c3081e1832dc7a22b48c6f2b5faae579b</string>
+			<key>NameTag</key>
+			<string>Fei Protocol</string>
+			<key>NameTagContractDetails</key>
+			<string>Fei Protocol: Fei DAO</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x639572471f2f318464dc01066a56867130e45e25</string>
+			<key>NameTag</key>
+			<string>Fei Protocol</string>
+			<key>NameTagContractDetails</key>
+			<string>Fei Protocol: Fei DAO Timelock</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xef1a94af192a88859eaf3f3d8c1b9705542174c5</string>
+			<key>NameTag</key>
+			<string>Fei Protocol</string>
+			<key>NameTagContractDetails</key>
+			<string>Fei Protocol: Fei Rewards Distributor</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x9271d303b57c204636c38df0ed339b18bf98f909</string>
+			<key>NameTag</key>
+			<string>Fei Protocol</string>
+			<key>NameTagContractDetails</key>
+			<string>Fei Protocol: Fei Router</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x956f47f50a910163d8bf957cf5846d573e7f87ca</string>
+			<key>NameTag</key>
+			<string>Fei Protocol</string>
+			<key>NameTagContractDetails</key>
+			<string>Fei Protocol: FEI Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xbffb152b9392e38cddc275d818a3db7fe364596b</string>
+			<key>NameTag</key>
+			<string>Fei Protocol</string>
+			<key>NameTagContractDetails</key>
+			<string>Fei Protocol: Genesis Group</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x18305daae09ea2f4d51faa33318be5978d251abd</string>
+			<key>NameTag</key>
+			<string>Fei Protocol</string>
+			<key>NameTagContractDetails</key>
+			<string>Fei Protocol: Staking</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xc7283b66eb1eb5fb86327f08e1b5816b0720212b</string>
+			<key>NameTag</key>
+			<string>Fei Protocol</string>
+			<key>NameTagContractDetails</key>
+			<string>Fei Protocol: Tribe</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xfe5b6c2a87a976dce20130c423c679f4d6044cd7</string>
+			<key>NameTag</key>
+			<string>Fei Protocol</string>
+			<key>NameTagContractDetails</key>
+			<string>Fei Protocol: Uniswap Incentive</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x087f35bd241e41fc28e43f0e8c58d283dd55bd65</string>
+			<key>NameTag</key>
+			<string>Fei Protocol</string>
+			<key>NameTagContractDetails</key>
+			<string>Fei Protocol: Uniswap Oracle</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x94b0a3d511b6ecdb17ebf877278ab030acb0a878</string>
+			<key>NameTag</key>
+			<string>Fei Protocol</string>
+			<key>NameTagContractDetails</key>
+			<string>Uniswap V2: FEI 3</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x9928e4046d7c6513326ccea028cd3e7a91c7590a</string>
+			<key>NameTag</key>
+			<string>Fei Protocol</string>
+			<key>NameTagContractDetails</key>
+			<string>Uniswap V2: FEI-TRIBE</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x6b175474e89094c44da98b954eedeac495271d0f</string>
+			<key>NameTag</key>
+			<string>Maker</string>
+			<key>NameTagContractDetails</key>
+			<string>Dai Stablecoin</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x39755357759ce0d7f32dc8dc45414cca409ae24e</string>
+			<key>NameTag</key>
+			<string>Maker</string>
+			<key>NameTagContractDetails</key>
+			<string>Eth2Dai: Old Contract</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359</string>
+			<key>NameTag</key>
+			<string>Maker</string>
+			<key>NameTagContractDetails</key>
+			<string>Sai Stablecoin</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x794e6e91555438afc3ccf1c5076a74f42133d08d</string>
+			<key>NameTag</key>
+			<string>Maker</string>
+			<key>NameTagContractDetails</key>
+			<string>OasisDEX</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2</string>
+			<key>NameTag</key>
+			<string>Maker</string>
+			<key>NameTagContractDetails</key>
+			<string>Maker Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x14fbca95be7e99c15cc2996c6c9d841e54b79425</string>
+			<key>NameTag</key>
+			<string>Maker</string>
+			<key>NameTagContractDetails</key>
+			<string>OasisDex: Old Contract 1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x526af336d614ade5cc252a407062b8861af998f5</string>
+			<key>NameTag</key>
+			<string>Maker</string>
+			<key>NameTagContractDetails</key>
+			<string>Maker: Sai Proxy 2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xb7ac09c2c0217b07d7c103029b4918a2c401eecb</string>
+			<key>NameTag</key>
+			<string>Maker</string>
+			<key>NameTagContractDetails</key>
+			<string>OasisDex: Old Contract 2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x448a5065aebb8e423f0896e6c5d525c040f59af3</string>
+			<key>NameTag</key>
+			<string>Maker</string>
+			<key>NameTagContractDetails</key>
+			<string>Maker: Contract 1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x4678f0a6958e4d2bc4f1baf7bc52e8f3564f3fe4</string>
+			<key>NameTag</key>
+			<string>Maker</string>
+			<key>NameTagContractDetails</key>
+			<string>Maker: Proxy Registry</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xc73e0383f3aff3215e6f04b0331d58cecf0ab849</string>
+			<key>NameTag</key>
+			<string>Maker</string>
+			<key>NameTagContractDetails</key>
+			<string>Maker: Migration</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xd8a04f5412223f513dc55f839574430f5ec15531</string>
+			<key>NameTag</key>
+			<string>Maker</string>
+			<key>NameTagContractDetails</key>
+			<string>Maker: MCD Flip ETH A</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xc66ea802717bfb9833400264dd12c2bceaa34a6d</string>
+			<key>NameTag</key>
+			<string>Maker</string>
+			<key>NameTagContractDetails</key>
+			<string>Maker: Old Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x00daa9a2d88bed5a29a6ca93e0b7d860cd1d403f</string>
+			<key>NameTag</key>
+			<string>Maker</string>
+			<key>NameTagContractDetails</key>
+			<string>Maker: Deployer 3</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x729d19f657bd0614b4985cf1d82531c67569197b</string>
+			<key>NameTag</key>
+			<string>Maker</string>
+			<key>NameTagContractDetails</key>
+			<string>Maker: Medianizer 2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xf53ad2c6851052a81b42133467480961b2321c09</string>
+			<key>NameTag</key>
+			<string>Maker</string>
+			<key>NameTagContractDetails</key>
+			<string>Pooled Ether</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x793ebbe21607e4f04788f89c7a9b97320773ec59</string>
+			<key>NameTag</key>
+			<string>Maker</string>
+			<key>NameTagContractDetails</key>
+			<string>Maker: Oasis Proxy</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x9759a6ac90977b93b58547b4a71c78317f391a28</string>
+			<key>NameTag</key>
+			<string>Maker</string>
+			<key>NameTagContractDetails</key>
+			<string>Maker: MCD Join DAI</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x78f2c2af65126834c51822f56be0d7469d7a523e</string>
+			<key>NameTag</key>
+			<string>Maker</string>
+			<key>NameTagContractDetails</key>
+			<string>Maker: MCD Cat</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xbda109309f9fafa6dd6a9cb9f1df4085b27ee8ef</string>
+			<key>NameTag</key>
+			<string>Maker</string>
+			<key>NameTagContractDetails</key>
+			<string>Maker: Contract 2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xa950524441892a31ebddf91d3ceefa04bf454466</string>
+			<key>NameTag</key>
+			<string>Maker</string>
+			<key>NameTagContractDetails</key>
+			<string>Maker: MCD Vow</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x19c0976f590d67707e62397c87829d896dc0f1f1</string>
+			<key>NameTag</key>
+			<string>Maker</string>
+			<key>NameTagContractDetails</key>
+			<string>Maker: MCD Jug</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xaa745404d55f88c108a28c86abe7b5a1e7817c07</string>
+			<key>NameTag</key>
+			<string>Maker</string>
+			<key>NameTagContractDetails</key>
+			<string>Maker: MCD Flip BAT A</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xddb108893104de4e1c6d0e47c42237db4e617acc</string>
+			<key>NameTag</key>
+			<string>Maker</string>
+			<key>NameTagContractDetails</key>
+			<string>Maker: Deployer 4</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x35d1b3f3d7966a1dfe207aa4514c12a259a0492b</string>
+			<key>NameTag</key>
+			<string>Maker</string>
+			<key>NameTagContractDetails</key>
+			<string>Maker: MCD Vat</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x0a3f6849f78076aefadf113f5bed87720274ddc0</string>
+			<key>NameTag</key>
+			<string>Maker</string>
+			<key>NameTagContractDetails</key>
+			<string>Maker: Governance Contract</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x7be8076f4ea4a4ad08075c2508e481d6c946d12b</string>
+			<key>NameTag</key>
+			<string>OpenSea</string>
+			<key>NameTagContractDetails</key>
+			<string>OpenSea</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x9c4e9cce4780062942a7fe34fa2fa7316c872956</string>
+			<key>NameTag</key>
+			<string>OpenSea</string>
+			<key>NameTagContractDetails</key>
+			<string>OpenSea: ENS Resolver</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x495f947276749ce646f68ac8c248420045cb7b5e</string>
+			<key>NameTag</key>
+			<string>OpenSea</string>
+			<key>NameTagContractDetails</key>
+			<string>OpenSea: OPENSTORE Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xa5409ec958c83c3f309868babaca7c86dcb077c1</string>
+			<key>NameTag</key>
+			<string>OpenSea</string>
+			<key>NameTagContractDetails</key>
+			<string>OpenSea: Registry</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x5b3256965e7c3cf26e11fcaf296dfc8807c01073</string>
+			<key>NameTag</key>
+			<string>OpenSea</string>
+			<key>NameTagContractDetails</key>
+			<string>OpenSea: Wallet</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x03ab458634910aad20ef5f1c8ee96f1d6ac54919</string>
+			<key>NameTag</key>
+			<string>Reflexer Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Reflexer: RAI Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x4ed9c0dca0479bc64d8f4eb3007126d5791f7851</string>
+			<key>NameTag</key>
+			<string>Reflexer Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Reflexer: Oracle Relayer</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x6243d8cea23066d098a15582d81a598b4e8391f4</string>
+			<key>NameTag</key>
+			<string>Reflexer Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Reflexer: FLX Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xe6f5377de93a361cd5531bdfbdf0f4b522e16b2b</string>
+			<key>NameTag</key>
+			<string>Reflexer Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Reflexer Finance: Feed Security Module ETH</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x8ae720a71622e824f576b4a8c03031066548a3b1</string>
+			<key>NameTag</key>
+			<string>Reflexer Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Uniswap V2: RAI 4</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x6a4b575ba61d2fb86ad0ff5e5be286960580e71a</string>
+			<key>NameTag</key>
+			<string>Reflexer Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Reflexer: Chain Link Price Feed Medianizer</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x12a5e1c81b10b264a575930aeae80681ddf595fe</string>
+			<key>NameTag</key>
+			<string>Reflexer Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Reflexer: Medianizer</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x005fab4c9d1ef0f3e41cd27b26cf05680c3bf947</string>
+			<key>NameTag</key>
+			<string>Reflexer Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Reflexer Finance: GEB RRFM Setter</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x7fafc11677649db6abfec127b4b776d585520ae1</string>
+			<key>NameTag</key>
+			<string>Reflexer Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Reflexer: Deployer 2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x427a277ea53e25143b3b509c684aa4d0eb8ba01b</string>
+			<key>NameTag</key>
+			<string>Reflexer Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Reflexer Finance: GEB Multisig</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xc2da0417f2a78ad100fe092b58fb10314bd8f157</string>
+			<key>NameTag</key>
+			<string>Reflexer Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Reflexer: Uniswap Single Keeper Flash Proxy ETH A</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xcdb05aeda142a1b0d6044c09c64e4226c1a281eb</string>
+			<key>NameTag</key>
+			<string>Reflexer Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Reflexer: Tax Collector</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xcee6aa1ab47d0fb0f24f51a3072ec16e20f90fce</string>
+			<key>NameTag</key>
+			<string>Reflexer Finance</string>
+			<key>NameTagContractDetails</key>
+			<string>Reflexer: Accounting Engine</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x1c395af6ee8f262d1befb1dc3b0045fd6cb2d5da</string>
+			<key>NameTag</key>
+			<string>Sorare</string>
+			<key>NameTagContractDetails</key>
+			<string>Sorare: Bulk Transfer</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x7f243bc585dc218d6b33949c02d01ac3b007aaa5</string>
+			<key>NameTag</key>
+			<string>Sorare</string>
+			<key>NameTagContractDetails</key>
+			<string>Sorare: Deployer</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xf5c9f957705bea56a7e806943f98f7777b995826</string>
+			<key>NameTag</key>
+			<string>Sorare</string>
+			<key>NameTagContractDetails</key>
+			<string>Sorare: L2 Bridge</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x629a673a8242c2ac4b7b8c5d8735fbeac21a6205</string>
+			<key>NameTag</key>
+			<string>Sorare</string>
+			<key>NameTagContractDetails</key>
+			<string>Sorare: SOR Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xc011a73ee8576fb46f5e1c5751ca3b9fe0af2a6f</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Proxy SNX Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xac1ed4fabbd5204e02950d68b6fc8c446ac95362</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Oracle</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xb440dd674e1243644791a4adfe3a2abb0a92d309</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Proxy Fee Pool</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x57ab1ec28d129707052df4df418d58a2d46d5f51</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Proxy sUSD Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xdcb6a51ea3ca5d3fd898fd6564757c7aaec3ca92</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: LP Rewards (Curve sUSD)</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xda4ef8520b1a57d7d63f1e249606d1a459698876</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Reward Escrow V2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x13c1542a468319688b89e323fe9a3be3a90ebb27</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: sBTC Curvepool Rewards</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x5e74c9036fb86bd7ecdcb084a0673efc32ea31cb</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Proxy sETH Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x48d7f315fedcad332f68aafa017c7c158bc54760</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: LP Rewards (Uniswap sETH)</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xfe18be6b3bd88a2d2a7f928d00292e7a9963cfc6</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Proxy sBTC Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xeb3107117fead7de89cd14d463d340a2e6917769</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: protocolDAO</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Reward Escrow</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xa9859874e1743a32409f75bb11549892138bba1e</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Proxy iETH Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xc746bc860781dc90bbfcd381d6a058dc16357f8d</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: LP Rewards (iETH)</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x0bfdc04b38251394542586969e2356d0d731f7de</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Exchanger</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xd71ecff9342a5ced620049e616c5035f1db98620</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Proxy sEUR Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x1f2c3a1046c32729862fcb038369696e3273a516</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Collateral Short</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x15fd6e554874b9e70f832ed37f231ac5e142362f</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Delegate Approvals</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x971e78e0c92392a4e39099835cf7e6ab535b2227</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Token Sale Escrow</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x261efcdd24cea98652b9700800a13dfbca4103ff</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Proxy sXAU Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x1c86b3cdf2a60ae3a574f7f71d44e2c50bddb87e</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: System Status</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xd6014ea05bde904448b743833ddf07c3c7837481</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Proxy iBTC Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x5c8344bcdc38f1ab5eb5c1d4a35ddeea522b5dfa</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Collateral Eth</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x167009dcda2e49930a71712d956f02cc980dcc1b</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Staking Rewards iBTC</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xe1f64079ada6ef07b03982ca34f1dd7152aa3b86</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Depot</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x49be88f0fcc3a8393a59d3688480d7d253c37d2a</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: sDAO</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xfed77055b40d63dcf17ab250ffd6948fbff57b82</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: EtherCollateral sUSD Trial</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xe92b4c7428152052b0930c81f4c687a5f1a12292</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Debt Cache 2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xfbaedde70732540ce2b11a8ac58eb2dc0d69de10</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Staking Rewards (Balancer SNX)</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x97767d7d04fd0db0a1a2478dcd4ba85290556b48</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: SNX Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xad95c918af576c82df740878c3e983cbd175dab6</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Liquidations</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x3f27c540adae3a9e8c875c61e3b970b559d7f65d</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Staking Rewards iETH</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xbbc455cb4f1b9e4bfc4b73970d360c8f032efee6</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Proxy sLINK Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x12c815b0c404d66dd0491f4ec62839904cec25e7</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Debt Cache</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x5ef0de4bd373e435341cd82311dfb13d5e8fdef5</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Underlying SNX Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xe1afe1fd76fd88f78cbf599ea1846231b8ba3b6b</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Proxy sDEFI Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xd69b189020ef614796578afe4d10378c5e7e1138</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Exchange Rates</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x99f4176ee457afedffcb1839c7ab7a030a5e4a92</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Treasury Council</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xf48e200eaf9906362bb1442fca31e0835773b8b4</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Proxy sAUD Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x6a22e5e94388464181578aa7a6b869e00fe27846</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Proxy sXAG Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x7133aff303539b0a4f60ab9bd9656598bf49e272</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Ether Collateral</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xa6b5e74466edc95d0b6e65c5cbfca0a676d893a4</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: ArbRewarder</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x617aecb6137b5108d1e7d4918e3725c8cebdb848</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Proxy sBNB Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xaa03ab31b55dceeef845c8d17890cc61cd98ed04</string>
+			<key>NameTag</key>
+			<string>Synthetix</string>
+			<key>NameTagContractDetails</key>
+			<string>Synthetix: Collateral Erc20</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x1f9840a85d5af5bf1d1762f925bdaddc4201f984</string>
+			<key>NameTag</key>
+			<string>Uniswap</string>
+			<key>NameTagContractDetails</key>
+			<string>Uniswap Protocol: UNI token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x7a250d5630b4cf539739df2c5dacb4c659f2488d</string>
+			<key>NameTag</key>
+			<string>Uniswap</string>
+			<key>NameTagContractDetails</key>
+			<string>Uniswap V2: Router 2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x090d4613473dee047c3f2706764f49e0821d256e</string>
+			<key>NameTag</key>
+			<string>Uniswap</string>
+			<key>NameTagContractDetails</key>
+			<string>Uniswap: Token Distributor</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xd533a949740bb3306d119cc777fa900ba034cd52</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: CRV Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xd061d61a4d941c39e5453435b6345dc261c2fce0</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: Token Minter</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xa5407eae9ba41422680e2e00537571bcc53efbfd</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: sUSD v2 Swap</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xdf5e0e81dff6faf3a7e52ba697820c5e32d806a8</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: yCrv Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xbbc81d23ea2c3ec7e56d39296f0cbb648873a5d3</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: y Deposit</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xc25a3a3b969415c80451098fa907ec722572917f</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: sCrv Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x7fc77b5c7614e1533320ea6ddc2eb61fa00a9714</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: sBTC Swap</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xa90996896660decc6e997655e065b23788857849</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: sCrv Gauge</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xfa712ee4788c042e2b7bb55e6cb8ec569c4530c1</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: yCrv Gauge</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x93054188d876f558f4a66b2ef1d97d16edf0895b</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: REN Swap</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x45f783cce6b7ff23b2ab2d70e416cdb7d6055f51</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: y Swap</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x075b1bb99792c9e1041ba13afef80c91a1e70fb3</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: sbtcCrv Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xfcba3e75865d2d561be8d220616520c171f12851</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: sUSD v2 Deposit</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xeb21209ae4c2c9ff2a86aca31e123764a3b6bc06</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: Compound Deposit</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x845838df265dcd2c412a1dc9e959c7d08537f8a2</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: cCrv Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x2f50d538606fa9edd2b11e2446beb18c9d5846bb</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: Gauge Controller</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x7ca5b0a2910b33e9759dc7ddb0413949071d7575</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: cCrv Gauge</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x705350c4bcd35c9441419ddd5d2f097d7a55410f</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: sbtcCrv Gauge</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x73ab2bd10ad10f7174a1ad5afae3ce3d991c5047</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: Ren Adapter 3</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x49849c98ae39fff122806c06791fa73784fb3675</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: renCrv Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xb1f2cdec61db658f091671f5f199635aef202cac</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: renCrv Gauge</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x3b3ac5386837dc563660fb6a0937dfaa5924333b</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: bCrv Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xb6c057591e073249f2d9d88ba59a46cfc9b59edb</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: BUSD Deposit</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x79a8c46dea5ada233abaffd40f3a0a2b1e5a4f27</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: BUSD Swap</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x69fb7c45726cfe2badee8317005d3f94be838840</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: bCrv Gauge</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xa2b47e3d5c44877cca798226b7b8118f9bfb7a56</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: Compound Swap</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xaeade605d01fe9a8e9c4b3aa0130a90d62167029</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: sBTC Adapter 3</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x9fe350dfa5f66bc086243f21a8f0932514316627</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: Ren Adapter</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x52ea46506b9cc5ef470c5bf89f17dc28bb35d85c</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: USDT Swap</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xa50ccc70b6a011cffddf45057e39679379187287</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: PAX Deposit</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x64e3c23bfc40722d3b649844055f1d51c1ac041d</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: pCrv Gauge</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xd905e2eaebe188fc92179b6350807d8bd91db0d8</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: pCrv Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x06364f10b501e868329afbc005b3492902d6c763</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: PAX Swap</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xac795d2c97e60df6a99ff1c814727302fd747a80</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: USDT Deposit</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x9fc689ccada600b6df723d9e47d84d76664a1f23</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: tCrv Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x02b3f51ac9202aa19be63d61a8c681579d6e3a51</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: sBTC Adapter 2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x104c1e66c67c385e6095ffcc6227d75c761dc019</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: sBTC Adapter</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x26d9980571e77ffb0349f9c801dd7ca9951fb656</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: Ren Adapter 2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x7002b727ef8f5571cb5f9d70d13dbeeb4dfae9d1</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: Registry</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xc1db00a8e5ef7bfa476395cdbcc98235477cde4e</string>
+			<key>NameTag</key>
+			<string>Curve.fi</string>
+			<key>NameTagContractDetails</key>
+			<string>Curve.fi: Calc</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x1e0447b19bb6ecfdae1e4ae1694b0c3659614e4e</string>
+			<key>NameTag</key>
+			<string>dYdX</string>
+			<key>NameTagContractDetails</key>
+			<string>dYdX: Solo Margin</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xd54f502e184b6b739d7d27a6410a67dc462d69c8</string>
+			<key>NameTag</key>
+			<string>dYdX</string>
+			<key>NameTagContractDetails</key>
+			<string>dYdX: L2 Perpetual Smart Contract</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xa8b39829ce2246f89b31c013b8cde15506fb9a76</string>
+			<key>NameTag</key>
+			<string>dYdX</string>
+			<key>NameTagContractDetails</key>
+			<string>dYdX: Payable Proxy For Solo Margin</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x92d6c1e31e14520e676a687f0a93788b716beff5</string>
+			<key>NameTag</key>
+			<string>dYdX</string>
+			<key>NameTagContractDetails</key>
+			<string>dYdX: DYDX Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x8129b737912e17212c8693b781928f5d0303390a</string>
+			<key>NameTag</key>
+			<string>dYdX</string>
+			<key>NameTagContractDetails</key>
+			<string>dYdX: L2 On-Chain Operator</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x0fd829c3365a225fb9226e75c97c3a114bd3199e</string>
+			<key>NameTag</key>
+			<string>dYdX</string>
+			<key>NameTagContractDetails</key>
+			<string>dYdX: Claims Proxy</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xf6b83ccadeee478fc372af6ca7069b14fbc5e1b1</string>
+			<key>NameTag</key>
+			<string>dYdX</string>
+			<key>NameTagContractDetails</key>
+			<string>dydx: FRI Statement</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x09403fd14510f8196f7879ef514827cd76960b5d</string>
+			<key>NameTag</key>
+			<string>dYdX</string>
+			<key>NameTagContractDetails</key>
+			<string>dYdX: Perpetual Proxy</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xefbcce4659db72ec6897f46783303708cf9acef8</string>
+			<key>NameTag</key>
+			<string>dYdX</string>
+			<key>NameTagContractDetails</key>
+			<string>dYdX: Memory Page Fact Registry</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x0d62bac5c346c78dc1b27107cabc5f4de057a830</string>
+			<key>NameTag</key>
+			<string>dYdX</string>
+			<key>NameTagContractDetails</key>
+			<string>dydx: Merkle Statement</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x36bf21c8e661b21e6166e4385f574941fdc6caff</string>
+			<key>NameTag</key>
+			<string>dYdX</string>
+			<key>NameTagContractDetails</key>
+			<string>dYdX: Margin</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x059550a1ca3c46a2adb803e9e3ea4585a34f004a</string>
+			<key>NameTag</key>
+			<string>dYdX</string>
+			<key>NameTagContractDetails</key>
+			<string>Expo</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x787f552bdc17332c98aa360748884513e3cb401a</string>
+			<key>NameTag</key>
+			<string>dYdX</string>
+			<key>NameTagContractDetails</key>
+			<string>dYdX: Dai Price Oracle</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x57b98aa8a8b69c6295195d153fe6edd0b0d176ac</string>
+			<key>NameTag</key>
+			<string>dYdX</string>
+			<key>NameTagContractDetails</key>
+			<string>dYdX: Auction Proxy</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x60c7c2a24b5e86c38639fd1586917a8fef66a56d</string>
+			<key>NameTag</key>
+			<string>ENS</string>
+			<key>NameTagContractDetails</key>
+			<string>ENS: Registrar Migration</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85</string>
+			<key>NameTag</key>
+			<string>ENS</string>
+			<key>NameTagContractDetails</key>
+			<string>ENS: Base Registrar Implementation</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xff252725f6122a92551a5fa9a6b6bf10eb0be035</string>
+			<key>NameTag</key>
+			<string>ENS</string>
+			<key>NameTagContractDetails</key>
+			<string>ENS: Bulk Renewal</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xa2c122be93b0074270ebee7f6b7292c7deb45047</string>
+			<key>NameTag</key>
+			<string>ENS</string>
+			<key>NameTagContractDetails</key>
+			<string>ENS: Default Reverse Resolver</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x4fe4e666be5752f1fdd210f4ab5de2cc26e3e0e8</string>
+			<key>NameTag</key>
+			<string>ENS</string>
+			<key>NameTagContractDetails</key>
+			<string>ENS: Deployer</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xa2f428617a523837d4adc81c67a296d42fd95e86</string>
+			<key>NameTag</key>
+			<string>ENS</string>
+			<key>NameTagContractDetails</key>
+			<string>ENS: DNS Registrar</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x314159265dd8dbb310642f98f50c066173c1259b</string>
+			<key>NameTag</key>
+			<string>ENS</string>
+			<key>NameTagContractDetails</key>
+			<string>ENS: Eth Name Service</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x283af0b28c62c092c9727f1ee09c02ca627eb7f5</string>
+			<key>NameTag</key>
+			<string>ENS</string>
+			<key>NameTagContractDetails</key>
+			<string>ENS: ETH Registrar Controller</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xe65d8aaf34cb91087d1598e0a15b582f57f217d9</string>
+			<key>NameTag</key>
+			<string>ENS</string>
+			<key>NameTagContractDetails</key>
+			<string>ENS: Migration Subdomain Registrar</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x911143d946ba5d467bfc476491fdb235fef4d667</string>
+			<key>NameTag</key>
+			<string>ENS</string>
+			<key>NameTagContractDetails</key>
+			<string>ENS: MultiSig</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xdaaf96c344f63131acadd0ea35170e7892d3dfba</string>
+			<key>NameTag</key>
+			<string>ENS</string>
+			<key>NameTagContractDetails</key>
+			<string>ENS: Public Resolver 1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x4976fb03c32e5b8cfe2b6ccb31c09ba78ebaba41</string>
+			<key>NameTag</key>
+			<string>ENS</string>
+			<key>NameTagContractDetails</key>
+			<string>ENS: Public Resolver 2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x00000000000c2e074ec69a0dfb2997ba6c7d2e1e</string>
+			<key>NameTag</key>
+			<string>ENS</string>
+			<key>NameTagContractDetails</key>
+			<string>ENS: Registry with Fallback</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x084b1c3c81545d370f3634392de611caabff8148</string>
+			<key>NameTag</key>
+			<string>ENS</string>
+			<key>NameTagContractDetails</key>
+			<string>ENS: Reverse Registrar</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xab528d626ec275e3fad363ff1393a41f581c5897</string>
+			<key>NameTag</key>
+			<string>ENS</string>
+			<key>NameTagContractDetails</key>
+			<string>ENS: Root</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xf7c83bd0c50e7a72b55a39fe0dabf5e3a330d749</string>
+			<key>NameTag</key>
+			<string>ENS</string>
+			<key>NameTagContractDetails</key>
+			<string>ENS: Short Name Claims</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xb9d374d0fe3d8341155663fae31b7beae0ae233a</string>
+			<key>NameTag</key>
+			<string>ENS</string>
+			<key>NameTagContractDetails</key>
+			<string>ENS: Stable Price Oracle</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xc32659651d137a18b79925449722855aa327231d</string>
+			<key>NameTag</key>
+			<string>ENS</string>
+			<key>NameTagContractDetails</key>
+			<string>ENS: Subdomain Registrar</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x0904dac3347ea47d208f3fd67402d039a3b99859</string>
+			<key>NameTag</key>
+			<string>ENS</string>
+			<key>NameTagContractDetails</key>
+			<string>ENS: Wallet</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xb6e040c9ecaae172a89bd561c5f73e1c48d28cd9</string>
+			<key>NameTag</key>
+			<string>ENS</string>
+			<key>NameTagContractDetails</key>
+			<string>ENS: Wallet 2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x4d953115678b15ce0b0396bcf95db68003f86fb5</string>
+			<key>NameTag</key>
+			<string>Gnosis Safe</string>
+			<key>NameTagContractDetails</key>
+			<string>Gnosis Safe: Relay service - Transactions</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x76e2cfc1f5fa8f6a5b3fc4c8f4788f0116861f9b</string>
+			<key>NameTag</key>
+			<string>Gnosis Safe</string>
+			<key>NameTagContractDetails</key>
+			<string>Gnosis Safe: Proxy Factory 1.1.1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xa6b71e26c5e0845f74c812102ca7114b6a896ab2</string>
+			<key>NameTag</key>
+			<string>Gnosis Safe</string>
+			<key>NameTagContractDetails</key>
+			<string>Gnosis Safe: Proxy Factory 1.3.0</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x07f455f30e862e13e3e3d960762cb11c4f744d52</string>
+			<key>NameTag</key>
+			<string>Gnosis Safe</string>
+			<key>NameTagContractDetails</key>
+			<string>Gnosis Safe: Relay service - Deployment</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x12302fe9c02ff50939baaaaf415fc226c078613c</string>
+			<key>NameTag</key>
+			<string>Gnosis Safe</string>
+			<key>NameTagContractDetails</key>
+			<string>Gnosis Safe: Proxy Factory 1.0.0</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xd20db445a971598688e5c02bd577e21fd3577f04</string>
+			<key>NameTag</key>
+			<string>Gnosis Safe</string>
+			<key>NameTagContractDetails</key>
+			<string>Gnosis Safe: Deployer 2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x13b9c9cb389f5ba7cd5ffb2cec60749ff04ab94a</string>
+			<key>NameTag</key>
+			<string>Gnosis Safe</string>
+			<key>NameTagContractDetails</key>
+			<string>Gnosis Safe: Deployer 1</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x88cd603a5dc47857d02865bbc7941b588c533263</string>
+			<key>NameTag</key>
+			<string>Gnosis Safe</string>
+			<key>NameTagContractDetails</key>
+			<string>Gnosis Safe: Proxy Factory 0.1.0</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x1aa7451dd11b8cb16ac089ed7fe05efa00100a6a</string>
+			<key>NameTag</key>
+			<string>Gnosis Safe</string>
+			<key>NameTagContractDetails</key>
+			<string>Gnosis Safe: Deployer 3</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x0b498ff89709d3838a063f1dfa463091f9801c2b</string>
+			<key>NameTag</key>
+			<string>Index Coop</string>
+			<key>NameTagContractDetails</key>
+			<string>Index Coop: BTC 2x Flexible Leverage Index</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xe501d177fe2172e1da8a6d338a44d9f89705ed5c</string>
+			<key>NameTag</key>
+			<string>Index Coop</string>
+			<key>NameTagContractDetails</key>
+			<string>Index Coop: Deployer</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xb93b505ed567982e2b6756177ddd23ab5745f309</string>
+			<key>NameTag</key>
+			<string>Index Coop</string>
+			<key>NameTagContractDetails</key>
+			<string>Index Coop: DPI staking rewards v2</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xaa6e8127831c9de45ae56bb1b0d4d4da6e5665bd</string>
+			<key>NameTag</key>
+			<string>Index Coop</string>
+			<key>NameTagContractDetails</key>
+			<string>Index Coop: ETH 2x Flexible Leverage Index</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x0954906da0bf32d5479e25f46056d22f08464cab</string>
+			<key>NameTag</key>
+			<string>Index Coop</string>
+			<key>NameTagContractDetails</key>
+			<string>Index Coop: INDEX Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x72e364f2abdc788b7e918bc238b21f109cd634d7</string>
+			<key>NameTag</key>
+			<string>Index Coop</string>
+			<key>NameTagContractDetails</key>
+			<string>Index Coop: Metaverse Index</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x11ab0243c57c6c1b39f2908aaebaed7ccf351491</string>
+			<key>NameTag</key>
+			<string>Nifty Gateway</string>
+			<key>NameTagContractDetails</key>
+			<string>Nifty Gateway: First and Last</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xf72136fb50f0c90324c9619aaab4289eeb277f3e</string>
+			<key>NameTag</key>
+			<string>Nifty Gateway</string>
+			<key>NameTagContractDetails</key>
+			<string>Nifty Gateway: Getaway Auctions</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xef2883efa7bf4ecf169f3ad6c012994078608985</string>
+			<key>NameTag</key>
+			<string>Nifty Gateway</string>
+			<key>NameTagContractDetails</key>
+			<string>Nifty Gateway: Hard To Explain</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x934fdb5084d448de4c61c960c5f806689ae720b1</string>
+			<key>NameTag</key>
+			<string>Nifty Gateway</string>
+			<key>NameTagContractDetails</key>
+			<string>Nifty Gateway: Insides</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xe052113bd7d7700d623414a0a4585bcae754e9d5</string>
+			<key>NameTag</key>
+			<string>Nifty Gateway</string>
+			<key>NameTagContractDetails</key>
+			<string>Nifty Gateway: Omnibus</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x408e41876cccdc0f92210600ef50372656052a38</string>
+			<key>NameTag</key>
+			<string>Ren</string>
+			<key>NameTagContractDetails</key>
+			<string>Ren: REN Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xeb4c2781e4eba804ce9a9803c67d0893436bb27d</string>
+			<key>NameTag</key>
+			<string>Ren</string>
+			<key>NameTagContractDetails</key>
+			<string>Ren: renBTC Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x32666b64e9fd0f44916e1378efb2cfa3b3b96e80</string>
+			<key>NameTag</key>
+			<string>Ren</string>
+			<key>NameTagContractDetails</key>
+			<string>Ren: RenBridge</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x2d7b6c95afeffa50c068d50f89c5c0014e054f0a</string>
+			<key>NameTag</key>
+			<string>Ren</string>
+			<key>NameTagContractDetails</key>
+			<string>Ren: Darknode Registry Proxy</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x1c5db575e2ff833e46a2e9864c22f4b22e0b37c2</string>
+			<key>NameTag</key>
+			<string>Ren</string>
+			<key>NameTagContractDetails</key>
+			<string>Ren: renZEC Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x9992e9341e496be5bc8f424dfc1f78a7388d3a58</string>
+			<key>NameTag</key>
+			<string>Ren</string>
+			<key>NameTagContractDetails</key>
+			<string>Ren: ChaosDEX</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xc3bbd5adb611dd74eca6123f05b18acc886e122d</string>
+			<key>NameTag</key>
+			<string>Ren</string>
+			<key>NameTagContractDetails</key>
+			<string>Ren: renZEC Gateway</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x2362843745615368f4ef0a43d7502353649c0783</string>
+			<key>NameTag</key>
+			<string>Ren</string>
+			<key>NameTagContractDetails</key>
+			<string>Ren: renDOGE Gateway</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x459086f2376525bdceba5bdda135e4e9d3fef5bf</string>
+			<key>NameTag</key>
+			<string>Ren</string>
+			<key>NameTagContractDetails</key>
+			<string>Ren: renBCH Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x05387a10bb3ef789b6c2a9ce2d6c21d5a8c6b1aa</string>
+			<key>NameTag</key>
+			<string>Ren</string>
+			<key>NameTagContractDetails</key>
+			<string>Ren: renDGB Gateway</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xed7d080aa1d2a4d468c615a5d481125bb56bf1bf</string>
+			<key>NameTag</key>
+			<string>Ren</string>
+			<key>NameTagContractDetails</key>
+			<string>Ren: renFIL Gateway</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xcc4ff5b8a4a7adb35f00ff0cbf53784e07c3c52f</string>
+			<key>NameTag</key>
+			<string>Ren</string>
+			<key>NameTagContractDetails</key>
+			<string>Ren: renBCH Gateway</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x88c64a7d2ecc882d558dd16abc1537515a78bb7d</string>
+			<key>NameTag</key>
+			<string>Ren</string>
+			<key>NameTagContractDetails</key>
+			<string>Ren: ZBTC Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xd7d7deab930b6d3f98b35a26a4c431630d5ab874</string>
+			<key>NameTag</key>
+			<string>Ren</string>
+			<key>NameTagContractDetails</key>
+			<string>Ren: renLUNA Gateway</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xe80d347df1209a76dd9d2319d62912ba98c54ddd</string>
+			<key>NameTag</key>
+			<string>Ren</string>
+			<key>NameTagContractDetails</key>
+			<string>Ren: Gateway Registry</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xd9e1ce17f2641f24ae83637ab66a2cca9c378b9f</string>
+			<key>NameTag</key>
+			<string>SushiSwap</string>
+			<key>NameTagContractDetails</key>
+			<string>SushiSwap: Router</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x6b3595068778dd592e39a122f4f5a5cf09c90fe2</string>
+			<key>NameTag</key>
+			<string>SushiSwap</string>
+			<key>NameTagContractDetails</key>
+			<string>SushiSwap: SUSHI Token</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xc2edad668740f1aa35e4d8f227fb8e17dca888cd</string>
+			<key>NameTag</key>
+			<string>SushiSwap</string>
+			<key>NameTagContractDetails</key>
+			<string>SushiSwap: MasterChef LP Staking Pool</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xcbe6b83e77cdc011cc18f6f0df8444e5783ed982</string>
+			<key>NameTag</key>
+			<string>SushiSwap</string>
+			<key>NameTagContractDetails</key>
+			<string>SushiSwap: Merkle Distributor</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0x088ee5007c98a9677165d78dd2109ae4a3d04d0c</string>
+			<key>NameTag</key>
+			<string>SushiSwap</string>
+			<key>NameTagContractDetails</key>
+			<string>SushiSwap: YFI</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xf73b31c07e3f8ea8f7c59ac58ed1f878708c8a76</string>
+			<key>NameTag</key>
+			<string>SushiSwap</string>
+			<key>NameTagContractDetails</key>
+			<string>SushiSwap: Dev Fund</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xe468ce99444174bd3bbbed09209577d25d1ad673</string>
+			<key>NameTag</key>
+			<string>Zora</string>
+			<key>NameTagContractDetails</key>
+			<string>Zora: Auction House</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xe5bfab544eca83849c53464f85b7164375bdaac1</string>
+			<key>NameTag</key>
+			<string>Zora</string>
+			<key>NameTagContractDetails</key>
+			<string>Zora: Market</string>
+		</dict>
+		<dict>
+			<key>Address</key>
+			<string>0xabefbc9fd2f806065b4f3c237d4b59d9a97bcac7</string>
+			<key>NameTag</key>
+			<string>Zora</string>
+			<key>NameTagContractDetails</key>
+			<string>Zora: Media</string>
+		</dict>
+	</array>
+</plist>

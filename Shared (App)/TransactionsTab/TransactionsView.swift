@@ -36,7 +36,8 @@ struct TransactionsView: View {
                                     TransactionRowView(
                                         txType: TransactionType(transactionGroup.type),
                                         description: transactionGroup.description,
-                                        toAddress: transactionGroup.toAddress,
+//                                        toAddress: transactionGroup.toAddress,
+                                        toAddress: transactionGroup.contractName ?? "",
                                         amount: transactionGroup.value
                                     )
                                     .onAppear {
