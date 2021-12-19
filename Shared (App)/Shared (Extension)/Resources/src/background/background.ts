@@ -5,7 +5,7 @@ import { getLogger } from '../utils';
 const log = getLogger('background');
 const Messenger = getMessenger('background', { logger: log });
 
-(async () => {
+(() => {
     browser.runtime.onMessage.addListener(
         async (request, sender, sendResponse) => {
             log(

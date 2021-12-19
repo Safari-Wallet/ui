@@ -465,7 +465,7 @@ const log = _utils.getLogger('background');
 const Messenger = _messaging.getMessenger('background', {
     logger: log
 });
-(async ()=>{
+(()=>{
     browser.runtime.onMessage.addListener(async (request, sender, sendResponse)=>{
         log(`Received message from browser runtime: ${JSON.stringify(request)}`);
         const onMethod = async (methodName, handler)=>{
