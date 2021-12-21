@@ -35,7 +35,7 @@ struct TransactionsView: View {
                                 NavigationLink(destination: TransactionDetailsView(group: transactionGroup)) {
                                     TransactionRowView(
                                         txType: TransactionType(transactionGroup.type),
-                                        description: transactionGroup.description,
+                                        description: transactionGroup.inputDescription ?? transactionGroup.methodName ?? transactionGroup.description,
 //                                        toAddress: transactionGroup.toAddress,
                                         toAddress: transactionGroup.contractName ?? "",
                                         amount: transactionGroup.value

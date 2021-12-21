@@ -147,9 +147,9 @@ final class TransactionsListViewModel: ObservableObject {
                 return tx
             }
             var tx = tx
-            // TODO: method name parser
+            // TODO: method name parser -> Set Address instead of setAddress(address)
             tx.methodName = input.methodName
-            // TODO: Parse input descriptions (plist)
+            // TODO: Parse any objects into different types
             let stringInputs = input.inputs.reduce([String:String](), { dict, input in
                 var dict = dict
                 dict[input.key] = input.value as? String ?? "n/a"
@@ -160,7 +160,6 @@ final class TransactionsListViewModel: ObservableObject {
                 methodHash: input.methodHash,
                 contractAddress: contractAddress.address
             )
-            // TODO: Parse any objects into types
             tx.input = stringInputs
             return tx
         }
