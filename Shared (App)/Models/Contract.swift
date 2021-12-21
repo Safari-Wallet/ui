@@ -5,7 +5,7 @@
 //  Created by Stefano on 05.12.21.
 //
 
-struct Contract {
+struct Contract: Hashable {
     let address: String
     let name: String
     let abi: String

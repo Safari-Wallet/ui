@@ -167,18 +167,17 @@ final class TransactionsListViewModel: ObservableObject {
     @MainActor
     private func fetchContracts(fromTxs txs: [TransactionGroup]) async {
         var contracts = [Contract]()
-        let loot = txs.first(where: { $0.toAddress == "0xff9c1b15b16263c61d017ee9f65c50e4ae0113d7" })
+        var addressSet = Set<RawAddress>()
         await withTaskGroup(of: Contract?.self) { [weak self] group in
             guard let self = self else { return }
-            for tx in txs {
+            // Avoids fetching duplicate addresses by adding to a Set
+            txs.forEach { addressSet.insert($0.toAddress) }
+            for address in addressSet {
+                guard self.contracts[address] == nil else { continue }
                 group.addTask {
-                    guard self.contracts[tx.toAddress] == nil else { return nil }
-                    return try? await self.contractService.fetchContractDetails(forAddress: tx.toAddress)
+                    return try? await self.contractService.fetchContractDetails(forAddress: address)
                 }
                 for await contract in group {
-                    print("%%", contract?.address)
-                    // investigate same contracts multiple times
-                    // some contracts nil, e.g. loot?
                     guard let contract = contract else { return }
                     contracts.append(contract)
                 }
