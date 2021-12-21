@@ -34,6 +34,7 @@ final class TransactionsListViewModel: ObservableObject {
     private let txService: TransactionFetchable
     private let contractService: ContractFetchable
     private let transactionDecoder: TransactionDecodable
+    private let transactionInputParser: TransactionInputParseable
     private var cancellables = Set<AnyCancellable>()
     
     init(chain: String,
@@ -42,7 +43,8 @@ final class TransactionsListViewModel: ObservableObject {
          symbol: String,
          txService: TransactionFetchable = TransactionService(),
          contractService: ContractFetchable = ContractService(),
-         transactionDecoder: TransactionDecodable = TransactionDecoder()
+         transactionDecoder: TransactionDecodable = TransactionDecoder(),
+         transactionInputParser: TransactionInputParseable = TransactionInputParser()
     ) {
         self.chain = chain
         self.address = address
@@ -51,6 +53,7 @@ final class TransactionsListViewModel: ObservableObject {
         self.txService = txService
         self.contractService = contractService
         self.transactionDecoder = transactionDecoder
+        self.transactionInputParser = transactionInputParser
         bindTransactionFilter()
     }
     
@@ -139,27 +142,26 @@ final class TransactionsListViewModel: ObservableObject {
             guard let contractAddress = tx.transactions.first?.to,
                   let contract = contracts[contractAddress.address],
                   let txInput = tx.inputData,
+                  let input = transactionDecoder.decodeInput(txInput, with: contract),
                   TransactionType(tx.type) == .contractExecution else {
                 return tx
             }
             var tx = tx
-            let input = transactionDecoder.decodeInput(txInput, with: contract)
             // TODO: method name parser
-            tx.methodName = input?.methodName
-            // TODO: Parse input descriptions
-            if input?.methodHash == "f7a16963", let ensName = input?.inputs["name"] as? String {
-                tx.inputDescription = "Registered \(ensName)"
-            }
-            // TODO: Parse any objects into types
-            tx.input = input?.inputs.reduce([String:String](), { dict, input in
+            tx.methodName = input.methodName
+            // TODO: Parse input descriptions (plist)
+            let stringInputs = input.inputs.reduce([String:String](), { dict, input in
                 var dict = dict
-                dict[input.key] = input.value as? String
-                    ?? (input.value as? Data)?.dataToHexString()
-                    ?? (input.value as? Int).flatMap(String.init)
-                    ?? "n/a"
+                dict[input.key] = input.value as? String ?? "n/a"
                 return dict
             })
-            print("$$", tx.input, tx.transactionHash)
+            tx.inputDescription = transactionInputParser.parse(
+                input: stringInputs,
+                methodHash: input.methodHash,
+                contractAddress: contractAddress.address
+            )
+            // TODO: Parse any objects into types
+            tx.input = stringInputs
             return tx
         }
     }

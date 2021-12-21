@@ -51,10 +51,22 @@
 		3D3D56762771DBD800CA37B0 /* TransactionDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3D56742771DBD800CA37B0 /* TransactionDecoder.swift */; };
 		3D3D56772771DBD800CA37B0 /* TransactionDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3D56742771DBD800CA37B0 /* TransactionDecoder.swift */; };
 		3D3D56782771DBD800CA37B0 /* TransactionDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3D56742771DBD800CA37B0 /* TransactionDecoder.swift */; };
+		3D3D567A277208A900CA37B0 /* MethodInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D3D5679277208A900CA37B0 /* MethodInfo.plist */; };
+		3D3D567B277208A900CA37B0 /* MethodInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D3D5679277208A900CA37B0 /* MethodInfo.plist */; };
+		3D3D567C277208A900CA37B0 /* MethodInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D3D5679277208A900CA37B0 /* MethodInfo.plist */; };
+		3D3D567D277208A900CA37B0 /* MethodInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D3D5679277208A900CA37B0 /* MethodInfo.plist */; };
 		3D97705F273CD4AE0014CAC7 /* TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D97705E273CD4AE0014CAC7 /* TransactionService.swift */; };
 		3D977060273CEEA80014CAC7 /* TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D97705E273CD4AE0014CAC7 /* TransactionService.swift */; };
 		3D977061273CEEA80014CAC7 /* TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D97705E273CD4AE0014CAC7 /* TransactionService.swift */; };
 		3D977062273CEEA90014CAC7 /* TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D97705E273CD4AE0014CAC7 /* TransactionService.swift */; };
+		3D9C80EC2772244900874D26 /* TransactionInputParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9C80EB2772244900874D26 /* TransactionInputParser.swift */; };
+		3D9C80ED2772244900874D26 /* TransactionInputParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9C80EB2772244900874D26 /* TransactionInputParser.swift */; };
+		3D9C80EE2772244900874D26 /* TransactionInputParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9C80EB2772244900874D26 /* TransactionInputParser.swift */; };
+		3D9C80EF2772244900874D26 /* TransactionInputParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9C80EB2772244900874D26 /* TransactionInputParser.swift */; };
+		3D9C80F1277226C800874D26 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9C80F0277226C800874D26 /* Method.swift */; };
+		3D9C80F2277226C800874D26 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9C80F0277226C800874D26 /* Method.swift */; };
+		3D9C80F3277226C800874D26 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9C80F0277226C800874D26 /* Method.swift */; };
+		3D9C80F4277226C800874D26 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9C80F0277226C800874D26 /* Method.swift */; };
 		3DACED5A2751D5B2004050B7 /* keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DACED592751D5B2004050B7 /* keys.swift */; };
 		3DACED5B2751D5B2004050B7 /* keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DACED592751D5B2004050B7 /* keys.swift */; };
 		3DACED5C2751D5B2004050B7 /* keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DACED592751D5B2004050B7 /* keys.swift */; };
@@ -265,7 +277,10 @@
 		3D216A122753246600620BB9 /* TransactionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRowView.swift; sourceTree = "<group>"; };
 		3D216A1427539F4700620BB9 /* TransactionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionType.swift; sourceTree = "<group>"; };
 		3D3D56742771DBD800CA37B0 /* TransactionDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDecoder.swift; sourceTree = "<group>"; };
+		3D3D5679277208A900CA37B0 /* MethodInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = MethodInfo.plist; sourceTree = "<group>"; };
 		3D97705E273CD4AE0014CAC7 /* TransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionService.swift; sourceTree = "<group>"; };
+		3D9C80EB2772244900874D26 /* TransactionInputParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionInputParser.swift; sourceTree = "<group>"; };
+		3D9C80F0277226C800874D26 /* Method.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
 		3DACED592751D5B2004050B7 /* keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keys.swift; sourceTree = "<group>"; };
 		3DE9F687276CC8C700AFB635 /* TransactionInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionInput.swift; sourceTree = "<group>"; };
 		3DEAA239275DAB4200EB8370 /* ContractInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ContractInfo.plist; sourceTree = "<group>"; };
@@ -492,6 +507,7 @@
 			children = (
 				3DFFFBAA275C588800056A69 /* ContractService.swift */,
 				3D3D56742771DBD800CA37B0 /* TransactionDecoder.swift */,
+				3D9C80EB2772244900874D26 /* TransactionInputParser.swift */,
 				3D97705E273CD4AE0014CAC7 /* TransactionService.swift */,
 			);
 			path = Services;
@@ -514,6 +530,7 @@
 			isa = PBXGroup;
 			children = (
 				3DFFFBA8275C57ED00056A69 /* Contract.swift */,
+				3D9C80F0277226C800874D26 /* Method.swift */,
 				F8812B472717E18600D1B231 /* RecoveryPhrase.swift */,
 				0A8BB798272E729200DFC647 /* Transaction.swift */,
 				4AAE2E652744ADA600696FBE /* TransactionGroup.swift */,
@@ -521,6 +538,7 @@
 				3DE9F687276CC8C700AFB635 /* TransactionInput.swift */,
 				4AAE2E60274400D500696FBE /* WalletTransaction.swift */,
 				3DEAA239275DAB4200EB8370 /* ContractInfo.plist */,
+				3D3D5679277208A900CA37B0 /* MethodInfo.plist */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -806,6 +824,7 @@
 				0A0E1ECD270687AE00061EA6 /* Icon.png in Resources */,
 				0A0E1ECB270687AE00061EA6 /* Main.html in Resources */,
 				3DEAA23A275DAB4200EB8370 /* ContractInfo.plist in Resources */,
+				3D3D567A277208A900CA37B0 /* MethodInfo.plist in Resources */,
 				0A0E1ED1270687AE00061EA6 /* Script.js in Resources */,
 				0A0E1ED5270687AE00061EA6 /* Assets.xcassets in Resources */,
 				0A0E1ECF270687AE00061EA6 /* Style.css in Resources */,
@@ -819,6 +838,7 @@
 				0A0E1ECE270687AE00061EA6 /* Icon.png in Resources */,
 				0A0E1ED0270687AE00061EA6 /* Style.css in Resources */,
 				3DEAA23B275DAB4200EB8370 /* ContractInfo.plist in Resources */,
+				3D3D567B277208A900CA37B0 /* MethodInfo.plist in Resources */,
 				0A0E1ED2270687AE00061EA6 /* Script.js in Resources */,
 				0A0E1ED6270687AE00061EA6 /* Assets.xcassets in Resources */,
 				0A0E1ECC270687AE00061EA6 /* Main.html in Resources */,
@@ -833,6 +853,7 @@
 				0A0E1EE5270687AE00061EA6 /* popup.css in Resources */,
 				0A0E1EE3270687AE00061EA6 /* popup.html in Resources */,
 				0A0E1EDB270687AE00061EA6 /* images in Resources */,
+				3D3D567C277208A900CA37B0 /* MethodInfo.plist in Resources */,
 				F1293EDC2758EF86000E883A /* ethereum in Resources */,
 				0A0E1EDD270687AE00061EA6 /* manifest.json in Resources */,
 				0A0E1ED9270687AE00061EA6 /* _locales in Resources */,
@@ -850,6 +871,7 @@
 				0A0E1EE6270687AE00061EA6 /* popup.css in Resources */,
 				0A0E1EE4270687AE00061EA6 /* popup.html in Resources */,
 				0A0E1EDC270687AE00061EA6 /* images in Resources */,
+				3D3D567D277208A900CA37B0 /* MethodInfo.plist in Resources */,
 				F1293EDD2758EF8C000E883A /* ethereum in Resources */,
 				0A0E1EDE270687AE00061EA6 /* manifest.json in Resources */,
 				0A0E1EDA270687AE00061EA6 /* _locales in Resources */,
@@ -900,6 +922,7 @@
 				F8ABEF3527125F16007F7D11 /* ContentView.swift in Sources */,
 				4AAE2E662744ADA600696FBE /* TransactionGroup.swift in Sources */,
 				F8812B4F2718B91E00D1B231 /* Intro2View.swift in Sources */,
+				3D9C80EC2772244900874D26 /* TransactionInputParser.swift in Sources */,
 				F8812B4C2718B91600D1B231 /* Intro1View.swift in Sources */,
 				3D216A1527539F4700620BB9 /* TransactionType.swift in Sources */,
 				3D3D56752771DBD800CA37B0 /* TransactionDecoder.swift in Sources */,
@@ -928,6 +951,7 @@
 				4AAE2E6B2745EE8B00696FBE /* TransactionDetailsView.swift in Sources */,
 				F8812B6227193E8B00D1B231 /* DeveloperView.swift in Sources */,
 				F8812B5E27192AA600D1B231 /* ShortcutItem.swift in Sources */,
+				3D9C80F1277226C800874D26 /* Method.swift in Sources */,
 				F8321B622717768400F12938 /* SummaryView.swift in Sources */,
 				F8ABEF3827129797007F7D11 /* WalletManager.swift in Sources */,
 				3DACED5A2751D5B2004050B7 /* keys.swift in Sources */,
@@ -950,6 +974,7 @@
 				F8ABEF3327125EFA007F7D11 /* WalletApp.swift in Sources */,
 				4AAE2E672744ADA600696FBE /* TransactionGroup.swift in Sources */,
 				F8812B502718B91E00D1B231 /* Intro2View.swift in Sources */,
+				3D9C80ED2772244900874D26 /* TransactionInputParser.swift in Sources */,
 				F8812B4D2718B91600D1B231 /* Intro1View.swift in Sources */,
 				3D977060273CEEA80014CAC7 /* TransactionService.swift in Sources */,
 				3D3D56762771DBD800CA37B0 /* TransactionDecoder.swift in Sources */,
@@ -978,6 +1003,7 @@
 				F8812B5F27192AA600D1B231 /* ShortcutItem.swift in Sources */,
 				F8321B632717768400F12938 /* SummaryView.swift in Sources */,
 				F8ABEF3927129797007F7D11 /* WalletManager.swift in Sources */,
+				3D9C80F2277226C800874D26 /* Method.swift in Sources */,
 				3DACED5B2751D5B2004050B7 /* keys.swift in Sources */,
 				3DFFFBAE275C5F1100056A69 /* Contract.swift in Sources */,
 				F8ABEECA27124A8C007F7D11 /* Constants.swift in Sources */,
@@ -1008,11 +1034,13 @@
 				3DACED5C2751D5B2004050B7 /* keys.swift in Sources */,
 				0A8BB796272E719800DFC647 /* TransactionsViewModel.swift in Sources */,
 				F8ABEEDB27124A8C007F7D11 /* WalletError.swift in Sources */,
+				3D9C80F3277226C800874D26 /* Method.swift in Sources */,
 				3DFFFBAD275C5F1000056A69 /* Contract.swift in Sources */,
 				3D3D56772771DBD800CA37B0 /* TransactionDecoder.swift in Sources */,
 				4AAE2E6D2745EE8B00696FBE /* TransactionDetailsView.swift in Sources */,
 				F8ABEED727124A8C007F7D11 /* SharedDocument.swift in Sources */,
 				3DE9F68A276CC8C700AFB635 /* TransactionInput.swift in Sources */,
+				3D9C80EE2772244900874D26 /* TransactionInputParser.swift in Sources */,
 				F8ABEF49271389F5007F7D11 /* NSFileCoordinator.swift in Sources */,
 				F84CFF29273842B200193E1B /* WalletManager+Core.swift in Sources */,
 				0A8BB79B272E729200DFC647 /* Transaction.swift in Sources */,
@@ -1039,11 +1067,13 @@
 				3DACED5D2751D5B2004050B7 /* keys.swift in Sources */,
 				0A8BB797272E719800DFC647 /* TransactionsViewModel.swift in Sources */,
 				F8ABEEDC27124A8C007F7D11 /* WalletError.swift in Sources */,
+				3D9C80F4277226C800874D26 /* Method.swift in Sources */,
 				3DFFFBAC275C5F1000056A69 /* Contract.swift in Sources */,
 				3D3D56782771DBD800CA37B0 /* TransactionDecoder.swift in Sources */,
 				4AAE2E6E2745EE8B00696FBE /* TransactionDetailsView.swift in Sources */,
 				F8ABEED827124A8C007F7D11 /* SharedDocument.swift in Sources */,
 				3DE9F68B276CC8C700AFB635 /* TransactionInput.swift in Sources */,
+				3D9C80EF2772244900874D26 /* TransactionInputParser.swift in Sources */,
 				F8ABEF4A271389F5007F7D11 /* NSFileCoordinator.swift in Sources */,
 				F84CFF2A273842B200193E1B /* WalletManager+Core.swift in Sources */,
 				0A8BB79C272E729200DFC647 /* Transaction.swift in Sources */,
