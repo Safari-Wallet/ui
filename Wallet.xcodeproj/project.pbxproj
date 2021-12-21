@@ -55,6 +55,10 @@
 		3DACED5B2751D5B2004050B7 /* keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DACED592751D5B2004050B7 /* keys.swift */; };
 		3DACED5C2751D5B2004050B7 /* keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DACED592751D5B2004050B7 /* keys.swift */; };
 		3DACED5D2751D5B2004050B7 /* keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DACED592751D5B2004050B7 /* keys.swift */; };
+		3DE9F688276CC8C700AFB635 /* TransactionInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE9F687276CC8C700AFB635 /* TransactionInput.swift */; };
+		3DE9F689276CC8C700AFB635 /* TransactionInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE9F687276CC8C700AFB635 /* TransactionInput.swift */; };
+		3DE9F68A276CC8C700AFB635 /* TransactionInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE9F687276CC8C700AFB635 /* TransactionInput.swift */; };
+		3DE9F68B276CC8C700AFB635 /* TransactionInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE9F687276CC8C700AFB635 /* TransactionInput.swift */; };
 		3DEAA23A275DAB4200EB8370 /* ContractInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DEAA239275DAB4200EB8370 /* ContractInfo.plist */; };
 		3DEAA23B275DAB4200EB8370 /* ContractInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DEAA239275DAB4200EB8370 /* ContractInfo.plist */; };
 		3DEAA23C275DAB4200EB8370 /* ContractInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DEAA239275DAB4200EB8370 /* ContractInfo.plist */; };
@@ -258,6 +262,7 @@
 		3D216A1427539F4700620BB9 /* TransactionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionType.swift; sourceTree = "<group>"; };
 		3D97705E273CD4AE0014CAC7 /* TransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionService.swift; sourceTree = "<group>"; };
 		3DACED592751D5B2004050B7 /* keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keys.swift; sourceTree = "<group>"; };
+		3DE9F687276CC8C700AFB635 /* TransactionInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionInput.swift; sourceTree = "<group>"; };
 		3DEAA239275DAB4200EB8370 /* ContractInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ContractInfo.plist; sourceTree = "<group>"; };
 		3DFFFBA8275C57ED00056A69 /* Contract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contract.swift; sourceTree = "<group>"; };
 		3DFFFBAA275C588800056A69 /* ContractService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractService.swift; sourceTree = "<group>"; };
@@ -507,6 +512,7 @@
 				0A8BB798272E729200DFC647 /* Transaction.swift */,
 				4AAE2E652744ADA600696FBE /* TransactionGroup.swift */,
 				3D216A1427539F4700620BB9 /* TransactionType.swift */,
+				3DE9F687276CC8C700AFB635 /* TransactionInput.swift */,
 				4AAE2E60274400D500696FBE /* WalletTransaction.swift */,
 				3DEAA239275DAB4200EB8370 /* ContractInfo.plist */,
 			);
@@ -899,6 +905,7 @@
 				F8321B5C27176ED600F12938 /* ShowMnemonicView.swift in Sources */,
 				F8321B5F27176EE700F12938 /* ConfirmMnemonicView.swift in Sources */,
 				F8AD21EF2717B4B40059D754 /* RestoreWalletView.swift in Sources */,
+				3DE9F688276CC8C700AFB635 /* TransactionInput.swift in Sources */,
 				4AAE2E61274400D500696FBE /* WalletTransaction.swift in Sources */,
 				F8AD21E92717B3420059D754 /* CreatePasswordView.swift in Sources */,
 				F8ABEECD27124A8C007F7D11 /* BiometricsAuthentication.swift in Sources */,
@@ -947,6 +954,7 @@
 				F8321B5D27176ED600F12938 /* ShowMnemonicView.swift in Sources */,
 				F8321B6027176EE700F12938 /* ConfirmMnemonicView.swift in Sources */,
 				F8AD21F02717B4B40059D754 /* RestoreWalletView.swift in Sources */,
+				3DE9F689276CC8C700AFB635 /* TransactionInput.swift in Sources */,
 				4AAE2E62274400D500696FBE /* WalletTransaction.swift in Sources */,
 				F8AD21EA2717B3420059D754 /* CreatePasswordView.swift in Sources */,
 				F8ABEED227124A8C007F7D11 /* FileObserver.swift in Sources */,
@@ -995,6 +1003,7 @@
 				3DFFFBAD275C5F1000056A69 /* Contract.swift in Sources */,
 				4AAE2E6D2745EE8B00696FBE /* TransactionDetailsView.swift in Sources */,
 				F8ABEED727124A8C007F7D11 /* SharedDocument.swift in Sources */,
+				3DE9F68A276CC8C700AFB635 /* TransactionInput.swift in Sources */,
 				F8ABEF49271389F5007F7D11 /* NSFileCoordinator.swift in Sources */,
 				F84CFF29273842B200193E1B /* WalletManager+Core.swift in Sources */,
 				0A8BB79B272E729200DFC647 /* Transaction.swift in Sources */,
@@ -1024,6 +1033,7 @@
 				3DFFFBAC275C5F1000056A69 /* Contract.swift in Sources */,
 				4AAE2E6E2745EE8B00696FBE /* TransactionDetailsView.swift in Sources */,
 				F8ABEED827124A8C007F7D11 /* SharedDocument.swift in Sources */,
+				3DE9F68B276CC8C700AFB635 /* TransactionInput.swift in Sources */,
 				F8ABEF4A271389F5007F7D11 /* NSFileCoordinator.swift in Sources */,
 				F84CFF2A273842B200193E1B /* WalletManager+Core.swift in Sources */,
 				0A8BB79C272E729200DFC647 /* Transaction.swift in Sources */,
