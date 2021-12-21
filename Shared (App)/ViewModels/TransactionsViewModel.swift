@@ -33,6 +33,7 @@ final class TransactionsListViewModel: ObservableObject {
     
     private let txService: TransactionFetchable
     private let contractService: ContractFetchable
+    private let transactionDecoder: TransactionDecodable
     private var cancellables = Set<AnyCancellable>()
     
     init(chain: String,
@@ -40,7 +41,8 @@ final class TransactionsListViewModel: ObservableObject {
          currency: String,
          symbol: String,
          txService: TransactionFetchable = TransactionService(),
-         contractService: ContractFetchable = ContractService()
+         contractService: ContractFetchable = ContractService(),
+         transactionDecoder: TransactionDecodable = TransactionDecoder()
     ) {
         self.chain = chain
         self.address = address
@@ -48,6 +50,7 @@ final class TransactionsListViewModel: ObservableObject {
         self.symbol = symbol
         self.txService = txService
         self.contractService = contractService
+        self.transactionDecoder = transactionDecoder
         bindTransactionFilter()
     }
     
@@ -60,23 +63,9 @@ final class TransactionsListViewModel: ObservableObject {
                 case .all:
                     let fetchedTransactions = try await self.txService.fetchTransactions(network: .ethereum, address: address)
                     await fetchContracts(fromTxs: fetchedTransactions)
-                    let txs = fetchedTransactions.map { tx -> TransactionGroup in
-                        var tx = tx
-                        let contract = contracts[tx.toAddress]
-                        // TODO: remove print of addresses without name tags
-                        if contract?.nameTag == nil || contract?.name == nil {
-                            print(tx.toAddress)
-                        }
-                        if let nameTag = contract?.nameTag, !nameTag.isEmpty {
-                            tx.contractName = nameTag
-                        } else if let contractName = contract?.name, !contractName.isEmpty {
-                            tx.contractName = contractName
-                        } else {
-                            tx.contractName = tx.toAddress
-                        }
-                        return tx
-                    }
-                    self.transactions.append(contentsOf: txs)
+                    let txsWithContractNames = addContractNames(toTxs: fetchedTransactions)
+                    let txsWithInput = addTxInput(toTxs: txsWithContractNames)
+                    self.transactions.append(contentsOf: txsWithInput)
                     state = .fetched(txs: self.transactions)
                     isFetching = false
                 case .sent:
@@ -126,21 +115,70 @@ final class TransactionsListViewModel: ObservableObject {
         return !isFetching && reachedThreshold
     }
     
+    private func addContractNames(toTxs txs: [TransactionGroup]) -> [TransactionGroup] {
+        txs.map { tx -> TransactionGroup in
+            var tx = tx
+            let contract = contracts[tx.toAddress]
+            // TODO: remove print of addresses without name tags
+            if contract?.nameTag == nil || contract?.name == nil {
+                print(tx.toAddress)
+            }
+            if let nameTag = contract?.nameTag, !nameTag.isEmpty {
+                tx.contractName = nameTag
+            } else if let contractName = contract?.name, !contractName.isEmpty {
+                tx.contractName = contractName
+            } else {
+                tx.contractName = tx.toAddress
+            }
+            return tx
+        }
+    }
+    
+    private func addTxInput(toTxs txs: [TransactionGroup]) -> [TransactionGroup] {
+        txs.map { tx -> TransactionGroup in
+            guard let contractAddress = tx.transactions.first?.to,
+                  let contract = contracts[contractAddress.address],
+                  let txInput = tx.inputData,
+                  TransactionType(tx.type) == .contractExecution else {
+                return tx
+            }
+            var tx = tx
+            let input = transactionDecoder.decodeInput(txInput, with: contract)
+            // TODO: method name parser
+            tx.methodName = input?.methodName
+            // TODO: Parse input descriptions
+            if input?.methodHash == "f7a16963", let ensName = input?.inputs["name"] as? String {
+                tx.inputDescription = "Registered \(ensName)"
+            }
+            // TODO: Parse any objects into types
+            tx.input = input?.inputs.reduce([String:String](), { dict, input in
+                var dict = dict
+                dict[input.key] = input.value as? String
+                    ?? (input.value as? Data)?.dataToHexString()
+                    ?? (input.value as? Int).flatMap(String.init)
+                    ?? "n/a"
+                return dict
+            })
+            print("$$", tx.input, tx.transactionHash)
+            return tx
+        }
+    }
+    
     @MainActor
     private func fetchContracts(fromTxs txs: [TransactionGroup]) async {
         var contracts = [Contract]()
+        let loot = txs.first(where: { $0.toAddress == "0xff9c1b15b16263c61d017ee9f65c50e4ae0113d7" })
         await withTaskGroup(of: Contract?.self) { [weak self] group in
             guard let self = self else { return }
             for tx in txs {
                 group.addTask {
-                    guard let contractAddress = tx.transactions.first?.to,
-                          self.contracts[tx.toAddress] == nil else { return nil }
-                    // TODO: Fetch tx input and decode with ABI fetched here
-                    // Discuss if we want to fetch tx input and contract details on list or on tx detail screen
-                    // If we want to show all details on the list, performance may be laggy because of the numerous fetches
-                    return try? await self.contractService.fetchContractDetails(forAddress: contractAddress)
+                    guard self.contracts[tx.toAddress] == nil else { return nil }
+                    return try? await self.contractService.fetchContractDetails(forAddress: tx.toAddress)
                 }
                 for await contract in group {
+                    print("%%", contract?.address)
+                    // investigate same contracts multiple times
+                    // some contracts nil, e.g. loot?
                     guard let contract = contract else { return }
                     contracts.append(contract)
                 }
