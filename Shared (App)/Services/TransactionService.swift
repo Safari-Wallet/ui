@@ -18,7 +18,7 @@ final class TransactionService: TransactionFetchable {
     private let offset = 20
     private let unmarshalClient: UnmarshalClient = UnmarshalClient(apiKey: ApiKeys.unmarshal)
     private let etherscanClient: EtherscanClient = EtherscanClient(apiKey: ApiKeys.etherscan)
-    var etherscanDict: [String : Etherscan.Transaction] = [:]
+    var etherscanTransactions: [String : Etherscan.Transaction] = [:]
     
     @MainActor
     func fetchTransactions(network: Network, address: Address) async throws -> [TransactionGroup] {
@@ -27,7 +27,7 @@ final class TransactionService: TransactionFetchable {
         let etherscanTransactionsDict = Dictionary(
             uniqueKeysWithValues: etherscanResponse.result.map { ($0.hash, $0) }
         )
-        etherscanDict = etherscanDict.merging(etherscanTransactionsDict)  { (_, new) in new }
+        etherscanTransactions = etherscanTransactions.merging(etherscanTransactionsDict)  { (_, new) in new }
 
         guard currentPage < unmarshalResponse.total_pages else { return [] }
         
@@ -42,7 +42,7 @@ final class TransactionService: TransactionFetchable {
                 hashGroup[transaction.hash] = group
             } else {
                 var newGroup = TransactionGroup(transactionHash: transaction.hash, transactions: [transaction])
-                newGroup.inputData = etherscanDict[newGroup.transactionHash]?.input
+                newGroup.inputData = etherscanTransactions[newGroup.transactionHash]?.input
                 hashGroup[transaction.hash] = newGroup
             }
         }

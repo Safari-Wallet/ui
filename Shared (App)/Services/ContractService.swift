@@ -34,7 +34,6 @@ final class ContractService: ContractFetchable {
     }
     
     func fetchContractDetails(forAddress address: RawAddress) async throws -> Contract? {
-        // TODO: fetch contract details (ABI & Contract name)
         let response = try await client.getContractDetails(forAddress: address)
         guard let contractDetails = response.result.first else { return nil }
         let contractInfo = name(forAddress: address)
