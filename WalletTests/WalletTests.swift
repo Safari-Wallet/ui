@@ -8,6 +8,7 @@
 import XCTest
 import MEWwalletKit
 @testable import Safari_Wallet
+@testable import SafariWalletCore
 
 class WalletTests: XCTestCase {
     

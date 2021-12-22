@@ -17,6 +17,7 @@ final class TransactionInputParser: TransactionInputParseable {
     
     private lazy var methodInfoLookup: [RawAddress: [MethodID: MethodInfo]] = {
         let decoder = PropertyListDecoder()
+        
         guard let url = Bundle.main.url(forResource: "MethodInfo", withExtension: "plist"),
               let data = try? Data(contentsOf: url),
               let methodInfo = try? decoder.decode([MethodInfo].self, from: data) else { return [:] }
@@ -34,9 +35,7 @@ final class TransactionInputParser: TransactionInputParseable {
     }()
     
     func parse(input: [String: String], methodHash: String, contractAddress: RawAddress) -> String? {
-        guard let methodInfo = methodInfoLookup[contractAddress]?[methodHash] else {
-            return nil
-        }
+        guard let methodInfo = methodInfoLookup[contractAddress]?[methodHash] else { return nil }
         let arguments = methodInfo.description.arguments.compactMap { input[$0] }
         return String(format: methodInfo.description.stringFormat, arguments: arguments)
     }
