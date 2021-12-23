@@ -12,16 +12,22 @@
     ],
     "scripts": {
         "build": "parcel build",
-        "watch": "parcel watch"
+        "watch": "parcel watch",
+        "test": "jest",
+        "test:watch": "jest --watch"
     },
     "devDependencies": {
-        "@types/firefox-webext-browser": "^94.0.0",
-        "parcel": "latest",
-        "parcel-reporter-copy-file-v2": "^1.0.1",
-        "prettier": "^2.5.0"
+        "@types/firefox-webext-browser": "94.0.0",
+        "@types/jest": "27.0.3",
+        "jest": "27.4.5",
+        "jsdom": "19.0.0",
+        "parcel": "2.0.1",
+        "parcel-reporter-copy-file-v2": "1.0.1",
+        "prettier": "2.5.0",
+        "ts-jest": "27.1.2"
     },
     "dependencies": {
-        "typescript": "^4.4.4"
+        "typescript": "4.4.4"
     },
     "copyStaticFiles": [
         {
