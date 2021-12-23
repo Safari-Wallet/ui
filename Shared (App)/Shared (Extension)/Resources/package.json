@@ -13,13 +13,14 @@
     "scripts": {
         "build": "parcel build",
         "watch": "parcel watch",
-        "test": "ts-jest",
-        "test:watch": "ts-jest --watch"
+        "test": "jest",
+        "test:watch": "jest --watch"
     },
     "devDependencies": {
         "@types/firefox-webext-browser": "94.0.0",
         "@types/jest": "27.0.3",
         "jest": "27.4.5",
+        "jsdom": "19.0.0",
         "parcel": "2.0.1",
         "parcel-reporter-copy-file-v2": "1.0.1",
         "prettier": "2.5.0",
