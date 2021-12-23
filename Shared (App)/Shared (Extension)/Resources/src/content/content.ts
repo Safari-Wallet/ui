@@ -32,20 +32,18 @@ log(`session ID`, findOrCreateSessionId());
 
 // - MARK: Main
 
-(async () => {
-    inject();
+inject();
 
-    onMessage('forwardToEthereumJs', (params) => {
-        window.postMessage({ ...params });
-    });
+onMessage('forwardToEthereumJs', (params) => {
+    window.postMessage({ ...params });
+});
 
-    window.addEventListener(`message`, (event) => {
-        log(`Received message from ethereum.js: ${JSON.stringify(event)}`);
+window.addEventListener(`message`, (event) => {
+    log(`Received message from ethereum.js: ${JSON.stringify(event)}`);
 
-        if (event.data.method) {
-            Messenger.sendToBackground(event.data.method, event.data.params);
-        }
-    });
-})();
+    if (event.data.method) {
+        Messenger.sendToBackground(event.data.method, event.data.params);
+    }
+});
 
 log(`loaded`);

@@ -19,45 +19,39 @@ export const chainId: keyof typeof chains = 1;
 
 // - MARK: Main
 
-const main = () => {
-    const onMessage: OnMessage = (methodName, handler) => {
-        log(`Listening to popup.${methodName}`);
+const onMessage: OnMessage = (methodName, handler) => {
+    log(`Listening to popup.${methodName}`);
 
-        browser.runtime.onMessage.addListener((request, e) => {
-            const { destination, method, params } = request;
+    browser.runtime.onMessage.addListener((request, e) => {
+        const { destination, method, params } = request;
 
-            if (destination !== `popup`) return;
-            if (method !== methodName) return;
+        if (destination !== `popup`) return;
+        if (method !== methodName) return;
 
-            log(
-                `Received method '${method}' with params: ${JSON.stringify(
-                    params
-                )}`
-            );
+        log(
+            `Received method '${method}' with params: ${JSON.stringify(params)}`
+        );
 
-            handler(params, '');
-        });
-    };
-
-    document.addEventListener(`DOMContentLoaded`, () => {
-        onMessage('updateState', ({ address, balance }) => {
-            const onConnectWallet = () => {
-                Messenger.sendToEthereumJs('walletConnected', {
-                    address,
-                    balance,
-                    chainId
-                });
-                closeWindow();
-            };
-
-            render('connectWallet', { address, balance, onConnectWallet });
-        });
-
-        render('loading');
-        Messenger.sendToBackground('getState');
-
-        log(`loaded`);
+        handler(params, '');
     });
 };
 
-main();
+document.addEventListener(`DOMContentLoaded`, () => {
+    onMessage('updateState', ({ address, balance }) => {
+        const onConnectWallet = () => {
+            Messenger.sendToEthereumJs('walletConnected', {
+                address,
+                balance,
+                chainId
+            });
+            closeWindow();
+        };
+
+        render('connectWallet', { address, balance, onConnectWallet });
+    });
+
+    render('loading');
+    Messenger.sendToBackground('getState');
+
+    log(`loaded`);
+});
