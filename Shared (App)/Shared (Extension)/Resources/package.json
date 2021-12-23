@@ -15,13 +15,14 @@
         "watch": "parcel watch"
     },
     "devDependencies": {
-        "@types/firefox-webext-browser": "^94.0.0",
+        "@types/firefox-webext-browser": "94.0.0",
+        "jest": "27.4.5",
         "parcel": "latest",
-        "parcel-reporter-copy-file-v2": "^1.0.1",
-        "prettier": "^2.5.0"
+        "parcel-reporter-copy-file-v2": "1.0.1",
+        "prettier": "2.5.0"
     },
     "dependencies": {
-        "typescript": "^4.4.4"
+        "typescript": "4.4.4"
     },
     "copyStaticFiles": [
         {
