@@ -1,3 +1,5 @@
+import { getLogger } from '../utils';
+
 // MARK: - Setup
 
 declare global {
@@ -5,6 +7,8 @@ declare global {
         ethereum: any;
     }
 }
+
+const log = getLogger('ethereum');
 
 // MARK: - Styling prelims
 
@@ -98,12 +102,7 @@ class Ethereum {
 
     request(payload: { method: any; params: any; from: any }) {
         return new Promise((resolve, reject) => {
-            let method =
-                typeof payload.method !== `undefined` ? payload.method : null;
-            let params =
-                typeof payload.params !== `undefined` ? payload.params : null;
-            let from =
-                typeof payload.from !== `undefined` ? payload.from : null;
+            log('Request', payload);
 
             const showPrompt = (message: string) => {
                 if (window.ethereum.opened === false) {
@@ -124,34 +123,37 @@ class Ethereum {
                 }
             };
 
-            switch (method) {
-                case `eth_requestAccounts`:
-                    window.postMessage(`eth_requestAccounts`);
-                    window.addEventListener(`message`, (event) => {
-                        if (event.data === `cancel`) {
-                            resolve([]);
-                        } else if (typeof event.data !== `string`) {
-                            resolve(event.data);
-                            window.ethereum.close();
-                        }
+            window.addEventListener(
+                'message',
+                (event) => {
+                    const { method, params } = event.data;
+
+                    log('Received message', method, params, {
+                        awaiting: payload.method
                     });
+
+                    if (
+                        payload.method === 'eth_requestAccounts' &&
+                        method === 'walletConnected'
+                    ) {
+                        resolve([params.address]);
+                        window.ethereum.close();
+                    }
+                },
+                { once: true }
+            );
+
+            switch (payload.method) {
+                case `eth_requestAccounts`:
                     showPrompt(`Open the wallet extension to connect`);
                     break;
                 case `eth_signTypedData_v3`:
-                    window.postMessage(`eth_signTypedData_v3`);
-                    window.addEventListener(`message`, (event) => {
-                        if (event.data === `cancel`) {
-                            resolve([]);
-                        } else if (typeof event.data !== `string`) {
-                            resolve(event.data);
-                            window.ethereum.close();
-                        }
-                    });
                     showPrompt(`Open the wallet extension to sign`);
                     resolve(true);
                     break;
                 default:
                     // * Invalid or unimplemented method
+                    log(`Invalid or unimplemented method`, payload.method);
                     resolve(false);
             }
         });
@@ -168,6 +170,10 @@ export const inject = () => {
     $injection.setAttribute('async', 'false');
     $injection.setAttribute('src', browser.runtime.getURL('ethereum/index.js'));
     document.body.insertBefore($injection, document.body.firstChild);
+
+    log('injected');
 };
+
+log(`loaded`);
 
 export default Ethereum;

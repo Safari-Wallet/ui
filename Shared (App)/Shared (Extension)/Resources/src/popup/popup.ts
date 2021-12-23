@@ -1,181 +1,57 @@
-import { Node } from 'typescript';
+import { getMessenger, OnMessage } from '../messaging';
+import { getErrorLogger, getLogger } from '../utils';
+import { render } from './templating';
+import { closeWindow } from './utils';
 
-type Optional<T> = T | null;
+// - MARK: Setup
 
-const main = () => {
-    let address = `0x`;
-    let balance = 0.0;
+export const log = getLogger('popup');
+export const error = getErrorLogger('popup');
+export const Messenger = getMessenger('popup', { logger: log });
 
-    let method = ``;
+export const chains = {
+    1: {
+        gasToken: `ETH`
+    }
+};
 
-    // For message signing:
-    let from = ``;
-    let params = {};
+export const chainId: keyof typeof chains = 1;
 
-    const chains = {
-        1: {
-            gasToken: `ETH`
-        }
-    };
+// - MARK: Main
 
-    let chain: keyof typeof chains = 1;
+const onMessage: OnMessage = (methodName, handler) => {
+    log(`Listening to popup.${methodName}`);
 
-    const views = {
-        default: () => `
-            <h1>Safari Wallet</h1>
-                <div class="flex">
-                    <button id="cancel" class="button button--secondary">Cancel</button>
-                    <button id="connect" class="button button--primary">Connect</button>
-                </div>
-        `,
-        connectWallet: () => `
-            <h1>Connect to <span id="title"></span></h1>
-            <p class="subtitle"><span id="host"></span></p>
-            <p>When you connect your wallet, this dapp will be able to view the contents:</p>
-            <div class="field">
-                <label class="field__label" for="address">Address</label>
-                <input id="address" class="field__input" type="text" value="${address}" disabled>
-            </div>
-            <div class="field">
-                <label class="field__label" for="balance">ETH Balance</label>
-                <input id="balance" class="field__input" type="text" value="${balance} ${chains[chain].gasToken}" disabled>
-            </div>
-            <div class="flex">
-                <button id="cancel" class="button button--secondary">Cancel</button>
-                <button id="connect" class="button button--primary">Connect</button>
-            </div>
-        `,
-        signMessage: () => `
-            <h1>Sign Message</h1>
-            <div class="flex">
-                <button id="cancel" class="button button--secondary">Cancel</button>
-                <button id="sign" class="button button--primary">Sign</button>
-            </div>
-        `
-    };
+    browser.runtime.onMessage.addListener((request, e) => {
+        const { destination, method, params } = request;
 
-    const $ = <Q extends string>(
-        query: Q
-    ): Optional<Q extends `#${string}` ? Element : NodeListOf<Element>> =>
-        (query[0] === `#`
-            ? document.querySelector(query)
-            : document.querySelectorAll(query)) as any;
+        if (destination !== `popup`) return;
+        if (method !== methodName) return;
 
-    const closeWindow = () => window.close();
-
-    const connectWallet = () => {
-        browser.runtime.sendMessage({
-            message: {
-                message: `eth_requestAccounts`
-            }
-        });
-        closeWindow();
-    };
-
-    const signMessage = () => {
-        /*
-        TODO
-        browser.runtime.sendMessage({
-            message: {
-                from,
-                message: `eth_signTypedData_v3`,
-                params,
-            },
-        });
-        */
-        closeWindow();
-    };
-
-    const refreshView = () => {
-        const $body = $(`#body`);
-
-        switch (method) {
-            case `eth_requestAccounts`:
-                if ($body) {
-                    $body.innerHTML = views.connectWallet();
-                }
-
-                $(`#cancel`)?.addEventListener(`click`, closeWindow);
-                $(`#connect`)?.addEventListener(`click`, connectWallet);
-                (browser.tabs as any).query(
-                    {
-                        active: true,
-                        currentWindow: true
-                    },
-                    (tabs: browser.tabs.Tab[]) => {
-                        const tab = tabs[0];
-
-                        const $title = $(`#title`);
-                        if ($title && tab.title) $title.textContent = tab.title;
-
-                        const $host = $(`#host`);
-                        if ($host && tab.url)
-                            $host.textContent = new URL(tab.url).host;
-                    }
-                );
-                break;
-            case `eth_signTypedData_v3`:
-                if ($body) {
-                    $body.innerHTML = views.signMessage();
-                }
-
-                $(`#cancel`)?.addEventListener(`click`, closeWindow);
-                $(`#sign`)?.addEventListener(`click`, signMessage);
-                break;
-            default:
-                if ($body) {
-                    $body.innerHTML = views.default();
-                }
-        }
-    };
-
-    document.addEventListener(`DOMContentLoaded`, () => {
-        browser.runtime.onMessage.addListener(
-            (request, sender, sendResponse) => {
-                (browser.tabs as any).query(
-                    {
-                        active: true,
-                        currentWindow: true
-                    },
-                    (tabs: browser.tabs.Tab[]) => {
-                        if (tabs.length === 0) return;
-
-                        // * This updates the default address
-                        if (typeof request.message.address !== `undefined`) {
-                            address = request.message.address;
-                        }
-                        // * This updates the gas token balance of the default address on the selected network
-                        if (typeof request.message.balance !== `undefined`) {
-                            balance = request.message.balance;
-                        }
-                        // * This updates the view based on the current method
-                        if (typeof request.message.method !== `undefined`) {
-                            method = request.message.method;
-                            if (method === `eth_signTypedData_v3`) {
-                                from = request.message.from;
-                                params = request.message.params;
-                            }
-                            refreshView();
-                        }
-                        // * This forwards messages from background.js to content.js
-                        if (
-                            typeof request.message.message !== `undefined` &&
-                            tabs[0].id
-                        ) {
-                            browser.tabs.sendMessage(tabs[0].id, {
-                                message: request.message.message
-                            });
-                        }
-                    }
-                );
-            }
+        log(
+            `Received method '${method}' with params: ${JSON.stringify(params)}`
         );
-        browser.runtime.sendMessage({
-            message: {
-                message: `get_state`
-            }
-        });
+
+        handler(params, '');
     });
 };
 
-main();
+document.addEventListener(`DOMContentLoaded`, () => {
+    onMessage('updateState', ({ address, balance }) => {
+        const onConnectWallet = () => {
+            Messenger.sendToEthereumJs('walletConnected', {
+                address,
+                balance,
+                chainId
+            });
+            closeWindow();
+        };
+
+        render('connectWallet', { address, balance, onConnectWallet });
+    });
+
+    render('loading');
+    Messenger.sendToBackground('getState');
+
+    log(`loaded`);
+});
