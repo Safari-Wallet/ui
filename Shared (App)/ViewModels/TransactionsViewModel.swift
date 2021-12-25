@@ -147,8 +147,7 @@ final class TransactionsListViewModel: ObservableObject {
                 return tx
             }
             var tx = tx
-            // TODO: method name parser -> Set Address instead of setAddress(address)
-            tx.methodName = input.methodName
+            tx.methodName = input.methodName.camelToTitleCased()
             // TODO: Parse AnyObjects into specific types
             let stringInputs = input.inputs.reduce([String:String](), { dict, input in
                 var dict = dict
@@ -186,6 +185,19 @@ final class TransactionsListViewModel: ObservableObject {
         }
         for contract in contracts {
             self.contracts[contract.address] = contract
+        }
+    }
+}
+
+private extension String {
+    
+    func camelToTitleCased() -> String {
+        unicodeScalars.reduce("") {
+            if CharacterSet.uppercaseLetters.contains($1) {
+                return ($0 + " " + String($1))
+            } else {
+                return ($0 + String($1)).capitalized
+            }
         }
     }
 }

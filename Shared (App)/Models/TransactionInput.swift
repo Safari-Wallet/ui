@@ -7,6 +7,7 @@
 
 struct TransactionInput {
     let methodName: String
+    let methodSignature: String
     let methodHash: String
     let inputs: [String: Any]
 }

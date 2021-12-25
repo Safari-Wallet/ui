@@ -29,7 +29,8 @@ struct TransactionDecoder: TransactionDecodable {
                 let methodHash = data[0 ..< 4].dataToHexString()
                 if methodHash == decodedMethodHash, let decodedInput = element?.decodeInputData(data) {
                     return TransactionInput(
-                        methodName: signature,
+                        methodName: function.name ?? "",
+                        methodSignature: signature,
                         methodHash: methodHash,
                         inputs: decodedInput
                     )
