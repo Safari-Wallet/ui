@@ -26,9 +26,10 @@ struct TransactionsView: View {
                     List {
                         switch viewModel.state {
                         case .loading:
-                            ForEach(1..<6) { transactionGroup in
-                                //                            TransactionRow(tx: .placeholder)
-                                //                                .redacted(reason: .placeholder)
+                            HStack {
+                                Spacer()
+                                ProgressView()
+                                Spacer()
                             }
                         case .fetched(txs: let txs):
                             ForEach(txs) { transactionGroup in

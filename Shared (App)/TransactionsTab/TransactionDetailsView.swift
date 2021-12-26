@@ -40,7 +40,7 @@ struct TransactionDetailsView: View {
                                 .font(.title2)
                                 .bold()
                             ForEach(input.sorted(by: >), id: \.key) { key, value in
-                                HStack {
+                                VStack(alignment: .leading, spacing: 10) {
                                     Text(key)
                                         .bold()
                                     Text(value)

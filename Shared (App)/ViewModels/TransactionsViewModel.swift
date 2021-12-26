@@ -142,21 +142,16 @@ final class TransactionsListViewModel: ObservableObject {
             guard let contractAddress = tx.transactions.first?.to,
                   let contract = contracts[contractAddress.address],
                   let txInput = tx.inputData,
-                  let input = transactionDecoder.decodeInput(txInput, with: contract),
+                  let input = transactionDecoder.decode(input: txInput, with: contract),
                   TransactionType(tx.type) == .contractExecution else {
                 return tx
             }
             var tx = tx
-            tx.methodName = input.methodName.camelToTitleCased()
-            // TODO: Parse AnyObjects into specific types
-            let stringInputs = input.inputs.reduce([String:String](), { dict, input in
-                var dict = dict
-                dict[input.key] = input.value as? String ?? "n/a"
-                return dict
-            })
+            tx.methodName = input.method.name.camelToTitleCased()
+            let stringInputs = transactionInputParser.parseToStringValues(input: input)
             tx.inputDescription = transactionInputParser.parse(
                 input: stringInputs,
-                methodHash: input.methodHash,
+                methodHash: input.method.hash,
                 contractAddress: contractAddress.address
             )
             tx.input = stringInputs
@@ -167,12 +162,12 @@ final class TransactionsListViewModel: ObservableObject {
     @MainActor
     private func fetchContracts(fromTxs txs: [TransactionGroup]) async {
         var contracts = [Contract]()
-        var addressSet = Set<RawAddress>()
+        var addresses = Set<RawAddress>()
         await withTaskGroup(of: Contract?.self) { [weak self] group in
             guard let self = self else { return }
             // Avoids fetching duplicate addresses by adding to a Set
-            txs.forEach { addressSet.insert($0.toAddress) }
-            for address in addressSet {
+            txs.forEach { addresses.insert($0.toAddress) }
+            for address in addresses {
                 guard self.contracts[address] == nil else { continue }
                 group.addTask {
                     return try? await self.contractService.fetchContractDetails(forAddress: address)
