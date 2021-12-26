@@ -40,6 +40,14 @@ struct TransactionGroup: Comparable, Identifiable {
     
     var contractName: String?
     
+    var inputData: String?
+    
+    var methodName: String?
+    
+    var input: [String: String]?
+    
+    var inputDescription: String?
+    
     static func < (lhs: TransactionGroup, rhs: TransactionGroup) -> Bool {
         guard let lhsBlock = lhs.transactions.first?.block.intValue,
               let rhsBlock = rhs.transactions.first?.block.intValue else {

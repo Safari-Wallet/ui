@@ -17,18 +17,36 @@ struct TransactionDetailsView: View {
             ForEach(group.transactions, id: \.source) { transaction in
                 if let alchemyTransfer = transaction as? AlchemyAssetTransfer {
                     VStack {
-                        Text(alchemyTransfer.source).font(.title)
+                        Text(alchemyTransfer.source)
+                            .font(.title)
+                            .bold()
                         Text(alchemyTransfer.description)
                     }
                 } else if let covalentTransaction = transaction as? Covalent.Transaction {
                     VStack {
-                        Text(covalentTransaction.source).font(.title)
+                        Text(covalentTransaction.source)
+                            .font(.title)
+                            .bold()
                         Text(covalentTransaction.description)
                     }
                 } else if let unmarshalTransaction = transaction as? Unmarshal.TokenTransaction {
-                    VStack {
-                        Text(unmarshalTransaction.source).font(.title)
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text(unmarshalTransaction.source)
+                            .font(.title)
+                            .bold()
                         Text(unmarshalTransaction.description)
+                        if let input = group.input {
+                            Text("Transaction input")
+                                .font(.title2)
+                                .bold()
+                            ForEach(input.sorted(by: >), id: \.key) { key, value in
+                                VStack(alignment: .leading, spacing: 10) {
+                                    Text(key)
+                                        .bold()
+                                    Text(value)
+                                }
+                            }
+                        }
                     }
                 }
             }

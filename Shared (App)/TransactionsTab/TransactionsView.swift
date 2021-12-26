@@ -26,16 +26,17 @@ struct TransactionsView: View {
                     List {
                         switch viewModel.state {
                         case .loading:
-                            ForEach(1..<6) { transactionGroup in
-                                //                            TransactionRow(tx: .placeholder)
-                                //                                .redacted(reason: .placeholder)
+                            HStack {
+                                Spacer()
+                                ProgressView()
+                                Spacer()
                             }
                         case .fetched(txs: let txs):
                             ForEach(txs) { transactionGroup in
                                 NavigationLink(destination: TransactionDetailsView(group: transactionGroup)) {
                                     TransactionRowView(
                                         txType: TransactionType(transactionGroup.type),
-                                        description: transactionGroup.description,
+                                        description: transactionGroup.inputDescription ?? transactionGroup.methodName ?? transactionGroup.description,
 //                                        toAddress: transactionGroup.toAddress,
                                         toAddress: transactionGroup.contractName ?? "",
                                         amount: transactionGroup.value
