@@ -23,7 +23,7 @@ class TransactionDecoderTests: XCTestCase {
     }
     
     func testDecodesValidTxInput() {
-        let txInput = decoder.decodeInput(mockTxInput, with: mockContract())
+        let txInput = decoder.decode(input: mockTxInput, with: mockContract())
         
         XCTAssertNotNil(txInput)
         XCTAssertEqual(txInput?.methodName, "registerWithConfig(string,address,uint256,bytes32,address,address)")
@@ -33,19 +33,19 @@ class TransactionDecoderTests: XCTestCase {
     }
     
     func testDecodeNonMatchingABIReturnsNil() {
-        let txInput = decoder.decodeInput("0x12345", with: mockContract(abi: erc20ABI))
+        let txInput = decoder.decode(input: "0x12345", with: mockContract(abi: erc20ABI))
         
         XCTAssertNil(txInput)
     }
     
     func testDecodeInvalidTxInputReturnsNil() {
-        let txInput = decoder.decodeInput("0x12345", with: mockContract())
+        let txInput = decoder.decode(input: "0x12345", with: mockContract())
         
         XCTAssertNil(txInput)
     }
     
     func testDecodeInvalidAbiReturnsNil() {
-        let txInput = decoder.decodeInput(mockTxInput, with: mockContract(abi: ""))
+        let txInput = decoder.decode(input: mockTxInput, with: mockContract(abi: ""))
         
         XCTAssertNil(txInput)
     }
