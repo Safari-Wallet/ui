@@ -12,8 +12,9 @@ import MEWwalletKit
 extension WalletManager: SafariWalletCoreDelegate {
     
     func addresses() -> [String]? {
-        guard let address = defaultAddress else { return nil }
-        return [address.address.debugDescription]
+        guard let bundles = addressBundles, let index = defaultAddressBundleIndex else { return nil }
+        let defaultBundle = bundles[index]
+        return [defaultBundle.addresses[defaultBundle.defaultAddressIndex].address.address]
     }
     
     func client() -> EthereumClient? {

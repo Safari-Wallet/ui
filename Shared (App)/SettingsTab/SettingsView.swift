@@ -16,50 +16,56 @@ struct SettingsView: View {
     @State private var selectedNetworkIndex = 0
     
 //    @State private var wallets: [String] = []
-    @State private var selectedWalletIndex = 0
+//    @State private var selectedWalletIndex = manager.defaultAddressBundleIndex
     
 //    @State private var addresses: [String] = []
-    @State private var selectedAddressIndex = 0
+//    @State private var selectedAddressIndex = 0
         
     var body: some View {
 
         Form {
-            /*
-            // MARK: - Wallet selection
-            Section(header: Text("Wallet")) {
-                let wallets = manager.wall
-                Picker(selection: $selectedWalletIndex, label: Text("")) {
-                    ForEach(0 ..< wallets.count, id: \.self) { i in
-                        Text(wallets[i]).tag(i)
+            let _ = print("⚠️ # of bundles: \(manager.addressBundles?.count ?? -1)")
+            if let addressBundles = manager.addressBundles, addressBundles.count > 0 {
+                let _ = print("⚠️ found address bundles")
+                // MARK: - Wallet selection
+                Section(header: Text("Wallet")) {
+                    Picker("HD Wallets", selection: $manager.defaultAddressBundleIndex) {
+                        ForEach(0 ..< addressBundles.count) { i in
+                            Text(addressBundles[i].walletName ?? "Wallet \(i)")
+                        }
                     }
+                    .labelsHidden()
+                    .pickerStyle(.inline)
+//                    .onChange(of: selectedWalletIndex) { tag in
+//                        Task {
+//                            try? await manager.setDefaultWallet(addressBundles[tag])
+////                            await reloadWallet()
+//                        }
+//                    }
                 }
-                .labelsHidden()
-                .pickerStyle(.inline)
-                .onChange(of: selectedWalletIndex) { tag in
-                    Task {
-                        try? await manager.setDefaultWallet(wallets[tag])
-                        await reloadWallet()
-                    }
+                
+                // MARK: - Accounts selection
+                Section(header: Text("Accounts")) {
+                        
+//                        Picker("Accounts", selection: manager.$defaultAddressBundleIndex) {
+//                            ForEach(0 ..< addressBundles.count) { i in
+//                                Text(addressBundles[i].walletName)
+//                            }
+//                        }
+//                        .labelsHidden()
+//                        .pickerStyle(.inline)
+//                        .onChange(of: selectedWalletIndex) { tag in
+//                            Task {
+//                                try? await manager.setDefaultWallet(addressBundles[tag])
+//                                await reloadWallet()
+//                            }
+//                        }
                 }
-            }
-            .task {
-                await self.reloadWallet(firstPass: true)
-            }
-            
-            // MARK: - Accounts selection
-            Section(header: Text("Selected account in wallet")) {
-                Picker(selection: $selectedAddressIndex, label: Text("")) {
-                    ForEach(0 ..< manager.addresses()?.count addresses.count, id: \.self) { i in
-                        Text(addresses[i]).tag(i)
-                    }
-                }
-                .labelsHidden()
-                .pickerStyle(.inline)
-                .onChange(of: selectedAddressIndex) { tag in                    
-                    manager.setDefaultAddress(self.addresses[tag])
-                }
-            }
-
+            }            
+//            .task {
+//                await self.reloadWallet(firstPass: true)
+//            }
+        
             // MARK: - Network selection
             Section(header: Text("Network")) {
                 Picker(selection: $selectedNetworkIndex, label: Text("")) {
@@ -70,10 +76,12 @@ struct SettingsView: View {
                 .labelsHidden()
                 .pickerStyle(.inline)
                 .onChange(of: selectedNetworkIndex) { tag in
-                    if tag == 1 {
-                        manager.setDefaultNetwork(.ropsten)
-                    } else {
-                        manager.setDefaultNetwork(.ethereum)
+                    Task {
+                        if tag == 1 {
+                            try await manager.setup(network: .ropsten)
+                        } else {
+                            try await manager.setup(network: .ethereum)
+                        }
                     }
                 }
                 .onAppear {
@@ -84,7 +92,7 @@ struct SettingsView: View {
                     }
                     
                 }
-            } */
+            }
         }
     }
     

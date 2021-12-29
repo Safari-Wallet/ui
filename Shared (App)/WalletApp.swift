@@ -21,13 +21,27 @@ struct WalletApp: App {
         WindowGroup {
             ContentView(isOnBoardingPresented: $shouldPresentOnboarding)
                 .task {
-                    do {
-                        shouldPresentOnboarding = try await isOnboardingNeeded()
-                    } catch {
-                        print(error.localizedDescription)
+                    try? await manager.setup()
+                    print("bundles: \(manager.addressBundles?.count ?? -1)")
+                    guard let bundles = manager.addressBundles, bundles.count > 0 else {
+                        self.shouldPresentOnboarding = true
+                        return
                     }
-                 
                 }
+//                .task {
+//                    do {
+//                        // If the app has no address bundles, show Restore or Create Wallet view
+//
+////                        assert(Thread.isMainThread)
+//                        if try await hasAccounts() == false {
+//                            shouldPresentOnboarding = true
+//                        }
+////                        shouldPresentOnboarding = try await !hasAccounts()
+//                    } catch {
+//                        print(error.localizedDescription)
+//                    }
+//
+//                }
                 .onOpenURL { url in handle(url: url) }
                 .environmentObject(manager)
         }
@@ -49,11 +63,13 @@ struct WalletApp: App {
 
 extension WalletApp {
     
-    func isOnboardingNeeded() async throws -> Bool {
-        try await manager.setup()
-        guard let bundles = manager.addressBundles else { return true }
-        return bundles.count == 0
-    }
+//    @MainActor
+//    func hasAccounts() async throws -> Bool {
+//        assert(Thread.isMainThread)
+//        try await manager.setup()
+//        guard let bundles = manager.addressBundles, bundles.count > 0 else { return false }
+//        return true
+//    }
 }
 
 // MARK: - Handle open URL

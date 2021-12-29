@@ -144,6 +144,6 @@ struct ConfirmMnemonicView_Previews: PreviewProvider {
     @State static var userHasConfirmedRecoveryPhrase = false
     static let bip39 = try! BIP39(mnemonic: "abandon amount liar amount expire adjust cage candy arch gather drum buyer")
     static var previews: some View {
-        ConfirmMnemonicView(state:$state, tabIndex: $tabIndex, bip39: bip39) //, userHasConfirmedRecoveryPhrase: $userHasConfirmedRecoveryPhrase)
+        ConfirmMnemonicView(state:$state, tabIndex: $tabIndex, bip39: bip39)
     }
 }

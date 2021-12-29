@@ -20,7 +20,7 @@ class WalletTests: XCTestCase {
     override func setUp() async throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         self.manager = WalletManager()
-        try await manager.deleteAllWalletsAndBundles()
+        try await manager.deleteAllWalletsAndBundles(allFiles: true)
     }
 
     override func tearDownWithError() throws {
@@ -46,7 +46,9 @@ class WalletTests: XCTestCase {
         let id = UUID()
         let bundle = AddressBundle(id: id, type: .keystorePassword, network: .ethereum, addresses: addresses)
         try await bundle.save()
-        let recoveredAddresses = try await AddressBundle.loadAddressBundle(id: id, network: .ethereum).addresses.map{ $0.address }
+
+        let recoveredBundle = try await AddressBundle.load(id: id, network: .ethereum)
+        let recoveredAddresses = recoveredBundle.addresses.map{ $0.address }
         XCTAssertEqual(addresses, recoveredAddresses)
     }
     

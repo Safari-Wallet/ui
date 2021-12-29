@@ -115,8 +115,7 @@ extension CreatePasswordView {
         let manager = WalletManager()
         try await manager.setup()
         guard let bundles = manager.addressBundles, let index = bundles.firstIndex(of: bundle) else { return }
-        manager.setDefaultAddressBundle(index: index)
-        manager.setDefaultAddress(index: 0)
+        manager.defaultAddressBundleIndex = index
         
         // 7. Print debug
         #if DEBUG

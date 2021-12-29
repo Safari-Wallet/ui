@@ -16,8 +16,9 @@ struct SharedDocument {
         url = try URL.sharedContainerURL(filename: filename)
     }
     
-    func read() async throws -> Data {
+    func read() async throws -> Data {        
         let url = try await NSFileCoordinator().coordinate(readingItemAt: self.url)
+        assert(FileManager.default.fileExists(atPath: url.path))
         return try Data(contentsOf: url)
     }
     

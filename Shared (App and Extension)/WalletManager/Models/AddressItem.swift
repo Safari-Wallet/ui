@@ -51,7 +51,7 @@ class AddressItem: Codable, Identifiable, ObservableObject {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         ensName = try container.decode(String?.self, forKey: .ensName)
         accountName = try container.decode(String?.self, forKey: .accountName)
-        bundleUUID = try container.decode(UUID.self, forKey: .accountName)
+        bundleUUID = try container.decode(UUID.self, forKey: .bundleUUID)
         address = try container.decode(Address.self, forKey: .address)
         derivationIndex = try container.decode(Int.self, forKey: .derivationIndex)
         id = derivationIndex

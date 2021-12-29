@@ -18,7 +18,7 @@ class AddressBundle: Identifiable, ObservableObject, Codable {
     
     @Published private (set) var addresses: [AddressItem]
     
-    var lastSelectedIndex: Int = 0
+    @Published var defaultAddressIndex: Int = 0
     
     let type: PrivateKeyType
     
@@ -121,9 +121,11 @@ extension AddressBundle {
         return bundles
     }
     
-    static func loadAddressBundle(id: UUID, network: Network) async throws -> AddressBundle {
-        let document = try SharedDocument(filename: id.uuidString.appendPathExtension(network.symbol).appendPathExtension(ADDRESSBUNDLE_FILE_EXTENSION))
-        guard let data = try? await document.read(), let bundle = try? JSONDecoder().decode(AddressBundle.self, from: data) else { throw WalletError.unexpectedResponse("") }
+    static func load(id: UUID, network: Network) async throws -> AddressBundle {
+        let filename = try id.uuidString.appendPathExtension(network.symbol).appendPathExtension(ADDRESSBUNDLE_FILE_EXTENSION)
+        let document = try SharedDocument(filename: filename)
+        let data = try await document.read()
+        let bundle = try JSONDecoder().decode(AddressBundle.self, from: data)
         return bundle
     }
     

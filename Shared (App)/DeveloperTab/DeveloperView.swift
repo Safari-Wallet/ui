@@ -23,7 +23,7 @@ struct DeveloperView: View {
     var body: some View {
         VStack {
             
-            Text("Developer settings")
+            Text("Developer tools")
                 .font(.title)
                 .padding()
             
