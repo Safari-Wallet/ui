@@ -1,5 +1,5 @@
 //
-//  AddressItem.swift
+//  Address.swift
 //  Wallet
 //
 //  Created by Ronald Mannak on 11/17/21.
@@ -10,7 +10,7 @@ import SwiftUI
 import MEWwalletKit
 import SafariWalletCore
 
-class AddressItem: Codable, Identifiable, ObservableObject {
+class Address: Codable, Identifiable, ObservableObject {
     
     let id: Int
     
@@ -21,7 +21,7 @@ class AddressItem: Codable, Identifiable, ObservableObject {
     
     let bundleUUID: UUID
     
-    let address: Address
+    let address: MEWwalletKit.Address
     
     let derivationIndex: Int
         
@@ -33,7 +33,7 @@ class AddressItem: Codable, Identifiable, ObservableObject {
         case derivationIndex
     }
     
-    init(address: Address, derivationIndex: Int, bundleUUID: UUID, accountName: String?) {
+    init(address: MEWwalletKit.Address, derivationIndex: Int, bundleUUID: UUID, accountName: String?) {
         self.id = derivationIndex
         self.accountName = accountName
         self.bundleUUID = bundleUUID
@@ -52,7 +52,7 @@ class AddressItem: Codable, Identifiable, ObservableObject {
         ensName = try container.decode(String?.self, forKey: .ensName)
         accountName = try container.decode(String?.self, forKey: .accountName)
         bundleUUID = try container.decode(UUID.self, forKey: .bundleUUID)
-        address = try container.decode(Address.self, forKey: .address)
+        address = try container.decode(MEWwalletKit.Address.self, forKey: .address)
         derivationIndex = try container.decode(Int.self, forKey: .derivationIndex)
         id = derivationIndex
     }

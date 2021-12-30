@@ -55,10 +55,10 @@
 		F81BAD47274601F1007521BE /* AddressBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81BAD45274601F1007521BE /* AddressBundle.swift */; };
 		F81BAD48274601F1007521BE /* AddressBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81BAD45274601F1007521BE /* AddressBundle.swift */; };
 		F81BAD49274601F1007521BE /* AddressBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81BAD45274601F1007521BE /* AddressBundle.swift */; };
-		F81BAD4B2746375A007521BE /* AddressItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81BAD4A2746375A007521BE /* AddressItem.swift */; };
-		F81BAD4C2746375A007521BE /* AddressItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81BAD4A2746375A007521BE /* AddressItem.swift */; };
-		F81BAD4D2746375A007521BE /* AddressItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81BAD4A2746375A007521BE /* AddressItem.swift */; };
-		F81BAD4E2746375A007521BE /* AddressItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81BAD4A2746375A007521BE /* AddressItem.swift */; };
+		F81BAD4B2746375A007521BE /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81BAD4A2746375A007521BE /* Address.swift */; };
+		F81BAD4C2746375A007521BE /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81BAD4A2746375A007521BE /* Address.swift */; };
+		F81BAD4D2746375A007521BE /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81BAD4A2746375A007521BE /* Address.swift */; };
+		F81BAD4E2746375A007521BE /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81BAD4A2746375A007521BE /* Address.swift */; };
 		F81BAD5027463B2C007521BE /* PrivateKeyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81BAD4F27463B2C007521BE /* PrivateKeyType.swift */; };
 		F81BAD5127463B2C007521BE /* PrivateKeyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81BAD4F27463B2C007521BE /* PrivateKeyType.swift */; };
 		F81BAD5227463B2C007521BE /* PrivateKeyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81BAD4F27463B2C007521BE /* PrivateKeyType.swift */; };
@@ -250,7 +250,7 @@
 		4A19E6DF271E673C0096027F /* JsonRpcClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonRpcClientTest.swift; sourceTree = "<group>"; };
 		F8124BB7271E03DF00F06D5D /* SigningTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigningTests.swift; sourceTree = "<group>"; };
 		F81BAD45274601F1007521BE /* AddressBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressBundle.swift; sourceTree = "<group>"; };
-		F81BAD4A2746375A007521BE /* AddressItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressItem.swift; sourceTree = "<group>"; };
+		F81BAD4A2746375A007521BE /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		F81BAD4F27463B2C007521BE /* PrivateKeyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKeyType.swift; sourceTree = "<group>"; };
 		F81BAD99274E0171007521BE /* WalletManager+Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalletManager+Storage.swift"; sourceTree = "<group>"; };
 		F81BAD9E274E03E8007521BE /* WalletManager+debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalletManager+debug.swift"; sourceTree = "<group>"; };
@@ -475,7 +475,7 @@
 			children = (
 				F81BAD4F27463B2C007521BE /* PrivateKeyType.swift */,
 				F81BAD45274601F1007521BE /* AddressBundle.swift */,
-				F81BAD4A2746375A007521BE /* AddressItem.swift */,
+				F81BAD4A2746375A007521BE /* Address.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -902,7 +902,7 @@
 				F8ABEF3827129797007F7D11 /* WalletManager.swift in Sources */,
 				F8C5B0022723BC5900B54FBD /* keys.swift in Sources */,
 				F81BADA4274EDA4D007521BE /* Keystore.swift in Sources */,
-				F81BAD4B2746375A007521BE /* AddressItem.swift in Sources */,
+				F81BAD4B2746375A007521BE /* Address.swift in Sources */,
 				F81BADA9275985CA007521BE /* KeychainPasswordItem+Convenience.swift in Sources */,
 				0A8BB794272E719800DFC647 /* TransactionsViewModel.swift in Sources */,
 				F8ABEED127124A8C007F7D11 /* FileObserver.swift in Sources */,
@@ -949,7 +949,7 @@
 				F8ABEECA27124A8C007F7D11 /* Constants.swift in Sources */,
 				F8C5B0032723BC5900B54FBD /* keys.swift in Sources */,
 				F81BADA5274EDA4D007521BE /* Keystore.swift in Sources */,
-				F81BAD4C2746375A007521BE /* AddressItem.swift in Sources */,
+				F81BAD4C2746375A007521BE /* Address.swift in Sources */,
 				F81BADAA275985CA007521BE /* KeychainPasswordItem+Convenience.swift in Sources */,
 				0A8BB795272E719800DFC647 /* TransactionsViewModel.swift in Sources */,
 				F8ABEEDA27124A8C007F7D11 /* WalletError.swift in Sources */,
@@ -962,7 +962,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A0E1ED7270687AE00061EA6 /* SafariWebExtensionHandler.swift in Sources */,
-				F81BAD4D2746375A007521BE /* AddressItem.swift in Sources */,
+				F81BAD4D2746375A007521BE /* Address.swift in Sources */,
 				F81BAD5227463B2C007521BE /* PrivateKeyType.swift in Sources */,
 				F8ABEED327124A8C007F7D11 /* FileObserver.swift in Sources */,
 				F8ABEF4E27138E1D007F7D11 /* String.swift in Sources */,
@@ -990,7 +990,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A0E1ED8270687AE00061EA6 /* SafariWebExtensionHandler.swift in Sources */,
-				F81BAD4E2746375A007521BE /* AddressItem.swift in Sources */,
+				F81BAD4E2746375A007521BE /* Address.swift in Sources */,
 				F81BAD5327463B2C007521BE /* PrivateKeyType.swift in Sources */,
 				F8ABEED427124A8C007F7D11 /* FileObserver.swift in Sources */,
 				F8ABEF4F27138E1D007F7D11 /* String.swift in Sources */,

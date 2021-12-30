@@ -16,7 +16,7 @@ class AddressBundle: Identifiable, ObservableObject, Codable {
     /// Human readable, end-user defined name
     @Published var walletName: String? 
     
-    @Published private (set) var addresses: [AddressItem]
+    @Published private (set) var addresses: [Address]
     
     @Published var defaultAddressIndex: Int = 0
     
@@ -30,7 +30,7 @@ class AddressBundle: Identifiable, ObservableObject, Codable {
     ///   - type: Private key type (keystore, hardware, etc)
     ///   - network: Network (e.g. Ethereum or Ropston)
     ///   - addresses: AddressItems
-    init(id: UUID, walletName: String? = nil, type: PrivateKeyType, network: Network = .ethereum, addresses: [AddressItem]) {
+    init(id: UUID, walletName: String? = nil, type: PrivateKeyType, network: Network = .ethereum, addresses: [Address]) {
         self.id = id
         self.walletName = walletName
         self.addresses = addresses
@@ -38,13 +38,13 @@ class AddressBundle: Identifiable, ObservableObject, Codable {
         self.network = network
     }
     
-    init(id: UUID, type: PrivateKeyType, network: Network = .ethereum, addresses: [Address]) {
+    init(id: UUID, type: PrivateKeyType, network: Network = .ethereum, addresses: [MEWwalletKit.Address]) {
         self.id = id
         self.type = type
         self.network = network
         self.addresses = []
         let items = addresses.enumerated().map { (index, address) in
-            AddressItem(address: address, derivationIndex: index, bundleUUID: id, accountName: nil)
+            Address(address: address, derivationIndex: index, bundleUUID: id, accountName: nil)
         }
         self.addresses = items
     }
@@ -61,7 +61,7 @@ class AddressBundle: Identifiable, ObservableObject, Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(UUID.self, forKey: .id)
         walletName = try container.decode(String?.self, forKey: .walletName)
-        addresses = try container.decode([AddressItem].self, forKey: .addresses)
+        addresses = try container.decode([Address].self, forKey: .addresses)
         type = try container.decode(PrivateKeyType.self, forKey: .type)
         network = try container.decode(Network.self, forKey: .network)
     }

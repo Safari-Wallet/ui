@@ -66,9 +66,9 @@ struct DeveloperView: View {
                         //https://docs.alchemy.com/alchemy/documentation/enhanced-apis/transfers-api
                         let transfers = try await client.alchemyAssetTransfers(fromBlock: Block(rawValue: "A97AB8"),
                                                                                toBlock: Block(rawValue: "A97CAC"),
-                                                                               fromAddress: Address(address: "3f5CE5FBFe3E9af3971dD833D26bA9b5C936f0bE"),
+                                                                               fromAddress: MEWwalletKit.Address(address: "3f5CE5FBFe3E9af3971dD833D26bA9b5C936f0bE"),
                                                                                contractAddresses: [
-                                                                                  Address(address: "7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9")!
+                                                                                MEWwalletKit.Address(address: "7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9")!
                                                                                ],
                                                                                excludeZeroValue: true,
                                                                                maxCount: 5)
