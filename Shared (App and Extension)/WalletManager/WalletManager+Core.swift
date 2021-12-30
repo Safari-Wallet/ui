@@ -14,7 +14,7 @@ extension WalletManager: SafariWalletCoreDelegate {
     func addresses() -> [String]? {
         guard let bundles = addressBundles, let index = defaultAddressBundleIndex else { return nil }
         let defaultBundle = bundles[index]
-        return [defaultBundle.addresses[defaultBundle.defaultAddressIndex].address.address]
+        return [defaultBundle.addresses[defaultBundle.defaultAddressIndex].addressString]
     }
     
     func client() -> EthereumClient? {
@@ -32,7 +32,7 @@ extension WalletManager: SafariWalletCoreDelegate {
         
         for bundle in bundles {
             for (index, bundleAddress) in bundle.addresses.enumerated() {
-                if address == bundleAddress.address.address {
+                if address == bundleAddress.addressString {
                     return try await bundle.account(forAddressIndex: index, password: password)
                 }
             }
