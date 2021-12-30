@@ -136,6 +136,34 @@ extension AddressBundle {
     }
 }
 
+// MARK: -- NSUserDefaults
+
+extension AddressBundle {
+    
+    func setDefault(index: Int) {
+        guard index < addresses.count, let sharedContainer = UserDefaults(suiteName: APP_GROUP) else {
+            assertionFailure()
+            return
+        }
+        
+        sharedContainer.set(self.id.uuidString, forKey: "DefaultAddressBundle")
+        sharedContainer.set(network.name, forKey: "DefaultNetwork")
+        sharedContainer.synchronize()
+    }
+    
+    static func loadDefault() async throws -> AddressBundle {
+        guard
+            let sharedContainer = UserDefaults(suiteName: APP_GROUP),
+            let bundleID = sharedContainer.string(forKey: "DefaultAddressBundle"),
+            let networkName = sharedContainer.string(forKey: "DefaultNetwork"),
+            let uuid = UUID(uuidString: bundleID)
+        else {
+            throw WalletError.noDefaultWalletSet
+        }
+        return try await load(id: uuid, network: Network(name: networkName))
+    }    
+}
+
 extension AddressBundle {
     
     func account(forAddressIndex: Int, password: String?) async throws -> Account {
