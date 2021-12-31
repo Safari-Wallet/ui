@@ -73,27 +73,43 @@ extension AddressBundle {
 
 extension AddressBundle {
     
-    func setDefault(index: Int) {
-        guard index < addresses.count, let sharedContainer = UserDefaults(suiteName: APP_GROUP) else {
+    struct DefaultAddress: Codable {
+        let addressIndex: Int
+        let bundleUUID: UUID
+        let network: String
+        
+        static let key = "DefaultAddress"
+    }
+    
+    func setDefault() {
+        guard self.defaultAddressIndex < addresses.count, let sharedContainer = UserDefaults(suiteName: APP_GROUP) else {
             assertionFailure()
             return
         }
         
-        sharedContainer.set(self.id.uuidString, forKey: "DefaultAddressBundle")
-        sharedContainer.set(network.name, forKey: "DefaultNetwork")
-        sharedContainer.synchronize()
+        let defaultAddress = DefaultAddress(addressIndex: defaultAddressIndex, bundleUUID: self.id, network: self.network.name)
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(defaultAddress) {
+            sharedContainer.set(encoded, forKey: DefaultAddress.key)
+            sharedContainer.synchronize()
+        }
     }
     
     static func loadDefault() async throws -> AddressBundle {
+        let decoder = JSONDecoder()
         guard
             let sharedContainer = UserDefaults(suiteName: APP_GROUP),
-            let bundleID = sharedContainer.string(forKey: "DefaultAddressBundle"),
-            let networkName = sharedContainer.string(forKey: "DefaultNetwork"),
-            let uuid = UUID(uuidString: bundleID)
+            let data = sharedContainer.object(forKey: DefaultAddress.key) as? Data,
+            let defaultAddress = try? decoder.decode(DefaultAddress.self, from: data)
         else {
             throw WalletError.noDefaultWalletSet
         }
-        return try await load(id: uuid, network: Network(name: networkName))
+                    
+        let bundle = try await load(id: defaultAddress.bundleUUID, network: Network(name: defaultAddress.network))
+        if defaultAddress.addressIndex < bundle.addresses.count {
+            bundle.defaultAddressIndex = 0 // Assuming addresses.count > 0
+        }
+        return bundle
     }
 }
 
