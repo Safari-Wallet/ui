@@ -6,17 +6,18 @@
 //
 
 import SwiftUI
+import MEWwalletKit
 
 struct ConfirmMnemonicView: View {
     
     @Binding var state: OnboardingState
     @Binding var tabIndex: Int
-    var mnemonic: RecoveryPhrase
+    let bip39: BIP39
     @State private var showingPasswordSheet = false
     @State private var walletWasSaved = false
-    
+        
     @State private var userPhrase = [String]() // ordered by user
-    @State private var shuffledPhrase: [String]?
+    @State var shuffledPhrase: [String]?
         
     private let selectedGridItemLayout = [GridItem(.adaptive(minimum: 100), alignment: .leading)]
     private let shuffledGridItemLayout = [GridItem(.adaptive(minimum: 100))]
@@ -25,7 +26,7 @@ struct ConfirmMnemonicView: View {
                 
         VStack {
             
-            if mnemonic.components.elementsEqual(userPhrase) {
+            if bip39.isEqual(to: userPhrase) {
                 Text("Recovery phrase reentered correctly")
                     .font(.title)
             } else {
@@ -41,7 +42,7 @@ struct ConfirmMnemonicView: View {
             Spacer()
             
             // MARK: - Grid of randomly shuffled seed
-            if let _ = self.shuffledPhrase, !mnemonic.components.elementsEqual(userPhrase) {
+            if let _ = self.shuffledPhrase, !bip39.isEqual(to: userPhrase) {
                 self.randomlyShuffledGrid
             } else {
                 Image(systemName: "checkmark.circle")
@@ -52,13 +53,13 @@ struct ConfirmMnemonicView: View {
             
                         
             // MARK: - Retry button if the seed is in the wrong order
-            if shuffledPhrase?.count == 0 && !mnemonic.components.elementsEqual(userPhrase) {
+            if shuffledPhrase?.count == 0 && !bip39.isEqual(to: userPhrase) {
                 Group {
                     Text("The recovery seed is not in the right order.")
                         .foregroundColor(.red)
                     Button(action: {
                         userPhrase = [String]()
-                        self.shuffledPhrase = mnemonic.shuffled
+                        self.shuffledPhrase = bip39.shuffle()!
                     }) {
                         Text("Retry")
                     }
@@ -67,7 +68,7 @@ struct ConfirmMnemonicView: View {
             }
             
             #if DEBUG
-            Text("hint: \(mnemonic.mnemonic)")
+            Text("hint: \(bip39.mnemonic!.joined(separator: " "))")
                 .font(.footnote)
             #endif
             HStack(spacing: 8) {
@@ -78,9 +79,9 @@ struct ConfirmMnemonicView: View {
                 Button("Next") {
                     showingPasswordSheet = true
                 }
-                .disabled(!mnemonic.components.elementsEqual(userPhrase))
+                .disabled(!bip39.isEqual(to: userPhrase))
                 .sheet(isPresented: $showingPasswordSheet) {
-                    CreatePasswordView(mnemonic: mnemonic.mnemonic, walletWasSaved: $walletWasSaved)
+                    CreatePasswordView(bip39: bip39, walletWasSaved: $walletWasSaved)
                         .onDisappear {
                             if walletWasSaved == true {
                                 state = .summary
@@ -91,9 +92,6 @@ struct ConfirmMnemonicView: View {
             .padding(.bottom, 32)
         }
         .padding()
-        .onAppear {
-            self.shuffledPhrase = mnemonic.shuffled
-        }
     }
         
     var userSelectedGrid: some View {
@@ -109,7 +107,7 @@ struct ConfirmMnemonicView: View {
                         Label(userPhrase[i], systemImage: "\(i+1).square.fill")
                             .frame(alignment: .leading)
                     }
-                    .disabled(mnemonic.components.elementsEqual(userPhrase))
+                    .disabled(bip39.isEqual(to: userPhrase))
                 } else {
                     Label("", systemImage: "\(i+1).square")
                 }
@@ -144,8 +142,8 @@ struct ConfirmMnemonicView_Previews: PreviewProvider {
     @State static var state: OnboardingState = .createWallet
     @State static var tabIndex: Int = 0
     @State static var userHasConfirmedRecoveryPhrase = false
-    static let mnemonic = RecoveryPhrase(mnemonic: "abandon amount liar amount expire adjust cage candy arch gather drum buyer")
+    static let bip39 = try! BIP39(mnemonic: "abandon amount liar amount expire adjust cage candy arch gather drum buyer")
     static var previews: some View {
-        ConfirmMnemonicView(state:$state, tabIndex: $tabIndex, mnemonic: mnemonic) //, userHasConfirmedRecoveryPhrase: $userHasConfirmedRecoveryPhrase)
+        ConfirmMnemonicView(state:$state, tabIndex: $tabIndex, bip39: bip39)
     }
 }

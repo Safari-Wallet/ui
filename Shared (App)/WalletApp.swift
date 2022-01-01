@@ -8,27 +8,42 @@
 import Foundation
 
 import SwiftUI
+import SafariWalletCore
 
 @main
 struct WalletApp: App {
     
+    @StateObject var manager = WalletManager()
     @State private var shouldPresentOnboarding = false
-    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
+    let userDefaultPublisher = NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification)
     
     var body: some Scene {
         WindowGroup {
             ContentView(isOnBoardingPresented: $shouldPresentOnboarding)
                 .task {
                     do {
-                        shouldPresentOnboarding = try isOnboardingNeeded()
+                        try await manager.setup()
                     } catch {
-                        print(error.localizedDescription)
+                        print("Unable to load default wallet: \(error.localizedDescription)")
+                        assert(Thread.isMainThread)
+                        shouldPresentOnboarding = true
+                    }
+                }
+                .onAppear{
+                    do {
+                        try migrate()
+                    } catch {
+                        print("Error migrating: \(error)")
                     }
                 }
                 .onOpenURL { url in handle(url: url) }
-        }
-        
+                .environmentObject(manager)
+                .onReceive(userDefaultPublisher) { output in
+                    print("⚠️ UserDefaults changed")
+                }
+        }        
     }
     
     func valueForKey(_ key: String, in items: [URLQueryItem]?) -> String? {
@@ -42,13 +57,19 @@ struct WalletApp: App {
     }
 }
 
-// MARK: - Onboarding
+// MARK: - App version migration
 
 extension WalletApp {
     
-    func isOnboardingNeeded() throws -> Bool {
-        return try !WalletManager().hasAccounts()
+    func migrate() throws {
+        guard let sharedContainer = UserDefaults(suiteName: APP_GROUP) else { throw WalletError.invalidAppGroupIdentifier(APP_GROUP) }
+        let build = sharedContainer.string(forKey: "build")
+        if build != Bundle.main.build {
+            sharedContainer.set(Bundle.main.build, forKey: "build")
+            sharedContainer.synchronize()
+        }
     }
+    
 }
 
 // MARK: - Handle open URL

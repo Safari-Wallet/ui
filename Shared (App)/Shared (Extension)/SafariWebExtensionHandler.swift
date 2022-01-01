@@ -28,29 +28,21 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
             // Sanity check
             let item = context.inputItems[0] as! NSExtensionItem
             guard let message = item.userInfo?[SFExtensionMessageKey] else {
-                response.userInfo = errorResponse(error: "No message key in message.\(String(describing: item.userInfo))")
+                response.userInfo = errorResponse(error: "No message key in message or message is not a string.\(String(describing: item.userInfo))")
                 logger.critical("Safari-wallet SafariWebExtensionHandler: No message key in message")
                 return
             }
                         
-            logger.critical("Safari-wallet SafariWebExtensionHandler: Received message from browser.runtime.sendNativeMessage: \(String(describing: message))")
+            logger.critical("Safari-wallet SafariWebExtensionHandler: Received message from browser.runtime.sendNativeMessage: \(String(describing: message), privacy: .public)")
             
             // Parse message
             do {
                 let returnValue = try await handle(message: message)
                 response.userInfo = [SFExtensionMessageKey: returnValue]
-                logger.critical("Safari-wallet SafariWebExtensionHandler received \(String(describing: returnValue))")
-            } catch WalletError.noMethod {
-                response.userInfo = errorResponse(error: "No method found")
-            } catch WalletCoreError.noParameters {
-                response.userInfo = errorResponse(error: "Missing paramaters")
-            } catch WalletError.invalidInput {
-                response.userInfo = errorResponse(error: "Error parsing input")
-            } catch WalletCoreError.noClient {
-                response.userInfo = errorResponse(error: "No Client")
+                logger.critical("Safari-wallet SafariWebExtensionHandler received \(String(describing: returnValue), privacy: .public)")
             } catch {
                 response.userInfo = errorResponse(error: error.localizedDescription)
-//                logger.critical("Safari-wallet SafariWebExtensionHandler error: \(error.localizedDescription))")
+                logger.critical("Safari-wallet SafariWebExtensionHandler error: \(error.localizedDescription, privacy: .public))")
             }
         }
     }
@@ -63,16 +55,16 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
 
     func handle(message: Any) async throws -> Any {
         let providerAPI = ProviderAPI(delegate: walletManager)
-        
         // Parse method and params
         if let message = message as? String {
             return try await providerAPI.parseMessage(method: message, params: nil)
         } else if let message = message as? [String: Any] {
             guard let method = message["method"] as? String else { throw WalletError.noMethod }
             let params = message["params"]
+            logger.critical("Safari-wallet SafariWebExtensionHandler: Received object with method \(method, privacy: .public) and params \(String(describing: params), privacy: .public)")
             return try await providerAPI.parseMessage(method: method, params: params)
         } else {
-            throw WalletError.invalidInput
+            throw WalletError.invalidInput(nil)
         }
     }
 }

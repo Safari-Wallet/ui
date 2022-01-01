@@ -41,6 +41,17 @@ const views = {
             <button id="connect" class="button button--primary">Connect</button>
         </div>
     `,
+    call: () => `
+        <h1>Call</h1>
+        <div class="field">
+            <label class="field__label" for="balance">ETH Balance</label>
+            <input id="balance" class="field__input" type="text" value="${balance} ${chains[chain].gasToken}" disabled>
+        </div>
+        <div class="flex">
+            <button id="cancel" class="button button--secondary">Cancel</button>
+            <button id="call" class="button button--primary">Call</button>
+        </div>
+    `,
     signMessage: () => `
         <h1>Sign Message</h1>
         <div class="flex">
@@ -55,8 +66,7 @@ const $ = (query) =>
     ? document.querySelector(query)
     : document.querySelectorAll(query);
 
-const closeWindow = () =>
-    window.close();
+const closeWindow = () => window.close();
 
 const connectWallet = () => {
     browser.runtime.sendMessage({
@@ -81,6 +91,15 @@ const signMessage = () => {
     closeWindow();
 };
 
+const call = () => {
+    browser.runtime.sendMessage({
+        message: {
+            message: `eth_call`,
+        },
+    });
+    closeWindow();
+};
+
 const refreshView = () => {
     switch (method) {
         case `eth_requestAccounts`:
@@ -100,6 +119,11 @@ const refreshView = () => {
             $(`#body`).innerHTML = views.signMessage();
             $(`#cancel`).addEventListener(`click`, closeWindow);
             $(`#sign`).addEventListener(`click`, signMessage);
+            break;
+        case `eth_call`:
+            $(`#body`).innerHTML = views.call();
+            $(`#cancel`).addEventListener(`click`, closeWindow);
+            $(`#call`).addEventListener(`click`, call);
             break;
         default:
             $(`#body`).innerHTML = views.default();
@@ -134,7 +158,15 @@ document.addEventListener(`DOMContentLoaded`, () => {
                 browser.tabs.sendMessage(tabs[0].id, {
                     message: request.message.message,
                 });
-            }
+            } else if (typeof request.message.address !== `undefined`) {
+                if (method === `eth_requestAccounts`) {
+                    browser.tabs.sendMessage(tabs[0].id, {
+                        message: request.message.address,
+                    });
+                }
+            } else if (typeof request.message.balance.error !== `undefined`) {
+                // TODO
+            } // TODO - more error handling
         });
     });
     browser.runtime.sendMessage({

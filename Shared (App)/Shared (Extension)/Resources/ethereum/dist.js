@@ -111,6 +111,18 @@ $4fa0c73a46e81912$var$Ethereum.prototype.request = (payload)=>{
                 showPrompt(`Open the wallet extension to sign`);
                 resolve(true);
                 break;
+            case `eth_call`:
+                window.postMessage(`eth_call`);
+                window.addEventListener(`message`, (event)=>{
+                    if (event.data === `cancel`) resolve([]);
+                    else if (typeof event.data !== `string`) {
+                        resolve(event.data);
+                        window.ethereum.close();
+                    }
+                });
+                showPrompt(`Open the wallet extension to call`);
+                resolve(true);
+                break;
             default:
                 // * Invalid or unimplemented method
                 resolve(false);

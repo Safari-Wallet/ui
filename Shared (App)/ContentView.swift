@@ -13,12 +13,9 @@ import OSLog
 import SafariServices
 #endif
 
-//struct KeychainConfiguration {
-//    static let serviceName = KEYCHAIN_GROUP
-//    static let accessGroup: String? = nil
-//}
-
 struct ContentView: View {
+    
+//    let userDefaultPublisher = NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification)
     
     @Binding var isOnBoardingPresented: Bool
     
@@ -41,6 +38,9 @@ struct ContentView: View {
                 #endif                
             }
         }
+//        .onReceive(userDefaultPublisher) { output in
+//            print("⚠️ UserDefaults changed")
+//        }
     }
 }
 

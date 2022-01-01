@@ -17,10 +17,17 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 // * This forwards messages from ethereum/index.js to background.js
 window.addEventListener(`message`, (event) => {
-    browser.runtime.sendMessage({
-        message: {
-            message: `update_method`,
-            method: event.data,
-        },
-    });
+    if (
+        event.data === `eth_requestAccounts` ||
+        event.data === `eth_signTypedData_v3` ||
+        event.data === `eth_call` ||
+        event.data === `cancel`
+    ) {
+        browser.runtime.sendMessage({
+            message: {
+                message: `update_method`,
+                method: event.data,
+            },
+        });
+    }
 });

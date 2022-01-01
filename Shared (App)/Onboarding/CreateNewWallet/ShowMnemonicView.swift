@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import MEWwalletKit
 
 struct ShowMnemonicView: View {
     
     @Binding var state: OnboardingState
     @Binding var tabIndex: Int
-    var mnemonic: RecoveryPhrase
+    let bip39: BIP39
     private let gridItemLayout = [GridItem(.adaptive(minimum: 150), alignment: .leading)]
     
     var body: some View {
@@ -27,9 +28,9 @@ struct ShowMnemonicView: View {
             
             LazyVGrid(columns: gridItemLayout, spacing: 20) {
 
-                ForEach(mnemonic.components.indices) { i in
+                ForEach(bip39.mnemonic!.indices) { i in
 
-                    Label(mnemonic.components[i], systemImage: "\(i+1).square.fill")
+                    Label(bip39.mnemonic![i], systemImage: "\(i+1).square.fill")
                         .frame(alignment: .leading)
                 }
             }
@@ -60,6 +61,6 @@ struct ShowMnemonicView_Previews: PreviewProvider {
     @State static var state: OnboardingState = .createWallet
     @State static var tabIndex: Int = 0
     static var previews: some View {
-        ShowMnemonicView(state: $state, tabIndex: $tabIndex, mnemonic: RecoveryPhrase(mnemonic: "abandon amount liar amount expire adjust cage candy arch gather drum buyer"))
+        ShowMnemonicView(state: $state, tabIndex: $tabIndex, bip39: BIP39(mnemonic: ["abandon", "amount", "liar", "amount", "expire", "adjust", "cage", "candy", "arch", "gather", "drum", "buyer"]))
     }
 }

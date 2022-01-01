@@ -7,18 +7,26 @@ let from = ``;
 let params = {};
 
 browser.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
-    if (typeof request.message === `undefined`) return;
+    if (typeof request.message === `undefined`) {
+        console.log(`before switch: request.message is undefined`);
+        return;
+    }
 
     switch (request.message.message) {
         case `eth_requestAccounts`: // * Return requested data from native app to popup.js
             const address = await browser.runtime.sendNativeMessage(`eth_requestAccounts`);
-            // TODO: address could return a { error: 'error message' } object. We need to check for that
-//            if address['error'] = `undefined` {
-//                ...
-//            }
-            browser.runtime.sendMessage({
-                message: address,
-            });
+            console.log(`address:`);
+            console.table(address);
+            if (typeof address.error !== `undefined`) {
+                // TODO handle error
+                console.log(`Error fetching address:`, address.error);
+            } else {
+                browser.runtime.sendMessage({
+                    message: {
+                        message: address,
+                    },
+                });
+            }
             break;
         case `eth_signTypedData_v3`: // * Return requested data from native app to popup.js
             /*
@@ -33,6 +41,18 @@ browser.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
             });
             */
             break;
+        case `eth_call`:
+            console.log(`background.js has received eth_call`);
+//            const data = await browser.runtime.sendNativeMessage(JSON.stringify({
+//                method: `eth_call`,
+//                params: ``,
+//            }));
+            const data = await browser.runtime.sendNativeMessage({
+                method: `eth_call`,
+                params: `this is a mock parameter`,
+            });
+            console.table(data);
+            break;
         case `cancel`: // * Cancel current method and notify popup.js of cancellation
             browser.runtime.sendMessage({
                 message: {
@@ -43,8 +63,8 @@ browser.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
         case `get_state`: // * Send current method, address, balance, and network (?) to popup.js
             const currentAddress = await browser.runtime.sendNativeMessage(`eth_getAccounts`);
             const balance = await browser.runtime.sendNativeMessage(`eth_getBalance`);
-            console.log(`currentAddress response: `, currentAddress)
-            console.log(`currentBalance response: `, balance)
+            console.log(`currentAddress response: `, currentAddress);
+            console.log(`currentBalance response: `, balance);
             // TODO: address could return a { error: 'error message' } object. We need to check for that 
             browser.runtime.sendMessage({
                 message: {
@@ -55,11 +75,28 @@ browser.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
                     params,
                 },
             });
+//            break;
+//        case `eth_sign`: // * Sings message. Send as hex string
+            const signature = await browser.runtime.sendNativeMessage({
+                method: `eth_sign`,
+                params: [`0xdeadbeaf`], // optional second item: password of the wallet
+            });
+            console.log(`eth_sign response: `, signature);
+            // TODO: address could return a { error: 'error message' } object. We need to check for that
+//            browser.runtime.sendMessage({
+//                message: {
+//                    signature: signature,
+//                    from,
+//                    method,
+//                    params,
+//                },
+//            });
             break;
         case `update_method`: // * Update current method from content.js
             method = request.message.method === `cancel`
                 ? ``
                 : request.message.method;
+            console.log(`new method, `, method);
             break;
         case `update_from`: // * Update "from" for message signing from content.js
             from = request.message.from;

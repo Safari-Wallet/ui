@@ -23,7 +23,7 @@ struct DeveloperView: View {
     var body: some View {
         VStack {
             
-            Text("Developer settings")
+            Text("Developer tools")
                 .font(.title)
                 .padding()
             
@@ -39,43 +39,57 @@ struct DeveloperView: View {
             
             Spacer()
             
-            Button("get balance") {
-                Task {
-                    do {
-                        let client = EthereumClient(provider: .alchemy(key: alchemyMainnetKey))!
-                        let balance = try await client.ethGetBalance(address: "0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B", blockNumber: .latest)
-                        print(balance.description)
-                        let height = try await client.ethBlockNumber()
-                        print(height)
-                    } catch {
-                        print(error)
+            Group {
+                Text("Web3 test calls")
+                    .font(.title3)
+                    .padding()
+                
+                Button("get balance") {
+                    Task {
+                        do {
+                            let client = EthereumClient(provider: .alchemy(key: alchemyMainnetKey))!
+                            let balance = try await client.ethGetBalance(address: "0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B", blockNumber: .latest)
+                            print(balance.description)
+                            let height = try await client.ethBlockNumber()
+                            print(height)
+                        } catch {
+                            print(error)
+                        }
                     }
                 }
+                .buttonStyle(.bordered)
+               
+                Button("Call alchemy_getAssetTransfers") {
+                  Task {
+                     do {
+                        let client = AlchemyClient(key: alchemyMainnetKey)!
+                        //https://docs.alchemy.com/alchemy/documentation/enhanced-apis/transfers-api
+                        let transfers = try await client.alchemyAssetTransfers(fromBlock: Block(rawValue: "A97AB8"),
+                                                                               toBlock: Block(rawValue: "A97CAC"),
+                                                                               fromAddress: MEWwalletKit.Address(address: "3f5CE5FBFe3E9af3971dD833D26bA9b5C936f0bE"),
+                                                                               contractAddresses: [
+                                                                                MEWwalletKit.Address(address: "7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9")!
+                                                                               ],
+                                                                               excludeZeroValue: true,
+                                                                               maxCount: 5)
+                        print(transfers)
+                     } catch {
+                        print(error)
+                     }
+                   }
+                }
+                .buttonStyle(.bordered)
             }
-           
-           Button("Call alchemy_getAssetTransfers") {
-              Task {
-                 do {
-                    let client = AlchemyClient(key: alchemyMainnetKey)!
-                    //https://docs.alchemy.com/alchemy/documentation/enhanced-apis/transfers-api
-                    let transfers = try await client.alchemyAssetTransfers(fromBlock: Block(rawValue: "A97AB8"),
-                                                                           toBlock: Block(rawValue: "A97CAC"),
-                                                                           fromAddress: Address(address: "3f5CE5FBFe3E9af3971dD833D26bA9b5C936f0bE"),
-                                                                           contractAddresses: [
-                                                                              Address(address: "7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9")!
-                                                                           ],
-                                                                           excludeZeroValue: true,
-                                                                           maxCount: 5)
-                    print(transfers)
-                 } catch {
-                    print(error)
-                 }
-              }
-           }
+            
+            Text("Wallet")
+                .font(.title3)
+                .padding()
             
             Button("Create a new wallet") {
                 isOnBoardingPresented = true
             }
+            .buttonStyle(.bordered)
+            
             Text("Shows new wallet popup")
                 .padding(.bottom)
             
@@ -93,10 +107,12 @@ struct DeveloperView: View {
             Text("Instantly creates a new wallet with the default password 'password123' and makes it the default wallet. Takes up to 5 seconds in debug mode.")
                 
             Button("Delete all wallets on disk", role: .destructive) {
-                try? manager.deleteAllWallets()
-                try? manager.deleteAllAddresses()
-                countWallets()
+                Task {
+                    try? await manager.deleteAllWalletsAndBundles()
+                }
+                
             }
+            .buttonStyle(.borderedProminent)
             .padding()
             
         }
@@ -112,7 +128,7 @@ extension DeveloperView {
     
     func countWallets() {
         do {
-            walletCount = try manager.listWalletFiles().count
+            walletCount = try SharedDocument.listAddressBundles(network: .ethereum).count
         } catch {
             walletCount = -1
             errorMessage = error.localizedDescription
@@ -120,14 +136,29 @@ extension DeveloperView {
     }
 
     func createTestWallet() async throws {
+        // 1. Create HDWallet
         let root = try BIP39(bitsOfEntropy: 128)
-        let mnemonic = root.mnemonic!.joined(separator: " ")
-        let manager = WalletManager()
-        let name = try await manager.saveWallet(mnemonic: mnemonic, password: "password123")
-        let addresses = try await manager.saveAddresses(mnemonic: mnemonic, addressCount: 5, name: name)        
-        print(addresses)
-        manager.defaultAddress = addresses.first!
-        manager.defaultWallet = name
+        guard let seed = try root.seed() else { throw WalletError.addressGenerationError }
+        let wallet: Wallet<PrivateKeyEth1> = try Wallet(seed: seed, network: .ethereum)
+        
+        // 2. Generate mainnet, Ropsten addresses
+        let addresses = try wallet.generateAddresses(count: 5)
+        let ropstenAddresses = try wallet.generateAddresses(count: 5, network: .ropsten)
+        
+        // 2. Save address bundles
+        let id = UUID()
+        let bundle = AddressBundle(id: id, type: .keystorePassword, network: .ethereum, addresses: addresses)
+        try await bundle.save()
+        let ropstenBundle = AddressBundle(id: id, type: .keystorePassword, network: .ropsten, addresses: ropstenAddresses)
+        try await ropstenBundle.save()
+        
+        // 3. Save seed
+        let keystore = try await KeystoreV3(bip39: root, password: "password123")
+        try await keystore.save(name: id.uuidString)
+        
+        // 4. Store password in keychain
+        try await KeychainPasswordItem.store(password: "password123", account: id.uuidString)
+        
         countWallets()
     }
     
