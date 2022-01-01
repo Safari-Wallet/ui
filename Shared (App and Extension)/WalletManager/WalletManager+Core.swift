@@ -12,35 +12,35 @@ import MEWwalletKit
 extension WalletManager: SafariWalletCoreDelegate {
     
     func addresses() -> [String]? {
-        guard let bundles = addressBundles, let index = defaultAddressBundleIndex else { return nil }
-        let defaultBundle = bundles[index]
-        return [defaultBundle.addresses[defaultBundle.defaultAddressIndex].addressString]
+        guard let address = self.address else { return nil }
+        return [address.addressString]
     }
     
     func client() -> EthereumClient? {
         let key: String
-        if case .ropsten = defaultNetwork {
+        if case .ropsten = network {
             key = alchemyRopstenKey
         } else {
             key = alchemyMainnetKey
         }
-        return AlchemyClient(network: defaultNetwork, key: key)
+        return AlchemyClient(network: network, key: key)
     }
     
     func account(address: String, password: String?) async throws -> Account {
-        guard let bundles = self.addressBundles else { throw WalletError.addressNotFound(address) }
-        
-        for bundle in bundles {
-            for (index, bundleAddress) in bundle.addresses.enumerated() {
-                if address == bundleAddress.addressString {
-                    return try await bundle.account(forAddressIndex: index, password: password)
-                }
-            }
-        }
-        throw WalletError.addressNotFound(address)
+        throw WalletError.notImplemented
+//        guard let bundles = self.addressBundles else { throw WalletError.addressNotFound(address) }
+//
+//        for bundle in bundles {
+//            for (index, bundleAddress) in bundle.addresses.enumerated() {
+//                if address == bundleAddress.addressString {
+//                    return try await bundle.account(forAddressIndex: index, password: password)
+//                }
+//            }
+//        }
+//        throw WalletError.addressNotFound(address)
     }
     
-    func network() -> Network {
-        return defaultNetwork
+    func currentNetwork() -> Network {
+        return network
     }
 }

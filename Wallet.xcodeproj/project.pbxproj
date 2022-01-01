@@ -71,6 +71,8 @@
 		F82D0472277D6F7A009C1725 /* AddressBundle+Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82D0470277D6F7A009C1725 /* AddressBundle+Storage.swift */; };
 		F82D0473277D6F7A009C1725 /* AddressBundle+Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82D0470277D6F7A009C1725 /* AddressBundle+Storage.swift */; };
 		F82D0474277D6F7A009C1725 /* AddressBundle+Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82D0470277D6F7A009C1725 /* AddressBundle+Storage.swift */; };
+		F82D047C277F8D10009C1725 /* AddressEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82D047B277F8D10009C1725 /* AddressEnvironment.swift */; };
+		F82D047D277F8D10009C1725 /* AddressEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82D047B277F8D10009C1725 /* AddressEnvironment.swift */; };
 		F8321B5927169A1D00F12938 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8321B5827169A1D00F12938 /* OnboardingView.swift */; };
 		F8321B5A27176EBE00F12938 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8321B5827169A1D00F12938 /* OnboardingView.swift */; };
 		F8321B5C27176ED600F12938 /* ShowMnemonicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8321B5B27176ED600F12938 /* ShowMnemonicView.swift */; };
@@ -246,6 +248,7 @@
 		F81BADA3274EDA4D007521BE /* Keystore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keystore.swift; sourceTree = "<group>"; };
 		F81BADA8275985CA007521BE /* KeychainPasswordItem+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeychainPasswordItem+Convenience.swift"; sourceTree = "<group>"; };
 		F82D0470277D6F7A009C1725 /* AddressBundle+Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddressBundle+Storage.swift"; sourceTree = "<group>"; };
+		F82D047B277F8D10009C1725 /* AddressEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressEnvironment.swift; sourceTree = "<group>"; };
 		F8321B5827169A1D00F12938 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		F8321B5B27176ED600F12938 /* ShowMnemonicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowMnemonicView.swift; sourceTree = "<group>"; };
 		F8321B5E27176EE700F12938 /* ConfirmMnemonicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmMnemonicView.swift; sourceTree = "<group>"; };
@@ -477,6 +480,7 @@
 			children = (
 				0A8BB793272E719800DFC647 /* TransactionsViewModel.swift */,
 				0A8BB798272E729200DFC647 /* Transaction.swift */,
+				F82D047B277F8D10009C1725 /* AddressEnvironment.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -883,6 +887,7 @@
 				F81BADA4274EDA4D007521BE /* Keystore.swift in Sources */,
 				F81BADA9275985CA007521BE /* KeychainPasswordItem+Convenience.swift in Sources */,
 				0A8BB794272E719800DFC647 /* TransactionsViewModel.swift in Sources */,
+				F82D047C277F8D10009C1725 /* AddressEnvironment.swift in Sources */,
 				F8ABEED127124A8C007F7D11 /* FileObserver.swift in Sources */,
 				F8ABEED927124A8C007F7D11 /* WalletError.swift in Sources */,
 				F8321B5927169A1D00F12938 /* OnboardingView.swift in Sources */,
@@ -927,6 +932,7 @@
 				F8C5B0032723BC5900B54FBD /* keys.swift in Sources */,
 				F81BADA5274EDA4D007521BE /* Keystore.swift in Sources */,
 				F81BADAA275985CA007521BE /* KeychainPasswordItem+Convenience.swift in Sources */,
+				F82D047D277F8D10009C1725 /* AddressEnvironment.swift in Sources */,
 				0A8BB795272E719800DFC647 /* TransactionsViewModel.swift in Sources */,
 				F8ABEEDA27124A8C007F7D11 /* WalletError.swift in Sources */,
 				F8321B5A27176EBE00F12938 /* OnboardingView.swift in Sources */,

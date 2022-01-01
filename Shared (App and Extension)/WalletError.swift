@@ -19,6 +19,7 @@ enum WalletError: Error {
     case seedError
     case noDefaultWalletSet
     case noDefaultAddressSet
+    case noAddressBundles
     case unexpectedResponse(String)
     case noMethod
     case errorOpeningKeyStore(String)
@@ -66,6 +67,8 @@ extension WalletError: LocalizedError {
             return "Method not implemented"
         case .outOfBounds:
             return "Out of bounds"
+        case .noAddressBundles:
+            return "No address bundles found"
         }
     }
 

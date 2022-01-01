@@ -15,7 +15,7 @@ import SafariServices
 
 struct ContentView: View {
     
-    let userDefaultPublisher = NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification)
+//    let userDefaultPublisher = NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification)
     
     @Binding var isOnBoardingPresented: Bool
     
@@ -38,9 +38,9 @@ struct ContentView: View {
                 #endif                
             }
         }
-        .onReceive(userDefaultPublisher) { output in
-            print("⚠️ UserDefaults changed")
-        }
+//        .onReceive(userDefaultPublisher) { output in
+//            print("⚠️ UserDefaults changed")
+//        }
     }
 }
 

@@ -111,11 +111,8 @@ extension CreatePasswordView {
         // 5. Store password in keychain
         try await KeychainPasswordItem.store(password: password, account: id.uuidString)
                 
-        // 6. Set default wallet and address
-        let manager = WalletManager()
-        try await manager.setup()
-        guard let bundles = manager.addressBundles, let index = bundles.firstIndex(of: bundle) else { return }
-        manager.defaultAddressBundleIndex = index
+        // 6. Set default wallet
+        bundle.setDefault()
         
         // 7. Print debug
         #if DEBUG

@@ -86,13 +86,14 @@ extension AddressBundle {
             assertionFailure()
             return
         }
-        
         let defaultAddress = DefaultAddress(addressIndex: defaultAddressIndex, bundleUUID: self.id, network: self.network.name)
         let encoder = JSONEncoder()
-        if let encoded = try? encoder.encode(defaultAddress) {
-            sharedContainer.set(encoded, forKey: DefaultAddress.key)
-            sharedContainer.synchronize()
+        guard let encoded = try? encoder.encode(defaultAddress) else {
+            assertionFailure()
+            return
         }
+        sharedContainer.set(encoded, forKey: DefaultAddress.key)
+        sharedContainer.synchronize()
     }
     
     static func loadDefault() async throws -> AddressBundle {
@@ -104,11 +105,8 @@ extension AddressBundle {
         else {
             throw WalletError.noDefaultWalletSet
         }
-                    
         let bundle = try await load(id: defaultAddress.bundleUUID, network: Network(name: defaultAddress.network))
-        if defaultAddress.addressIndex < bundle.addresses.count {
-            bundle.defaultAddressIndex = 0 // Assuming addresses.count > 0
-        }
+        bundle.defaultAddressIndex = defaultAddress.addressIndex
         return bundle
     }
 }
@@ -130,6 +128,7 @@ extension AddressBundle {
             let wallet = try Wallet<PrivateKeyEth1>(seed: seed)
             let account = try Account(privateKey: wallet.privateKey, wallet: id.uuidString, derivationpath: "123") // FIXME: derivationpath
             assert(account.addresss.address == addresses[forAddressIndex].addressString)
+            assertionFailure()
             return account
         case .viewOnly:
             throw WalletError.viewOnly

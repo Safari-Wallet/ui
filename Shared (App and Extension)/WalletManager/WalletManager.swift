@@ -8,11 +8,26 @@
 import Foundation
 import MEWwalletKit
 import SafariWalletCore
-import Alamofire
-import SwiftUI
 
 final class WalletManager: ObservableObject {
     
+    //@MainActor
+    @Published var address: AddressItem?
+    
+    @Published var network: Network = .ethereum
+    
+//    func bundle() -> AddressBundle {}
+//    func account() -> Account {}
+    
+    @MainActor
+    func setup() async throws {
+        let defaultBundle = try await AddressBundle.loadDefault()
+        self.address = defaultBundle.addresses[defaultBundle.defaultAddressIndex]
+        self.network = defaultBundle.network
+    }
+
+    
+    /*
     @Published private (set) var addressBundles: [AddressBundle]? {
         didSet {
             if addressBundles == nil {
@@ -110,6 +125,6 @@ extension WalletManager {
             }
             sharedContainer.synchronize()
         }
-    }
+    }*/
    
 }

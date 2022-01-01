@@ -7,112 +7,169 @@
 
 import SwiftUI
 import MEWwalletKit
+import SafariWalletCore
 
 struct SettingsView: View {
     
-    @EnvironmentObject var manager: WalletManager
-    
-    private let networks: [String] = ["Mainnet", "Ropsten"]
-    @State private var selectedNetworkIndex = 0
-    
-//    @State private var wallets: [String] = []
-//    @State private var selectedWalletIndex = manager.defaultAddressBundleIndex
-    
-//    @State private var addresses: [String] = []
-//    @State private var selectedAddressIndex = 0
-        
+    @StateObject var viewModel = AccountSelectionViewModel()
+            
     var body: some View {
-
+    
         Form {
-            let _ = print("⚠️ # of bundles: \(manager.addressBundles?.count ?? -1)")
-            if let addressBundles = manager.addressBundles, addressBundles.count > 0 {
-                let _ = print("⚠️ found address bundles")
+            if let addressBundles = viewModel.bundles, addressBundles.count > 0 {
                 // MARK: - Wallet selection
                 Section(header: Text("Wallet")) {
-                    Picker("HD Wallets", selection: $manager.defaultAddressBundleIndex) {
+                    Picker("HD Wallets", selection: $viewModel.bundleIndex) {
                         ForEach(0 ..< addressBundles.count) { i in
-                            Text(addressBundles[i].walletName ?? "Wallet \(i)")
+                            Text(addressBundles[i].walletName ?? "Wallet \(i + 1)")
                         }
                     }
                     .labelsHidden()
                     .pickerStyle(.inline)
-//                    .onChange(of: selectedWalletIndex) { tag in
-//                        Task {
-//                            try? await manager.setDefaultWallet(addressBundles[tag])
-////                            await reloadWallet()
-//                        }
-//                    }
                 }
                 
                 // MARK: - Accounts selection
                 Section(header: Text("Accounts")) {
-                        
-//                        Picker("Accounts", selection: manager.$defaultAddressBundleIndex) {
-//                            ForEach(0 ..< addressBundles.count) { i in
-//                                Text(addressBundles[i].walletName)
-//                            }
-//                        }
-//                        .labelsHidden()
-//                        .pickerStyle(.inline)
-//                        .onChange(of: selectedWalletIndex) { tag in
-//                            Task {
-//                                try? await manager.setDefaultWallet(addressBundles[tag])
-//                                await reloadWallet()
-//                            }
-//                        }
+                    
+                    if let bundle = viewModel.defaultBundle() {
+                        Picker("Accounts", selection: $viewModel.addressIndex) {
+                            ForEach(0 ..<  bundle.addresses.count) { i in
+                                let address = bundle.addresses[i]
+                                Text(address.ensName ?? address.addressString)
+                            }
+                        }
+                        .labelsHidden()
+                        .pickerStyle(.inline)
+                    }
                 }
-            }            
-//            .task {
-//                await self.reloadWallet(firstPass: true)
-//            }
-        
+            }
+                       
             // MARK: - Network selection
             Section(header: Text("Network")) {
-                Picker(selection: $selectedNetworkIndex, label: Text("")) {
-                    ForEach(networks.indices) { i in
-                        Text(networks[i]).tag(i)
+                Picker(selection: $viewModel.networkIndex, label: Text("")) {
+                    ForEach(viewModel.networks.indices) { i in
+                        Text(viewModel.networks[i]).tag(i)
                     }
                 }
                 .labelsHidden()
                 .pickerStyle(.inline)
-                .onChange(of: selectedNetworkIndex) { tag in
-                    Task {
-                        if tag == 1 {
-                            try await manager.setup(network: .ropsten)
-                        } else {
-                            try await manager.setup(network: .ethereum)
-                        }
-                    }
-                }
-                .onAppear {
-                    if case .ropsten = manager.defaultNetwork  {
-                        selectedNetworkIndex = 1
-                    } else {
-                        selectedNetworkIndex = 0
-                    }
-                    
-                }
             }
+        }
+        .onDisappear {
+            viewModel.setDefault()
+        }
+        .task {
+            await viewModel.setup()
         }
     }
     
-//    func reloadWallet(firstPass: Bool = false) async {
-//        guard let defaultWallet = manager.defaultWallet,
-//              let wallets = try? manager.listWalletFiles(),
-//              let addresses = try? await manager.loadAddresses(name: defaultWallet),
-//              let defaultAddress = manager.defaultAddress,
-//              let selectedWalletIndex = wallets.firstIndex(of: defaultWallet),
-//              let selectedAddressIndex = addresses.firstIndex(of: defaultAddress)
-//        else {
-//            print("Error reloading wallet")
-//            return
-//        }
-//        self.wallets = wallets
-//        self.addresses = addresses
-//        self.selectedWalletIndex = selectedWalletIndex
-//        self.selectedAddressIndex = selectedAddressIndex
-//    }
+}
+
+extension SettingsView {
     
+    @MainActor
+    class AccountSelectionViewModel: ObservableObject {
+        
+        @Published var bundleIndex: Int = 0 {
+            didSet {
+                guard let bundle = self.bundles?[bundleIndex] else {
+                    return
+                }
+                self.addressIndex = bundle.defaultAddressIndex
+            }
+        }
+        @Published var addressIndex: Int = 0 {
+            didSet {
+                guard let bundle = self.bundles?[bundleIndex], addressIndex < bundle.addresses.count else {
+                    return
+                }
+                bundle.defaultAddressIndex = addressIndex
+            }
+        }
+        @Published var networkIndex: Int = 0 {
+            didSet {
+                guard oldValue != networkIndex else { return }
+                Task {
+                    let network: Network
+                    if networkIndex == 0 {
+                        network = .ethereum
+                    } else {
+                        network = .ropsten
+                    }
+                    await change(network: network)
+                }
+            }
+        }
+        
+        var bundles: [AddressBundle]?
+        var addresses: [AddressItem]?
+        let networks: [String] = ["Mainnet", "Ropsten"]
+        
+        func setup() async {
+            do {
+                let defaultBundle = try await AddressBundle.loadDefault()
+                let bundles = try await AddressBundle.loadAddressBundles(network: defaultBundle.network).filter{ $0.addresses.count > 0 }
+                guard bundles.count > 0, let bundleIndex = bundles.firstIndex(of: defaultBundle) else {
+                    return
+                }
+                                
+                self.bundles = bundles
+                self.bundleIndex = bundleIndex
+                self.addresses = defaultBundle.addresses
+                self.addressIndex = defaultBundle.defaultAddressIndex
+                if case .ethereum = defaultBundle.network  {
+                    networkIndex = 0
+                } else {
+                    networkIndex = 1
+                }
+            } catch {
+                reset()
+                return
+            }
+        }
+        
+        func change(network: Network) async {
+            do {
+                let bundles = try await AddressBundle.loadAddressBundles(network: network).filter{ $0.addresses.count > 0 }
+                guard bundles.count > 0 else {
+                    throw WalletError.noAddressBundles
+                }
+                self.bundles = bundles
+                self.addresses = bundles[0].addresses
+                bundleIndex = 0
+                addressIndex = 0
+                if case .ethereum = network  {
+                    networkIndex = 0
+                } else {
+                    networkIndex = 1
+                }
+            } catch {
+                await setup()
+                return
+            }
+        }
+        
+        func reset() {
+            self.bundles = nil
+            self.addresses = nil
+        }
+        
+        func defaultBundle() -> AddressBundle? {
+            guard let bundles = bundles, bundleIndex < bundles.count else {
+                return nil
+            }
+            return bundles[bundleIndex]
+        }
+        
+        func setDefault() {
+            guard let bundles = self.bundles, bundleIndex < bundles.count, addressIndex < bundles[bundleIndex].addresses.count else {
+                return
+            }
+            let defaultBundle = bundles[bundleIndex]
+            defaultBundle.defaultAddressIndex = addressIndex
+            defaultBundle.setDefault()
+        }
+    }
 }
 
 struct SettingsView_Previews: PreviewProvider {

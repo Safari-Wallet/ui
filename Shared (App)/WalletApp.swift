@@ -8,44 +8,35 @@
 import Foundation
 
 import SwiftUI
+import SafariWalletCore
 
 @main
 struct WalletApp: App {
     
     @StateObject var manager = WalletManager()
     @State private var shouldPresentOnboarding = false
-    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
+    let userDefaultPublisher = NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification)
     
     var body: some Scene {
         WindowGroup {
             ContentView(isOnBoardingPresented: $shouldPresentOnboarding)
                 .task {
-                    try? await manager.setup()
-                    print("bundles: \(manager.addressBundles?.count ?? -1)")
-                    guard let bundles = manager.addressBundles, bundles.count > 0 else {
-                        self.shouldPresentOnboarding = true
-                        return
+                    do {
+                        try await manager.setup()
+                    } catch {
+                        print("Unable to load default wallet: \(error.localizedDescription)")
+                        assert(Thread.isMainThread)
+                        shouldPresentOnboarding = true
                     }
                 }
-//                .task {
-//                    do {
-//                        // If the app has no address bundles, show Restore or Create Wallet view
-//
-////                        assert(Thread.isMainThread)
-//                        if try await hasAccounts() == false {
-//                            shouldPresentOnboarding = true
-//                        }
-////                        shouldPresentOnboarding = try await !hasAccounts()
-//                    } catch {
-//                        print(error.localizedDescription)
-//                    }
-//
-//                }
                 .onOpenURL { url in handle(url: url) }
                 .environmentObject(manager)
-        }
-        
+                .onReceive(userDefaultPublisher) { output in
+                    print("⚠️ UserDefaults changed")
+                }
+        }        
     }
     
     func valueForKey(_ key: String, in items: [URLQueryItem]?) -> String? {
@@ -57,19 +48,6 @@ struct WalletApp: App {
         }
         return nil
     }
-}
-
-// MARK: - Onboarding
-
-extension WalletApp {
-    
-//    @MainActor
-//    func hasAccounts() async throws -> Bool {
-//        assert(Thread.isMainThread)
-//        try await manager.setup()
-//        guard let bundles = manager.addressBundles, bundles.count > 0 else { return false }
-//        return true
-//    }
 }
 
 // MARK: - Handle open URL
