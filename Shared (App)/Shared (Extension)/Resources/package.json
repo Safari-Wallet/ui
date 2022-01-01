@@ -1,0 +1,67 @@
+{
+    "name": "safari-wallet-extension",
+    "version": "0.0.0",
+    "license": "GPL-3.0",
+    "author": {
+        "name": "Balance DAO"
+    },
+    "source": [
+        "src/content/content.ts",
+        "src/background/background.ts",
+        "src/popup/popup.ts",
+        "src/ethereum/index.ts"
+    ],
+    "scripts": {
+        "build": "parcel build",
+        "watch": "parcel watch",
+        "test": "jest",
+        "test:watch": "jest --watch"
+    },
+    "devDependencies": {
+        "@types/firefox-webext-browser": "94.0.0",
+        "@types/jest": "27.0.3",
+        "jest": "27.4.5",
+        "jsdom": "19.0.0",
+        "parcel": "2.0.1",
+        "parcel-reporter-copy-file-v2": "1.0.1",
+        "prettier": "2.5.0",
+        "ts-jest": "27.1.2"
+    },
+    "dependencies": {
+        "typescript": "4.4.4"
+    },
+    "copyStaticFiles": [
+        {
+            "from": "./dist/background/background.js",
+            "to": "."
+        },
+        {
+            "from": "./dist/background/background.js.map",
+            "to": "."
+        },
+        {
+            "from": "./dist/content/content.js",
+            "to": "."
+        },
+        {
+            "from": "./dist/content/content.js.map",
+            "to": "."
+        },
+        {
+            "from": "./dist/popup/popup.js",
+            "to": "."
+        },
+        {
+            "from": "./dist/popup/popup.js.map",
+            "to": "."
+        },
+        {
+            "from": "./dist/ethereum/index.js",
+            "to": "./ethereum"
+        },
+        {
+            "from": "./dist/ethereum/index.js.map",
+            "to": "./ethereum"
+        }
+    ]
+}

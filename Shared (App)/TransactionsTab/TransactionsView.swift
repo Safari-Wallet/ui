@@ -6,60 +6,97 @@
 //
 
 import SwiftUI
-import SafariWalletCore
 
 struct TransactionsView: View {
-    @ObservedObject var Transactions: TransactionsViewModel
-    @State private var filter = 0
+    
+    @ObservedObject var viewModel: TransactionsListViewModel
+    
     var body: some View {
         NavigationView {
             VStack {
                 Section {
-                    Picker("Mode", selection: $filter, content: {
-                        Text("All").tag(0)
-                        Text("Sent").tag(1)
-                        Text("Received").tag(2)
-                        Text("Interactions").tag(3)
-                        Text("Failed").tag(4)
+                    Picker("Mode", selection: $viewModel.filter, content: {
+                        Text("All").tag(TransactionFilter.all)
+                        Text("Sent").tag(TransactionFilter.sent)
+                        Text("Received").tag(TransactionFilter.received)
+                        Text("Interactions").tag(TransactionFilter.interactions)
+                        Text("Failed").tag(TransactionFilter.failed)
                     })
-                    .pickerStyle(SegmentedPickerStyle())
+                        .pickerStyle(SegmentedPickerStyle())
                     List {
-                        ForEach(Transactions.transactions) { tx in
-                            TransactionRow(tx: tx)
+                        switch viewModel.state {
+                        case .loading:
+                            ForEach(1..<6) { transactionGroup in
+                                //                            TransactionRow(tx: .placeholder)
+                                //                                .redacted(reason: .placeholder)
+                            }
+                        case .fetched(txs: let txs):
+                            ForEach(txs) { transactionGroup in
+                                NavigationLink(destination: TransactionDetailsView(group: transactionGroup)) {
+                                    TransactionRowView(
+                                        txType: TransactionType(transactionGroup.type),
+                                        description: transactionGroup.description,
+//                                        toAddress: transactionGroup.toAddress,
+                                        toAddress: transactionGroup.contractName ?? "",
+                                        amount: transactionGroup.value
+                                    )
+                                    .onAppear {
+                                        viewModel.fetchTransactionsIfNeeded(currentTransaction: transactionGroup)
+                                    }
+                                }
+                            }
+                        case .error(message: let message):
+                            // Simple error msg for now
+                            Text(message)
+                            Spacer()
                         }
                     }
+                    .refreshable {
+                        viewModel.fetchTransactions()
+                    }
+                    .listStyle(.plain)
                 }
-            }
+            }.navigationBarHidden(true)
         }
     }
 }
 
 struct TransactionRow: View {
-    var tx: Covalent.Transaction
+    
+    let transactionGroup: TransactionGroup
+    
     var body: some View {
-        VStack {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Hash: \(transactionGroup.transactionHash)")
+                .font(.headline)
+                .bold()
+                .lineLimit(1)
+                .truncationMode(.tail)
             HStack {
-                Text(tx.from_address.address)
+                Text(transactionGroup.fromAddress)
                     .lineLimit(1)
                     .truncationMode(.middle)
-                if tx.to_address != nil {
-                    Image(systemName: "arrow.right")
-                        .foregroundColor(.blue)
-                    Text(tx.to_address!.address)
-                        .lineLimit(1)
-                        .truncationMode(.middle)
-                }
+                Spacer()
+                Image(systemName: "arrow.right")
+                    .foregroundColor(.blue)
+                    .unredacted()
+                Spacer()
+                Text(transactionGroup.toAddress)
+                    .lineLimit(1)
+                    .truncationMode(.middle)
             }
-            .padding(.vertical)
-            Text("$\(tx.value_quote!)") // TOOD - interlopate symbol variable
-                .font(.system(size: 24.0, weight: .bold, design: .rounded))
+            Text("\(transactionGroup.transactions.count) sources")
         }
-        .padding(.vertical)
+        .frame(maxWidth: .infinity)
+        .padding()
     }
 }
 
 struct TransactionsView_Previews: PreviewProvider {
     static var previews: some View {
-        TransactionsView(Transactions: TransactionsViewModel(chain: "1", address: "ric.eth", currency: "USD", symbol: "$"))
+        TransactionsView(viewModel: TransactionsListViewModel(chain: "1",
+                                                              address: "ric.eth",
+                                                              currency: "USD",
+                                                              symbol: "$"))
     }
 }

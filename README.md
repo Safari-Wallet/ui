@@ -50,9 +50,12 @@ Use your own Alchemy or Infura keys by creating a file called `keys.swift` in th
 
 ```swift
 // Shared (App and Extension)/keys.swift
-let alchemyRopstenKey: String = "<YOUR ALCHEMY ROPSTEN KEY HERE"
-let alchemyMainnetKey: String = "<YOUR ALCHEMY MAINNET KEY HERE>"
-let infuraRopstenKey: String = "<YOUR INFURA ROPSTEN KEY HERE>"
-let infuraMainnetKey: String = "<YOUR INFURA MAINNET KEY HERE>"
-let covalentKey: String = "<YOUR COVALENT KEY HERE>"
+struct ApiKeys {
+    static let alchemyMainnet = "<YOUR KEY HERE>"
+    static let alchemyRopsten = "<YOUR KEY HERE>"
+    static let infuraRopsten = "<YOUR KEY HERE>"
+    static let infuraMainnet = "<YOUR KEY HERE>"
+    static let covalent = "<YOUR KEY HERE>"
+    static let unmarshal = "<YOUR KEY HERE>"
+}
 ```
