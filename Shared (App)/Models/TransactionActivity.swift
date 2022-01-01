@@ -5,6 +5,7 @@
 //  Created by Stefano on 01.01.22.
 //
 
+import BigInt
 import Foundation
 import MEWwalletKit
 import SafariWalletCore
@@ -35,12 +36,12 @@ struct TransactedAssets: Equatable {
 enum Asset: Equatable {
     case native(NativeAsset)
     case erc20(ERC20Asset)
-    case erc721(ERC721Asset)
+//    case erc721(ERC721Asset)
 }
 
 struct NativeAsset: Equatable {
     let symbol: String
-    let value: Double
+    let value: BigInt
     let decimal: Int
     let price: Price?
     let currentPrice: Price?
@@ -48,7 +49,7 @@ struct NativeAsset: Equatable {
 
 struct ERC20Asset: Equatable {
     let symbol: String
-    let value: Double
+    let value: BigInt
     let decimal: Int
     let price: Price?
     let currentPrice: Price?
@@ -94,13 +95,14 @@ extension TransactionActivity {
 extension Asset {
 
     init(tx: Zerion.TransactionChange, meta: Zerion.Meta) {
-        if tx.asset.type == "nft" {
-            self = .erc721(ERC721Asset())
-        } else if tx.asset.assetCode == "eth" {
+//        if tx.asset.type == "nft" {
+//            self = .erc721(ERC721Asset())
+//        }
+        if tx.asset.assetCode == "eth" {
             self = .native(
                 NativeAsset(
                     symbol: tx.asset.symbol,
-                    value: tx.value,
+                    value: BigInt(tx.value),
                     decimal: tx.asset.decimals,
                     price: tx.asset.price.flatMap { Price(value: $0.value, currency: meta.currency) },
                     currentPrice: tx.price.flatMap { Price(value: $0, currency: meta.currency) }
@@ -110,7 +112,7 @@ extension Asset {
             self = .erc20(
                 ERC20Asset(
                     symbol: tx.asset.symbol,
-                    value: tx.value,
+                    value: BigInt(tx.value),
                     decimal: tx.asset.decimals,
                     price: tx.asset.price.flatMap { Price(value: $0.value, currency: meta.currency) },
                     currentPrice: tx.price.flatMap { Price(value: $0, currency: meta.currency) }
