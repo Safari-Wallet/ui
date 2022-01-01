@@ -1554,7 +1554,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Safari-Wallet/core";
 			requirement = {
-				branch = feature/eth_call;
+				branch = develop;
 				kind = branch;
 			};
 		};
