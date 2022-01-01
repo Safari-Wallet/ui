@@ -41,7 +41,14 @@ struct WalletApp: App {
                 .onOpenURL { url in handle(url: url) }
                 .environmentObject(manager)
                 .onReceive(userDefaultPublisher) { output in
-                    print("⚠️ UserDefaults changed")
+//                    print("⚠️ UserDefaults changed")
+                    Task {
+                        do {
+                            try await manager.setup()
+                        } catch {
+                            print("Error manager setup: \(error.localizedDescription)")
+                        }
+                    }
                 }
         }        
     }

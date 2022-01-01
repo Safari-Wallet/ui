@@ -11,7 +11,7 @@ import SafariWalletCore
 #if DEBUG
 struct DeveloperView: View {
     
-    let manager = WalletManager()
+    @EnvironmentObject var manager: WalletManager
     @State var walletCount: Int = 0
     @State var errorMessage: String = ""
     @State var isOnBoardingPresented: Bool = false {
@@ -40,6 +40,20 @@ struct DeveloperView: View {
             Spacer()
             
             Group {
+                
+                if let ensName = manager.address?.ensName {
+                    Text(ensName)
+                        .font(.title2)
+                        .padding()
+                }
+                else if let address = manager.address?.addressString {
+                    Text(address)
+                        .font(.title2)
+                        .padding()
+                } else {
+                    Text("no address set")
+                }
+                
                 Text("Web3 test calls")
                     .font(.title3)
                     .padding()
