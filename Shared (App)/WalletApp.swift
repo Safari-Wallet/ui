@@ -31,6 +31,13 @@ struct WalletApp: App {
                         shouldPresentOnboarding = true
                     }
                 }
+                .onAppear{
+                    do {
+                        try migrate()
+                    } catch {
+                        print("Error migrating: \(error)")
+                    }
+                }
                 .onOpenURL { url in handle(url: url) }
                 .environmentObject(manager)
                 .onReceive(userDefaultPublisher) { output in
@@ -48,6 +55,21 @@ struct WalletApp: App {
         }
         return nil
     }
+}
+
+// MARK: - App version migration
+
+extension WalletApp {
+    
+    func migrate() throws {
+        guard let sharedContainer = UserDefaults(suiteName: APP_GROUP) else { throw WalletError.invalidAppGroupIdentifier(APP_GROUP) }
+        let build = sharedContainer.string(forKey: "build")
+        if build != Bundle.main.build {
+            sharedContainer.set(Bundle.main.build, forKey: "build")
+            sharedContainer.synchronize()
+        }
+    }
+    
 }
 
 // MARK: - Handle open URL
