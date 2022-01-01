@@ -9,10 +9,8 @@ import Foundation
 import MEWwalletKit
 import SafariWalletCore
 
-//@MainActor
 final class WalletManager: ObservableObject {
     
-    //@MainActor
     @Published var address: AddressItem?
     
     @Published var network: Network = .ethereum
