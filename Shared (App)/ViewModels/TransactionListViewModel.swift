@@ -58,8 +58,8 @@ final class TransactionsListViewModel: ObservableObject {
                 
                 let viewModels = fetchedTransactions.map(toViewModel)
                 self.viewModels.append(contentsOf: viewModels)
+                self.transactions.append(contentsOf: fetchedTransactions)
                 
-                self.transactions = fetchedTransactions
                 isFetching = false
             } catch let error {
                 //TODO: Error handling / Define error cases and appropriate error messages
