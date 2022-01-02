@@ -19,9 +19,9 @@ extension WalletManager: SafariWalletCoreDelegate {
     func client() -> EthereumClient? {
         let key: String
         if case .ropsten = network {
-            key = alchemyRopstenKey
+            key = ApiKeys.alchemyRopsten
         } else {
-            key = alchemyMainnetKey
+            key = ApiKeys.alchemyMainnet
         }
         return AlchemyClient(network: network, key: key)
     }

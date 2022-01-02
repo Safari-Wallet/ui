@@ -101,6 +101,18 @@
 		F82D0497278031E2009C1725 /* WalletManager+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82D048D278031E2009C1725 /* WalletManager+Core.swift */; };
 		F82D0498278031E2009C1725 /* WalletManager+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82D048D278031E2009C1725 /* WalletManager+Core.swift */; };
 		F82D0499278031E2009C1725 /* WalletManager+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82D048D278031E2009C1725 /* WalletManager+Core.swift */; };
+		F82D049D2780335D009C1725 /* AddressBundle+Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82D049A2780335D009C1725 /* AddressBundle+Storage.swift */; };
+		F82D049E2780335D009C1725 /* AddressBundle+Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82D049A2780335D009C1725 /* AddressBundle+Storage.swift */; };
+		F82D049F2780335D009C1725 /* AddressBundle+Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82D049A2780335D009C1725 /* AddressBundle+Storage.swift */; };
+		F82D04A02780335D009C1725 /* AddressBundle+Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82D049A2780335D009C1725 /* AddressBundle+Storage.swift */; };
+		F82D04A12780335D009C1725 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82D049B2780335D009C1725 /* Bundle.swift */; };
+		F82D04A22780335D009C1725 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82D049B2780335D009C1725 /* Bundle.swift */; };
+		F82D04A32780335D009C1725 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82D049B2780335D009C1725 /* Bundle.swift */; };
+		F82D04A42780335D009C1725 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82D049B2780335D009C1725 /* Bundle.swift */; };
+		F82D04A52780335D009C1725 /* Keystore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82D049C2780335D009C1725 /* Keystore.swift */; };
+		F82D04A62780335D009C1725 /* Keystore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82D049C2780335D009C1725 /* Keystore.swift */; };
+		F82D04A72780335D009C1725 /* Keystore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82D049C2780335D009C1725 /* Keystore.swift */; };
+		F82D04A82780335D009C1725 /* Keystore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82D049C2780335D009C1725 /* Keystore.swift */; };
 		F8321B5927169A1D00F12938 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8321B5827169A1D00F12938 /* OnboardingView.swift */; };
 		F8321B5A27176EBE00F12938 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8321B5827169A1D00F12938 /* OnboardingView.swift */; };
 		F8321B5C27176ED600F12938 /* ShowMnemonicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8321B5B27176ED600F12938 /* ShowMnemonicView.swift */; };
@@ -274,6 +286,9 @@
 		F82D048B278031E2009C1725 /* WalletManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletManager.swift; sourceTree = "<group>"; };
 		F82D048C278031E2009C1725 /* WalletManager+debug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WalletManager+debug.swift"; sourceTree = "<group>"; };
 		F82D048D278031E2009C1725 /* WalletManager+Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WalletManager+Core.swift"; sourceTree = "<group>"; };
+		F82D049A2780335D009C1725 /* AddressBundle+Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AddressBundle+Storage.swift"; sourceTree = "<group>"; };
+		F82D049B2780335D009C1725 /* Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
+		F82D049C2780335D009C1725 /* Keystore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keystore.swift; sourceTree = "<group>"; };
 		F8321B5827169A1D00F12938 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		F8321B5B27176ED600F12938 /* ShowMnemonicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowMnemonicView.swift; sourceTree = "<group>"; };
 		F8321B5E27176EE700F12938 /* ConfirmMnemonicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmMnemonicView.swift; sourceTree = "<group>"; };
@@ -597,6 +612,9 @@
 		F8ABEF40271389CD007F7D11 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				F82D049A2780335D009C1725 /* AddressBundle+Storage.swift */,
+				F82D049B2780335D009C1725 /* Bundle.swift */,
+				F82D049C2780335D009C1725 /* Keystore.swift */,
 				F8ABEF41271389D9007F7D11 /* URL.swift */,
 				F8ABEF46271389F5007F7D11 /* NSFileCoordinator.swift */,
 				F8ABEF4B27138E1D007F7D11 /* String.swift */,
@@ -935,7 +953,10 @@
 				F8812B482717E18600D1B231 /* RecoveryPhrase.swift in Sources */,
 				0A8BB794272E719800DFC647 /* TransactionsViewModel.swift in Sources */,
 				F8ABEED127124A8C007F7D11 /* FileObserver.swift in Sources */,
+				F82D049D2780335D009C1725 /* AddressBundle+Storage.swift in Sources */,
 				F8ABEF3E27129DEB007F7D11 /* AppDelegate.swift in Sources */,
+				F82D04A12780335D009C1725 /* Bundle.swift in Sources */,
+				F82D04A52780335D009C1725 /* Keystore.swift in Sources */,
 				F8ABEED927124A8C007F7D11 /* WalletError.swift in Sources */,
 				F8321B5927169A1D00F12938 /* OnboardingView.swift in Sources */,
 			);
@@ -984,7 +1005,10 @@
 				0A8BB795272E719800DFC647 /* TransactionsViewModel.swift in Sources */,
 				3DFFFBAF275C5F1D00056A69 /* ContractService.swift in Sources */,
 				F8ABEF3F27129DEB007F7D11 /* AppDelegate.swift in Sources */,
+				F82D049E2780335D009C1725 /* AddressBundle+Storage.swift in Sources */,
 				F8812B4A2717E2F700D1B231 /* RecoveryPhrase.swift in Sources */,
+				F82D04A22780335D009C1725 /* Bundle.swift in Sources */,
+				F82D04A62780335D009C1725 /* Keystore.swift in Sources */,
 				F8ABEEDA27124A8C007F7D11 /* WalletError.swift in Sources */,
 				F8321B5A27176EBE00F12938 /* OnboardingView.swift in Sources */,
 			);
@@ -1001,12 +1025,14 @@
 				F8ABEF4E27138E1D007F7D11 /* String.swift in Sources */,
 				4AAE2E682744ADA600696FBE /* TransactionGroup.swift in Sources */,
 				3DFFFBB3275C625700056A69 /* TransactionRowView.swift in Sources */,
+				F82D04A72780335D009C1725 /* Keystore.swift in Sources */,
 				3D977061273CEEA80014CAC7 /* TransactionService.swift in Sources */,
 				3DFFFBB0275C5F1E00056A69 /* ContractService.swift in Sources */,
 				F8ABEECB27124A8C007F7D11 /* Constants.swift in Sources */,
 				F8ABEEDF27124A8C007F7D11 /* KeychainPasswordItem.swift in Sources */,
 				F82D0498278031E2009C1725 /* WalletManager+Core.swift in Sources */,
 				3DACED5C2751D5B2004050B7 /* keys.swift in Sources */,
+				F82D04A32780335D009C1725 /* Bundle.swift in Sources */,
 				F82D0494278031E2009C1725 /* WalletManager+debug.swift in Sources */,
 				0A8BB796272E719800DFC647 /* TransactionsViewModel.swift in Sources */,
 				F8ABEEDB27124A8C007F7D11 /* WalletError.swift in Sources */,
@@ -1016,6 +1042,7 @@
 				F8ABEF49271389F5007F7D11 /* NSFileCoordinator.swift in Sources */,
 				0A8BB79B272E729200DFC647 /* Transaction.swift in Sources */,
 				3DFFFBB6275C626000056A69 /* TransactionType.swift in Sources */,
+				F82D049F2780335D009C1725 /* AddressBundle+Storage.swift in Sources */,
 				F8ABEF44271389D9007F7D11 /* URL.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1031,12 +1058,14 @@
 				F8ABEF4F27138E1D007F7D11 /* String.swift in Sources */,
 				4AAE2E692744ADA600696FBE /* TransactionGroup.swift in Sources */,
 				3DFFFBB4275C625800056A69 /* TransactionRowView.swift in Sources */,
+				F82D04A82780335D009C1725 /* Keystore.swift in Sources */,
 				3D977062273CEEA90014CAC7 /* TransactionService.swift in Sources */,
 				3DFFFBB1275C5F1E00056A69 /* ContractService.swift in Sources */,
 				F8ABEECC27124A8C007F7D11 /* Constants.swift in Sources */,
 				F8ABEEE027124A8C007F7D11 /* KeychainPasswordItem.swift in Sources */,
 				F82D0499278031E2009C1725 /* WalletManager+Core.swift in Sources */,
 				3DACED5D2751D5B2004050B7 /* keys.swift in Sources */,
+				F82D04A42780335D009C1725 /* Bundle.swift in Sources */,
 				F82D0495278031E2009C1725 /* WalletManager+debug.swift in Sources */,
 				0A8BB797272E719800DFC647 /* TransactionsViewModel.swift in Sources */,
 				F8ABEEDC27124A8C007F7D11 /* WalletError.swift in Sources */,
@@ -1046,6 +1075,7 @@
 				F8ABEF4A271389F5007F7D11 /* NSFileCoordinator.swift in Sources */,
 				0A8BB79C272E729200DFC647 /* Transaction.swift in Sources */,
 				3DFFFBB7275C626200056A69 /* TransactionType.swift in Sources */,
+				F82D04A02780335D009C1725 /* AddressBundle+Storage.swift in Sources */,
 				F8ABEF45271389D9007F7D11 /* URL.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1611,7 +1641,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Safari-Wallet/core";
 			requirement = {
-				branch = main;
+				branch = develop;
 				kind = branch;
 			};
 		};
