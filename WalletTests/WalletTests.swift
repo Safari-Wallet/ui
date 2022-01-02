@@ -44,7 +44,7 @@ class WalletTests: XCTestCase {
         let wallet = try Wallet<PrivateKeyEth1>(mnemonic: mnemonic)
         let addresses = try wallet.generateAddresses(count: 5)
         let id = UUID()
-        let bundle = AddressBundle(id: id, type: .keystorePassword, network: .ethereum, addresses: addresses)
+        let bundle = AddressBundle(id: id, walletName: "Ethereum Wallet 1", type: .keystorePassword, network: .ethereum, addresses: addresses)
         try await bundle.save()
         bundle.setDefault()
 
@@ -52,6 +52,7 @@ class WalletTests: XCTestCase {
         let recoveredAddresses = recoveredBundle.addresses.map{ $0.addressString }
         let addressStrings = addresses.map{ $0.address }
         XCTAssertEqual(addressStrings, recoveredAddresses)
+        XCTAssertEqual(recoveredBundle.walletName, "Ethereum Wallet 1")
     }
     
     func testWalletEncryptionRoundtrip() async throws {

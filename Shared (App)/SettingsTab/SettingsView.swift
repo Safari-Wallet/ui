@@ -11,6 +11,8 @@ import SafariWalletCore
 
 struct SettingsView: View {
     
+//FIXME: ForEach<Range<Int>, Int, Text> count (2) != its initial count (1). `ForEach(_:content:)` should only be used for *constant* data. Instead conform data to `Identifiable` or use `ForEach(_:id:content:)` and provide an explicit `id`!
+    
     @StateObject var viewModel = AccountSelectionViewModel()
             
     var body: some View {
