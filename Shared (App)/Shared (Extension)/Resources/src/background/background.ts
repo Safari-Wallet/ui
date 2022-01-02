@@ -5,6 +5,8 @@ import { getLogger } from '../utils';
 const log = getLogger('background');
 const Messenger = getMessenger('background', { logger: log });
 
+Messenger.sendToNative('hello-fren', 'tmp', {});
+
 browser.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
     log(`Received message from browser runtime: ${JSON.stringify(request)}`);
 
