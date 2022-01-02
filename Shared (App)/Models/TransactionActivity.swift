@@ -70,6 +70,8 @@ struct Fee: Equatable {
     let price: Price?
 }
 
+// MARK: - Zerion Mapping
+
 extension TransactionActivity {
 
     init(tx: Zerion.Transaction, meta: Zerion.Meta) {
