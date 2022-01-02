@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MEWwalletKit
 
 struct RestoreWalletView: View {
     
@@ -16,7 +17,7 @@ struct RestoreWalletView: View {
     
     var body: some View {
         
-        VStack { /*
+        VStack {
             Text("Restore existing password")
                 .font(.title)                
             
@@ -37,7 +38,9 @@ struct RestoreWalletView: View {
                 }
                 .disabled(RecoveryPhrase(mnemonic: restoredMnemonic.lowercased()).isValid() == false)
                 .sheet(isPresented: $showingPasswordSheet) {
-                    CreatePasswordView(mnemonic: restoredMnemonic, walletWasSaved: $walletWasSaved)
+                    let mnemonicArray = restoredMnemonic.components(separatedBy: " ")
+                    let bip39 = BIP39(mnemonic: mnemonicArray)
+                    CreatePasswordView(bip39: bip39, walletWasSaved: $walletWasSaved)
                         .onDisappear {
                             if walletWasSaved == true {
                                 state = .summary
@@ -45,7 +48,7 @@ struct RestoreWalletView: View {
                         }
                 }
             }
-            .padding(.bottom, 32) */
+            .padding(.bottom, 32)
         }
         .padding()
     }
