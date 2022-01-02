@@ -117,6 +117,8 @@
 		F82D04AB2781347A009C1725 /* KeychainPasswordItem+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82D04A927813479009C1725 /* KeychainPasswordItem+Convenience.swift */; };
 		F82D04AC2781347A009C1725 /* KeychainPasswordItem+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82D04A927813479009C1725 /* KeychainPasswordItem+Convenience.swift */; };
 		F82D04AD2781347A009C1725 /* KeychainPasswordItem+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82D04A927813479009C1725 /* KeychainPasswordItem+Convenience.swift */; };
+		F82D04F52782261F009C1725 /* Swifter in Frameworks */ = {isa = PBXBuildFile; productRef = F82D04F42782261F009C1725 /* Swifter */; };
+		F82D04F7278229A8009C1725 /* Swifter in Frameworks */ = {isa = PBXBuildFile; productRef = F82D04F6278229A8009C1725 /* Swifter */; };
 		F8321B5927169A1D00F12938 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8321B5827169A1D00F12938 /* OnboardingView.swift */; };
 		F8321B5A27176EBE00F12938 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8321B5827169A1D00F12938 /* OnboardingView.swift */; };
 		F8321B5C27176ED600F12938 /* ShowMnemonicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8321B5B27176ED600F12938 /* ShowMnemonicView.swift */; };
@@ -335,6 +337,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F83FBA1E2730DBF300F864A7 /* SafariWalletCore in Frameworks */,
+				F82D04F52782261F009C1725 /* Swifter in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,6 +353,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F83FBA202730DD1F00F864A7 /* SafariWalletCore in Frameworks */,
+				F82D04F7278229A8009C1725 /* Swifter in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -688,6 +692,7 @@
 			name = "Wallet (iOS)";
 			packageProductDependencies = (
 				F83FBA1D2730DBF300F864A7 /* SafariWalletCore */,
+				F82D04F42782261F009C1725 /* Swifter */,
 			);
 			productName = "Wallet (iOS)";
 			productReference = 0A0E1E9C270687AE00061EA6 /* Safari Wallet.app */;
@@ -729,6 +734,7 @@
 			name = "Wallet Extension (iOS)";
 			packageProductDependencies = (
 				F83FBA1F2730DD1F00F864A7 /* SafariWalletCore */,
+				F82D04F6278229A8009C1725 /* Swifter */,
 			);
 			productName = "Wallet Extension (iOS)";
 			productReference = 0A0E1EBA270687AE00061EA6 /* Safari Wallet Extension.appex */;
@@ -810,6 +816,7 @@
 			mainGroup = 0A0E1E7F270687AA00061EA6;
 			packageReferences = (
 				F83FBA1C2730DBF300F864A7 /* XCRemoteSwiftPackageReference "core" */,
+				F82D04F32782261F009C1725 /* XCRemoteSwiftPackageReference "swifter" */,
 			);
 			productRefGroup = 0A0E1E9D270687AE00061EA6 /* Products */;
 			projectDirPath = "";
@@ -1647,6 +1654,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		F82D04F32782261F009C1725 /* XCRemoteSwiftPackageReference "swifter" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/httpswift/swifter.git";
+			requirement = {
+				branch = stable;
+				kind = branch;
+			};
+		};
 		F83FBA1C2730DBF300F864A7 /* XCRemoteSwiftPackageReference "core" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Safari-Wallet/core";
@@ -1658,6 +1673,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F82D04F42782261F009C1725 /* Swifter */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F82D04F32782261F009C1725 /* XCRemoteSwiftPackageReference "swifter" */;
+			productName = Swifter;
+		};
+		F82D04F6278229A8009C1725 /* Swifter */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F82D04F32782261F009C1725 /* XCRemoteSwiftPackageReference "swifter" */;
+			productName = Swifter;
+		};
 		F83FBA1D2730DBF300F864A7 /* SafariWalletCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F83FBA1C2730DBF300F864A7 /* XCRemoteSwiftPackageReference "core" */;
