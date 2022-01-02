@@ -13,6 +13,8 @@ final class TransactionsListViewModel: ObservableObject {
     
     // TODO: show error
     @Published var viewModels: [TransactionViewModel] = []
+    @Published var showError = false
+    var errorMessage = ""
     
     private var transactions: [TransactionActivity] = []
     // TODO: Implement contract caching
@@ -61,7 +63,8 @@ final class TransactionsListViewModel: ObservableObject {
                 isFetching = false
             } catch let error {
                 //TODO: Error handling / Define error cases and appropriate error messages
-                print(error)
+                errorMessage = error.localizedDescription
+                showError = true
             }
         }
     }

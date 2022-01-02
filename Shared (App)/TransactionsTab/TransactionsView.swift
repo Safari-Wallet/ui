@@ -37,6 +37,7 @@ struct TransactionsView: View {
                 .navigationTitle("Transactions")
             }
         }
+        .notification(show: $viewModel.showError, text: viewModel.errorMessage)
     }
     
     struct TransactionsView_Previews: PreviewProvider {
