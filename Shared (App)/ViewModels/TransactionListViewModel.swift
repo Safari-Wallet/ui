@@ -11,17 +11,10 @@ import MEWwalletKit
 
 final class TransactionsListViewModel: ObservableObject {
     
-    enum State: Equatable {
-        case loading
-        case fetched(txs: [TransactionGroup])
-        case error(message: String)
-    }
     // TODO: show error
     @Published var viewModels: [TransactionViewModel] = []
-    @Published var state: State = .loading
     
-    private var transactions2: [TransactionActivity] = []
-    private var transactions: [TransactionGroup] = []
+    private var transactions: [TransactionActivity] = []
     // TODO: Implement contract caching
     private var contracts: [String: Contract] = [:]
     
@@ -48,6 +41,7 @@ final class TransactionsListViewModel: ObservableObject {
         self.symbol = symbol
         self.txService = txService
         self.contractService = contractService
+        fetchTransactions()
     }
     
     func fetchTransactions() {
@@ -74,23 +68,22 @@ final class TransactionsListViewModel: ObservableObject {
                 
                 let viewModels = fetchedTransactions.map(TransactionViewModel.init)
                 self.viewModels.append(contentsOf: viewModels)
-                
-                state = .fetched(txs: self.transactions)
+                self.transactions = fetchedTransactions
                 isFetching = false
             } catch let error {
                 //TODO: Error handling / Define error cases and appropriate error messages
-                state = .error(message: error.localizedDescription)
+                print(error)
             }
         }
     }
     
-    func fetchTransactionsIfNeeded(currentTransaction transaction: TransactionGroup) {
-        guard canLoadNextPage(atTransaction: transaction) else { return }
+    func fetchTransactionsIfNeeded(atTransactionHash txHash: String) {
+        guard canLoadNextPage(atTransactionHash: txHash) else { return }
         fetchTransactions()
     }
     
-    private func canLoadNextPage(atTransaction transaction: TransactionGroup) -> Bool {
-        guard let index: Int = transactions.firstIndex(of: transaction) else { return false }
+    private func canLoadNextPage(atTransactionHash txHash: String) -> Bool {
+        guard let index: Int = transactions.firstIndex(where: { $0.txHash == txHash }) else { return false }
         let reachedThreshold = Double(index) / Double(transactions.count) > 0.7
         return !isFetching && reachedThreshold
     }

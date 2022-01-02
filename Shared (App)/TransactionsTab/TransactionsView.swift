@@ -25,7 +25,7 @@ struct TransactionsView: View {
                         )
                             .padding([.top, .bottom], 8)
                             .onAppear {
-//                                viewModel.fetchTransactionsIfNeeded(currentTransaction: transactionGroup)
+                                viewModel.fetchTransactionsIfNeeded(atTransactionHash: tx.hash)
                             }
                     }
                 }
