@@ -37,12 +37,12 @@ final class ContractService: ContractFetchable {
         // TODO: fetch contract details (ABI & Contract name)
 //        let response = try await client.getContractDetails(forAddress: address)
 //        guard let contractDetails = response.result.first else { return nil }
-        let contractInfo = name(forAddress: address.address)
+        guard let contractInfo = name(forAddress: address.address) else { return nil }
         let contract = Contract(
             address: address.address,
             name: "", //contractDetails.contractName,
             abi: "", //contractDetails.abi,
-            nameTag: contractInfo?.nameTag
+            nameTag: contractInfo.nameTag
         )
         return contract
     }

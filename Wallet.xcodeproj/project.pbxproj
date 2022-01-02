@@ -66,8 +66,6 @@
 		3DACED5C2751D5B2004050B7 /* keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DACED592751D5B2004050B7 /* keys.swift */; };
 		3DACED5D2751D5B2004050B7 /* keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DACED592751D5B2004050B7 /* keys.swift */; };
 		4A19E6E0271E673C0096027F /* JsonRpcClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A19E6DF271E673C0096027F /* JsonRpcClientTest.swift */; };
-		4AAE2E6B2745EE8B00696FBE /* TransactionDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAE2E6A2745EE8B00696FBE /* TransactionDetailsView.swift */; };
-		4AAE2E6C2745EE8B00696FBE /* TransactionDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAE2E6A2745EE8B00696FBE /* TransactionDetailsView.swift */; };
 		F1293EDC2758EF86000E883A /* ethereum in Resources */ = {isa = PBXBuildFile; fileRef = F1293EDA2758EE25000E883A /* ethereum */; };
 		F1293EDD2758EF8C000E883A /* ethereum in Resources */ = {isa = PBXBuildFile; fileRef = F1293EDA2758EE25000E883A /* ethereum */; };
 		F8124BB8271E03DF00F06D5D /* SigningTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8124BB7271E03DF00F06D5D /* SigningTests.swift */; };
@@ -248,7 +246,6 @@
 		3DA49A572780617F00C76F45 /* TransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewModel.swift; sourceTree = "<group>"; };
 		3DACED592751D5B2004050B7 /* keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keys.swift; sourceTree = "<group>"; };
 		4A19E6DF271E673C0096027F /* JsonRpcClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonRpcClientTest.swift; sourceTree = "<group>"; };
-		4AAE2E6A2745EE8B00696FBE /* TransactionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsView.swift; sourceTree = "<group>"; };
 		F1293EDA2758EE25000E883A /* ethereum */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ethereum; sourceTree = "<group>"; };
 		F8124BB7271E03DF00F06D5D /* SigningTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigningTests.swift; sourceTree = "<group>"; };
 		F8321B5827169A1D00F12938 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -537,7 +534,6 @@
 			children = (
 				F8812B572719239700D1B231 /* TransactionsView.swift */,
 				3D216A122753246600620BB9 /* TransactionRowView.swift */,
-				4AAE2E6A2745EE8B00696FBE /* TransactionDetailsView.swift */,
 			);
 			path = TransactionsTab;
 			sourceTree = "<group>";
@@ -912,7 +908,6 @@
 				3DA49A582780617F00C76F45 /* TransactionViewModel.swift in Sources */,
 				F8ABEEC927124A8C007F7D11 /* Constants.swift in Sources */,
 				F88801CF273A392A00094849 /* SettingsView.swift in Sources */,
-				4AAE2E6B2745EE8B00696FBE /* TransactionDetailsView.swift in Sources */,
 				F8812B6227193E8B00D1B231 /* DeveloperView.swift in Sources */,
 				F8812B5E27192AA600D1B231 /* ShortcutItem.swift in Sources */,
 				F8321B622717768400F12938 /* SummaryView.swift in Sources */,
@@ -961,7 +956,6 @@
 				F8ABEECE27124A8C007F7D11 /* BiometricsAuthentication.swift in Sources */,
 				3DA49A592780617F00C76F45 /* TransactionViewModel.swift in Sources */,
 				F88801D0273A392A00094849 /* SettingsView.swift in Sources */,
-				4AAE2E6C2745EE8B00696FBE /* TransactionDetailsView.swift in Sources */,
 				F8812B6327193E8B00D1B231 /* DeveloperView.swift in Sources */,
 				F8812B5F27192AA600D1B231 /* ShortcutItem.swift in Sources */,
 				F8321B632717768400F12938 /* SummaryView.swift in Sources */,

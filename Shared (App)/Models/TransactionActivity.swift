@@ -76,9 +76,9 @@ extension TransactionActivity {
 
     init(tx: Zerion.Transaction, meta: Zerion.Meta) {
         self.init(
-            from: Address(raw: tx.addressFrom),
-            to: tx.addressTo.flatMap(Address.init),
-            txHash: tx.hash,
+            from: Address(raw: tx.addressFrom.lowercased()),
+            to: tx.addressTo.flatMap { Address(raw: $0.lowercased()) },
+            txHash: tx.txHash,
             type: TransactionType(rawValue: tx.txType) ?? .unknown,
             assets: TransactedAssets(
                 in: tx.changes?.first(where: { $0.direction == .in }).flatMap { Asset(tx: $0, meta: meta) },

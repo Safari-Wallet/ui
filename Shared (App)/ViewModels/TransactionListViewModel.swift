@@ -50,22 +50,9 @@ final class TransactionsListViewModel: ObservableObject {
         Task {
             do {
                 let fetchedTransactions = try await self.txService.fetchTransactions(network: .ethereum, address: address)
-                //                    await fetchContracts(fromTxs: fetchedTransactions)
-                //                    let txs = fetchedTransactions.map { tx -> TransactionGroup in
-                //                        var tx = tx
-                //                        let contract = contracts[tx.toAddress]
-                //                        if let nameTag = contract?.nameTag, !nameTag.isEmpty {
-                //                            tx.contractName = nameTag
-                //                        } else if let contractName = contract?.name, !contractName.isEmpty {
-                //                            tx.contractName = contractName
-                //                        } else {
-                //                            tx.contractName = tx.toAddress
-                //                        }
-                //                        return tx
-                //                    }
-                //                    self.transactions.append(contentsOf: txs)
-                
-                
+                await fetchContracts(fromTxs: fetchedTransactions)
+                print(contracts)
+                // TODO: Add contract name
                 let viewModels = fetchedTransactions.map(TransactionViewModel.init)
                 self.viewModels.append(contentsOf: viewModels)
                 self.transactions = fetchedTransactions
@@ -89,14 +76,15 @@ final class TransactionsListViewModel: ObservableObject {
     }
     
     @MainActor
-    private func fetchContracts(fromTxs txs: [TransactionGroup]) async {
+    private func fetchContracts(fromTxs txs: [TransactionActivity]) async {
         var contracts = [Contract]()
         await withTaskGroup(of: Contract?.self) { [weak self] group in
             guard let self = self else { return }
             for tx in txs {
                 group.addTask {
-                    guard let contractAddress = tx.transactions.first?.to,
-                          self.contracts[tx.toAddress] == nil else { return nil }
+                    guard //tx.type != .execution,
+                          let contractAddress = tx.to,
+                          self.contracts[contractAddress.address] == nil else { return nil }
                     return try? await self.contractService.fetchContractDetails(forAddress: contractAddress)
                 }
                 for await contract in group {
