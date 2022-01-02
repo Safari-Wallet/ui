@@ -20,6 +20,7 @@ struct TransactionActivity: Equatable {
     let status: TransactionStatus
     let block: Block
     let minedAt: Int
+    let protocolName: String?
 }
 
 enum TransactionStatus: String, Equatable {
@@ -89,7 +90,8 @@ extension TransactionActivity {
             },
             status: TransactionStatus(rawValue: tx.status) ?? .confirmed,
             block: Block(rawValue: tx.blockNumber),
-            minedAt: tx.minedAt
+            minedAt: tx.minedAt,
+            protocolName: tx.protocol
         )
     }
 }

@@ -18,6 +18,7 @@ struct TransactionViewModel: Identifiable {
     let fiat: String?
     let type: TransactionType
     let tags: [String]
+    let description: String?
     // TODO: date
 }
 
@@ -30,6 +31,7 @@ extension TransactionViewModel {
         let currency = TransactionViewModel.mapToCurrency(tx: tx)
         let from = TransactionViewModel.mapToTruncatedAddress(tx.from)
         let to = tx.to.flatMap(TransactionViewModel.mapToTruncatedAddress)
+        let description = TransactionViewModel.getDescription(fromTx: tx)
         self.init(
             id: UUID(),
             hash: tx.txHash,
@@ -38,7 +40,8 @@ extension TransactionViewModel {
             token: token,
             fiat: currency,
             type: tx.type,
-            tags: nameTags
+            tags: nameTags,
+            description: description
         )
     }
     
@@ -104,6 +107,14 @@ extension TransactionViewModel {
         // TODO: Handle locales based on fetched currency
         formatter.locale = Locale(identifier: "en_US")
         return formatter.string(from: NSNumber(value: value))
+    }
+    
+    static func getDescription(fromTx tx: TransactionActivity) -> String? {
+        // Just ENS for now until we have input parsing
+        if tx.type == .trade && tx.protocolName == "ens" {
+            return "Registered ENS"
+        }
+        return nil
     }
 }
 

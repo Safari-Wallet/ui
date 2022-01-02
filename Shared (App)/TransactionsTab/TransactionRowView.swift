@@ -10,11 +10,11 @@ import SwiftUI
 struct TransactionRowView: View {
     
     let txType: TransactionType
-    let description: String
     let toAddress: String
     let token: String?
     let fiat: String?
     let nameTag: String?
+    let description: String?
     
     var body: some View {
         HStack(spacing: 14) {
@@ -37,7 +37,7 @@ struct TransactionRowView: View {
                     }
                 }
                 
-                Text(txType.title)
+                Text(description ?? txType.title)
                     .font(.system(.caption2, design: .monospaced))
                     .lineLimit(2)
                 HStack {
@@ -62,20 +62,20 @@ struct TransactionRowView_Previews: PreviewProvider {
         Group {
             TransactionRowView(
                 txType: .trade,
-                description: "Swapped 1 weth for 1 fwb",
                 toAddress: "0x1FF1af1934DF4e772F2A8a998FEA635704B77836",
                 token: "1 ETH",
                 fiat: "USD 4000",
-                nameTag: "Uniswap"
+                nameTag: "Uniswap",
+                description: "Swapped 1 weth for 1 fwb"
             )
             
             TransactionRowView(
                 txType: .trade,
-                description: "Swapped 1 weth for 1 fwb",
                 toAddress: "0x1FF1af1934DF4e772F2A8a998FEA635704B77836",
                 token: nil,
                 fiat: nil,
-                nameTag: nil
+                nameTag: nil,
+                description: nil
             )
         }
         .padding(10)
