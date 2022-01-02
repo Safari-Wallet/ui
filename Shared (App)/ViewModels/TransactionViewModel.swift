@@ -87,14 +87,20 @@ extension TransactionViewModel {
             // Should we use current prices or prices at time of tx?
             guard let price = asset.currentPrice else { return nil }
             let value = (asset.value.convert(withDecimals: asset.decimal) * price.value).rounded(toPlaces: 2)
-            let symbol = price.currency
-            return "\(value) \(symbol)"
+            return formattedCurrencyFrom(value: value, currency: price.currency)
         case .erc20(let asset):
             guard let price = asset.currentPrice else { return nil }
             let value = (asset.value.convert(withDecimals: asset.decimal) * price.value).rounded(toPlaces: 2)
-            let symbol = price.currency
-            return "\(value) \(symbol)"
+            return formattedCurrencyFrom(value: value, currency: price.currency)
         }
+    }
+    
+    static func formattedCurrencyFrom(value: Double, currency: String) -> String? {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        // TODO: Handle locales based on fetched currency
+        formatter.locale = Locale(identifier: "en_US")
+        return formatter.string(from: NSNumber(value: value))
     }
 }
 
