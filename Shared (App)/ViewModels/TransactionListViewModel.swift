@@ -51,9 +51,7 @@ final class TransactionsListViewModel: ObservableObject {
             do {
                 let fetchedTransactions = try await self.txService.fetchTransactions(network: .ethereum, address: address)
                 await fetchContracts(fromTxs: fetchedTransactions)
-                print(contracts)
-                // TODO: Add contract name
-                let viewModels = fetchedTransactions.map(TransactionViewModel.init)
+                let viewModels = fetchedTransactions.map(toViewModel)
                 self.viewModels.append(contentsOf: viewModels)
                 self.transactions = fetchedTransactions
                 isFetching = false
@@ -82,8 +80,7 @@ final class TransactionsListViewModel: ObservableObject {
             guard let self = self else { return }
             for tx in txs {
                 group.addTask {
-                    guard //tx.type != .execution,
-                          let contractAddress = tx.to,
+                    guard let contractAddress = tx.to,
                           self.contracts[contractAddress.address] == nil else { return nil }
                     return try? await self.contractService.fetchContractDetails(forAddress: contractAddress)
                 }
@@ -96,6 +93,13 @@ final class TransactionsListViewModel: ObservableObject {
         for contract in contracts {
             self.contracts[contract.address] = contract
         }
+    }
+    
+    private func toViewModel(_ tx: TransactionActivity) -> TransactionViewModel {
+        guard let toAddress = tx.to?.address, let contractName = contracts[toAddress]?.nameTag else {
+            return TransactionViewModel(tx: tx, nameTags: [])
+        }
+        return TransactionViewModel(tx: tx, nameTags: [contractName])
     }
 }
 

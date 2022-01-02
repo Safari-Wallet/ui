@@ -21,7 +21,8 @@ struct TransactionsView: View {
                             description: "none",
                             toAddress: tx.toAddress ?? "", // TODO: distinguish between contract address and send from or to
                             token: tx.token,
-                            fiat: tx.fiat
+                            fiat: tx.fiat,
+                            nameTag: tx.tags.first
                         )
                             .padding([.top, .bottom], 8)
                             .onAppear {

@@ -14,6 +14,7 @@ struct TransactionRowView: View {
     let toAddress: String
     let token: String?
     let fiat: String?
+    let nameTag: String?
     
     var body: some View {
         HStack(spacing: 14) {
@@ -40,7 +41,7 @@ struct TransactionRowView: View {
                     .font(.system(.caption2, design: .monospaced))
                     .lineLimit(2)
                 HStack {
-                    Text(toAddress)
+                    Text(nameTag ?? toAddress)
                         .font(.system(.caption2, design: .monospaced))
                         .truncationMode(Text.TruncationMode.middle)
                         .lineLimit(1)
@@ -64,7 +65,8 @@ struct TransactionRowView_Previews: PreviewProvider {
                 description: "Swapped 1 weth for 1 fwb",
                 toAddress: "0x1FF1af1934DF4e772F2A8a998FEA635704B77836",
                 token: "1 ETH",
-                fiat: "USD 4000"
+                fiat: "USD 4000",
+                nameTag: "Uniswap"
             )
             
             TransactionRowView(
@@ -72,7 +74,8 @@ struct TransactionRowView_Previews: PreviewProvider {
                 description: "Swapped 1 weth for 1 fwb",
                 toAddress: "0x1FF1af1934DF4e772F2A8a998FEA635704B77836",
                 token: nil,
-                fiat: nil
+                fiat: nil,
+                nameTag: nil
             )
         }
         .padding(10)

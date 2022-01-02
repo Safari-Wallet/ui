@@ -17,13 +17,15 @@ struct TransactionViewModel: Identifiable {
     let token: String?
     let fiat: String?
     let type: TransactionType
+    let tags: [String]
+    // TODO: date
 }
 
 // MARK: - Domain to View Model Mapping
 
 extension TransactionViewModel {
     
-    init(tx: TransactionActivity) {
+    init(tx: TransactionActivity, nameTags: [String]) {
         let token = TransactionViewModel.mapToToken(tx: tx)
         let currency = TransactionViewModel.mapToCurrency(tx: tx)
         let from = TransactionViewModel.mapToTruncatedAddress(tx.from)
@@ -35,7 +37,8 @@ extension TransactionViewModel {
             toAddress: to,
             token: token,
             fiat: currency,
-            type: tx.type
+            type: tx.type,
+            tags: nameTags
         )
     }
     
