@@ -19,7 +19,7 @@ struct TransactionViewModel: Identifiable {
     let type: TransactionType
     let tags: [String]
     let description: String?
-    // TODO: date
+    let date: String
 }
 
 // MARK: - Domain to View Model Mapping
@@ -32,6 +32,7 @@ extension TransactionViewModel {
         let from = TransactionViewModel.mapToTruncatedAddress(tx.from)
         let to = tx.to.flatMap(TransactionViewModel.mapToTruncatedAddress)
         let description = TransactionViewModel.getDescription(fromTx: tx)
+        let date = TransactionViewModel.formattedDateFrom(tx: tx)
         self.init(
             id: UUID(),
             hash: tx.txHash,
@@ -41,7 +42,8 @@ extension TransactionViewModel {
             fiat: currency,
             type: tx.type,
             tags: nameTags,
-            description: description
+            description: description,
+            date: date
         )
     }
     
@@ -107,6 +109,15 @@ extension TransactionViewModel {
         // TODO: Handle locales based on fetched currency
         formatter.locale = Locale(identifier: "en_US")
         return formatter.string(from: NSNumber(value: value))
+    }
+    
+    static func formattedDateFrom(tx: TransactionActivity) -> String {
+        let date = Date(timeIntervalSince1970: TimeInterval(tx.minedAt))
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .none
+        dateFormatter.dateStyle = .medium
+        dateFormatter.doesRelativeDateFormatting = true
+        return dateFormatter.string(from: date)
     }
     
     static func getDescription(fromTx tx: TransactionActivity) -> String? {

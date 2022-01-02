@@ -15,6 +15,7 @@ struct TransactionRowView: View {
     let fiat: String?
     let nameTag: String?
     let description: String?
+    let date: String
     
     var body: some View {
         HStack(spacing: 14) {
@@ -46,7 +47,7 @@ struct TransactionRowView: View {
                         .truncationMode(Text.TruncationMode.middle)
                         .lineLimit(1)
                     Spacer()
-                    Text("Yesterday")
+                    Text(date)
                         .font(.system(.caption2, design: .monospaced))
                         .truncationMode(Text.TruncationMode.middle)
                         .lineLimit(1)
@@ -66,7 +67,8 @@ struct TransactionRowView_Previews: PreviewProvider {
                 token: "1 ETH",
                 fiat: "USD 4000",
                 nameTag: "Uniswap",
-                description: "Swapped 1 weth for 1 fwb"
+                description: "Swapped 1 weth for 1 fwb",
+                date: "Yesterday"
             )
             
             TransactionRowView(
@@ -75,7 +77,8 @@ struct TransactionRowView_Previews: PreviewProvider {
                 token: nil,
                 fiat: nil,
                 nameTag: nil,
-                description: nil
+                description: nil,
+                date: "Yesterday"
             )
         }
         .padding(10)

@@ -18,11 +18,12 @@ struct TransactionsView: View {
                     ForEach(viewModel.viewModels) { tx in
                         TransactionRowView(
                             txType: tx.type,
-                            toAddress: tx.toAddress ?? "", // TODO: distinguish between contract address and send from or to
+                            toAddress: tx.toAddress ?? "",
                             token: tx.token,
                             fiat: tx.fiat,
                             nameTag: tx.tags.first,
-                            description: tx.description
+                            description: tx.description,
+                            date: tx.date
                         )
                             .padding([.top, .bottom], 8)
                             .onAppear {
