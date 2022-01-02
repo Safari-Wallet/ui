@@ -13,9 +13,10 @@ final class TransactionsListViewModel: ObservableObject {
     
     @Published var viewModels: [TransactionViewModel] = []
     @Published var showDetails = false
-    var transactionDetail: TransactionActivity?
     @Published var showError = false
-    var errorMessage = ""
+    
+    private(set) var transactionDetail: TransactionActivity?
+    private(set) var errorMessage = ""
     
     private var transactions: [TransactionActivity] = []
     // TODO: Implement contract caching
@@ -125,12 +126,4 @@ final class TransactionsListViewModel: ObservableObject {
         }
         return TransactionViewModel(tx: tx, nameTags: [contractName])
     }
-}
-
-enum TransactionFilter: Int {
-    case all
-    case sent
-    case received
-    case interactions
-    case failed
 }
