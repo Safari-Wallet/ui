@@ -18,13 +18,16 @@ struct SharedDocument {
     
     func read() async throws -> Data {        
         let url = try await NSFileCoordinator().coordinate(readingItemAt: self.url)
-        assert(FileManager.default.fileExists(atPath: url.path))
         return try Data(contentsOf: url)
     }
     
     func write(_ data: Data) async throws {
         let url = try await  NSFileCoordinator().coordinate(writingItemAt: self.url)
         return try data.write(to: url, options: .atomic)
+    }
+    
+    func fileExists() -> Bool {
+        return FileManager.default.fileExists(atPath: url.path)
     }
     
     static func list(fileExtension: String) throws -> [SharedDocument] {

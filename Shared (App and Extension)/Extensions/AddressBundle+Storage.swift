@@ -67,6 +67,13 @@ extension AddressBundle {
         let data = try JSONEncoder().encode(self)
         try await document.write(data)
     }
+        
+    /// Returns the number of address bundles on disk
+    /// Use for default naming of wallets
+    /// - Returns: The number of address bundles found
+    static func numberOfBundles(network: Network) -> Int? {
+        return try? SharedDocument.listAddressBundles(network: network).count
+    }
 }
 
 // MARK: -- NSUserDefaults

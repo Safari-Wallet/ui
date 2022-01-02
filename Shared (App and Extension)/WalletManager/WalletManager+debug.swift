@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SafariWalletCore
 
 // MARK: - Debugging methods
 #if DEBUG
@@ -50,11 +51,9 @@ extension WalletManager {
         
         // 3. Reset userdefaults
         guard let sharedContainer = UserDefaults(suiteName: APP_GROUP) else { throw WalletError.invalidAppGroupIdentifier(APP_GROUP) }
-        sharedContainer.removeObject(forKey: "DefaultWallet")
-        sharedContainer.removeObject(forKey: "DefaultAddressBundleIndex")
-        sharedContainer.removeObject(forKey: "DefaultAddressIndex")
+        // FIXME: Publishing changes from background threads is not allowed; make sure to publish values from the main thread (via operators like receive(on:)) on model updates. vv
+        sharedContainer.removeObject(forKey: AddressBundle.DefaultAddress.key)
         sharedContainer.synchronize()
-        try await self.setup()
     }
 }
 #endif

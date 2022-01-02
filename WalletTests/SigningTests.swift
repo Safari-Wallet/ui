@@ -22,7 +22,7 @@ class SigningTests: XCTestCase {
     override func setUp() async throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         self.manager = WalletManager()
-        try! await manager.deleteAllWalletsAndBundles()
+        try? await manager.deleteAllWalletsAndBundles()
         self.seed = try BIP39(mnemonic: mnemonic).seed()
         self.wallet = try Wallet(seed: seed, network: .ethereum)
     }

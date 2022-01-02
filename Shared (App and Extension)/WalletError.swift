@@ -26,6 +26,7 @@ enum WalletError: Error {
     case viewOnly
     case notImplemented
     case outOfBounds
+    case fileNotFound(String)
 }
 
 extension WalletError: LocalizedError {
@@ -69,6 +70,8 @@ extension WalletError: LocalizedError {
             return "Out of bounds"
         case .noAddressBundles:
             return "No address bundles found"
+        case .fileNotFound(let file):
+            return "File not found: \(file)"
         }
     }
 
