@@ -50,9 +50,13 @@ final class TransactionsListViewModel: ObservableObject {
         Task {
             do {
                 let fetchedTransactions = try await self.txService.fetchTransactions(network: .ethereum, address: address)
-                await fetchContracts(fromTxs: fetchedTransactions)
+                
+                let contracts = await fetchContracts(fromTxs: fetchedTransactions)
+                contracts.forEach { self.contracts[$0.address] = $0 }
+                
                 let viewModels = fetchedTransactions.map(toViewModel)
                 self.viewModels.append(contentsOf: viewModels)
+                
                 self.transactions = fetchedTransactions
                 isFetching = false
             } catch let error {
@@ -74,24 +78,34 @@ final class TransactionsListViewModel: ObservableObject {
     }
     
     @MainActor
-    private func fetchContracts(fromTxs txs: [TransactionActivity]) async {
-        var contracts = [Contract]()
+    private func fetchContracts(fromTxs txs: [TransactionActivity]) async -> [Contract] {
         await withTaskGroup(of: Contract?.self) { [weak self] group in
-            guard let self = self else { return }
-            for tx in txs {
-                group.addTask {
-                    guard let contractAddress = tx.to,
-                          self.contracts[contractAddress.address] == nil else { return nil }
-                    return try? await self.contractService.fetchContractDetails(forAddress: contractAddress)
-                }
-                for await contract in group {
-                    guard let contract = contract else { return }
-                    contracts.append(contract)
+            guard let self = self else { return [] }
+            
+            var contracts = [Contract]()
+            var addresses = Set<RawAddress>()
+            
+            // Create a set of unique addresses
+            txs.forEach {
+                if let toAddress = $0.to?.address {
+                    addresses.insert(toAddress)
                 }
             }
-        }
-        for contract in contracts {
-            self.contracts[contract.address] = contract
+            
+            // For each unique address add a fetch task to the task group
+            for address in addresses {
+                guard self.contracts[address] == nil else { continue }
+                group.addTask {
+                    return await self.contractService.fetchContractDetails(forAddress: address)
+                }
+            }
+            
+            // Execute each fetch task and return all fetched contracts
+            for await contract in group {
+                guard let contract = contract else { continue }
+                contracts.append(contract)
+            }
+            return contracts
         }
     }
     
