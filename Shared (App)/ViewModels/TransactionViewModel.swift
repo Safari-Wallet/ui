@@ -14,12 +14,12 @@ struct TransactionViewModel: Identifiable {
     let hash: String
     let fromAddress: String
     let toAddress: String?
-    let tokenValue: String?
-    let tokenSymbol: String?
-    let fiatValue: String?
-    let currency: String?
+    let token: String?
+    let fiat: String?
     let type: TransactionType
 }
+
+// MARK: - Domain to View Model Mapping
 
 extension TransactionViewModel {
     
@@ -33,21 +33,20 @@ extension TransactionViewModel {
             hash: tx.txHash,
             fromAddress: from,
             toAddress: to,
-            tokenValue: token?.value,
-            tokenSymbol: token?.symbol,
-            fiatValue: currency?.value, // Should we use current prices or prices at time of tx?
-            currency: currency?.symbol,
+            token: token,
+            fiat: currency,
             type: tx.type
         )
     }
     
     static func mapToTruncatedAddress(_ address: Address) -> String {
-        return address.address.prefix(5) + "..." + address.address.suffix(5)
+        let address = address.address.lowercased()
+        return address.prefix(5) + "..." + address.suffix(5)
     }
     
-    static func mapToToken(tx: TransactionActivity) -> (value: String, symbol: String)? {
+    static func mapToToken(tx: TransactionActivity) -> String? {
         switch tx.type {
-        case .send: // stake, deployment, deposit, repay
+        case .send: // stake, deployment, deposit, repay ?
             guard let asset = tx.assets.out else { return nil }
             return mapToToken(asset: asset)
         default:
@@ -56,22 +55,20 @@ extension TransactionViewModel {
         }
     }
     
-    static func mapToToken(asset: Asset) -> (value: String, symbol: String)? {
+    static func mapToToken(asset: Asset) -> String? {
         switch asset {
         case .native(let asset):
-            return (
-                value: String(asset.value.convert(withDecimals: asset.decimal).rounded(toPlaces: 4)),
-                symbol: asset.symbol
-            )
+            let value = asset.value.convert(withDecimals: asset.decimal).rounded(toPlaces: 4)
+            let symbol = asset .symbol
+            return "\(value) \(symbol)"
         case .erc20(let asset):
-            return (
-                value: String(asset.value.convert(withDecimals: asset.decimal).rounded(toPlaces: 4)),
-                symbol: asset.symbol
-            )
+            let value = asset.value.convert(withDecimals: asset.decimal).rounded(toPlaces: 4)
+            let symbol = asset .symbol
+            return "\(value) \(symbol)"
         }
     }
     
-    static func mapToCurrency(tx: TransactionActivity) -> (value: String, symbol: String)? {
+    static func mapToCurrency(tx: TransactionActivity) -> String? {
         switch tx.type {
         case .send: // stake, deployment, deposit, repay
             guard let asset = tx.assets.out else { return nil }
@@ -83,25 +80,23 @@ extension TransactionViewModel {
         }
     }
     
-    static func mapToCurrency(asset: Asset) -> (value: String, symbol: String)? {
+    static func mapToCurrency(asset: Asset) -> String? {
         switch asset {
         case .native(let asset):
-            guard let price = asset.price else { return nil }
-            return (
-                value: String(asset.value.convert(withDecimals: asset.decimal) * price.value),
-                symbol: asset.symbol
-            )
+            // TODO: do proper currency formatting
+            // Should we use current prices or prices at time of tx?
+            guard let price = asset.currentPrice else { return nil }
+            let value = (asset.value.convert(withDecimals: asset.decimal) * price.value).rounded(toPlaces: 2)
+            let symbol = price.currency
+            return "\(value) \(symbol)"
         case .erc20(let asset):
-            guard let price = asset.price else { return nil }
-            return (
-                value: String(asset.value.convert(withDecimals: asset.decimal) * price.value),
-                symbol: asset.symbol
-            )
+            guard let price = asset.currentPrice else { return nil }
+            let value = (asset.value.convert(withDecimals: asset.decimal) * price.value).rounded(toPlaces: 2)
+            let symbol = price.currency
+            return "\(value) \(symbol)"
         }
     }
 }
-
-
 
 // TODO: Move to extensions folder
 
