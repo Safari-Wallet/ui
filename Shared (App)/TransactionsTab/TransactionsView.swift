@@ -26,8 +26,12 @@ struct TransactionsView: View {
                             date: tx.date
                         )
                             .padding([.top, .bottom], 8)
+                            .contentShape(Rectangle())
                             .onAppear {
                                 viewModel.fetchTransactionsIfNeeded(atTransactionHash: tx.hash)
+                            }
+                            .onTapGesture {
+                                viewModel.showDetails(forTransaction: tx)
                             }
                     }
                 }
@@ -39,6 +43,22 @@ struct TransactionsView: View {
             }
         }
         .notification(show: $viewModel.showError, text: viewModel.errorMessage)
+        .sheet(isPresented: $viewModel.showDetails) {
+            NavigationView {
+                HStack {
+                    Text("View on Etherscan")
+                    Image(systemName: "square.and.arrow.up")
+                }
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    guard let tx = viewModel.transactionDetail,
+                          let url = URL(string: "https://etherscan.io/tx/\(tx.txHash)") else { return }
+                    UIApplication.shared.open(url) { _ in
+                        viewModel.showDetails = false
+                    }
+                }
+            }
+        }
     }
     
     struct TransactionsView_Previews: PreviewProvider {

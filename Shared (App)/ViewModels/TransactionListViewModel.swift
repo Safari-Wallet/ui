@@ -11,8 +11,9 @@ import MEWwalletKit
 
 final class TransactionsListViewModel: ObservableObject {
     
-    // TODO: show error
     @Published var viewModels: [TransactionViewModel] = []
+    @Published var showDetails = false
+    var transactionDetail: TransactionActivity?
     @Published var showError = false
     var errorMessage = ""
     
@@ -72,6 +73,12 @@ final class TransactionsListViewModel: ObservableObject {
     func fetchTransactionsIfNeeded(atTransactionHash txHash: String) {
         guard canLoadNextPage(atTransactionHash: txHash) else { return }
         fetchTransactions()
+    }
+    
+    func showDetails(forTransaction tx: TransactionViewModel) {
+        guard let tx = transactions.first(where: { $0.txHash == tx.hash }) else { return }
+        transactionDetail = tx
+        showDetails = true
     }
     
     private func canLoadNextPage(atTransactionHash txHash: String) -> Bool {
