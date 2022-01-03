@@ -40,6 +40,19 @@ class WalletTests: XCTestCase {
         }
     }
     
+    func testClean() throws {
+        // Checks if no files are present and no presets are found
+        let path = try URL.sharedContainer().path
+        let files = try FileManager.default.contentsOfDirectory(atPath: path)
+        XCTAssertEqual(files.count, 0, "found: \(files)")
+        
+        guard let sharedContainer = UserDefaults(suiteName: APP_GROUP) else {
+            XCTFail()
+            return
+        }
+        XCTAssertNil(sharedContainer.object(forKey: AddressBundle.DefaultAddress.key))
+    }
+    
     func testSaveAddresses() async throws {
         let wallet = try Wallet<PrivateKeyEth1>(mnemonic: mnemonic)
         let addresses = try wallet.generateAddresses(count: 5)
