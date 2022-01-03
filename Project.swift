@@ -4,189 +4,85 @@ import ProjectDescriptionHelpers
 let name = "Safari Wallet"
 let bundleId = "com.safari-wallet"
 let developmentTeam = "HHJXTX62XS"
-let urlName = "com.safari.wallet"
-let urlScheme = "safari-wallet"
 
-let productName = name.replacingOccurrences(of: " ", with: "_")
-let productNameExtension = "\(productName)_Extension"
-let productNameTests = "\(productName)_Tests"
-let extensionBundleId = "\(bundleId).Extension"
-let testsTargetName = "\(name) Tests"
-let iosName = "App (iOS)"
-let macosName = "App (macOS)"
-let iosExtensionName = "Extension (iOS)"
-let macosExtensionName = "Extension (macOS)"
+let productName = name.replaceSpaceWithUnder
 
-let sharedAppFolders = [
-    "Shared (App)/**",
-    "Shared (App and Extension)/**",
-]
-
-let sharedExtensionFolders = [
-    SourceFileGlob("Shared (Extension)/**", excluding: "Shared (Extension)/Resources/node_modules/**"),
-    SourceFileGlob("Shared (App and Extension)/**"),
-]
-
-let sharedExtensionResources = ResourceFileElements(resources: [
-    .folderReference(path: "Shared (Extension)/Resources/ethereum"),
-    .folderReference(path: "Shared (Extension)/Resources/_locales"),
-    .folderReference(path: "Shared (Extension)/Resources/images"),
-    "Shared (Extension)/Resources/background.js",
-    "Shared (Extension)/Resources/content.js",
-    "Shared (Extension)/Resources/popup.js",
-    "Shared (Extension)/Resources/popup.css",
-    "Shared (Extension)/Resources/popup.html",
-    "Shared (Extension)/Resources/manifest.json",
-])
-
-let resources = ResourceFileElements(resources: [
-    "Shared (App)/**/*.{xcassets}",
-])
-let macosResources = ResourceFileElements(resources: [
-    "macOS (App)/**/*.{storyboard}",
-] + resources.resources)
-
-let coreDependency = TargetDependency.external(name: "SafariWalletCore")
-
-let baseSettings = SettingsDictionary()
-    .automaticCodeSigning(devTeam: developmentTeam)
-    .bundleId(bundleId)
-
-let iosDeploymentTarget = DeploymentTarget.iOS(targetVersion: "15.0", devices: [.iphone, .ipad])
-let macosDeploymentTarget = DeploymentTarget.macOS(targetVersion: "11.0")
-
-let iosSource = "iOS (App)"
-let macosSource = "macOS (App)"
-let iosExtensionSource = "iOS (Extension)"
-let macosExtensionSource = "macOS (Extension)"
-
-let iosTarget = Target(
-    name: iosName,
-    platform: .iOS,
+let appTargets = Target.crossPlatform(
+    name: Constants.name,
     product: .app,
     productName: productName,
     bundleId: bundleId,
-    deploymentTarget: iosDeploymentTarget,
-    infoPlist: .extendingDefault(with: [
-        "CFBundleDisplayName": .string(name),
-        "CFBundleURLTypes": .array([
-            .dictionary([
-                "CFBundleTypeRole": .string("Editor"),
-                "CFBundleURLName": .string(urlName),
-                "CFBundleURLSchemes": .array([
-                    .string(urlScheme),
-                ]),
-            ]),
+    deploymentTarget: Constants.deploymentTarget,
+    infoPlist: .crossPlatformValue(
+        iOS: .extendingDefault(with: [
+            "CFBundleDisplayName": .string(name),
+            "CFBundleURLTypes": Constants.urlTypes,
         ]),
-    ]),
-    sources: .init(globs: [
-        "\(iosSource)/**",
-    ] + sharedAppFolders),
-    resources: resources,
-    entitlements: .entitlements(folder: iosSource),
-    dependencies: [
-        coreDependency,
-        .target(name: iosExtensionName),
-    ]
+        macOS: .default
+    ),
+    sources: .source(Constants.source, withShared: .app),
+    resources: .crossPlatform(Constants.resources),
+    entitlements: .entitlements(Constants.source),
+    dependencies: .crossPlatformValue(
+        iOS: [
+            .core,
+            .target(name: Constants.extensionName.iOS),
+        ],
+        macOS: [
+            .target(name: Constants.extensionName.macOS),
+        ]
+    )
 )
 
-let macosTarget = Target(
-    name: macosName,
-    platform: .macOS,
-    product: .app,
-    productName: productName,
-    bundleId: bundleId,
-    deploymentTarget: macosDeploymentTarget,
-    sources: .init(globs: [
-        "\(macosSource)/**",
-    ] + sharedAppFolders),
-    resources: macosResources,
-    entitlements: .entitlements(folder: macosSource),
-    dependencies: [
-        .target(name: macosExtensionName),
-    ]
-)
-
-let extensionPlist = InfoPlist.extendingDefault(with: [
-    "NSExtension": .dictionary([
-        "NSExtensionPointIdentifier": .string("com.apple.Safari.web-extension"),
-        "NSExtensionPrincipalClass": .string("$(PRODUCT_MODULE_NAME).SafariWebExtensionHandler"),
-    ]),
-])
-
-let iosExtensionTarget = Target(
-    name: iosExtensionName,
-    platform: .iOS,
+let extensionTargets = Target.crossPlatform(
+    name: Constants.extensionName,
     product: .appExtension,
-    productName: productNameExtension,
-    bundleId: extensionBundleId,
-    deploymentTarget: iosDeploymentTarget,
-    infoPlist: extensionPlist,
-    sources: .init(globs: [
-        "\(iosExtensionSource)/**",
-    ] + sharedExtensionFolders),
-    resources: sharedExtensionResources,
-    entitlements: .entitlements(folder: iosExtensionSource),
-    dependencies: [
-        coreDependency,
-    ]
+    productName: productName.under.Extension,
+    bundleId: bundleId.dot.Extension,
+    deploymentTarget: Constants.deploymentTarget,
+    infoPlist: .direct(Constants.extensionPlist),
+    sources: .source(Constants.extensionSource, withShared: .extension),
+    resources: .direct(Constants.sharedExtensionResources),
+    entitlements: .entitlements(Constants.extensionSource),
+    dependencies: .crossPlatformValue(
+        iOS: [
+            .core,
+        ],
+        macOS: [
+        ]
+    )
 )
 
-let macosExtensionTarget = Target(
-    name: macosExtensionName,
-    platform: .macOS,
-    product: .appExtension,
-    productName: productNameExtension,
-    bundleId: extensionBundleId,
-    deploymentTarget: macosDeploymentTarget,
-    infoPlist: extensionPlist,
-    sources: .init(globs: [
-        "\(macosExtensionSource)/**",
-    ] + sharedExtensionFolders),
-    resources: sharedExtensionResources,
-    entitlements: .entitlements(folder: macosExtensionSource),
-    dependencies: [
-    ]
-)
-
-let testsTarget = Target(
-    name: testsTargetName,
-    platform: .iOS,
+let testsTargets = Target.crossPlatform(
+    name: Constants.testsName,
     product: .unitTests,
-    productName: productNameTests,
-    bundleId: "\(bundleId).Tests",
-    sources: [
+    productName: productName.under.Tests,
+    bundleId: bundleId.dot.Tests,
+    sources: .direct([
         "Tests/**",
-    ],
-    dependencies: [
-        .target(name: iosName),
-    ]
+    ]),
+    dependencies: .crossPlatformValue(
+        iOS: [
+            .target(name: Constants.name.iOS),
+        ],
+        macOS: [
+            .target(name: Constants.name.macOS),
+        ]
+    )
 )
 
 let project = Project(
     name: name,
     organizationName: name,
-    settings: .settings(base: baseSettings),
-    targets: [
-        iosTarget,
-        macosTarget,
-        iosExtensionTarget,
-        macosExtensionTarget,
-        testsTarget,
-    ],
-    schemes: [
-        Scheme(
-            name: iosName,
-            shared: true,
-            buildAction: .buildAction(targets: ["\(iosName)"]),
-            testAction: .targets(["\(testsTargetName)"])
-        ),
-        Scheme(
-            name: macosName,
-            shared: true,
-            buildAction: .buildAction(targets: ["\(macosName)"])
-        ),
-    ],
+    settings: .settings(base: SettingsDictionary()
+                            .automaticCodeSigning(devTeam: developmentTeam)
+                            .bundleId(bundleId)),
+    targets: appTargets + extensionTargets + testsTargets,
+    schemes: .crossPlatformSchemes(
+        name: Constants.name,
+        buildAction: Constants.name,
+        testAction: Constants.testsName
+    ),
     fileHeaderTemplate: "",
     additionalFiles: [
         "README.md",
