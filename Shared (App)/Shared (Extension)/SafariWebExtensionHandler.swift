@@ -17,25 +17,27 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
     
     let walletManager = WalletManager()
     let logger = Logger()
-    let server = HttpServer()
+    var server: HttpServer? = HttpServer()
     
     override init() {
         logger.critical("Safari-wallet SafariWebExtensionHandler: Handler init")
         do {
-            // http://127.0.0.1:8080/hello
-            server["/hello"] = { .ok(.htmlBody("You asked for \($0)"))  }
-            try server.start()
+            if let server = server {
+                // http://127.0.0.1:8080
+                server["/"] = { .ok(.htmlBody("You asked for \($0)"))  }
+                try server.start()
+            }
         } catch {
             logger.critical("Safari-wallet SafariWebExtensionHandler: Error staring web server: \(error.localizedDescription)")
+            server = nil // deallocate http server
         }
         super.init()
     }
     
-    // If deinit is *no* present, the handler will *not* be deallocated.
-//    deinit {
-//        logger.critical("Safari-wallet SafariWebExtensionHandler: Handler deinit")
-////        server.stop()
-//    }
+    deinit {
+        logger.critical("Safari-wallet SafariWebExtensionHandler: Handler deinit")
+//        server.stop() Keep the http server running
+    }
 //
     func beginRequest(with context: NSExtensionContext) {
         
