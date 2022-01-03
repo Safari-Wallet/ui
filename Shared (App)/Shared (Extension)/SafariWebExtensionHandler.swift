@@ -20,20 +20,23 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
     let server = HttpServer()
     
     override init() {
+        logger.critical("Safari-wallet SafariWebExtensionHandler: Handler init")
         do {
             // http://127.0.0.1:8080/hello
             server["/hello"] = { .ok(.htmlBody("You asked for \($0)"))  }
             try server.start()
         } catch {
-            print("Error starting web server: \(error)")
+            logger.critical("Safari-wallet SafariWebExtensionHandler: Error staring web server: \(error.localizedDescription)")
         }
         super.init()
     }
     
+    // If deinit is *no* present, the handler will *not* be deallocated.
 //    deinit {
-//        server.stop()
+//        logger.critical("Safari-wallet SafariWebExtensionHandler: Handler deinit")
+////        server.stop()
 //    }
-    
+//
     func beginRequest(with context: NSExtensionContext) {
         
         // TODO: can we fire a timer here that keeps checks on changes (e.g. account)?
