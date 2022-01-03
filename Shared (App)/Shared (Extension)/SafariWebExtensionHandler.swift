@@ -8,6 +8,7 @@
 import SafariServices
 import SafariWalletCore
 import os.log
+import Swifter
 
 let SFExtensionMessageKey = "message"
 let SFSFExtensionResponseErrorKey = "error"
@@ -16,6 +17,22 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
     
     let walletManager = WalletManager()
     let logger = Logger()
+    let server = HttpServer()
+    
+    override init() {
+        do {
+            // http://127.0.0.1:8080/hello
+            server["/hello"] = { .ok(.htmlBody("You asked for \($0)"))  }
+            try server.start()
+        } catch {
+            print("Error starting web server: \(error)")
+        }
+        super.init()
+    }
+    
+//    deinit {
+//        server.stop()
+//    }
     
     func beginRequest(with context: NSExtensionContext) {
         
