@@ -14,6 +14,7 @@ final class TransactionsListViewModel: ObservableObject {
     @Published var viewModels: [TransactionViewModel] = []
     @Published var showDetails = false
     @Published var showError = false
+    @Published var isFetching = false
     
     private(set) var transactionDetail: TransactionActivity?
     private(set) var errorMessage = ""
@@ -28,8 +29,6 @@ final class TransactionsListViewModel: ObservableObject {
     private let address: String
     private let currency: String
     private let symbol: String
-    
-    private var isFetching = false
     
     private let txService: TransactionFetchable
     private let contractService: ContractFetchable
@@ -69,6 +68,7 @@ final class TransactionsListViewModel: ObservableObject {
                 //TODO: Error handling / Define error cases and appropriate error messages
                 errorMessage = error.localizedDescription
                 showError = true
+                isFetching = false
             }
         }
     }

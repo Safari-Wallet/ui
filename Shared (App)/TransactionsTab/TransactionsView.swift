@@ -13,33 +13,36 @@ struct TransactionsView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                List {
-                    ForEach(viewModel.viewModels) { tx in
-                        TransactionRowView(
-                            txType: tx.type,
-                            toAddress: tx.toAddress ?? "",
-                            token: tx.token,
-                            fiat: tx.fiat,
-                            nameTag: tx.tags.first,
-                            description: tx.description,
-                            date: tx.date
-                        )
-                            .padding([.top, .bottom], 8)
-                            .contentShape(Rectangle())
-                            .onAppear {
-                                viewModel.fetchTransactionsIfNeeded(atTransactionHash: tx.hash)
-                            }
-                            .onTapGesture {
-                                viewModel.showDetails(forTransaction: tx)
-                            }
+            ZStack {
+                if viewModel.isFetching { ProgressView() }
+                VStack {
+                    List {
+                        ForEach(viewModel.viewModels) { tx in
+                            TransactionRowView(
+                                txType: tx.type,
+                                toAddress: tx.toAddress ?? "",
+                                token: tx.token,
+                                fiat: tx.fiat,
+                                nameTag: tx.tags.first,
+                                description: tx.description,
+                                date: tx.date
+                            )
+                                .padding([.top, .bottom], 8)
+                                .contentShape(Rectangle())
+                                .onAppear {
+                                    viewModel.fetchTransactionsIfNeeded(atTransactionHash: tx.hash)
+                                }
+                                .onTapGesture {
+                                    viewModel.showDetails(forTransaction: tx)
+                                }
+                        }
                     }
+                    .refreshable {
+                        viewModel.fetchTransactions()
+                    }
+                    .listStyle(.plain)
+                    .navigationTitle("Transactions")
                 }
-                .refreshable {
-                    viewModel.fetchTransactions()
-                }
-                .listStyle(.plain)
-                .navigationTitle("Transactions")
             }
         }
         .notification(show: $viewModel.showError, text: viewModel.errorMessage)
