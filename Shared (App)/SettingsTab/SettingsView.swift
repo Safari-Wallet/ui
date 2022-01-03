@@ -20,6 +20,8 @@ struct SettingsView: View {
     
     @State private var addresses: [String] = []
     @State private var selectedAddressIndex = 0
+    
+    @ObservedObject private var userSettings: UserSettings = UserSettings()
         
     var body: some View {
 
@@ -89,9 +91,35 @@ struct SettingsView: View {
                     
                 }
             }
+            
+            // MARK: - Developer
+            Section(header: Text("Developer")) {
+                Toggle("Developer mode", isOn: $userSettings.devMode)
+            }
+            .onAppear()
         }
     }
-    
+}
+
+extension SettingsView {
+    class UserSettings: ObservableObject {
+        @Published var devMode: Bool {
+            didSet {
+                guard let sharedContainer = UserDefaults(suiteName: APP_GROUP) else { return  }
+                sharedContainer.set(devMode, forKey: "DevMode")
+                sharedContainer.synchronize()
+            }
+        }
+        
+        init() {
+            if let sharedContainer = UserDefaults(suiteName: APP_GROUP), let _ = sharedContainer.object(forKey: "DevMode") {
+                self.devMode = sharedContainer.bool(forKey: "DevMode")
+            } else {
+                // "DevMode" key doesn't exist in user defaults
+                self.devMode = true // TODO: Should be false for release
+            }
+        }
+    }
 }
 
 struct SettingsView_Previews: PreviewProvider {
