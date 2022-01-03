@@ -116,7 +116,7 @@ extension SettingsView {
                 self.devMode = sharedContainer.bool(forKey: "DevMode")
             } else {
                 // "DevMode" key doesn't exist in user defaults
-                self.devMode = true // TODO: Should be false for release
+                self.devMode = false
             }
         }
     }

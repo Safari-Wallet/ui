@@ -21,16 +21,25 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
     
     override init() {
         logger.critical("Safari-wallet SafariWebExtensionHandler: Handler init")
-        do {
-            if let server = server {
-                // http://127.0.0.1:8080
-                server["/"] = { .ok(.htmlBody("You asked for \($0)"))  }
-                try server.start()
+        
+        // If developer mode is enabled and extension is running in the simulator, load http server
+        // http://127.0.0.1:8080
+        #if targetEnvironment(simulator)
+        if let sharedContainer = UserDefaults(suiteName: APP_GROUP), let _ = sharedContainer.object(forKey: "DevMode"), sharedContainer.bool(forKey: "DevMode") == true {
+            do {
+                if let server = server {
+                    server["/"] = { .ok(.htmlBody("You asked for \($0)"))  }
+                    try server.start()
+                    logger.critical("Safari-wallet SafariWebExtensionHandler: http server started")
+                }
+            } catch {
+                logger.critical("Safari-wallet SafariWebExtensionHandler: Error staring http server: \(error.localizedDescription)")
+                server = nil // deallocate http server
             }
-        } catch {
-            logger.critical("Safari-wallet SafariWebExtensionHandler: Error staring web server: \(error.localizedDescription)")
-            server = nil // deallocate http server
         }
+        #else
+        logger.critical("Safari-wallet SafariWebExtensionHandler: init not in simulator")
+        #endif
         super.init()
     }
     
@@ -38,7 +47,7 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
         logger.critical("Safari-wallet SafariWebExtensionHandler: Handler deinit")
 //        server.stop() Keep the http server running
     }
-//
+
     func beginRequest(with context: NSExtensionContext) {
         
         // TODO: can we fire a timer here that keeps checks on changes (e.g. account)?
