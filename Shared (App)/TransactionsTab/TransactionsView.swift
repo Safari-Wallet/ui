@@ -47,7 +47,7 @@ struct TransactionsView: View {
             NavigationView {
                 HStack {
                     Text("View on Etherscan")
-                    Image(systemName: "square.and.arrow.up")
+                    Image(systemName: "arrow.up.forward.square")
                 }
                 .contentShape(Rectangle())
                 .onTapGesture {

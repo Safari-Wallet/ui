@@ -18,10 +18,12 @@ final class TransactionsListViewModel: ObservableObject {
     private(set) var transactionDetail: TransactionActivity?
     private(set) var errorMessage = ""
     
+    // TODO: Implement transaction persistence
     private var transactions: [TransactionActivity] = []
-    // TODO: Implement contract caching
+    // TODO: Implement contract persistence
     private var contracts: [String: Contract] = [:]
     
+    // TODO: Add to user defaults
     private let chain: String
     private let address: String
     private let currency: String
@@ -72,7 +74,7 @@ final class TransactionsListViewModel: ObservableObject {
     }
     
     func fetchTransactionsIfNeeded(atTransactionHash txHash: String) {
-        guard canLoadNextPage(atTransactionHash: txHash) else { return }
+        guard shouldLoadNextPage(atTransactionHash: txHash) else { return }
         fetchTransactions()
     }
     
@@ -82,7 +84,7 @@ final class TransactionsListViewModel: ObservableObject {
         showDetails = true
     }
     
-    private func canLoadNextPage(atTransactionHash txHash: String) -> Bool {
+    private func shouldLoadNextPage(atTransactionHash txHash: String) -> Bool {
         guard let index: Int = transactions.firstIndex(where: { $0.txHash == txHash }) else { return false }
         let reachedThreshold = Double(index) / Double(transactions.count) > 0.7
         return !isFetching && reachedThreshold

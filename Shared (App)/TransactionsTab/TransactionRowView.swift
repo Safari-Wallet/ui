@@ -44,12 +44,12 @@ struct TransactionRowView: View {
                 HStack {
                     Text(nameTag ?? toAddress)
                         .font(.system(.caption2, design: .monospaced))
-                        .truncationMode(Text.TruncationMode.middle)
+                        .truncationMode(.middle)
                         .lineLimit(1)
                     Spacer()
                     Text(date)
                         .font(.system(.caption2, design: .monospaced))
-                        .truncationMode(Text.TruncationMode.middle)
+                        .truncationMode(.middle)
                         .lineLimit(1)
                     
                 }

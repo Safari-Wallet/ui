@@ -67,11 +67,10 @@ struct Price: Equatable {
 
 struct Fee: Equatable {
     let value: Int
-//    let decimal: Int
     let price: Price?
 }
 
-// MARK: - Zerion Mapping
+// MARK: - Network Model Mapping
 
 extension TransactionActivity {
 

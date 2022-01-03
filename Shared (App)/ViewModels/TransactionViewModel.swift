@@ -82,7 +82,6 @@ extension TransactionViewModel {
             guard let asset = tx.assets.out else { return nil }
             return mapToCurrency(asset: asset)
         default:
-            // check for ens registrations (type trade)
             guard let asset = tx.assets.in else { return nil }
             return mapToCurrency(asset: asset)
         }
@@ -91,8 +90,6 @@ extension TransactionViewModel {
     static func mapToCurrency(asset: Asset) -> String? {
         switch asset {
         case .native(let asset):
-            // TODO: do proper currency formatting
-            // Should we use current prices or prices at time of tx?
             guard let price = asset.currentPrice else { return nil }
             let value = (asset.value.convert(withDecimals: asset.decimal) * price.value).rounded(toPlaces: 2)
             return formattedCurrencyFrom(value: value, currency: price.currency)
@@ -103,6 +100,7 @@ extension TransactionViewModel {
         }
     }
     
+    // TODO: Create a common formatter to be used across the app
     static func formattedCurrencyFrom(value: Double, currency: String) -> String? {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
