@@ -2,15 +2,6 @@
   "object": {
     "pins": [
       {
-        "package": "Alamofire",
-        "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
-        "state": {
-          "branch": null,
-          "revision": "d120af1e8638c7da36c8481fd61a66c0c08dc4fc",
-          "version": "5.4.4"
-        }
-      },
-      {
         "package": "BigInt",
         "repositoryURL": "https://github.com/attaswift/BigInt.git",
         "state": {
@@ -32,8 +23,8 @@
         "package": "SafariWalletCore",
         "repositoryURL": "https://github.com/Safari-Wallet/core",
         "state": {
-          "branch": "feature/eth_call",
-          "revision": "6754c3251df02a7b0fe0a697af95abb95b507157",
+          "branch": "develop",
+          "revision": "6dad6c75b169e54f6978c318424086d96864e5a1",
           "version": null
         }
       },
