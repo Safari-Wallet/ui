@@ -50,6 +50,7 @@ let coreDependency = TargetDependency.external(name: "SafariWalletCore")
 
 let baseSettings = SettingsDictionary()
     .automaticCodeSigning(devTeam: developmentTeam)
+    .bundleId(bundleId)
 
 let iosDeploymentTarget = DeploymentTarget.iOS(targetVersion: "15.0", devices: [.iphone, .ipad])
 let macosDeploymentTarget = DeploymentTarget.macOS(targetVersion: "11.0")

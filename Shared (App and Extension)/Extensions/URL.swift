@@ -15,7 +15,7 @@ extension URL {
     }
     
     static func sharedContainer() throws -> URL {
-        guard let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: APP_GROUP) else { throw WalletError.invalidAppGroupIdentifier }
+        guard let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Configuration.appGroup) else { throw WalletError.invalidAppGroupIdentifier }
         #if os(macOS)
         // In MacOS, containerURL:forSecurityApplicationGroupIdentifier returns a URL even if the app group directory is not available
         var isDir : ObjCBool = false

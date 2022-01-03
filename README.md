@@ -14,9 +14,9 @@ The bulk of the development is currently going on in the `Shared (App and Extens
 
 It is important to read these files:
 
-- `Shared (App)` > `Shared (Extension)` > `Resources` > `README.md`
+- `Shared (Extension)` > `Resources` > `README.md`
 
-- `Shared (App)` > `Shared (Extension)` > `Resources` > `ethereum` > `README.md`
+- `Shared (Extension)` > `Resources` > `ethereum` > `README.md`
 
 - `test-dapp` > `README.md`
 
@@ -49,6 +49,7 @@ You can also set up the local dev server here (WIP): https://github.com/natclark
 Project uses [Tuist](https://tuist.io/). To start developing [install Tuist](https://docs.tuist.io/tutorial/get-started#install), Node.js, and run:
 
 ```sh
+tuist dependencies fetch
 tuist focus
 ```
 
