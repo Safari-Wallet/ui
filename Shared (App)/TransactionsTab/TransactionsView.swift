@@ -13,90 +13,63 @@ struct TransactionsView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                Section {
-                    Picker("Mode", selection: $viewModel.filter, content: {
-                        Text("All").tag(TransactionFilter.all)
-                        Text("Sent").tag(TransactionFilter.sent)
-                        Text("Received").tag(TransactionFilter.received)
-                        Text("Interactions").tag(TransactionFilter.interactions)
-                        Text("Failed").tag(TransactionFilter.failed)
-                    })
-                        .pickerStyle(SegmentedPickerStyle())
+            ZStack {
+                if viewModel.isFetching { ProgressView() }
+                VStack {
                     List {
-                        switch viewModel.state {
-                        case .loading:
-                            ForEach(1..<6) { transactionGroup in
-                                //                            TransactionRow(tx: .placeholder)
-                                //                                .redacted(reason: .placeholder)
-                            }
-                        case .fetched(txs: let txs):
-                            ForEach(txs) { transactionGroup in
-                                NavigationLink(destination: TransactionDetailsView(group: transactionGroup)) {
-                                    TransactionRowView(
-                                        txType: TransactionType(transactionGroup.type),
-                                        description: transactionGroup.description,
-//                                        toAddress: transactionGroup.toAddress,
-                                        toAddress: transactionGroup.contractName ?? "",
-                                        amount: transactionGroup.value
-                                    )
-                                    .onAppear {
-                                        viewModel.fetchTransactionsIfNeeded(currentTransaction: transactionGroup)
-                                    }
+                        ForEach(viewModel.viewModels) { tx in
+                            TransactionRowView(
+                                txType: tx.type,
+                                toAddress: tx.toAddress ?? "",
+                                token: tx.token,
+                                fiat: tx.fiat,
+                                nameTag: tx.tags.first,
+                                description: tx.description,
+                                date: tx.date
+                            )
+                                .padding([.top, .bottom], 8)
+                                .contentShape(Rectangle())
+                                .onAppear {
+                                    viewModel.fetchTransactionsIfNeeded(atTransactionHash: tx.hash)
                                 }
-                            }
-                        case .error(message: let message):
-                            // Simple error msg for now
-                            Text(message)
-                            Spacer()
+                                .onTapGesture {
+                                    viewModel.showDetails(forTransaction: tx)
+                                }
                         }
                     }
                     .refreshable {
                         viewModel.fetchTransactions()
                     }
                     .listStyle(.plain)
+                    .navigationTitle("Transactions")
                 }
-            }.navigationBarHidden(true)
-        }
-    }
-}
-
-struct TransactionRow: View {
-    
-    let transactionGroup: TransactionGroup
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("Hash: \(transactionGroup.transactionHash)")
-                .font(.headline)
-                .bold()
-                .lineLimit(1)
-                .truncationMode(.tail)
-            HStack {
-                Text(transactionGroup.fromAddress)
-                    .lineLimit(1)
-                    .truncationMode(.middle)
-                Spacer()
-                Image(systemName: "arrow.right")
-                    .foregroundColor(.blue)
-                    .unredacted()
-                Spacer()
-                Text(transactionGroup.toAddress)
-                    .lineLimit(1)
-                    .truncationMode(.middle)
             }
-            Text("\(transactionGroup.transactions.count) sources")
         }
-        .frame(maxWidth: .infinity)
-        .padding()
+        .notification(show: $viewModel.showError, text: viewModel.errorMessage)
+        .sheet(isPresented: $viewModel.showDetails) {
+            NavigationView {
+                HStack {
+                    Text("View on Etherscan")
+                    Image(systemName: "arrow.up.forward.square")
+                }
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    guard let tx = viewModel.transactionDetail,
+                          let url = URL(string: "https://etherscan.io/tx/\(tx.txHash)") else { return }
+                    UIApplication.shared.open(url) { _ in
+                        viewModel.showDetails = false
+                    }
+                }
+            }
+        }
     }
-}
-
-struct TransactionsView_Previews: PreviewProvider {
-    static var previews: some View {
-        TransactionsView(viewModel: TransactionsListViewModel(chain: "1",
-                                                              address: "ric.eth",
-                                                              currency: "USD",
-                                                              symbol: "$"))
+    
+    struct TransactionsView_Previews: PreviewProvider {
+        static var previews: some View {
+            TransactionsView(viewModel: TransactionsListViewModel(chain: "1",
+                                                                  address: "ric.eth",
+                                                                  currency: "USD",
+                                                                  symbol: "$"))
+        }
     }
 }

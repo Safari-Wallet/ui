@@ -8,12 +8,17 @@
 enum TransactionType: String {
     case send
     case receive
+    case trade
+    case authorize
     case stake
     case unstake
-    case swap
-    case mint
-    case burn
-    case contractExecution
-    case approve
+    case deployment
+    case cancel
+    case deposit
+    case withdraw
+    case borrow
+    case repay
+    case claim
+    case execution
     case unknown
 }

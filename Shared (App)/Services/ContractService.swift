@@ -11,7 +11,7 @@ import SafariWalletCore
 
 protocol ContractFetchable {
     func name(forAddress address: RawAddress) -> ContractInfo?
-    func fetchContractDetails(forAddress: Address) async throws -> Contract?
+    func fetchContractDetails(forAddress: RawAddress) async -> Contract?
 }
 
 typealias RawAddress = String
@@ -33,16 +33,14 @@ final class ContractService: ContractFetchable {
         return contractNameLookup[address]
     }
     
-    func fetchContractDetails(forAddress address: Address) async throws -> Contract? {
+    func fetchContractDetails(forAddress address: RawAddress) async -> Contract? {
         // TODO: fetch contract details (ABI & Contract name)
-//        let response = try await client.getContractDetails(forAddress: address)
-//        guard let contractDetails = response.result.first else { return nil }
-        let contractInfo = name(forAddress: address.address)
+        guard let contractInfo = name(forAddress: address) else { return nil }
         let contract = Contract(
-            address: address.address,
+            address: address,
             name: "", //contractDetails.contractName,
             abi: "", //contractDetails.abi,
-            nameTag: contractInfo?.nameTag
+            nameTag: contractInfo.nameTag
         )
         return contract
     }
