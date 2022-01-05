@@ -13,11 +13,11 @@ class WalletManager {
 
     var defaultAddress: String? {
         get {
-            guard let sharedContainer = UserDefaults(suiteName: APP_GROUP), let address = sharedContainer.string(forKey: "DefaultAddress") else { return nil }
+            guard let sharedContainer = UserDefaults(suiteName: Configuration.appGroup), let address = sharedContainer.string(forKey: "DefaultAddress") else { return nil }
             return address
         }
         set {
-            guard let address = newValue,  let sharedContainer = UserDefaults(suiteName: APP_GROUP) else { return }
+            guard let address = newValue,  let sharedContainer = UserDefaults(suiteName: Configuration.appGroup) else { return }
             sharedContainer.set(address, forKey: "DefaultAddress")
             sharedContainer.synchronize()            
         }
@@ -25,11 +25,11 @@ class WalletManager {
     
     var defaultWallet: String? {
         get {
-            guard let sharedContainer = UserDefaults(suiteName: APP_GROUP), let wallet = sharedContainer.string(forKey: "DefaultWallet") else { return nil }
+            guard let sharedContainer = UserDefaults(suiteName: Configuration.appGroup), let wallet = sharedContainer.string(forKey: "DefaultWallet") else { return nil }
             return wallet
         }
         set {
-            guard let wallet = newValue,  let sharedContainer = UserDefaults(suiteName: APP_GROUP) else { return }
+            guard let wallet = newValue,  let sharedContainer = UserDefaults(suiteName: Configuration.appGroup) else { return }
             sharedContainer.set(wallet, forKey: "DefaultWallet")
             sharedContainer.synchronize()
         }
@@ -37,12 +37,12 @@ class WalletManager {
     
     var defaultNetwork: Network {
         get {
-            guard let sharedContainer = UserDefaults(suiteName: APP_GROUP), let network = sharedContainer.string(forKey: "DefaultNetwork") else { return .ethereum }
+            guard let sharedContainer = UserDefaults(suiteName: Configuration.appGroup), let network = sharedContainer.string(forKey: "DefaultNetwork") else { return .ethereum }
             if network == "Ropsten" { return .ropsten }
             return .ethereum
         }
         set {
-            guard let sharedContainer = UserDefaults(suiteName: APP_GROUP) else { return }
+            guard let sharedContainer = UserDefaults(suiteName: Configuration.appGroup) else { return }
             sharedContainer.set(newValue.name, forKey: "DefaultNetwork")
             sharedContainer.synchronize()
         }
@@ -246,24 +246,24 @@ class WalletManager {
 //extension WalletManager {
 //
 //    func setDefaultAddress(_ address: String) {
-//        guard let sharedContainer = UserDefaults(suiteName: APP_GROUP) else { return }
+//        guard let sharedContainer = UserDefaults(suiteName: Configuration.appGroup) else { return }
 //        sharedContainer.set(address, forKey: "DefaultAddress")
 //        sharedContainer.synchronize()
 //    }
 //
 //    func defaultAddress() -> String? {
-//        guard let sharedContainer = UserDefaults(suiteName: APP_GROUP), let address = sharedContainer.string(forKey: "DefaultAddress") else { return nil }
+//        guard let sharedContainer = UserDefaults(suiteName: Configuration.appGroup), let address = sharedContainer.string(forKey: "DefaultAddress") else { return nil }
 //        return address
 //    }
 //
 //    func setDefaultHDWallet(_ wallet: String) {
-//        guard let sharedContainer = UserDefaults(suiteName: APP_GROUP) else { return }
+//        guard let sharedContainer = UserDefaults(suiteName: Configuration.appGroup) else { return }
 //        sharedContainer.set(wallet, forKey: "DefaultWallet")
 //        sharedContainer.synchronize()
 //    }
 //
 //    func defaultHDWallet() -> String? {
-//        guard let sharedContainer = UserDefaults(suiteName: APP_GROUP), let wallet = sharedContainer.string(forKey: "DefaultWallet") else { return nil }
+//        guard let sharedContainer = UserDefaults(suiteName: Configuration.appGroup), let wallet = sharedContainer.string(forKey: "DefaultWallet") else { return nil }
 //        return wallet
 //    }
 //}

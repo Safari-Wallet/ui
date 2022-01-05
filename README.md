@@ -14,9 +14,9 @@ The bulk of the development is currently going on in the `Shared (App and Extens
 
 It is important to read these files:
 
-- `Shared (App)` > `Shared (Extension)` > `Resources` > `README.md`
+- `Shared (Extension)` > `Resources` > `README.md`
 
-- `Shared (App)` > `Shared (Extension)` > `Resources` > `ethereum` > `README.md`
+- `Shared (Extension)` > `Resources` > `ethereum` > `README.md`
 
 - `test-dapp` > `README.md`
 
@@ -44,9 +44,26 @@ Then, to test the popover, navigate to https://safari-wallet-test-dapp.vercel.ap
 
 You can also set up the local dev server here (WIP): https://github.com/natclark/safari-wallet-test-dapp
 
+## Development
+
+Project uses [Tuist](https://tuist.io/). To start developing [install Tuist](https://docs.tuist.io/tutorial/get-started#install), Node.js, and run:
+
+```sh
+tuist dependencies fetch
+tuist focus
+```
+
+---
+
+To edit the Tuist configuration you can use `tuist edit` which will open Xcode.
+
+### Dependencies
+
+Swift dependencies are managed by Tuist and are specified in `Tuist/Dependencies.swift`.
+
 ## Keys
 
-Use your own Alchemy or Infura keys by creating a file called `keys.swift` in the `Shared (App and Extension)` directory. The filename is added to .gitignore so won't be committed. 
+Use your own Alchemy or Infura keys by creating a file called `keys.swift` in the `Shared (App and Extension)` directory. The filename is added to .gitignore so won't be committed.
 
 ```swift
 // Shared (App and Extension)/keys.swift
@@ -57,5 +74,6 @@ struct ApiKeys {
     static let infuraMainnet = "<YOUR KEY HERE>"
     static let covalent = "<YOUR KEY HERE>"
     static let unmarshal = "<YOUR KEY HERE>"
+    static let etherscan = "<YOUR KEY HERE>"
 }
 ```

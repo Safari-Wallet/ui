@@ -14,7 +14,7 @@ import SafariServices
 #endif
 
 //struct KeychainConfiguration {
-//    static let serviceName = KEYCHAIN_GROUP
+//    static let serviceName = Configuration.bundleId
 //    static let accessGroup: String? = nil
 //}
 
