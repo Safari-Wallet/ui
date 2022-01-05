@@ -17,6 +17,7 @@ let appTargets = Target.crossPlatform(
         iOS: .extendingDefault(with: [
             "CFBundleDisplayName": .string(name),
             "CFBundleURLTypes": Constants.urlTypes,
+            "UIRequiresFullScreen": .boolean(true),
         ]),
         macOS: .default
     ),
