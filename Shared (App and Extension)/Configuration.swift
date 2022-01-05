@@ -23,6 +23,6 @@ enum Configuration {
     }
     
     static let bundleId: String = try! value(for: "CFBundleIdentifier")
-    static let extensionBundleId: String = "\(bundleId).Extension"
-    static let appGroup: String = "group.\(bundleId)"
+    static let extensionBundleId = "\(bundleId).Extension"
+    static let appGroup = "group.\(bundleId)"
 }

@@ -67,6 +67,7 @@ public enum Constants {
     ])
     
     public static let extensionPlist = InfoPlist.extendingDefault(with: [
+        "CFBundleDisplayName": "Extension",
         "NSExtension": .dictionary([
             "NSExtensionPointIdentifier": .string("com.apple.Safari.web-extension"),
             "NSExtensionPrincipalClass": .string("$(PRODUCT_MODULE_NAME).SafariWebExtensionHandler"),
