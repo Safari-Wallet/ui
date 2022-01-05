@@ -1,5 +1,5 @@
 //
-//  WalletManager+debug.swift
+//  UserSettings+debug.swift
 //  Wallet
 //
 //  Created by Ronald Mannak on 11/23/21.
@@ -10,7 +10,7 @@ import SafariWalletCore
 
 // MARK: - Debugging methods
 #if DEBUG
-extension WalletManager {
+extension UserSettings {
     
     func deleteAllWalletsAndBundles(allFiles: Bool = false) async throws {
 
@@ -50,9 +50,8 @@ extension WalletManager {
         }
         
         // 3. Reset userdefaults
-        guard let sharedContainer = UserDefaults(suiteName: APP_GROUP) else { throw WalletError.invalidAppGroupIdentifier(APP_GROUP) }
-        // FIXME: Publishing changes from background threads is not allowed; make sure to publish values from the main thread (via operators like receive(on:)) on model updates. vv
-        sharedContainer.removeObject(forKey: AddressBundle.DefaultAddress.key)
+        sharedContainer.removeObject(forKey: UserSettings.devModeKey)
+        sharedContainer.removeObject(forKey: UserSettings.bundleKey)
         sharedContainer.synchronize()
     }
 }

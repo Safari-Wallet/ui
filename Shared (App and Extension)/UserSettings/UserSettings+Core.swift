@@ -1,5 +1,5 @@
 //
-//  WalletManager+Core.swift
+//  UserSettings+Core.swift
 //  Wallet
 //
 //  Created by Ronald Mannak on 11/7/21.
@@ -9,7 +9,7 @@ import Foundation
 import SafariWalletCore
 import MEWwalletKit
 
-extension WalletManager: SafariWalletCoreDelegate {
+extension UserSettings: SafariWalletCoreDelegate {
     
     func addresses() -> [String]? {
         guard let address = self.address else { return nil }

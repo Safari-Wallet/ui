@@ -37,11 +37,26 @@ extension AddressBundle {
         }
     }
     
+    var url: URL? {
+        try? URL.sharedContainer().appendingPathComponent(id.uuidString).appendingPathExtension(network.symbol).appendingPathExtension(ADDRESSBUNDLE_FILE_EXTENSION)
+    }
+    
+    var keystoreURL: URL? {
+        try? URL.sharedContainer().appendingPathComponent(id.uuidString).appendingPathExtension(KEYSTORE_FILE_EXTENSION)
+    }
+    
     var keystoreExists: Bool {
-        guard let walletURL = try? URL.sharedContainer().appendingPathComponent(id.uuidString).appendingPathComponent(KEYSTORE_FILE_EXTENSION) else {
+        guard let keystoreURL = self.keystoreURL else {
             return false
         }
-        return FileManager.default.fileExists(atPath: walletURL.path)
+        return FileManager.default.fileExists(atPath: keystoreURL.path)
+    }
+    
+    var bundleExists: Bool {
+        guard let bundleURL = self.url else {
+            return false
+        }
+        return FileManager.default.fileExists(atPath: bundleURL.path)
     }
     
     static func loadAddressBundles(network: Network) async throws -> [AddressBundle] {
@@ -73,48 +88,6 @@ extension AddressBundle {
     /// - Returns: The number of address bundles found
     static func numberOfBundles(network: Network) -> Int? {
         return try? SharedDocument.listAddressBundles(network: network).count
-    }
-}
-
-// MARK: -- NSUserDefaults
-
-extension AddressBundle {
-    
-    struct DefaultAddress: Codable {
-        let addressIndex: Int
-        let bundleUUID: UUID
-        let network: String
-        
-        static let key = "DefaultAddress"
-    }
-    
-    func setDefault() {
-        guard self.defaultAddressIndex < addresses.count, let sharedContainer = UserDefaults(suiteName: APP_GROUP) else {
-            assertionFailure()
-            return
-        }
-        let defaultAddress = DefaultAddress(addressIndex: defaultAddressIndex, bundleUUID: self.id, network: self.network.name)
-        let encoder = JSONEncoder()
-        guard let encoded = try? encoder.encode(defaultAddress) else {
-            assertionFailure()
-            return
-        }
-        sharedContainer.set(encoded, forKey: DefaultAddress.key)
-        sharedContainer.synchronize()
-    }
-    
-    static func loadDefault() async throws -> AddressBundle {
-        let decoder = JSONDecoder()
-        guard
-            let sharedContainer = UserDefaults(suiteName: APP_GROUP),
-            let data = sharedContainer.object(forKey: DefaultAddress.key) as? Data,
-            let defaultAddress = try? decoder.decode(DefaultAddress.self, from: data)
-        else {
-            throw WalletError.noDefaultWalletSet
-        }
-        let bundle = try await load(id: defaultAddress.bundleUUID, network: Network(name: defaultAddress.network))
-        bundle.defaultAddressIndex = defaultAddress.addressIndex
-        return bundle
     }
 }
 

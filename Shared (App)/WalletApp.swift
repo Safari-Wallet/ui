@@ -13,43 +13,35 @@ import SafariWalletCore
 @main
 struct WalletApp: App {
     
-    @StateObject var manager = WalletManager()
+    @StateObject var userSettings = UserSettings()
     @State private var shouldPresentOnboarding = false
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
-    let userDefaultPublisher = NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification)
+//    let userDefaultPublisher = NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification)
     
     var body: some Scene {
         WindowGroup {
             ContentView(isOnBoardingPresented: $shouldPresentOnboarding)
-                .task {
-                    do {
-                        try await manager.setup()
-                    } catch {
-                        print("Unable to load default wallet: \(error.localizedDescription)")
-                        assert(Thread.isMainThread)
-                        shouldPresentOnboarding = true
-                    }
-                }
                 .onAppear{
+                    shouldPresentOnboarding = (userSettings.bundle == nil)
                     do {
                         try migrate()
                     } catch {
                         print("Error migrating: \(error)")
                     }
                 }
+                .environmentObject(userSettings)
                 .onOpenURL { url in handle(url: url) }
-                .environmentObject(manager)
-                .onReceive(userDefaultPublisher) { output in
-//                    print("⚠️ UserDefaults changed")
-                    Task {
-                        do {
-                            try await manager.setup()
-                        } catch {
-                            print("Error manager setup: \(error.localizedDescription)")
-                        }
-                    }
-                }
+//                .onReceive(userDefaultPublisher) { output in
+////                    print("⚠️ UserDefaults changed")
+//                    Task {
+//                        do {
+//                            try await manager.setup()
+//                        } catch {
+//                            print("Error manager setup: \(error.localizedDescription)")
+//                        }
+//                    }
+//                }
         }        
     }
     

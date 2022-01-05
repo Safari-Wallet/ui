@@ -11,10 +11,10 @@ import SafariWalletCore
 #if DEBUG
 struct DeveloperView: View {
     
-    @EnvironmentObject var manager: WalletManager
+    @EnvironmentObject var userSettings: UserSettings
     @State var walletCount: Int = 0
     @State var errorMessage: String = ""
-    @State var isOnBoardingPresented: Bool = false {
+    @State var presentOnboarding: Bool = false {
         didSet {
             self.countWallets()
         }
@@ -41,12 +41,12 @@ struct DeveloperView: View {
             
             Group {
                 
-                if let ensName = manager.address?.ensName {
+                if let ensName = userSettings.address?.ensName {
                     Text(ensName)
                         .font(.title2)
                         .padding()
                 }
-                else if let address = manager.address?.addressString {
+                else if let address = userSettings.address?.addressString {
                     Text(address)
                         .font(.title2)
                         .padding()
@@ -100,7 +100,7 @@ struct DeveloperView: View {
                 .padding()
             
             Button("Create a new wallet") {
-                isOnBoardingPresented = true
+                presentOnboarding = true
             }
             .buttonStyle(.bordered)
             
@@ -120,21 +120,22 @@ struct DeveloperView: View {
             
             Text("Instantly creates a new wallet with the default password 'password123' and makes it the default wallet. Takes up to 5 seconds in debug mode.")
                 
-            Button("Delete all wallets on disk", role: .destructive) {
-                Task {
-                    try? await manager.deleteAllWalletsAndBundles()
-                }
-                
-            }
-            .buttonStyle(.borderedProminent)
-            .padding()
+//            Button("Delete all wallets on disk", role: .destructive) {
+//                Task {
+//                    try? await manager.deleteAllWalletsAndBundles()
+//                }
+//                
+//            }
+//            .buttonStyle(.borderedProminent)
+//            .padding()
             
         }
         .padding()
         .onAppear {
             countWallets()
         }
-        .sheet(isPresented: $isOnBoardingPresented) { OnboardingView(isCancelable: true) }
+        .sheet(isPresented: $presentOnboarding) { OnboardingView(isCancelable: true) }
+        .environmentObject(userSettings)
     }
 }
 

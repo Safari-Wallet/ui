@@ -27,6 +27,7 @@ enum WalletError: Error {
     case notImplemented
     case outOfBounds
     case fileNotFound(String)
+    case invalidAppGroup(String)
 }
 
 extension WalletError: LocalizedError {
@@ -72,6 +73,8 @@ extension WalletError: LocalizedError {
             return "No address bundles found"
         case .fileNotFound(let file):
             return "File not found: \(file)"
+        case .invalidAppGroup(let group):
+            return "Invalid app group: \(group)"
         }
     }
 

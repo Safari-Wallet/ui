@@ -15,14 +15,14 @@ class SigningTests: XCTestCase {
     
     let mnemonic = "all all all all all all all all all all all all"
     let password = "password123"
-    var manager: WalletManager!
+    var userSettings: UserSettings!
     var wallet: Wallet<PrivateKeyEth1>!
     var seed: Data!
 
     override func setUp() async throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        self.manager = WalletManager()
-        try? await manager.deleteAllWalletsAndBundles()
+        self.userSettings = UserSettings()
+        try? await userSettings.deleteAllWalletsAndBundles()
         self.seed = try BIP39(mnemonic: mnemonic).seed()
         self.wallet = try Wallet(seed: seed, network: .ethereum)
     }

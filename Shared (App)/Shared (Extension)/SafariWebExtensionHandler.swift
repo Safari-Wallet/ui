@@ -14,7 +14,7 @@ let SFSFExtensionResponseErrorKey = "error"
  
 class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
     
-    let walletManager = WalletManager()
+    let userSettings = UserSettings()
     let logger = Logger()
     
     func beginRequest(with context: NSExtensionContext) {
@@ -54,7 +54,7 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
     // MARK: - Web3 Message handling
 
     func handle(message: Any) async throws -> Any {
-        let providerAPI = ProviderAPI(delegate: walletManager)
+        let providerAPI = ProviderAPI(delegate: userSettings)
         // Parse method and params
         if let message = message as? String {
             return try await providerAPI.parseMessage(method: message, params: nil)

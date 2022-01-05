@@ -12,6 +12,7 @@ import MEWwalletKit
 struct CreatePasswordView: View {
     
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var userSettings: UserSettings
     
     let bip39: BIP39
     
@@ -122,8 +123,7 @@ extension CreatePasswordView {
         try await KeychainPasswordItem.store(password: password, account: id.uuidString)
                 
         // 6. Set default wallet
-        bundle.setDefault()
-//        try await WalletManager().setup()
+        userSettings.bundle = bundle 
         
         // 7. Print debug
         #if DEBUG
