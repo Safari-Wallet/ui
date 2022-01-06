@@ -60,8 +60,8 @@
         "repositoryURL": "https://github.com/MyEtherWallet/mew-wallet-ios-tweetnacl.git",
         "state": {
           "branch": null,
-          "revision": "fc7d17268f38b363cbf79eed5f03e1297e5a0bb7",
-          "version": "1.0.0"
+          "revision": "a0ff7de7d4e78513952a65e43eb102eb4fb3170e",
+          "version": "1.0.1"
         }
       },
       {
