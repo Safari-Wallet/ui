@@ -53,11 +53,12 @@ class WalletTests: XCTestCase {
         XCTAssertNil(sharedContainer.object(forKey: UserSettings.bundleKey))
     }
     
-    func testSaveAddresses() async throws {
+    func testSaveEthBundle() async throws {
         let wallet = try Wallet<PrivateKeyEth1>(mnemonic: mnemonic)
         let addresses = try wallet.generateAddresses(count: 5)
         let id = UUID()
         let bundle = AddressBundle(id: id, walletName: "Ethereum Wallet 1", type: .keystorePassword, network: .ethereum, addresses: addresses)
+        XCTAssertEqual(bundle.network, .ethereum)
         try await bundle.save()
         userSettings.bundle = bundle
 
@@ -66,6 +67,24 @@ class WalletTests: XCTestCase {
         let addressStrings = addresses.map{ $0.address }
         XCTAssertEqual(addressStrings, recoveredAddresses)
         XCTAssertEqual(recoveredBundle.walletName, "Ethereum Wallet 1")
+        XCTAssertEqual(recoveredBundle.network, Network.ethereum)
+    }
+    
+    func testSaveRopstenBundle() async throws {
+        let wallet = try Wallet<PrivateKeyEth1>(mnemonic: mnemonic)
+        let addresses = try wallet.generateAddresses(count: 5, network: .ropsten)
+        let id = UUID()
+        let bundle = AddressBundle(id: id, walletName: "Ropsten Wallet 1", type: .keystorePassword, network: .ropsten, addresses: addresses)
+        XCTAssertEqual(bundle.network, .ropsten)
+        try await bundle.save()
+        userSettings.bundle = bundle
+
+        let recoveredBundle = try await AddressBundle.load(id: id, network: .ropsten)
+        let recoveredAddresses = recoveredBundle.addresses.map{ $0.addressString }
+        let addressStrings = addresses.map{ $0.address }
+        XCTAssertEqual(addressStrings, recoveredAddresses)
+        XCTAssertEqual(recoveredBundle.walletName, "Ropsten Wallet 1")
+        XCTAssertEqual(recoveredBundle.network, Network.ropsten)
     }
     
     func testWalletEncryptionRoundtrip() async throws {

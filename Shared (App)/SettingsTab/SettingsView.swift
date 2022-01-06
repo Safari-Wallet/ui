@@ -24,31 +24,26 @@ struct SettingsView: View {
                 Section(header: Text("Wallet")) {
                     Picker("HD Wallets", selection: $viewModel.bundleIndex) {
                         ForEach(viewModel.bundles, id: \.id) {  bundle in
-                            Text(bundle.walletName ?? "Unnamed wallet")
+                            Text(bundle.walletName ?? "Unnamed wallet \(bundle.id)")
                         }
-//
-//                        ForEach(0 ..< addressBundles.count) { i in
-//                            Text(addressBundles[i].walletName ?? "Wallet \(i + 1)")
-//                        }
                     }
                     .labelsHidden()
                     .pickerStyle(.inline)
                 }
 
                 // MARK: - Accounts selection
-//                Section(header: Text("Accounts")) {
-//
-//                    if let bundle = viewModel.defaultBundle() {
-//                        Picker("Accounts", selection: $viewModel.addressIndex) {
-//                            ForEach(0 ..<  bundle.addresses.count) { i in
-//                                let address = bundle.addresses[i]
-//                                Text(address.ensName ?? address.addressString)
-//                            }
-//                        }
-//                        .labelsHidden()
-//                        .pickerStyle(.inline)
-//                    }
-//                }
+                Section(header: Text("Accounts")) {
+
+                    if let bundle = viewModel.bundles[viewModel.bundleIndex] {
+                        Picker("Accounts", selection: $viewModel.addressIndex) {
+                            ForEach(bundle.addresses, id: \.id) { address in
+                                Text(address.ensName ?? address.addressString)
+                            }
+                        }
+                        .labelsHidden()
+                        .pickerStyle(.inline)
+                    }
+                }
             }
                        
             // MARK: - Network selection
@@ -114,6 +109,7 @@ extension SettingsView {
         
         @Published var bundleIndex: Int = 0 {
             didSet {
+                print("bundle set to \(bundleIndex)")
                 guard bundleIndex < self.bundles.count else { return }
                 let bundle = self.bundles[bundleIndex]
                 self.addressIndex = bundle.defaultAddressIndex
@@ -122,6 +118,7 @@ extension SettingsView {
         
         @Published var addressIndex: Int = 0 {
             didSet {
+                print("index set to \(addressIndex)")
                 let bundle = self.bundles[bundleIndex]
                 bundle.defaultAddressIndex = addressIndex
             }

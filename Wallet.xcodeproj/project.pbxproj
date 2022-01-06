@@ -189,6 +189,10 @@
 		F8AD21EA2717B3420059D754 /* CreatePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD21E82717B3420059D754 /* CreatePasswordView.swift */; };
 		F8AD21EF2717B4B40059D754 /* RestoreWalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD21EE2717B4B40059D754 /* RestoreWalletView.swift */; };
 		F8AD21F02717B4B40059D754 /* RestoreWalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD21EE2717B4B40059D754 /* RestoreWalletView.swift */; };
+		F8CABCBA27869C41009F2F91 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CABCB927869C41009F2F91 /* Network.swift */; };
+		F8CABCBB27869C41009F2F91 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CABCB927869C41009F2F91 /* Network.swift */; };
+		F8CABCBC27869C41009F2F91 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CABCB927869C41009F2F91 /* Network.swift */; };
+		F8CABCBD27869C41009F2F91 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CABCB927869C41009F2F91 /* Network.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -328,6 +332,7 @@
 		F8AD21E5271796CC0059D754 /* RestoreOrCreateWalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreOrCreateWalletView.swift; sourceTree = "<group>"; };
 		F8AD21E82717B3420059D754 /* CreatePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePasswordView.swift; sourceTree = "<group>"; };
 		F8AD21EE2717B4B40059D754 /* RestoreWalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreWalletView.swift; sourceTree = "<group>"; };
+		F8CABCB927869C41009F2F91 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -662,6 +667,7 @@
 				F8ABEF41271389D9007F7D11 /* URL.swift */,
 				F8ABEF46271389F5007F7D11 /* NSFileCoordinator.swift */,
 				F8ABEF4B27138E1D007F7D11 /* String.swift */,
+				F8CABCB927869C41009F2F91 /* Network.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -984,6 +990,7 @@
 				F8AD21E92717B3420059D754 /* CreatePasswordView.swift in Sources */,
 				F8ABEECD27124A8C007F7D11 /* BiometricsAuthentication.swift in Sources */,
 				F846FDC5278503220044815B /* AddViewOnlyView.swift in Sources */,
+				F8CABCBA27869C41009F2F91 /* Network.swift in Sources */,
 				3D216A132753246600620BB9 /* TransactionRowView.swift in Sources */,
 				F8ABEF3227125EFA007F7D11 /* WalletApp.swift in Sources */,
 				F8ABEF42271389D9007F7D11 /* URL.swift in Sources */,
@@ -1042,6 +1049,7 @@
 				F8AD21EA2717B3420059D754 /* CreatePasswordView.swift in Sources */,
 				F8ABEED227124A8C007F7D11 /* FileObserver.swift in Sources */,
 				F846FDC6278503220044815B /* AddViewOnlyView.swift in Sources */,
+				F8CABCBB27869C41009F2F91 /* Network.swift in Sources */,
 				F8ABEEDE27124A8C007F7D11 /* KeychainPasswordItem.swift in Sources */,
 				F8ABEF43271389D9007F7D11 /* URL.swift in Sources */,
 				F8ABEED627124A8C007F7D11 /* SharedDocument.swift in Sources */,
@@ -1079,6 +1087,7 @@
 				0A0E1ED7270687AE00061EA6 /* SafariWebExtensionHandler.swift in Sources */,
 				F8ABEED327124A8C007F7D11 /* FileObserver.swift in Sources */,
 				F82D04AC2781347A009C1725 /* KeychainPasswordItem+Convenience.swift in Sources */,
+				F8CABCBC27869C41009F2F91 /* Network.swift in Sources */,
 				F8ABEF4E27138E1D007F7D11 /* String.swift in Sources */,
 				F82D04A72780335D009C1725 /* Keystore.swift in Sources */,
 				3DFFFBB0275C5F1E00056A69 /* ContractService.swift in Sources */,
@@ -1106,6 +1115,7 @@
 				0A0E1ED8270687AE00061EA6 /* SafariWebExtensionHandler.swift in Sources */,
 				F8ABEED427124A8C007F7D11 /* FileObserver.swift in Sources */,
 				F82D04AD2781347A009C1725 /* KeychainPasswordItem+Convenience.swift in Sources */,
+				F8CABCBD27869C41009F2F91 /* Network.swift in Sources */,
 				F8ABEF4F27138E1D007F7D11 /* String.swift in Sources */,
 				F82D04A82780335D009C1725 /* Keystore.swift in Sources */,
 				3DFFFBB1275C5F1E00056A69 /* ContractService.swift in Sources */,
@@ -1685,7 +1695,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Safari-Wallet/core";
 			requirement = {
-				branch = main;
+				branch = develop;
 				kind = branch;
 			};
 		};
