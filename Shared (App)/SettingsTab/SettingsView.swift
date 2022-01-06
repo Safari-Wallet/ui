@@ -23,8 +23,9 @@ struct SettingsView: View {
                 // MARK: - Wallet selection
                 Section(header: Text("Wallet")) {
                     Picker("HD Wallets", selection: $viewModel.bundleIndex) {
-                        ForEach(viewModel.bundles, id: \.id) {  bundle in
-                            Text(bundle.walletName ?? "Unnamed wallet \(bundle.id)")
+                        ForEach(viewModel.bundles.indices) { i in
+                            let bundle = viewModel.bundles[i]
+                            Text(bundle.walletName ?? bundle.id.uuidString)
                         }
                     }
                     .labelsHidden()
@@ -32,7 +33,7 @@ struct SettingsView: View {
                 }
 
                 // MARK: - Accounts selection
-                Section(header: Text("Accounts")) {
+                Section(header: Text("Accounts in wallet")) {
 
                     if let bundle = viewModel.bundles[viewModel.bundleIndex] {
                         Picker("Accounts", selection: $viewModel.addressIndex) {
@@ -112,6 +113,7 @@ extension SettingsView {
                 print("bundle set to \(bundleIndex)")
                 guard bundleIndex < self.bundles.count else { return }
                 let bundle = self.bundles[bundleIndex]
+                self.addresses = bundle.addresses
                 self.addressIndex = bundle.defaultAddressIndex
             }
         }
@@ -124,8 +126,9 @@ extension SettingsView {
             }
         }
         
-        @Published var networkIndex: Int = 0 //{
-//            didSet {
+        @Published var networkIndex: Int = 0 {
+            didSet {
+                print("network set to \(networkIndex)")
 //                guard oldValue != networkIndex else { return }
 //                Task {
 //                    let network: Network
@@ -136,11 +139,13 @@ extension SettingsView {
 //                    }
 //                    await change(network: network)
 //                }
-//            }
-//        }
+            }
+        }
         
         @Published var bundles = [AddressBundle]()
+        
         @Published var addresses = [AddressItem]()
+        
         let networks: [String] = ["Mainnet", "Ropsten"]
                 
         @MainActor
