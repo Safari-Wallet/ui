@@ -8,8 +8,16 @@ export type Logger = (message: string, ...others: any[]) => void;
 
 export const getLogger =
     (fileName: string): Logger =>
-    (message: string, ...others: any[]) =>
-        console.log(`[${fileName}.js] ${message}`, ...others);
+    (message: string, ...others: any[]) => {
+        //console.log(`[${fileName}.js] ${message}`, ...others);
+        // todo deal with "others"
+        const xhr = new XMLHttpRequest();
+        xhr.onload = (data) => {
+            // todo handle
+        };
+        xhr.open(`POST`, `http://localhost:8081/add?message=${message}&sender=${fileName}.js`, true);
+        xhr.send();
+    };
 
 export const getErrorLogger =
     (fileName: string): Logger =>

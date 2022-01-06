@@ -7,6 +7,7 @@
 
 import XCTest
 import MEWwalletKit
+import SafariWalletCore
 @testable import Safari_Wallet
 
 // Based on ShapeShift unit tests: https://github.com/shapeshift/hdwallet/blob/master/packages/hdwallet-native/src/ethereum.test.ts
@@ -14,16 +15,15 @@ class SigningTests: XCTestCase {
     
     let mnemonic = "all all all all all all all all all all all all"
     let password = "password123"
-    var manager: WalletManager!
+    var userSettings: UserSettings!
     var wallet: Wallet<PrivateKeyEth1>!
     var seed: Data!
 
-    override func setUpWithError() throws {
+    override func setUp() async throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        self.manager = WalletManager()
-        try manager.deleteAllWallets()
-        try manager.deleteAllAddresses()
-        self.seed = try BIP39(mnemonic: mnemonic.components(separatedBy: " ")).seed()
+        self.userSettings = UserSettings()
+        try? await userSettings.deleteAllWalletsAndBundles()
+        self.seed = try BIP39(mnemonic: mnemonic).seed()
         self.wallet = try Wallet(seed: seed, network: .ethereum)
     }
 

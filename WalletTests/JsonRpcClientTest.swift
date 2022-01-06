@@ -6,8 +6,9 @@
 //
 
 import XCTest
+import SafariWalletCore
 @testable import Safari_Wallet
-
+/*
 class JsonRpcClientTest: XCTestCase {
    
    func testMakeRequest_success() async {
@@ -56,3 +57,4 @@ class MockURLSession: WalletURLSession {
    }
    
 }
+*/

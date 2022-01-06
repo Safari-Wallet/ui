@@ -8,27 +8,41 @@
 import Foundation
 
 import SwiftUI
+import SafariWalletCore
 
 @main
 struct WalletApp: App {
     
+    @StateObject var userSettings = UserSettings()
     @State private var shouldPresentOnboarding = false
-    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
+//    let userDefaultPublisher = NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification)
     
     var body: some Scene {
         WindowGroup {
             ContentView(isOnBoardingPresented: $shouldPresentOnboarding)
-                .task {
+                .onAppear{
+                    shouldPresentOnboarding = (userSettings.bundle == nil)
                     do {
-                        shouldPresentOnboarding = try isOnboardingNeeded()
+                        try migrate()
                     } catch {
-                        print(error.localizedDescription)
+                        print("Error migrating: \(error)")
                     }
                 }
+                .environmentObject(userSettings)
                 .onOpenURL { url in handle(url: url) }
-        }
-        
+//                .onReceive(userDefaultPublisher) { output in
+////                    print("⚠️ UserDefaults changed")
+//                    Task {
+//                        do {
+//                            try await manager.setup()
+//                        } catch {
+//                            print("Error manager setup: \(error.localizedDescription)")
+//                        }
+//                    }
+//                }
+        }        
     }
     
     func valueForKey(_ key: String, in items: [URLQueryItem]?) -> String? {
@@ -42,13 +56,19 @@ struct WalletApp: App {
     }
 }
 
-// MARK: - Onboarding
+// MARK: - App version migration
 
 extension WalletApp {
     
-    func isOnboardingNeeded() throws -> Bool {
-        return try !WalletManager().hasAccounts()
+    func migrate() throws {
+        guard let sharedContainer = UserDefaults(suiteName: APP_GROUP) else { throw WalletError.invalidAppGroupIdentifier(APP_GROUP) }
+        let build = sharedContainer.string(forKey: "build")
+        if build != Bundle.main.build {
+            sharedContainer.set(Bundle.main.build, forKey: "build")
+            sharedContainer.synchronize()
+        }
     }
+    
 }
 
 // MARK: - Handle open URL

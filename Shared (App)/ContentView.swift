@@ -13,11 +13,6 @@ import OSLog
 import SafariServices
 #endif
 
-//struct KeychainConfiguration {
-//    static let serviceName = KEYCHAIN_GROUP
-//    static let accessGroup: String? = nil
-//}
-
 struct ContentView: View {
     
     @Binding var isOnBoardingPresented: Bool
