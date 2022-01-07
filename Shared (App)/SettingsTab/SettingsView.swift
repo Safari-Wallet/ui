@@ -25,8 +25,11 @@ struct SettingsView: View {
                     Picker("HD Wallets", selection: $viewModel.bundleIndex) {
                         ForEach(viewModel.bundles.indices) { i in
                             let bundle = viewModel.bundles[i]
-                            Text(bundle.walletName ?? bundle.id.uuidString)
+                            Text(bundle.walletName)
                         }
+//                        ForEach(viewModel.bundles, id: \.id) { bundle in
+//                            Text(bundle.walletName ?? bundle.id.uuidString)
+//                        }
                     }
                     .labelsHidden()
                     .pickerStyle(.inline)
@@ -89,13 +92,21 @@ struct SettingsView: View {
         .onAppear {
             self.viewModel.userSettings = self.userSettings
         }
-        .onDisappear {
-            userSettings.bundle = viewModel.bundles[viewModel.bundleIndex]
-        }
         .task {
             await viewModel.setup()
         }
-        .sheet(isPresented: $presentOnboarding) { OnboardingView(isCancelable: true) }
+        .onDisappear {
+            userSettings.bundle = viewModel.bundles[viewModel.bundleIndex]
+            print("default address index: \(userSettings.bundle!.defaultAddressIndex)")
+        }
+        .sheet(isPresented: $presentOnboarding) {
+            OnboardingView(isCancelable: true)
+                .onDisappear {
+                    Task {
+                        await viewModel.setup()
+                    }
+                }
+        }
         .environmentObject(userSettings)
     }        
     
@@ -151,7 +162,8 @@ extension SettingsView {
         @MainActor
         func setup() async {
             do {
-                self.bundles = try await AddressBundle.loadAddressBundles(network: userSettings!.network)
+                self.bundles = try await AddressBundle.loadAddressBundles(network: userSettings!.network).sorted(by: { $0.walletName < $1.walletName
+                })
                 guard let defaultBundle = userSettings!.bundle,
                 let bundleIndex = bundles.firstIndex(of: defaultBundle) else {
                     self.bundleIndex = 0
@@ -160,7 +172,7 @@ extension SettingsView {
                     }
                     return
                 }
-                                     
+                                    
                 self.bundleIndex = bundleIndex
                 self.addressIndex = defaultBundle.defaultAddressIndex
                 self.addresses = defaultBundle.addresses

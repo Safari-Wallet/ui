@@ -154,9 +154,9 @@ extension DeveloperView {
         
         // 2. Save address bundles
         let id = UUID()
-        let bundle = AddressBundle(id: id, type: .keystorePassword, network: .ethereum, addresses: addresses)
+        let bundle = AddressBundle(id: id, walletName: "Eth \(id.uuidString)", type: .keystorePassword, network: .ethereum, addresses: addresses)
         try await bundle.save()
-        let ropstenBundle = AddressBundle(id: id, type: .keystorePassword, network: .ropsten, addresses: ropstenAddresses)
+        let ropstenBundle = AddressBundle(id: id, walletName: "Ropsten \(id.uuidString)", type: .keystorePassword, network: .ropsten, addresses: ropstenAddresses)
         try await ropstenBundle.save()
         
         // 3. Save seed
