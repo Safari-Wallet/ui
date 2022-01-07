@@ -28,10 +28,10 @@ struct ContentView: View {
                     .tabItem { Label("Shortcuts", systemImage: "square.grid.3x2") }
                 TransactionsView(viewModel: TransactionsListViewModel(chain: "1", address: "0x225e9b54f41f44f42150b6aaa730da5f2d23faf2", currency: "USD", symbol: "$"))
                     .tabItem { Label("Transactions", systemImage: "repeat") }
-                SettingsView()
-                    .tabItem { Label("Settings", systemImage: "gear") }
                 ExtensionTutorialView()
                     .tabItem { Label("Extension", systemImage: "puzzlepiece.extension.fill") }
+                SettingsView()
+                    .tabItem { Label("Settings", systemImage: "gear") }
                 #if DEBUG
                 DeveloperView()
                     .tabItem { Label("Developer", systemImage: "exclamationmark.triangle.fill") }
