@@ -30,6 +30,8 @@ struct ContentView: View {
                     .tabItem { Label("Transactions", systemImage: "repeat") }
                 SettingsView()
                     .tabItem { Label("Settings", systemImage: "gear") }
+                ExtensionTutorialView()
+                    .tabItem { Label("Extension", systemImage: "puzzlepiece.extension.fill") }
                 #if DEBUG
                 DeveloperView()
                     .tabItem { Label("Developer", systemImage: "exclamationmark.triangle.fill") }

@@ -99,14 +99,6 @@ struct DeveloperView: View {
                 .font(.title3)
                 .padding()
             
-            Button("Create a new wallet") {
-                presentOnboarding = true
-            }
-            .buttonStyle(.bordered)
-            
-            Text("Shows new wallet popup")
-                .padding(.bottom)
-            
             Button("Create a new test wallet") {
                 Task {
                     do {
