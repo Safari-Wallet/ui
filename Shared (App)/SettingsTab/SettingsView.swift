@@ -23,13 +23,10 @@ struct SettingsView: View {
                 // MARK: - Wallet selection
                 Section(header: Text("Wallet")) {
                     Picker("HD Wallets", selection: $viewModel.bundleIndex) {
-                        ForEach(viewModel.bundles.indices) { i in
+                        ForEach(0 ..< viewModel.bundles.count, id:\.self) { i in
                             let bundle = viewModel.bundles[i]
                             Text(bundle.walletName)
                         }
-//                        ForEach(viewModel.bundles, id: \.id) { bundle in
-//                            Text(bundle.walletName ?? bundle.id.uuidString)
-//                        }
                     }
                     .labelsHidden()
                     .pickerStyle(.inline)
