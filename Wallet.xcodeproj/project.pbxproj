@@ -191,6 +191,8 @@
 		F8AD21F02717B4B40059D754 /* RestoreWalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD21EE2717B4B40059D754 /* RestoreWalletView.swift */; };
 		F8C02DF12787CF5800B7F28D /* ExtensionTutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C02DF02787CF5800B7F28D /* ExtensionTutorialView.swift */; };
 		F8C02DF22787CF5800B7F28D /* ExtensionTutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C02DF02787CF5800B7F28D /* ExtensionTutorialView.swift */; };
+		F8C02DF42788B1E000B7F28D /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C02DF32788B1E000B7F28D /* Color.swift */; };
+		F8C02DF52788B1E000B7F28D /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C02DF32788B1E000B7F28D /* Color.swift */; };
 		F8CABCBA27869C41009F2F91 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CABCB927869C41009F2F91 /* Network.swift */; };
 		F8CABCBB27869C41009F2F91 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CABCB927869C41009F2F91 /* Network.swift */; };
 		F8CABCBC27869C41009F2F91 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CABCB927869C41009F2F91 /* Network.swift */; };
@@ -335,6 +337,7 @@
 		F8AD21E82717B3420059D754 /* CreatePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePasswordView.swift; sourceTree = "<group>"; };
 		F8AD21EE2717B4B40059D754 /* RestoreWalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreWalletView.swift; sourceTree = "<group>"; };
 		F8C02DF02787CF5800B7F28D /* ExtensionTutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionTutorialView.swift; sourceTree = "<group>"; };
+		F8C02DF32788B1E000B7F28D /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		F8CABCB927869C41009F2F91 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -672,6 +675,7 @@
 				F8ABEF46271389F5007F7D11 /* NSFileCoordinator.swift */,
 				F8ABEF4B27138E1D007F7D11 /* String.swift */,
 				F8CABCB927869C41009F2F91 /* Network.swift */,
+				F8C02DF32788B1E000B7F28D /* Color.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -993,6 +997,7 @@
 				F8ABEF47271389F5007F7D11 /* NSFileCoordinator.swift in Sources */,
 				F883973E278644AF00DB2D0D /* NotificationView.swift in Sources */,
 				F8812B522718B92500D1B231 /* Intro3View.swift in Sources */,
+				F8C02DF42788B1E000B7F28D /* Color.swift in Sources */,
 				F8AD21E6271796CC0059D754 /* RestoreOrCreateWalletView.swift in Sources */,
 				F8321B5C27176ED600F12938 /* ShowMnemonicView.swift in Sources */,
 				F88397442786451600DB2D0D /* TransactionActivity.swift in Sources */,
@@ -1053,6 +1058,7 @@
 				3DFFFBB5275C626000056A69 /* TransactionType.swift in Sources */,
 				F883973F278644AF00DB2D0D /* NotificationView.swift in Sources */,
 				F8AD21E7271796CC0059D754 /* RestoreOrCreateWalletView.swift in Sources */,
+				F8C02DF52788B1E000B7F28D /* Color.swift in Sources */,
 				3DFFFBB2275C625700056A69 /* TransactionRowView.swift in Sources */,
 				F8321B5D27176ED600F12938 /* ShowMnemonicView.swift in Sources */,
 				F88397452786451600DB2D0D /* TransactionActivity.swift in Sources */,

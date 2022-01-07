@@ -9,7 +9,11 @@ import SwiftUI
 
 struct ExtensionTutorialView: View {
     var body: some View {
-        Text("Extension tutorial!")
+        ZStack {
+            Color(hex: 0xE7E7EC)
+                .ignoresSafeArea(.container, edges: .top)
+            Text("Extension tutorial!")
+        }
     }
 }
 
