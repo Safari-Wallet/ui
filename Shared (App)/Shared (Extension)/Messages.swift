@@ -29,6 +29,7 @@ protocol NativeMessageParams: Codable {
 enum NativeMessageMethod: String, Decodable {
     case eth_getAccounts
     case eth_getBalance
+    case signTypedData
     case helloFren
 }
 
@@ -47,6 +48,8 @@ extension NativeMessage {
             params = try container.decode(eth_getAccountsMessageParams.self, forKey: .params)
         case .eth_getBalance:
             params = try container.decode(eth_getBalanceMessageParams.self, forKey: .params)
+        case .signTypedData:
+            params = try container.decode(signTypedDataMessageParams.self, forKey: .params)
         case .helloFren:
             params = try container.decode(helloFrenMessageParams.self, forKey: .params)
         }

@@ -44,10 +44,8 @@ window.addEventListener(`load`, () => {
                 ];
                 const domain = {
                     name: `Safari Wallet Test dApp`,
-                    version: `2`,
+                    version: `3`,
                     chainId: 1,
-                    verifyingContract: ``, // TODO
-                    salt: ``, // TODO
                 };
                 const message = {
                     amount: `Hello World`,
@@ -66,11 +64,12 @@ window.addEventListener(`load`, () => {
                     primaryType: `Echo`,
                     message,
                 });
-                await window.ethereum.request({
+                const signature = await window.ethereum.request({
                     method: `eth_signTypedData_v3`,
                     params: [currentAccounts[0], data],
                     from: currentAccounts[0],
                 });
+                alert(signature)
             } catch (e) {
                 alert(`Something went wrong with eth_sign.`);
             }

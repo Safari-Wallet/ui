@@ -27,17 +27,17 @@ extension UserSettings: SafariWalletCoreDelegate {
     }
     
     func account(address: String, password: String?) async throws -> Account {
-        throw WalletError.notImplemented
-//        guard let bundles = self.addressBundles else { throw WalletError.addressNotFound(address) }
-//
-//        for bundle in bundles {
-//            for (index, bundleAddress) in bundle.addresses.enumerated() {
-//                if address == bundleAddress.addressString {
-//                    return try await bundle.account(forAddressIndex: index, password: password)
-//                }
-//            }
-//        }
-//        throw WalletError.addressNotFound(address)
+        let bundles = try await AddressBundle.loadAddressBundles(network: .ethereum)
+
+        for bundle in bundles {
+            for (index, bundleAddress) in bundle.addresses.enumerated() {
+                if address == bundleAddress.addressString {
+                    return try await bundle.account(forAddressIndex: index, network: network, password: password)
+                }
+            }
+        }
+
+        throw WalletError.addressNotFound(address)
     }
     
     func currentNetwork() -> Network {

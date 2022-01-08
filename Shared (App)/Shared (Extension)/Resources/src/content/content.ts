@@ -1,6 +1,5 @@
 import { getLogger } from '../utils';
 import { getMessenger, OnMessage } from '../messaging';
-import { inject } from '../ethereum';
 import { findOrCreateSessionId } from './sessions';
 
 // - MARK: Utils
@@ -32,17 +31,27 @@ log(`session ID`, findOrCreateSessionId());
 
 // - MARK: Main
 
-inject();
+const $injection = document.createElement('script');
+$injection.type = 'text/javascript';
+$injection.async = false;
+$injection.src = browser.runtime.getURL('ethereum/index.js');
+document.body.insertBefore($injection, document.body.firstChild);
 
 onMessage('forwardToEthereumJs', (params) => {
-    window.postMessage({ ...params });
+    Messenger.sendToEthereumJs(params);
 });
 
 window.addEventListener(`message`, (event) => {
-    log(`Received message from ethereum.js: ${JSON.stringify(event)}`);
+    if (event.data?.destination !== 'content') return;
+    log(`Received message from postMessage: ${JSON.stringify(event)}`);
 
-    if (event.data.method) {
-        Messenger.sendToBackground(event.data.method, event.data.params);
+    const method = event.data?.method;
+    if (method) {
+        Messenger.sendToBackground(method, event.data.params).then((result) => {
+            log(`Received message from background: ${JSON.stringify(result)}`);
+            if (!result) return;
+            Messenger.sendToEthereumJs({ method, params: result });
+        });
     }
 });
 

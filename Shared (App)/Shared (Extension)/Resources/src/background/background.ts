@@ -5,7 +5,7 @@ import { getLogger } from '../utils';
 const log = getLogger('background');
 const Messenger = getMessenger('background', { logger: log });
 
-browser.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
+browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     log(`Received message from browser runtime: ${JSON.stringify(request)}`);
 
     const onMethod: OnMessage = async (methodName, handler) => {
@@ -32,7 +32,7 @@ browser.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
             sessionId,
             {
                 address,
-                block: 'latest',
+                block: 'latest'
             }
         );
 
@@ -43,6 +43,47 @@ browser.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
             address,
             balance
         });
+    });
+
+    onMethod('eth_signTypedData_v3', async (params, sessionId) => {
+        log('eth_signTypedData_v3: sending to native', params);
+
+        const signature = await Messenger.sendToNative(
+            'signTypedData',
+            sessionId,
+            {
+                version: 'v3',
+                address: params[0],
+                data: params[1]
+            }
+        );
+
+        log(`eth_signTypedData_v3 response: ${JSON.stringify(signature)}`);
+
+        // TODO: Handle user cancelation
+
+        sendResponse({ signature });
+    });
+
+    // TODO: Merge with eth_signTypedData_v3
+    onMethod('eth_signTypedData_v4', async (params, sessionId) => {
+        log('eth_signTypedData_v4: sending to native', params);
+
+        const signature = await Messenger.sendToNative(
+            'signTypedData',
+            sessionId,
+            {
+                version: 'v4',
+                address: params[0],
+                data: params[1]
+            }
+        );
+
+        log(`eth_signTypedData_v4 response: ${JSON.stringify(signature)}`);
+
+        // TODO: Handle user cancelation
+
+        sendResponse({ signature });
     });
 
     //         case `eth_signTypedData_v3`: // * Return requested data from native app to popup.js
@@ -65,6 +106,7 @@ browser.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
     //                 },
     //             });
     //             break;
+    return true; // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/runtime/onMessage#sending_an_asynchronous_response_using_sendresponse
 });
 
 log(`loaded`);
