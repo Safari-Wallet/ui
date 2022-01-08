@@ -23,9 +23,9 @@ struct SettingsView: View {
                 // MARK: - Wallet selection
                 Section(header: Text("Wallet")) {
                     Picker("HD Wallets", selection: $viewModel.bundleIndex) {
-                        ForEach(viewModel.bundles.indices) { i in
+                        ForEach(0 ..< viewModel.bundles.count, id:\.self) { i in
                             let bundle = viewModel.bundles[i]
-                            Text(bundle.walletName ?? bundle.id.uuidString)
+                            Text(bundle.walletName)
                         }
                     }
                     .labelsHidden()
@@ -89,13 +89,21 @@ struct SettingsView: View {
         .onAppear {
             self.viewModel.userSettings = self.userSettings
         }
-        .onDisappear {
-            userSettings.bundle = viewModel.bundles[viewModel.bundleIndex]
-        }
         .task {
             await viewModel.setup()
         }
-        .sheet(isPresented: $presentOnboarding) { OnboardingView(isCancelable: true) }
+        .onDisappear {
+            userSettings.bundle = viewModel.bundles[viewModel.bundleIndex]
+            print("default address index: \(userSettings.bundle!.defaultAddressIndex)")
+        }
+        .sheet(isPresented: $presentOnboarding) {
+            OnboardingView(isCancelable: true)
+                .onDisappear {
+                    Task {
+                        await viewModel.setup()
+                    }
+                }
+        }
         .environmentObject(userSettings)
     }        
     
@@ -129,16 +137,16 @@ extension SettingsView {
         @Published var networkIndex: Int = 0 {
             didSet {
                 print("network set to \(networkIndex)")
-//                guard oldValue != networkIndex else { return }
-//                Task {
-//                    let network: Network
-//                    if networkIndex == 0 {
-//                        network = .ethereum
-//                    } else {
-//                        network = .ropsten
-//                    }
-//                    await change(network: network)
-//                }
+                guard oldValue != networkIndex else { return }
+                Task {
+                    let network: Network
+                    if networkIndex == 0 {
+                        network = .ethereum
+                    } else {
+                        network = .ropsten
+                    }
+                    await change(network: network)
+                }
             }
         }
         
@@ -151,7 +159,8 @@ extension SettingsView {
         @MainActor
         func setup() async {
             do {
-                self.bundles = try await AddressBundle.loadAddressBundles(network: userSettings!.network)
+                self.bundles = try await AddressBundle.loadAddressBundles(network: userSettings!.network).sorted(by: { $0.walletName < $1.walletName
+                })
                 guard let defaultBundle = userSettings!.bundle,
                 let bundleIndex = bundles.firstIndex(of: defaultBundle) else {
                     self.bundleIndex = 0
@@ -160,7 +169,7 @@ extension SettingsView {
                     }
                     return
                 }
-                                     
+                                    
                 self.bundleIndex = bundleIndex
                 self.addressIndex = defaultBundle.defaultAddressIndex
                 self.addresses = defaultBundle.addresses
@@ -177,46 +186,25 @@ extension SettingsView {
         }
         
         func change(network: Network) async {
-//            do {
-//                let bundles = try await AddressBundle.loadAddressBundles(network: network).filter{ $0.addresses.count > 0 }
-//                guard bundles.count > 0 else {
-//                    throw WalletError.noAddressBundles
-//                }
-//                self.bundles = bundles
-//                self.addresses = bundles[0].addresses
-//                bundleIndex = 0
-//                addressIndex = 0
-//                if case .ethereum = network  {
-//                    networkIndex = 0
-//                } else {
-//                    networkIndex = 1
-//                }
-//            } catch {
-//                await setup()
-//                return
-//            }
+            do {
+                let bundles = try await AddressBundle.loadAddressBundles(network: network).filter{ $0.addresses.count > 0 }
+                guard bundles.count > 0 else {
+                    throw WalletError.noAddressBundles
+                }
+                self.bundles = bundles
+                self.addresses = bundles[0].addresses
+                bundleIndex = 0
+                addressIndex = 0
+            } catch {
+                await setup()
+                return
+            }
         }
         
         func reset() {
             self.bundles = [AddressBundle]()
             self.addresses = [AddressItem]()
         }
-        
-//        func defaultBundle() -> AddressBundle? {
-//            guard let bundles = bundles, bundleIndex < bundles.count else {
-//                return nil
-//            }
-//            return bundles[bundleIndex]
-//        }
-        
-//        func setDefault() {
-//            guard let bundles = self.bundles, bundleIndex < bundles.count, addressIndex < bundles[bundleIndex].addresses.count else {
-//                return
-//            }
-//            let defaultBundle = bundles[bundleIndex]
-//            defaultBundle.defaultAddressIndex = addressIndex
-//            defaultBundle.setDefault()
-//        }
     }
 }
 

@@ -99,14 +99,6 @@ struct DeveloperView: View {
                 .font(.title3)
                 .padding()
             
-            Button("Create a new wallet") {
-                presentOnboarding = true
-            }
-            .buttonStyle(.bordered)
-            
-            Text("Shows new wallet popup")
-                .padding(.bottom)
-            
             Button("Create a new test wallet") {
                 Task {
                     do {
@@ -162,9 +154,9 @@ extension DeveloperView {
         
         // 2. Save address bundles
         let id = UUID()
-        let bundle = AddressBundle(id: id, type: .keystorePassword, network: .ethereum, addresses: addresses)
+        let bundle = AddressBundle(id: id, walletName: "Eth \(id.uuidString)", type: .keystorePassword, network: .ethereum, addresses: addresses)
         try await bundle.save()
-        let ropstenBundle = AddressBundle(id: id, type: .keystorePassword, network: .ropsten, addresses: ropstenAddresses)
+        let ropstenBundle = AddressBundle(id: id, walletName: "Ropsten \(id.uuidString)", type: .keystorePassword, network: .ropsten, addresses: ropstenAddresses)
         try await ropstenBundle.save()
         
         // 3. Save seed

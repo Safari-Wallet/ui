@@ -99,15 +99,12 @@ extension CreatePasswordView {
         let ropstenAddresses = try wallet.generateAddresses(count: 5, network: .ropsten)
         
         // 3. Create default name for bundle
-        var ethBundleName: String? = nil
-        if let numberOfBundles = AddressBundle.numberOfBundles(network: .ethereum) {
-            ethBundleName = "Eth Wallet \(numberOfBundles+1)"
-        }
-        var ropstenbundleName: String? = nil
-        if let numberOfBundles = AddressBundle.numberOfBundles(network: .ropsten) {
-            ropstenbundleName = "Ropsten Wallet \(numberOfBundles+1)"
-        }
+        let numberOfEthBundles = AddressBundle.numberOfBundles(network: .ethereum) ?? 0
+        let ethBundleName = "Eth Wallet \(numberOfEthBundles+1)"
         
+        let numberOfRopBundles = AddressBundle.numberOfBundles(network: .ropsten) ?? 0
+        let ropstenbundleName = "Ropsten Wallet \(numberOfRopBundles+1)"
+                
         // 3. Save address bundles
         let id = UUID()
         let bundle = AddressBundle(id: id, walletName: ethBundleName, type: .keystorePassword, network: .ethereum, addresses: addresses)
