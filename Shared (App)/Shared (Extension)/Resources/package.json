@@ -25,6 +25,7 @@
         "parcel": "2.0.1",
         "parcel-reporter-copy-file-v2": "1.0.1",
         "prettier": "2.5.0",
+        "quicktype": "^15.0.260",
         "ts-jest": "27.1.2"
     },
     "dependencies": {
