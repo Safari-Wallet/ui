@@ -1,3 +1,4 @@
-import { NativeMessage } from '../types';
-
-export type EthGetAccountsMessage = NativeMessage<'eth_getAccounts', {}>;
+export type EthGetAccountsMessage = {
+    method: "eth_getAccounts";
+    params: {};
+}

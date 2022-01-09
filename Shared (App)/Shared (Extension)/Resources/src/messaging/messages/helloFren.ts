@@ -1,10 +1,8 @@
-import { NativeMessage } from '../types';
-
-export type HelloFrenMessage = NativeMessage<
-    'helloFren',
-    {
+export type HelloFrenMessage = {
+    method: "helloFren";
+    params: {
         foo: string;
         bar: number;
-        awgmi: boolean;
-    }
->;
+        wagmi?: boolean;
+    };
+}
