@@ -40,6 +40,11 @@ app.post(`/add`, (req, res) => {
     const senderContext = req.query[`sender`];
     if (typeof message !== `undefined` && typeof senderContext !== `undefined`) {
         const timestamp = Date.now();
+        if (typeof message !== `string`) {
+            try {
+                message = JSON.stringify(message);
+            } catch (e) {}
+        }
         responseData.logs.push({
             message,
             senderContext,
