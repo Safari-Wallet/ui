@@ -87,8 +87,7 @@ class Ethereum {
                     resolve([params.address]);
                     window.ethereum.close();
                     break;
-                case 'eth_signTypedData_v3':
-                case 'eth_signTypedData_v4':
+                case 'sign':
                     resolve(params.signature);
                     break;
             }
@@ -152,14 +151,20 @@ class Ethereum {
                     showPrompt(`Open the wallet extension to connect`);
                     this.waitingFor.walletConnected = resolve;
                     break;
+                case `eth_sign`:
+                case `personal_sign`:
                 case `eth_signTypedData_v3`:
                 case `eth_signTypedData_v4`:
                     // showPrompt(`Open the wallet extension to sign`);
                     sendToContent({
-                        method: payload.method,
-                        params: payload.params
+                        method: 'sign',
+                        params: {
+                            method: payload.method,
+                            address: payload.params[0],
+                            data: payload.params[1]
+                        }
                     });
-                    this.waitingFor[payload.method] = resolve;
+                    this.waitingFor.sign = resolve;
                     break;
                 default:
                     // * Invalid or unimplemented method

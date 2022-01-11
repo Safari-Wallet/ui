@@ -45,67 +45,20 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
         });
     });
 
-    onMethod('eth_signTypedData_v3', async (params, sessionId) => {
-        log('eth_signTypedData_v3: sending to native', params);
+    onMethod('sign', async (params, sessionId) => {
+        log('sign: sending to native', params);
 
         const signature = await Messenger.sendToNative(
-            'signTypedData',
+            'sign',
             sessionId,
-            {
-                version: 'v3',
-                address: params[0],
-                data: params[1]
-            }
+            params
         );
-
-        log(`eth_signTypedData_v3 response: ${JSON.stringify(signature)}`);
 
         // TODO: Handle user cancelation
 
         sendResponse({ signature });
     });
 
-    // TODO: Merge with eth_signTypedData_v3
-    onMethod('eth_signTypedData_v4', async (params, sessionId) => {
-        log('eth_signTypedData_v4: sending to native', params);
-
-        const signature = await Messenger.sendToNative(
-            'signTypedData',
-            sessionId,
-            {
-                version: 'v4',
-                address: params[0],
-                data: params[1]
-            }
-        );
-
-        log(`eth_signTypedData_v4 response: ${JSON.stringify(signature)}`);
-
-        // TODO: Handle user cancelation
-
-        sendResponse({ signature });
-    });
-
-    //         case `eth_signTypedData_v3`: // * Return requested data from native app to popup.js
-    //             /*
-    //             TODO
-    //             const signature = await browser.runtime.sendNativeMessage({
-    //                 from: request.message.from,
-    //                 message: `eth_signTypedData_v3`,
-    //                 params: request.message.params,
-    //             });
-    //             browser.runtime.sendMessage({
-    //                 message: signature.message,
-    //             });
-    //             */
-    //             break;
-    //         case `cancel`: // * Cancel current method and notify popup.js of cancellation
-    //             browser.runtime.sendMessage({
-    //                 message: {
-    //                     message: `cancel`,
-    //                 },
-    //             });
-    //             break;
     return true; // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/runtime/onMessage#sending_an_asynchronous_response_using_sendresponse
 });
 
