@@ -1,4 +1,5 @@
-import { recoverTypedSignature } from '@metamask/eth-sig-util'
+import { recoverTypedSignature, recoverPersonalSignature } from '@metamask/eth-sig-util'
+import { bufferToHex, keccakFromString, fromRpcSig, ecrecover, publicToAddress, bufferToHex } from 'ethereumjs-util'
 
 window.addEventListener(`load`, () => {
 
@@ -21,6 +22,57 @@ window.addEventListener(`load`, () => {
         }
     });
 
+    $(`eth_sign`).addEventListener(`click`, async () => {
+        if (currentAccounts.length > 0) {
+            try {
+                const message = 'test';
+                const messageHash = keccakFromString(message);
+
+                const signature = await window.ethereum.request({
+                    method: `eth_sign`,
+                    params: [currentAccounts[0], bufferToHex(messageHash)],
+                    from: currentAccounts[0],
+                });
+
+                const signatureParams = fromRpcSig(signature);
+                const publicKey = ecrecover(
+                    messageHash,
+                    signatureParams.v,
+                    signatureParams.r,
+                    signatureParams.s
+                );
+                const addressBuffer = publicToAddress(publicKey);
+                const address = bufferToHex(addressBuffer);
+                const result = address.toLowerCase() === currentAccounts[0].toLowerCase()
+                alert(result ? 'Signature verified successfully' : `Signature verification failed: ${signature}`)
+            } catch (e) {
+                console.error(e)
+                alert(`Something went wrong with eth_sign.`);
+            }
+        } else {
+            alert(`Please connect a wallet first.`);
+        }
+    });
+    $(`personal_sign`).addEventListener(`click`, async () => {
+        if (currentAccounts.length > 0) {
+            try {
+                const data = '0x879a053d4800c6354e76c7985a865d2922c82fb5b3f4577b2fe08b998954f2e0';
+
+                const signature = await window.ethereum.request({
+                    method: `personal_sign`,
+                    params: [currentAccounts[0], data],
+                    from: currentAccounts[0],
+                });
+
+                const result = recoverPersonalSignature({ data, signature }) === currentAccounts[0].toLowerCase()
+                alert(result ? 'Signature verified successfully' : `Signature verification failed: ${signature}`)
+            } catch (e) {
+                alert(`Something went wrong with personal_sign.`);
+            }
+        } else {
+            alert(`Please connect a wallet first.`);
+        }
+    });
     $(`eth_signTypedData_v3`).addEventListener(`click`, async () => {
         if (currentAccounts.length > 0) {
             try {

@@ -12,6 +12,7 @@
     "parcel": "^2.1.1"
   },
   "dependencies": {
-    "@metamask/eth-sig-util": "^4.0.0"
+    "@metamask/eth-sig-util": "^4.0.0",
+    "ethereumjs-util": "^7.1.3"
   }
 }
