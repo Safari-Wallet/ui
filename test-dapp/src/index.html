@@ -5,13 +5,14 @@
         <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1,shrink-to-fit=no">
         <title>Safari Wallet Test dApp</title>
         <link rel="stylesheet" type="text/css" href="./style.css">
-        <script type="text/javascript" src="./script.js"></script>
+        <script type="module" src="./script.js"></script>
     </head>
     <body>
         <h1>Safari Wallet Test dApp</h1>
         <section>
             <button id="connect">Connect Wallet</button>
-            <button id="sign">Sign Message</button>
+            <button id="eth_signTypedData_v3">Sign message with eth_signTypedData_v3</button>
+            <button id="eth_signTypedData_v4">Sign message with eth_signTypedData_v4</button>
             <button id="call">Try eth_call</button>
         </section>
         <p>Wallet: <span id="wallet">Not Connected</span></p>
