@@ -286,6 +286,7 @@
 		3DFFFBAA275C588800056A69 /* ContractService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractService.swift; sourceTree = "<group>"; };
 		4A19E6DF271E673C0096027F /* JsonRpcClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonRpcClientTest.swift; sourceTree = "<group>"; };
 		6EFE79D5278F3778001570FC /* SafariWalletCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SafariWalletCore; sourceTree = "<group>"; };
+		6EFE79DA278F3C13001570FC /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		F1293EDA2758EE25000E883A /* ethereum */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ethereum; sourceTree = "<group>"; };
 		F8124BB7271E03DF00F06D5D /* SigningTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigningTests.swift; sourceTree = "<group>"; };
 		F82D048B278031E2009C1725 /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
@@ -396,6 +397,7 @@
 				0A0E1EBE270687AE00061EA6 /* iOS (Extension) */,
 				0A0E1EC8270687AE00061EA6 /* macOS (Extension) */,
 				0AE54717270694EB00C4A81F /* README.md */,
+				6EFE79DA278F3C13001570FC /* Package.swift */,
 				F8ABEFD227141581007F7D11 /* WalletTests */,
 				0A0E1E9D270687AE00061EA6 /* Products */,
 				F8ABEEE827125105007F7D11 /* Frameworks */,
