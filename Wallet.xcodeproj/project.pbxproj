@@ -62,6 +62,8 @@
 		3DFFFBB2275C625700056A69 /* TransactionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D216A122753246600620BB9 /* TransactionRowView.swift */; };
 		3DFFFBB5275C626000056A69 /* TransactionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D216A1427539F4700620BB9 /* TransactionType.swift */; };
 		4A19E6E0271E673C0096027F /* JsonRpcClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A19E6DF271E673C0096027F /* JsonRpcClientTest.swift */; };
+		6EFE79D7278F3796001570FC /* SafariWalletCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6EFE79D6278F3796001570FC /* SafariWalletCore */; };
+		6EFE79D9278F379C001570FC /* SafariWalletCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6EFE79D8278F379C001570FC /* SafariWalletCore */; };
 		F1293EDC2758EF86000E883A /* ethereum in Resources */ = {isa = PBXBuildFile; fileRef = F1293EDA2758EE25000E883A /* ethereum */; };
 		F1293EDD2758EF8C000E883A /* ethereum in Resources */ = {isa = PBXBuildFile; fileRef = F1293EDA2758EE25000E883A /* ethereum */; };
 		F8124BB8271E03DF00F06D5D /* SigningTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8124BB7271E03DF00F06D5D /* SigningTests.swift */; };
@@ -101,8 +103,6 @@
 		F8321B6027176EE700F12938 /* ConfirmMnemonicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8321B5E27176EE700F12938 /* ConfirmMnemonicView.swift */; };
 		F8321B622717768400F12938 /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8321B612717768400F12938 /* SummaryView.swift */; };
 		F8321B632717768400F12938 /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8321B612717768400F12938 /* SummaryView.swift */; };
-		F83FBA1E2730DBF300F864A7 /* SafariWalletCore in Frameworks */ = {isa = PBXBuildFile; productRef = F83FBA1D2730DBF300F864A7 /* SafariWalletCore */; };
-		F83FBA202730DD1F00F864A7 /* SafariWalletCore in Frameworks */ = {isa = PBXBuildFile; productRef = F83FBA1F2730DD1F00F864A7 /* SafariWalletCore */; };
 		F83FF5E3278692DA00201CCE /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8BB798272E729200DFC647 /* Transaction.swift */; };
 		F83FF5E4278692DB00201CCE /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8BB798272E729200DFC647 /* Transaction.swift */; };
 		F846FDBB278502B30044815B /* ConnectNanoXView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F846FDBA278502B30044815B /* ConnectNanoXView.swift */; };
@@ -285,6 +285,7 @@
 		3DFFFBA8275C57ED00056A69 /* Contract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contract.swift; sourceTree = "<group>"; };
 		3DFFFBAA275C588800056A69 /* ContractService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractService.swift; sourceTree = "<group>"; };
 		4A19E6DF271E673C0096027F /* JsonRpcClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonRpcClientTest.swift; sourceTree = "<group>"; };
+		6EFE79D5278F3778001570FC /* SafariWalletCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SafariWalletCore; sourceTree = "<group>"; };
 		F1293EDA2758EE25000E883A /* ethereum */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ethereum; sourceTree = "<group>"; };
 		F8124BB7271E03DF00F06D5D /* SigningTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigningTests.swift; sourceTree = "<group>"; };
 		F82D048B278031E2009C1725 /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
@@ -346,7 +347,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F83FBA1E2730DBF300F864A7 /* SafariWalletCore in Frameworks */,
+				6EFE79D7278F3796001570FC /* SafariWalletCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,7 +362,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F83FBA202730DD1F00F864A7 /* SafariWalletCore in Frameworks */,
+				6EFE79D9278F379C001570FC /* SafariWalletCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,6 +388,7 @@
 			children = (
 				F8ABEEE227124C5D007F7D11 /* Wallet Extension (iOS).entitlements */,
 				F8ABEEE127124C30007F7D11 /* Wallet (iOS).entitlements */,
+				6EFE79D5278F3778001570FC /* SafariWalletCore */,
 				F8ABEF3A271297A3007F7D11 /* Shared (App and Extension) */,
 				0A0E1E84270687AA00061EA6 /* Shared (App) */,
 				0A0E1E9E270687AE00061EA6 /* iOS (App) */,
@@ -747,7 +749,7 @@
 			);
 			name = "Wallet (iOS)";
 			packageProductDependencies = (
-				F83FBA1D2730DBF300F864A7 /* SafariWalletCore */,
+				6EFE79D6278F3796001570FC /* SafariWalletCore */,
 			);
 			productName = "Wallet (iOS)";
 			productReference = 0A0E1E9C270687AE00061EA6 /* Safari Wallet.app */;
@@ -788,7 +790,7 @@
 			);
 			name = "Wallet Extension (iOS)";
 			packageProductDependencies = (
-				F83FBA1F2730DD1F00F864A7 /* SafariWalletCore */,
+				6EFE79D8278F379C001570FC /* SafariWalletCore */,
 			);
 			productName = "Wallet Extension (iOS)";
 			productReference = 0A0E1EBA270687AE00061EA6 /* Safari Wallet Extension.appex */;
@@ -869,7 +871,6 @@
 			);
 			mainGroup = 0A0E1E7F270687AA00061EA6;
 			packageReferences = (
-				F83FBA1C2730DBF300F864A7 /* XCRemoteSwiftPackageReference "core" */,
 			);
 			productRefGroup = 0A0E1E9D270687AE00061EA6 /* Products */;
 			projectDirPath = "";
@@ -1710,26 +1711,13 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		F83FBA1C2730DBF300F864A7 /* XCRemoteSwiftPackageReference "core" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Safari-Wallet/core";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		F83FBA1D2730DBF300F864A7 /* SafariWalletCore */ = {
+		6EFE79D6278F3796001570FC /* SafariWalletCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F83FBA1C2730DBF300F864A7 /* XCRemoteSwiftPackageReference "core" */;
 			productName = SafariWalletCore;
 		};
-		F83FBA1F2730DD1F00F864A7 /* SafariWalletCore */ = {
+		6EFE79D8278F379C001570FC /* SafariWalletCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F83FBA1C2730DBF300F864A7 /* XCRemoteSwiftPackageReference "core" */;
 			productName = SafariWalletCore;
 		};
 /* End XCSwiftPackageProductDependency section */
