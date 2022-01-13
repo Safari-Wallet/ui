@@ -37,6 +37,7 @@ extension ShortcutItem {
             ShortcutItem(name: "1Inch", id: 8104, url: URL(string: "https://app.1inch.io")!),
             ShortcutItem(name: "Fei", id: 8642, url: URL(string: "https://app.fei.money")!),
             ShortcutItem(name: "Gysr", id: 7661, url: URL(string: "https://app.gysr.io")!),
+            ShortcutItem(name: "MoneyPipe", id: -4, url: URL(string: "https://moneypipe.xyz")!)
         ]
     }
 }

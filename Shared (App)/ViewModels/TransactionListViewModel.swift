@@ -54,7 +54,8 @@ final class TransactionsListViewModel: ObservableObject {
         isFetching = true
         Task {
             do {
-                let fetchedTransactions = try await self.txService.fetchTransactions(network: .ethereum, address: address)
+                let network: Network = (chain == "3" ? .ropsten : .ethereum) // FIXME: ;)
+                let fetchedTransactions = try await self.txService.fetchTransactions(network: network, address: address)
                 
                 let contracts = await fetchContracts(fromTxs: fetchedTransactions)
                 contracts.forEach { self.contracts[$0.address] = $0 }
