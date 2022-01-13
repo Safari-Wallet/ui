@@ -65,6 +65,8 @@
 		F1293EDC2758EF86000E883A /* ethereum in Resources */ = {isa = PBXBuildFile; fileRef = F1293EDA2758EE25000E883A /* ethereum */; };
 		F1293EDD2758EF8C000E883A /* ethereum in Resources */ = {isa = PBXBuildFile; fileRef = F1293EDA2758EE25000E883A /* ethereum */; };
 		F8124BB8271E03DF00F06D5D /* SigningTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8124BB7271E03DF00F06D5D /* SigningTests.swift */; };
+		F826AFBA278FDAAA00E90D66 /* SendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F826AFB9278FDAAA00E90D66 /* SendView.swift */; };
+		F826AFBB278FDAAA00E90D66 /* SendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F826AFB9278FDAAA00E90D66 /* SendView.swift */; };
 		F82D048E278031E2009C1725 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82D048B278031E2009C1725 /* UserSettings.swift */; };
 		F82D048F278031E2009C1725 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82D048B278031E2009C1725 /* UserSettings.swift */; };
 		F82D0490278031E2009C1725 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82D048B278031E2009C1725 /* UserSettings.swift */; };
@@ -287,6 +289,7 @@
 		4A19E6DF271E673C0096027F /* JsonRpcClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonRpcClientTest.swift; sourceTree = "<group>"; };
 		F1293EDA2758EE25000E883A /* ethereum */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ethereum; sourceTree = "<group>"; };
 		F8124BB7271E03DF00F06D5D /* SigningTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigningTests.swift; sourceTree = "<group>"; };
+		F826AFB9278FDAAA00E90D66 /* SendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendView.swift; sourceTree = "<group>"; };
 		F82D048B278031E2009C1725 /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		F82D048C278031E2009C1725 /* UserSettings+debug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserSettings+debug.swift"; sourceTree = "<group>"; };
 		F82D048D278031E2009C1725 /* UserSettings+Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserSettings+Core.swift"; sourceTree = "<group>"; };
@@ -406,6 +409,7 @@
 				3D97705D273CD4A00014CAC7 /* Services */,
 				F8812B462717E07000D1B231 /* Models */,
 				F8321B57271698EB00F12938 /* Onboarding */,
+				F826AFB8278FDA9200E90D66 /* SendView */,
 				F8812B562719235B00D1B231 /* TransactionsTab */,
 				F8812B552719234A00D1B231 /* ShortcutTab */,
 				F88801CD273A391800094849 /* SettingsTab */,
@@ -515,6 +519,14 @@
 				3D97705E273CD4AE0014CAC7 /* TransactionService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		F826AFB8278FDA9200E90D66 /* SendView */ = {
+			isa = PBXGroup;
+			children = (
+				F826AFB9278FDAAA00E90D66 /* SendView.swift */,
+			);
+			path = SendView;
 			sourceTree = "<group>";
 		};
 		F82D048A278031E2009C1725 /* UserSettings */ = {
@@ -988,6 +1000,7 @@
 				F82D0492278031E2009C1725 /* UserSettings+debug.swift in Sources */,
 				F8812B4C2718B91600D1B231 /* Intro1View.swift in Sources */,
 				3D216A1527539F4700620BB9 /* TransactionType.swift in Sources */,
+				F826AFBA278FDAAA00E90D66 /* SendView.swift in Sources */,
 				3DFFFBAB275C588800056A69 /* ContractService.swift in Sources */,
 				F88397362786425100DB2D0D /* TransactionListViewModel.swift in Sources */,
 				3D97705F273CD4AE0014CAC7 /* TransactionService.swift in Sources */,
@@ -1049,6 +1062,7 @@
 				F82D0493278031E2009C1725 /* UserSettings+debug.swift in Sources */,
 				F8812B4D2718B91600D1B231 /* Intro1View.swift in Sources */,
 				3D977060273CEEA80014CAC7 /* TransactionService.swift in Sources */,
+				F826AFBB278FDAAA00E90D66 /* SendView.swift in Sources */,
 				F8ABEF4D27138E1D007F7D11 /* String.swift in Sources */,
 				F88397372786425100DB2D0D /* TransactionListViewModel.swift in Sources */,
 				F8ABEF48271389F5007F7D11 /* NSFileCoordinator.swift in Sources */,

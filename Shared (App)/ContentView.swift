@@ -27,6 +27,9 @@ struct ContentView: View {
                 ShortcutView()
                     .tabItem { Label("Shortcuts", systemImage: "square.grid.3x2") }
                 
+                SendView()
+                    .tabItem { Label("Send", systemImage: "paperplane.fill") }
+                
                 TransactionsView(viewModel: TransactionsListViewModel(chain: "1", address: "0x225e9b54f41f44f42150b6aaa730da5f2d23faf2", currency: "USD", symbol: "$"))
                     .tabItem { Label("Transactions", systemImage: "repeat") }
                 
