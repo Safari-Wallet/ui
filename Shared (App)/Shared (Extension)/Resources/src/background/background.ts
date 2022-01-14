@@ -32,11 +32,10 @@ browser.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
             sessionId
         );
 
-        Messenger.sendToNative('helloFren', sessionId, {
-            foo: 'hello',
-            bar: 123,
-            wagmi: true
-        });
+        Messenger.sendToNative("helloFren", "", {
+            foo: "asas",
+            bar: 23
+        })
 
         // TODO: address could return a { error: 'error message' } object. We need to check for that
 

@@ -1,7 +1,7 @@
 // The different components need to communicate through different channels:
 // @todo
 
-import { NativeMessageMethod, NativeMessageParams } from './messaging/native';
+import { NativeMessageMethod, NativeMessageParams } from './messaging/index';
 import { Logger } from './utils';
 
 // - MARK: Types

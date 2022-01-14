@@ -62,6 +62,10 @@
 		3DFFFBB2275C625700056A69 /* TransactionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D216A122753246600620BB9 /* TransactionRowView.swift */; };
 		3DFFFBB5275C626000056A69 /* TransactionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D216A1427539F4700620BB9 /* TransactionType.swift */; };
 		4A19E6E0271E673C0096027F /* JsonRpcClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A19E6DF271E673C0096027F /* JsonRpcClientTest.swift */; };
+		F1041CA9278B8D3000E5ECC1 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1041CA8278B8D3000E5ECC1 /* Messages.swift */; };
+		F1041CAA278B8D3000E5ECC1 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1041CA8278B8D3000E5ECC1 /* Messages.swift */; };
+		F1041CAB278B8D3000E5ECC1 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1041CA8278B8D3000E5ECC1 /* Messages.swift */; };
+		F1041CAC278B8D3000E5ECC1 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1041CA8278B8D3000E5ECC1 /* Messages.swift */; };
 		F1293EDC2758EF86000E883A /* ethereum in Resources */ = {isa = PBXBuildFile; fileRef = F1293EDA2758EE25000E883A /* ethereum */; };
 		F1293EDD2758EF8C000E883A /* ethereum in Resources */ = {isa = PBXBuildFile; fileRef = F1293EDA2758EE25000E883A /* ethereum */; };
 		F8124BB8271E03DF00F06D5D /* SigningTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8124BB7271E03DF00F06D5D /* SigningTests.swift */; };
@@ -285,6 +289,7 @@
 		3DFFFBA8275C57ED00056A69 /* Contract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contract.swift; sourceTree = "<group>"; };
 		3DFFFBAA275C588800056A69 /* ContractService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractService.swift; sourceTree = "<group>"; };
 		4A19E6DF271E673C0096027F /* JsonRpcClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonRpcClientTest.swift; sourceTree = "<group>"; };
+		F1041CA8278B8D3000E5ECC1 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
 		F1293EDA2758EE25000E883A /* ethereum */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ethereum; sourceTree = "<group>"; };
 		F8124BB7271E03DF00F06D5D /* SigningTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigningTests.swift; sourceTree = "<group>"; };
 		F82D048B278031E2009C1725 /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
@@ -440,6 +445,7 @@
 			children = (
 				0A0E1E8E270687AE00061EA6 /* SafariWebExtensionHandler.swift */,
 				0A0E1E8F270687AE00061EA6 /* Resources */,
+				F1041CA8278B8D3000E5ECC1 /* Messages.swift */,
 			);
 			path = "Shared (Extension)";
 			sourceTree = "<group>";
@@ -997,6 +1003,7 @@
 				F8ABEF47271389F5007F7D11 /* NSFileCoordinator.swift in Sources */,
 				F883973E278644AF00DB2D0D /* NotificationView.swift in Sources */,
 				F8812B522718B92500D1B231 /* Intro3View.swift in Sources */,
+				F1041CA9278B8D3000E5ECC1 /* Messages.swift in Sources */,
 				F8C02DF42788B1E000B7F28D /* Color.swift in Sources */,
 				F8AD21E6271796CC0059D754 /* RestoreOrCreateWalletView.swift in Sources */,
 				F8321B5C27176ED600F12938 /* ShowMnemonicView.swift in Sources */,
@@ -1058,6 +1065,7 @@
 				3DFFFBB5275C626000056A69 /* TransactionType.swift in Sources */,
 				F883973F278644AF00DB2D0D /* NotificationView.swift in Sources */,
 				F8AD21E7271796CC0059D754 /* RestoreOrCreateWalletView.swift in Sources */,
+				F1041CAA278B8D3000E5ECC1 /* Messages.swift in Sources */,
 				F8C02DF52788B1E000B7F28D /* Color.swift in Sources */,
 				3DFFFBB2275C625700056A69 /* TransactionRowView.swift in Sources */,
 				F8321B5D27176ED600F12938 /* ShowMnemonicView.swift in Sources */,
@@ -1119,6 +1127,7 @@
 				F82D0494278031E2009C1725 /* UserSettings+debug.swift in Sources */,
 				F8ABEEDB27124A8C007F7D11 /* WalletError.swift in Sources */,
 				3DFFFBAD275C5F1000056A69 /* Contract.swift in Sources */,
+				F1041CAB278B8D3000E5ECC1 /* Messages.swift in Sources */,
 				F8ABEED727124A8C007F7D11 /* SharedDocument.swift in Sources */,
 				F8ABEF49271389F5007F7D11 /* NSFileCoordinator.swift in Sources */,
 				F82D049F2780335D009C1725 /* AddressBundle+Storage.swift in Sources */,
@@ -1147,6 +1156,7 @@
 				F82D0495278031E2009C1725 /* UserSettings+debug.swift in Sources */,
 				F8ABEEDC27124A8C007F7D11 /* WalletError.swift in Sources */,
 				3DFFFBAC275C5F1000056A69 /* Contract.swift in Sources */,
+				F1041CAC278B8D3000E5ECC1 /* Messages.swift in Sources */,
 				F8ABEED827124A8C007F7D11 /* SharedDocument.swift in Sources */,
 				F8ABEF4A271389F5007F7D11 /* NSFileCoordinator.swift in Sources */,
 				F82D04A02780335D009C1725 /* AddressBundle+Storage.swift in Sources */,
