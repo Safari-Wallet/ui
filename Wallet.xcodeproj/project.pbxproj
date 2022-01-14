@@ -107,6 +107,8 @@
 		F83FBA202730DD1F00F864A7 /* SafariWalletCore in Frameworks */ = {isa = PBXBuildFile; productRef = F83FBA1F2730DD1F00F864A7 /* SafariWalletCore */; };
 		F83FF5E3278692DA00201CCE /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8BB798272E729200DFC647 /* Transaction.swift */; };
 		F83FF5E4278692DB00201CCE /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8BB798272E729200DFC647 /* Transaction.swift */; };
+		F844EA682791EEEC00CE8013 /* SendConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844EA672791EEEC00CE8013 /* SendConfirmView.swift */; };
+		F844EA692791EEEC00CE8013 /* SendConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844EA672791EEEC00CE8013 /* SendConfirmView.swift */; };
 		F846FDBB278502B30044815B /* ConnectNanoXView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F846FDBA278502B30044815B /* ConnectNanoXView.swift */; };
 		F846FDBC278502B30044815B /* ConnectNanoXView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F846FDBA278502B30044815B /* ConnectNanoXView.swift */; };
 		F846FDBE278502C00044815B /* ConnectTrezorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F846FDBD278502C00044815B /* ConnectTrezorView.swift */; };
@@ -301,6 +303,7 @@
 		F8321B5B27176ED600F12938 /* ShowMnemonicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowMnemonicView.swift; sourceTree = "<group>"; };
 		F8321B5E27176EE700F12938 /* ConfirmMnemonicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmMnemonicView.swift; sourceTree = "<group>"; };
 		F8321B612717768400F12938 /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
+		F844EA672791EEEC00CE8013 /* SendConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendConfirmView.swift; sourceTree = "<group>"; };
 		F846FDBA278502B30044815B /* ConnectNanoXView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectNanoXView.swift; sourceTree = "<group>"; };
 		F846FDBD278502C00044815B /* ConnectTrezorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectTrezorView.swift; sourceTree = "<group>"; };
 		F846FDC0278502C80044815B /* ConnectNanoSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectNanoSView.swift; sourceTree = "<group>"; };
@@ -525,6 +528,7 @@
 			isa = PBXGroup;
 			children = (
 				F826AFB9278FDAAA00E90D66 /* SendView.swift */,
+				F844EA672791EEEC00CE8013 /* SendConfirmView.swift */,
 			);
 			path = SendView;
 			sourceTree = "<group>";
@@ -1019,6 +1023,7 @@
 				F8AD21EF2717B4B40059D754 /* RestoreWalletView.swift in Sources */,
 				F8AD21E92717B3420059D754 /* CreatePasswordView.swift in Sources */,
 				F8ABEECD27124A8C007F7D11 /* BiometricsAuthentication.swift in Sources */,
+				F844EA682791EEEC00CE8013 /* SendConfirmView.swift in Sources */,
 				F846FDC5278503220044815B /* AddViewOnlyView.swift in Sources */,
 				F8CABCBA27869C41009F2F91 /* Network.swift in Sources */,
 				3D216A132753246600620BB9 /* TransactionRowView.swift in Sources */,
@@ -1081,6 +1086,7 @@
 				F8AD21F02717B4B40059D754 /* RestoreWalletView.swift in Sources */,
 				F8AD21EA2717B3420059D754 /* CreatePasswordView.swift in Sources */,
 				F8ABEED227124A8C007F7D11 /* FileObserver.swift in Sources */,
+				F844EA692791EEEC00CE8013 /* SendConfirmView.swift in Sources */,
 				F846FDC6278503220044815B /* AddViewOnlyView.swift in Sources */,
 				F8CABCBB27869C41009F2F91 /* Network.swift in Sources */,
 				F8ABEEDE27124A8C007F7D11 /* KeychainPasswordItem.swift in Sources */,
