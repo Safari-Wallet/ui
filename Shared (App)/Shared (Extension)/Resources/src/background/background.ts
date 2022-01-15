@@ -29,7 +29,8 @@ browser.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
 
         const balance = await Messenger.sendToNative(
             'eth_getBalance',
-            sessionId
+            sessionId,
+            { address }
         );
 
         // TODO: address could return a { error: 'error message' } object. We need to check for that

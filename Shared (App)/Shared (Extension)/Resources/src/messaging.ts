@@ -1,6 +1,7 @@
 // The different components need to communicate through different channels:
 // @todo
 
+import { NativeMessageMethod, NativeMessageParams } from './messaging/index';
 import { Logger } from './utils';
 
 // - MARK: Types
@@ -39,12 +40,15 @@ export type OnMessage = <M extends Method>(
 
 export const getSendNativeMessage =
     (logger: Logger) =>
-    <M extends Method>(
+    async <M extends NativeMessageMethod>(
         method: M,
-        sessionId: string,
-        params: MethodParams[M] = {}
+        _sessionId: string,
+        params: NativeMessageParams<M> = {}
     ) => {
-        const message = { method, sessionId, params };
+        const message = {
+            method,
+            params
+        };
 
         logger(
             `Sending message to SafariWebExtensionHandler: ${JSON.stringify(
@@ -52,7 +56,22 @@ export const getSendNativeMessage =
             )}`
         );
 
-        return browser.runtime.sendNativeMessage('ignored', message.method); // tmp
+        const result = await browser.runtime.sendNativeMessage(
+            'ignored',
+            message
+        );
+
+        logger(`Result from message: ${JSON.stringify(result)}`);
+
+        if (result.error) {
+            throw new Error(
+                `Received error from SafariWebExtensionHandler: ${JSON.stringify(
+                    result
+                )}`
+            );
+        }
+
+        return result;
     };
 
 export const getSendBrowserRuntimeMessage =
