@@ -20,7 +20,7 @@ final class TransactionService: TransactionFetchable {
     
     @MainActor
     func fetchTransactions(network: Network, address: Address) async throws -> [TransactionActivity] {
-        let zerionResponse = try await zerionClient.getTransactions(address: address, offset: currentPage * limit, limit: limit)
+        let zerionResponse = try await zerionClient.getTransactions(network: network, address: address, offset: currentPage * limit, limit: limit)
         let transactionActivities = zerionResponse.payload.transactions.map { tx in
             TransactionActivity(tx: tx, meta: zerionResponse.meta)
         }
