@@ -6,74 +6,58 @@
 //
 
 import Foundation
-
-
-
+import SafariServices
+import SafariWalletCore
 
 // MARK: - Setup
 
-public enum NativeMessageMethod: String, Codable {
-    case eth_getAccounts = "eth_getAccounts"
-    case eth_getBalance = "eth_getBalance"
-    case helloFren = "helloFren"
+enum MessageError: Error {
+    case unknownMethod(NativeMessageMethod)
 }
 
-extension NativeMessageMethod {
-    func toFrontendMessage(params: Any) -> FrontendMessage {
-        var params:
-        switch self {
-        case .eth_getAccounts:
-            params = EthGetAccountsMessageParams()
-        case .eth_getBalance:
-            params = EthGetBalanceMessageParams()
-        case .helloFren:
-            params = HelloFrenMessageParams(foo: params["foo"], bar: params["bar"], wagmi: params["wagmi"])
-        }
-        
-        return FrontendMessage(method: self, params: params)
-    }
-}
-
-struct FrontendMessage<P : Codable> : Codable {
+struct NativeMessage: Decodable {
     var method: NativeMessageMethod
-    var params: P
+    var params: NativeMessageParams
 }
 
-// MARK: - Messages
-
-// MARK: EthGetAccountsMessageParams
-
-struct EthGetAccountsMessageParams : Codable {}
-
-// MARK: EthGetBalanceMessage
-
-struct EthGetBalanceMessageParams : Codable {}
-
-// MARK: HelloFrenMessage
-
-struct HelloFrenMessageParams : Codable {
-    let foo: String
-    let bar: Int
-    let wagmi: Bool?
+protocol NativeMessageParams: Codable {
+    func execute(with userSettings: UserSettings) async throws -> Any
 }
 
-// MARK: - Access list
+// MARK: - Message parsing
 
-public func getFrontendMessageType<P: FrontendMessage>(method: NativeMessageMethod) throws -> P {
+enum NativeMessageMethod: String, Decodable {
+    case eth_getAccounts
+    case eth_getBalance
+    case helloFren
+}
+
+extension NativeMessage {
+    private enum CodingKeys: CodingKey {
+        case method
+        case params
+    }
     
-}
-
-public class FrontendMessages {
-    static let map: [NativeMessageMethod: FrontendMessage.Type] = [
-        .eth_getBalance: EthGetBalanceMessage.self,
-        .eth_getAccounts: EthGetAccountsMessage.self,
-        .helloFren: HelloFrenMessage.self
-    ]
-    
-    static func getMessageType<P: FrontendMessage>(method: NativeMessageMethod) throws -> P {
-        if map[method] == nil {
-            throw WalletError.invalidInput("Unknown type for method '\(method)'")
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        method = try container.decode(NativeMessageMethod.self, forKey: .method)
+        
+        switch method {
+        case .eth_getAccounts:
+            params = try container.decode(eth_getAccountsMessageParams.self, forKey: .params)
+        case .eth_getBalance:
+            params = try container.decode(eth_getBalanceMessageParams.self, forKey: .params)
+        case .helloFren:
+            params = try container.decode(helloFrenMessageParams.self, forKey: .params)
         }
-        return map[method] as P
     }
 }
+
+// MARK: - Runtime
+
+func parseMessageParams(message: [String: Any]) throws -> NativeMessageParams {
+    let jsonEncoded = try JSONSerialization.data(withJSONObject: message, options: [])
+    let parsedMessage = try JSONDecoder().decode(NativeMessage.self, from: jsonEncoded)
+    return parsedMessage.params
+}
+
