@@ -412,7 +412,7 @@
 				3D97705D273CD4A00014CAC7 /* Services */,
 				F8812B462717E07000D1B231 /* Models */,
 				F8321B57271698EB00F12938 /* Onboarding */,
-				F826AFB8278FDA9200E90D66 /* SendView */,
+				F826AFB8278FDA9200E90D66 /* SendTab */,
 				F8812B562719235B00D1B231 /* TransactionsTab */,
 				F8812B552719234A00D1B231 /* ShortcutTab */,
 				F88801CD273A391800094849 /* SettingsTab */,
@@ -524,13 +524,13 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		F826AFB8278FDA9200E90D66 /* SendView */ = {
+		F826AFB8278FDA9200E90D66 /* SendTab */ = {
 			isa = PBXGroup;
 			children = (
 				F826AFB9278FDAAA00E90D66 /* SendView.swift */,
 				F844EA672791EEEC00CE8013 /* SendConfirmView.swift */,
 			);
-			path = SendView;
+			path = SendTab;
 			sourceTree = "<group>";
 		};
 		F82D048A278031E2009C1725 /* UserSettings */ = {
