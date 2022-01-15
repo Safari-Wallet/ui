@@ -1,4 +1,7 @@
 export type EthGetBalanceMessage = {
     method: "eth_getBalance";
-    params: {};
+    params: {
+        address: string;
+        block?: string;
+    };
 }

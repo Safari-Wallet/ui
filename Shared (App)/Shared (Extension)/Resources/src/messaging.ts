@@ -40,14 +40,13 @@ export type OnMessage = <M extends Method>(
 
 export const getSendNativeMessage =
     (logger: Logger) =>
-    <M extends NativeMessageMethod>(
+    async <M extends NativeMessageMethod>(
         method: M,
-        sessionId: string,
+        _sessionId: string,
         params: NativeMessageParams<M> = {}
     ) => {
         const message = {
             method,
-            sessionId,
             params
         };
 
@@ -57,7 +56,22 @@ export const getSendNativeMessage =
             )}`
         );
 
-        return browser.runtime.sendNativeMessage('ignored', { message });
+        const result = await browser.runtime.sendNativeMessage(
+            'ignored',
+            message
+        );
+
+        logger(`Result from message: ${JSON.stringify(result)}`);
+
+        if (result.error) {
+            throw new Error(
+                `Received error from SafariWebExtensionHandler: ${JSON.stringify(
+                    result
+                )}`
+            );
+        }
+
+        return result;
     };
 
 export const getSendBrowserRuntimeMessage =
