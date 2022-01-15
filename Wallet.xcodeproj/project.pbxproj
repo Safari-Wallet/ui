@@ -109,6 +109,12 @@
 		F83FBA202730DD1F00F864A7 /* SafariWalletCore in Frameworks */ = {isa = PBXBuildFile; productRef = F83FBA1F2730DD1F00F864A7 /* SafariWalletCore */; };
 		F83FF5E3278692DA00201CCE /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8BB798272E729200DFC647 /* Transaction.swift */; };
 		F83FF5E4278692DB00201CCE /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8BB798272E729200DFC647 /* Transaction.swift */; };
+		F844EA6B2792376B00CE8013 /* Messages2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844EA6A2792376B00CE8013 /* Messages2.swift */; };
+		F844EA6C2792376B00CE8013 /* Messages2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844EA6A2792376B00CE8013 /* Messages2.swift */; };
+		F844EA6E279240BE00CE8013 /* Messages3.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844EA6D279240BE00CE8013 /* Messages3.swift */; };
+		F844EA6F279240BE00CE8013 /* Messages3.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844EA6D279240BE00CE8013 /* Messages3.swift */; };
+		F844EA7127925C4F00CE8013 /* Messages4.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844EA7027925C4F00CE8013 /* Messages4.swift */; };
+		F844EA7227925C4F00CE8013 /* Messages4.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844EA7027925C4F00CE8013 /* Messages4.swift */; };
 		F846FDBB278502B30044815B /* ConnectNanoXView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F846FDBA278502B30044815B /* ConnectNanoXView.swift */; };
 		F846FDBC278502B30044815B /* ConnectNanoXView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F846FDBA278502B30044815B /* ConnectNanoXView.swift */; };
 		F846FDBE278502C00044815B /* ConnectTrezorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F846FDBD278502C00044815B /* ConnectTrezorView.swift */; };
@@ -303,6 +309,9 @@
 		F8321B5B27176ED600F12938 /* ShowMnemonicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowMnemonicView.swift; sourceTree = "<group>"; };
 		F8321B5E27176EE700F12938 /* ConfirmMnemonicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmMnemonicView.swift; sourceTree = "<group>"; };
 		F8321B612717768400F12938 /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
+		F844EA6A2792376B00CE8013 /* Messages2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages2.swift; sourceTree = "<group>"; };
+		F844EA6D279240BE00CE8013 /* Messages3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages3.swift; sourceTree = "<group>"; };
+		F844EA7027925C4F00CE8013 /* Messages4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages4.swift; sourceTree = "<group>"; };
 		F846FDBA278502B30044815B /* ConnectNanoXView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectNanoXView.swift; sourceTree = "<group>"; };
 		F846FDBD278502C00044815B /* ConnectTrezorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectTrezorView.swift; sourceTree = "<group>"; };
 		F846FDC0278502C80044815B /* ConnectNanoSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectNanoSView.swift; sourceTree = "<group>"; };
@@ -446,6 +455,9 @@
 				0A0E1E8E270687AE00061EA6 /* SafariWebExtensionHandler.swift */,
 				0A0E1E8F270687AE00061EA6 /* Resources */,
 				F1041CA8278B8D3000E5ECC1 /* Messages.swift */,
+				F844EA6A2792376B00CE8013 /* Messages2.swift */,
+				F844EA6D279240BE00CE8013 /* Messages3.swift */,
+				F844EA7027925C4F00CE8013 /* Messages4.swift */,
 			);
 			path = "Shared (Extension)";
 			sourceTree = "<group>";
@@ -988,6 +1000,7 @@
 			files = (
 				0A8BB799272E729200DFC647 /* Transaction.swift in Sources */,
 				F8812B5B271923A300D1B231 /* ShortcutView.swift in Sources */,
+				F844EA7127925C4F00CE8013 /* Messages4.swift in Sources */,
 				F8812B582719239700D1B231 /* TransactionsView.swift in Sources */,
 				F8ABEF3527125F16007F7D11 /* ContentView.swift in Sources */,
 				F8812B4F2718B91E00D1B231 /* Intro2View.swift in Sources */,
@@ -1003,6 +1016,7 @@
 				F8ABEF47271389F5007F7D11 /* NSFileCoordinator.swift in Sources */,
 				F883973E278644AF00DB2D0D /* NotificationView.swift in Sources */,
 				F8812B522718B92500D1B231 /* Intro3View.swift in Sources */,
+				F844EA6E279240BE00CE8013 /* Messages3.swift in Sources */,
 				F1041CA9278B8D3000E5ECC1 /* Messages.swift in Sources */,
 				F8C02DF42788B1E000B7F28D /* Color.swift in Sources */,
 				F8AD21E6271796CC0059D754 /* RestoreOrCreateWalletView.swift in Sources */,
@@ -1014,6 +1028,7 @@
 				F8AD21E92717B3420059D754 /* CreatePasswordView.swift in Sources */,
 				F8ABEECD27124A8C007F7D11 /* BiometricsAuthentication.swift in Sources */,
 				F846FDC5278503220044815B /* AddViewOnlyView.swift in Sources */,
+				F844EA6B2792376B00CE8013 /* Messages2.swift in Sources */,
 				F8CABCBA27869C41009F2F91 /* Network.swift in Sources */,
 				3D216A132753246600620BB9 /* TransactionRowView.swift in Sources */,
 				F8ABEF3227125EFA007F7D11 /* WalletApp.swift in Sources */,
@@ -1050,6 +1065,7 @@
 			files = (
 				0A8BB79A272E729200DFC647 /* Transaction.swift in Sources */,
 				F8812B5C271923A300D1B231 /* ShortcutView.swift in Sources */,
+				F844EA7227925C4F00CE8013 /* Messages4.swift in Sources */,
 				F8812B592719239700D1B231 /* TransactionsView.swift in Sources */,
 				F8ABEF3327125EFA007F7D11 /* WalletApp.swift in Sources */,
 				F8812B502718B91E00D1B231 /* Intro2View.swift in Sources */,
@@ -1065,6 +1081,7 @@
 				3DFFFBB5275C626000056A69 /* TransactionType.swift in Sources */,
 				F883973F278644AF00DB2D0D /* NotificationView.swift in Sources */,
 				F8AD21E7271796CC0059D754 /* RestoreOrCreateWalletView.swift in Sources */,
+				F844EA6F279240BE00CE8013 /* Messages3.swift in Sources */,
 				F1041CAA278B8D3000E5ECC1 /* Messages.swift in Sources */,
 				F8C02DF52788B1E000B7F28D /* Color.swift in Sources */,
 				3DFFFBB2275C625700056A69 /* TransactionRowView.swift in Sources */,
@@ -1076,6 +1093,7 @@
 				F8AD21EA2717B3420059D754 /* CreatePasswordView.swift in Sources */,
 				F8ABEED227124A8C007F7D11 /* FileObserver.swift in Sources */,
 				F846FDC6278503220044815B /* AddViewOnlyView.swift in Sources */,
+				F844EA6C2792376B00CE8013 /* Messages2.swift in Sources */,
 				F8CABCBB27869C41009F2F91 /* Network.swift in Sources */,
 				F8ABEEDE27124A8C007F7D11 /* KeychainPasswordItem.swift in Sources */,
 				F8ABEF43271389D9007F7D11 /* URL.swift in Sources */,
