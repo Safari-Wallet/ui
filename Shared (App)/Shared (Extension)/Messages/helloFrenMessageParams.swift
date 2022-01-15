@@ -8,8 +8,6 @@
 import Foundation
 
 struct helloFrenMessageParams: NativeMessageParams {
-    let foo: String
-    let bar: Int
     let wagmi: Bool?
     
     func execute(with userSettings: UserSettings) async throws -> Any {
