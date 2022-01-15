@@ -9,17 +9,24 @@ import Foundation
 import SafariWalletCore
 import MEWwalletKit
 
-func parseMessage4() async throws -> Any? {
-    
-    let message: [String: Any] = [
-        "method": "helloFren",
-        "params": [
-            "foo": "bar",
-            "bar": 42,
-            "wagmi": true
-        ]
+let message1: [String: Any] = [
+    "method": "helloFren",
+    "params": [
+        "foo": "bar",
+        "bar": 42,
+        "wagmi": true
     ]
-    
+]
+
+let message2: [String: Any] = [
+    "method": "eth_getBalance",
+    "params": [
+        "address": "0x000000001",
+        "block": "latest"
+    ]
+]
+
+func parseMessage4(message: [String: Any]) async throws -> Any? {
     let jsonEncoded = try JSONSerialization.data(withJSONObject: message, options: [])
     let messageObj = try JSONDecoder().decode(NativeMessage4.self, from: jsonEncoded)
     return try await messageObj.params?.execute()
@@ -77,6 +84,7 @@ struct HelloFrenMessageParams4: NativeMessageParams4 {
 
     func execute() async throws -> Any? {
         // do something here
+        print("Executing helloFren")
         return nil
     }
 }
@@ -88,6 +96,7 @@ struct eth_getBalanceMessageParams4: NativeMessageParams4 {
     
     func execute() async throws -> Any? {
         // do something here
+        print("Executing getBalance")
         return nil
     }
     
