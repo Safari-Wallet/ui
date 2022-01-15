@@ -15,7 +15,7 @@ struct eth_getBalanceMessageParams: NativeMessageParams {
     
     func execute(with userSettings: UserSettings) async throws -> Any {
         let providerAPI = ProviderAPI(delegate: userSettings)
-        return try await providerAPI.parseMessage(method: "eth_getBalance", params: [self.address, self.block])
+        return try await providerAPI.parseMessage(method: "eth_getBalance", params: [self.address.address, self.block.stringValue])
     }
     
     private enum CodingKeys: CodingKey {
