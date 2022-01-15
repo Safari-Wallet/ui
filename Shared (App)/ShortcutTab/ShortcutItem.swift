@@ -26,6 +26,7 @@ extension ShortcutItem {
 //            ShortcutItem(name: "Test Dev App", id: -1, url: URL(string: "https://safari-wallet-test-dapp.vercel.app")!),
             ShortcutItem(name: "Test Dev App", id: -1, url: URL(string: "https://ui-eff.pages.dev/")!),
             ShortcutItem(name: "Local Test App", id: -2, url: URL(string: "https://localhost:3000")!),
+            ShortcutItem(name: "MetaMask test", id: -3, url: URL(string: "https://metamask.github.io/test-dapp/")!),
             ShortcutItem(name: "Uniswap", id: 1027, url: URL(string: "https://app.uniswap.org/")!),
             ShortcutItem(name: "Aave", id: 7278, url: URL(string: "https://app.aave.com")!),
             ShortcutItem(name: "Maker", id: 1518, url: URL(string: "https://oasis.app")!),
@@ -36,6 +37,7 @@ extension ShortcutItem {
             ShortcutItem(name: "1Inch", id: 8104, url: URL(string: "https://app.1inch.io")!),
             ShortcutItem(name: "Fei", id: 8642, url: URL(string: "https://app.fei.money")!),
             ShortcutItem(name: "Gysr", id: 7661, url: URL(string: "https://app.gysr.io")!),
+            ShortcutItem(name: "MoneyPipe", id: -4, url: URL(string: "https://moneypipe.xyz")!)
         ]
     }
 }
