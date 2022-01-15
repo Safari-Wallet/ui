@@ -11,6 +11,7 @@ import os.log
 
 let SFExtensionMessageKey = "message"
 let SFSFExtensionResponseErrorKey = "error"
+let SFSFExtensionResponseFullErrorKey = "fullError"
 
 class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
     let logger = Logger()
@@ -28,7 +29,7 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
             
             let item = context.inputItems[0] as! NSExtensionItem
             guard let message = item.userInfo?[SFExtensionMessageKey] else {
-                response.userInfo = errorResponse(error: "No message key in message or message is not a string.\(String(describing: item.userInfo))")
+                response.userInfo = errorResponse(error: "No message key in message or message is not a string.\(String(describing: item.userInfo))", fullError: nil)
                 logger.critical("Safari-wallet SafariWebExtensionHandler: No message key in message")
                 return
             }
@@ -38,7 +39,8 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
             // Validate incoming message
             
             if let message = message as? [String: Any] {
-                guard (message["method"] as? NativeMessageMethod) != nil else { throw WalletError.noMethod }
+                guard (message["method"] as? String) != nil else { throw WalletError.noMethod }
+                guard (NativeMessageMethod.init(rawValue: message["method"] as! String)) != nil else { throw WalletError.invalidInput("Unknown method \(String(describing: message["method"]))") }
                 guard (message["params"] as? [String: Any]) != nil else { throw WalletError.invalidInput("Missing params property")}
                 
                 do {
@@ -46,15 +48,20 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
                     response.userInfo = [SFExtensionMessageKey: returnValue]
                     logger.critical("Safari-wallet SafariWebExtensionHandler received \(String(describing: returnValue), privacy: .public)")
                 } catch {
-                    response.userInfo = errorResponse(error: error.localizedDescription)
-                    logger.critical("Safari-wallet SafariWebExtensionHandler error: \(error.localizedDescription, privacy: .public))")
+                    response.userInfo = errorResponse(error: error.localizedDescription, fullError: "\(error)")
+                    logger.critical("Safari-wallet SafariWebExtensionHandler error: \(error.localizedDescription, privacy: .public)")
                 }
             }
         }
     }
     
-    fileprivate func errorResponse(error: String) -> [String: Any] {
-        return [SFExtensionMessageKey: [SFSFExtensionResponseErrorKey: error]]
+    fileprivate func errorResponse(error: String, fullError: String?) -> [String: Any] {
+        return [
+            SFExtensionMessageKey: [
+                SFSFExtensionResponseErrorKey: error,
+                SFSFExtensionResponseFullErrorKey: fullError
+            ]
+        ]
     }
 
     // MARK: - Web3 Message handling
