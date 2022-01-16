@@ -32,3 +32,13 @@ export const $ = <Q extends string>(
     (query[0] === `#`
         ? document.querySelector(query)
         : document.querySelectorAll(query)) as any;
+
+export const fromHex = (hex: string) => {
+    if (hex === '0x0') {
+        return 0;
+    }
+    hex.startsWith('0x') && (hex = hex.slice(2));
+    let ascii = '';
+    for (var i = 0; i < hex.length; i += 2) ascii += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+    return parseInt(ascii);
+}
