@@ -45,14 +45,14 @@ extension ENSResolver: ENSResolvable {
         let resolverCall = ensContract.registry.resolver(hashedEns)
         let resolverAddressHex: String = try await client.ethCall(call: resolverCall)
         
-        // Resolve the ENS name with the returned resolver
         guard resolverAddressHex != .nullAddress else { throw ENSError.resolverContractUnknown }
-        
         let resolverAddress = decode(resolverAddress: resolverAddressHex)
+        
+        // Resolve the ENS name with the returned resolver
         let nameCall = ensContract.nameResolver.name(hashedEns, contractAddress: resolverAddress)
         let ensNameHex: String = try await client.ethCall(call: nameCall)
         
-        guard let ensName = ABIDecoder.decodeSignleType(type: .string, data: Data(hex: ensNameHex)).value as? String else {
+        guard let ensName = decode(ensName: ensNameHex) else {
             throw ENSError.failedDecodingEnsName
         }
         
@@ -70,6 +70,10 @@ extension ENSResolver: ENSResolvable {
         let index = hex.index(hex.endIndex, offsetBy: -40)
         let rawAddress = String(hex[index...]).withHexPrefix()
         return Address(raw: rawAddress)
+    }
+    
+    private func decode(ensName hex: String) -> String? {
+        return ABIDecoder.decodeSignleType(type: .string, data: Data(hex: hex)).value as? String
     }
 }
 
