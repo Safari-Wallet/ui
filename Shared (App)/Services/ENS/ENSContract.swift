@@ -44,7 +44,7 @@ struct ENSContract {
         }
         
         func resolver(_ node: String) -> Call {
-            let encodedParameters = ENSResolver.resolverFunction.encodeParameters([node as AnyObject])
+            let encodedParameters = Registry.resolverFunction.encodeParameters([node as AnyObject])
             let encodedParametersHex = encodedParameters?.toHexString().withHexPrefix()
             return Call(to: resolverAddress, data: encodedParametersHex)
         }
@@ -63,7 +63,7 @@ struct ENSContract {
         )
         
         func name(_ node: String, contractAddress: Address) -> Call {
-            let encodedParameters = ENSResolver.nameFunction.encodeParameters([node as AnyObject])
+            let encodedParameters = NameResolver.nameFunction.encodeParameters([node as AnyObject])
             let encodedParametersHex = encodedParameters?.toHexString().withHexPrefix()
             return Call(to: contractAddress, data: encodedParametersHex)
         }

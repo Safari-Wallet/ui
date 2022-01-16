@@ -1027,6 +1027,7 @@
 				3D216A132753246600620BB9 /* TransactionRowView.swift in Sources */,
 				F8ABEF3227125EFA007F7D11 /* WalletApp.swift in Sources */,
 				F8ABEF42271389D9007F7D11 /* URL.swift in Sources */,
+				3D1CE8C52793D60F00A2FE48 /* ENSContract.swift in Sources */,
 				3DFFFBA9275C57ED00056A69 /* Contract.swift in Sources */,
 				F8C02DF12787CF5800B7F28D /* ExtensionTutorialView.swift in Sources */,
 				F846FDC1278502C80044815B /* ConnectNanoSView.swift in Sources */,
@@ -1049,6 +1050,7 @@
 				F8ABEED927124A8C007F7D11 /* WalletError.swift in Sources */,
 				F846FDBE278502C00044815B /* ConnectTrezorView.swift in Sources */,
 				F8321B5927169A1D00F12938 /* OnboardingView.swift in Sources */,
+				3D4CD963279170AE0032C583 /* ENSService.swift in Sources */,
 				F82D04AA2781347A009C1725 /* KeychainPasswordItem+Convenience.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1088,6 +1090,7 @@
 				F8ABEEDE27124A8C007F7D11 /* KeychainPasswordItem.swift in Sources */,
 				F8ABEF43271389D9007F7D11 /* URL.swift in Sources */,
 				F8ABEED627124A8C007F7D11 /* SharedDocument.swift in Sources */,
+				3D1CE8C62793D60F00A2FE48 /* ENSContract.swift in Sources */,
 				F8ABEF3627125F16007F7D11 /* ContentView.swift in Sources */,
 				F8C02DF22787CF5800B7F28D /* ExtensionTutorialView.swift in Sources */,
 				F846FDC2278502C80044815B /* ConnectNanoSView.swift in Sources */,
