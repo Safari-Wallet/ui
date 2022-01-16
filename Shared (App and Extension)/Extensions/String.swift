@@ -24,5 +24,19 @@ extension String {
     func deletingPathExtension() -> String {
         (self as NSString).deletingPathExtension
     }
-
+    
+    func withoutHexPrefix() -> String {
+        if self.hasPrefix("0x") {
+            let index = self.index(self.startIndex, offsetBy: 2)
+            return String(self[index...])
+        }
+        return self
+    }
+    
+    func withHexPrefix() -> String {
+        if !self.hasPrefix("0x") {
+            return "0x" + self
+        }
+        return self
+    }
 }
