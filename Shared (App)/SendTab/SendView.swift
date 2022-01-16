@@ -11,72 +11,65 @@ import SwiftUI
 struct SendView: View {
     
     @EnvironmentObject var userSettings: UserSettings
+    @State var showConfirmPopup = false
     @State var to: String = ""
     @State var amount: String = ""
     @State var balance: String = ""
     @State var assetIndex: Int = 0
     
     var body: some View {
-        HStack {
-            Form {
-             
-                // MARK: - From
-                Section(header: Text("From (click to copy to clipboard)")) {
-                    Text(userSettings.address?.addressString ?? "Error: select address in Settings")
-                        .onTapGesture {
-                            guard let address = userSettings.address?.addressString else { return }
-                            #if os(iOS)
-            //                UIPasteboard.general.setValue(address, forPasteboardType:  UTTypePlainText)
-                            UIPasteboard.general.string = address
-                            #elseif os(OSX)
-                            let pasteBoard = NSPasteboard.general()
-                            pasteBoard.clearContents()
-                            pasteBoard.writeObjects([address as NSString])
-                            #endif
-                        }
-                    
-                    Picker(selection: $assetIndex, label: Text("Asset")) {
-                        ForEach(0 ..< 1) { _ in
-                            Text(userSettings.network.symbol)
-                        }
+        Form {
+         
+            // MARK: - From
+            Section(header: Text("From (click to copy to clipboard)")) {
+                Text(userSettings.address?.addressString ?? "Error: select address in Settings")
+                    .onTapGesture {
+                        guard let address = userSettings.address?.addressString else { return }
+                        #if os(iOS)
+        //                UIPasteboard.general.setValue(address, forPasteboardType:  UTTypePlainText)
+                        UIPasteboard.general.string = address
+                        #elseif os(OSX)
+                        let pasteBoard = NSPasteboard.general()
+                        pasteBoard.clearContents()
+                        pasteBoard.writeObjects([address as NSString])
+                        #endif
                     }
-                    
-                    Text("Balance: \(balance) \(userSettings.network.symbol.uppercased())")
-                    
-                }
                 
-                // MARK: - Asset
-                
-                
-                // MARK: - To
-                Section(header: Text("TO")) {
-                    TextField("To address or ENS name", text: $to)
-                    
-                    HStack {
-                        Text("Amount")
-                        TextField("0", text: $amount)
-                        Text(userSettings.network.symbol.uppercased())
+                Picker(selection: $assetIndex, label: Text("Asset")) {
+                    ForEach(0 ..< 1) { _ in
+                        Text(userSettings.network.symbol)
                     }
                 }
-             
+                
+                Text("Balance: \(balance) \(userSettings.network.symbol.uppercased())")
+                
             }
             
-//            Button("Previous") {
-//                tabIndex -= 1
-//            }
-//            Spacer()
-//            Button("Next") {
-//                showingPasswordSheet = true
-//            }
-//            .disabled(!bip39.isEqual(to: userPhrase))
-//            .sheet(isPresented: $showingPasswordSheet) {
-//                CreatePasswordView(bip39: bip39, walletWasSaved: $walletWasSaved)
-//                    .onDisappear {
-//                        if walletWasSaved == true {
-//                            state = .summary
-//                        }
-//                    }
-//            }
+            // MARK: - Asset
+            
+            
+            // MARK: - To
+            Section(header: Text("TO")) {
+                TextField("To address or ENS name", text: $to)
+                
+                HStack {
+                    Text("Amount")
+                    TextField("0", text: $amount)
+                    Text(userSettings.network.symbol.uppercased())
+                }
+            }
+
+            Button("Pay") {
+                showConfirmPopup = true
+            }
+            .disabled(amount.count == 0)
+            .sheet(isPresented: $showConfirmPopup) {
+                SendConfirmView(amount: "\(amount) \(userSettings.network.symbol.uppercased())")
+                    .onDisappear {
+                            //
+                    }
+
+                }
         }
     }
 }
