@@ -39,8 +39,12 @@
 		0A0E1EE8270687AE00061EA6 /* popup.js in Resources */ = {isa = PBXBuildFile; fileRef = 0A0E1E97270687AE00061EA6 /* popup.js */; };
 		0A8BB799272E729200DFC647 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8BB798272E729200DFC647 /* Transaction.swift */; };
 		0A8BB79A272E729200DFC647 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8BB798272E729200DFC647 /* Transaction.swift */; };
+		3D1CE8C52793D60F00A2FE48 /* ENSContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1CE8C42793D60F00A2FE48 /* ENSContract.swift */; };
+		3D1CE8C62793D60F00A2FE48 /* ENSContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1CE8C42793D60F00A2FE48 /* ENSContract.swift */; };
 		3D216A132753246600620BB9 /* TransactionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D216A122753246600620BB9 /* TransactionRowView.swift */; };
 		3D216A1527539F4700620BB9 /* TransactionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D216A1427539F4700620BB9 /* TransactionType.swift */; };
+		3D4CD963279170AE0032C583 /* ENSService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4CD962279170AE0032C583 /* ENSService.swift */; };
+		3D4CD964279170DB0032C583 /* ENSService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4CD962279170AE0032C583 /* ENSService.swift */; };
 		3D97705F273CD4AE0014CAC7 /* TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D97705E273CD4AE0014CAC7 /* TransactionService.swift */; };
 		3D977060273CEEA80014CAC7 /* TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D97705E273CD4AE0014CAC7 /* TransactionService.swift */; };
 		3DACED5A2751D5B2004050B7 /* keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DACED592751D5B2004050B7 /* keys.swift */; };
@@ -277,8 +281,10 @@
 		0A8BB798272E729200DFC647 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		0AE54717270694EB00C4A81F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0AE5471D27091C5800C4A81F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3D1CE8C42793D60F00A2FE48 /* ENSContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENSContract.swift; sourceTree = "<group>"; };
 		3D216A122753246600620BB9 /* TransactionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRowView.swift; sourceTree = "<group>"; };
 		3D216A1427539F4700620BB9 /* TransactionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionType.swift; sourceTree = "<group>"; };
+		3D4CD962279170AE0032C583 /* ENSService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENSService.swift; sourceTree = "<group>"; };
 		3D97705E273CD4AE0014CAC7 /* TransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionService.swift; sourceTree = "<group>"; };
 		3DACED592751D5B2004050B7 /* keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keys.swift; sourceTree = "<group>"; };
 		3DEAA239275DAB4200EB8370 /* ContractInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ContractInfo.plist; sourceTree = "<group>"; };
@@ -508,10 +514,20 @@
 			path = "macOS (Extension)";
 			sourceTree = "<group>";
 		};
+		3D1CE8C32793D5FF00A2FE48 /* ENS */ = {
+			isa = PBXGroup;
+			children = (
+				3D1CE8C42793D60F00A2FE48 /* ENSContract.swift */,
+				3D4CD962279170AE0032C583 /* ENSService.swift */,
+			);
+			path = ENS;
+			sourceTree = "<group>";
+		};
 		3D97705D273CD4A00014CAC7 /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				3DFFFBAA275C588800056A69 /* ContractService.swift */,
+				3D1CE8C32793D5FF00A2FE48 /* ENS */,
 				3D97705E273CD4AE0014CAC7 /* TransactionService.swift */,
 			);
 			path = Services;
@@ -1094,6 +1110,7 @@
 				F8ABEEDA27124A8C007F7D11 /* WalletError.swift in Sources */,
 				F846FDBF278502C00044815B /* ConnectTrezorView.swift in Sources */,
 				F8321B5A27176EBE00F12938 /* OnboardingView.swift in Sources */,
+				3D4CD964279170DB0032C583 /* ENSService.swift in Sources */,
 				F82D04AB2781347A009C1725 /* KeychainPasswordItem+Convenience.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
