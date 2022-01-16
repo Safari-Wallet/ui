@@ -93,6 +93,7 @@ struct SettingsView: View {
             await viewModel.setup()
         }
         .onDisappear {
+            guard viewModel.bundleIndex < viewModel.bundles.count else { return }
             userSettings.bundle = viewModel.bundles[viewModel.bundleIndex]
             print("default address index: \(userSettings.bundle!.defaultAddressIndex)")
         }
