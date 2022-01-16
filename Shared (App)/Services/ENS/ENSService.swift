@@ -48,10 +48,7 @@ extension ENSResolver: ENSResolvable {
         // Resolve the ENS name with the returned resolver
         guard resolverAddressHex != .nullAddress else { throw ENSError.resolverContractUnknown }
         
-        let index = resolverAddressHex.index(resolverAddressHex.endIndex, offsetBy: -40)
-        let rawAddress = String(resolverAddressHex[index...]).withHexPrefix()
-        let resolverAddress = Address(raw: rawAddress)
-        
+        let resolverAddress = decode(resolverAddress: resolverAddressHex)
         let nameCall = ensContract.nameResolver.name(hashedEns, contractAddress: resolverAddress)
         let ensNameHex: String = try await client.ethCall(call: nameCall)
         
@@ -67,6 +64,12 @@ extension ENSResolver: ENSResolvable {
     private func hash(address: RawAddress) -> String {
         let ensReverse = address.lowercased().withoutHexPrefix() + ".addr.reverse"
         return hash(name: ensReverse).withHexPrefix()
+    }
+    
+    private func decode(resolverAddress hex: String) -> Address {
+        let index = hex.index(hex.endIndex, offsetBy: -40)
+        let rawAddress = String(hex[index...]).withHexPrefix()
+        return Address(raw: rawAddress)
     }
 }
 
