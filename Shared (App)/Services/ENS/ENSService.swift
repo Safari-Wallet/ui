@@ -9,11 +9,11 @@ import Foundation
 import MEWwalletKit
 import SafariWalletCore
 
-protocol ENSResolvable {
+protocol ENSReverseResolvable {
     func resolve(address: RawAddress) async throws -> String
 }
 
-protocol ENSReverseResolvable {
+protocol ENSResolvable {
     func resolve(ens: String) async throws -> RawAddress
 }
 
@@ -31,9 +31,9 @@ final class ENSResolver {
     }
 }
 
-// MARK: - ENSResolvable
+// MARK: - ENSReverseResolvable
 
-extension ENSResolver: ENSResolvable {
+extension ENSResolver: ENSReverseResolvable {
     
     func resolve(address: RawAddress) async throws -> String {
         guard let client = client else { throw ENSError.clientError }
@@ -77,9 +77,9 @@ extension ENSResolver: ENSResolvable {
     }
 }
 
-// MARK: - ENSReverseResolvable
+// MARK: - ENSResolvable
 
-extension ENSResolver: ENSReverseResolvable {
+extension ENSResolver: ENSResolvable {
     
     func resolve(ens: String) async throws -> RawAddress {
         assertionFailure("Not implemented yet")
