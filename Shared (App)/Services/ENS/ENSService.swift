@@ -13,8 +13,23 @@ protocol ENSReverseResolvable {
     func resolve(address: RawAddress) async throws -> String
 }
 
+extension ENSReverseResolvable {
+    
+    func resolve(address: Address) async throws -> String {
+        try await resolve(address: address.address)
+    }
+}
+
 protocol ENSResolvable {
     func resolve(ens: String) async throws -> RawAddress
+}
+
+extension ENSResolvable {
+    
+    func resolve(ens: String) async throws -> Address {
+        let rawAddress = try await resolve(ens: ens)
+        return Address(raw: rawAddress)
+    }
 }
 
 final class ENSResolver {
