@@ -6,15 +6,16 @@
 //
 
 import SwiftUI
+import SafariWalletCore
 //import UniformTypeIdentifiers
 
 struct SendView: View {
     
     @EnvironmentObject var userSettings: UserSettings
+    @ObservedObject var viewModel = ViewModel() //(userSettings: userSettings)
     @State var showConfirmPopup = false
     @State var to: String = ""
     @State var amount: String = ""
-    @State var balance: String = ""
     @State var assetIndex: Int = 0
     
     var body: some View {
@@ -36,12 +37,13 @@ struct SendView: View {
                     }
                 
                 Picker(selection: $assetIndex, label: Text("Asset")) {
+                    // TODO: alchemy call for erc 20 tokens?
                     ForEach(0 ..< 1) { _ in
                         Text(userSettings.network.symbol)
                     }
                 }
                 
-                Text("Balance: \(balance) \(userSettings.network.symbol.uppercased())")
+                Text("Balance: \(viewModel.balance) \(userSettings.network.symbol.uppercased())")
                 
             }
             
@@ -50,7 +52,7 @@ struct SendView: View {
             
             // MARK: - To
             Section(header: Text("TO")) {
-                TextField("To address or ENS name", text: $to)
+                TextField("Address or ENS name", text: $to)
                 
                 HStack {
                     Text("Amount")
@@ -61,8 +63,9 @@ struct SendView: View {
 
             Button("Pay") {
                 showConfirmPopup = true
+                print("dc: \(Decimal(string: amount))")
             }
-            .disabled(amount.count == 0)
+            .disabled(amount.count == 0 || Decimal(string: amount) == nil)
             .sheet(isPresented: $showConfirmPopup) {
                 SendConfirmView(amount: "\(amount) \(userSettings.network.symbol.uppercased())")
                     .onDisappear {
@@ -70,7 +73,50 @@ struct SendView: View {
                     }
 
                 }
+            .task {
+                do {
+                    try await viewModel.setup(userSettings: self.userSettings)
+                    print("task")
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+            .onAppear {
+                print("on appear")
+            }
         }
+    }
+    
+    @MainActor
+    class ViewModel: ObservableObject {
+        
+        
+        @Published var balance: String = ""
+        private var client: AlchemyClient = AlchemyClient(network: .ethereum, key: ApiKeys.alchemyMainnet)! // TODO: Init can only fail if the URL is invalid, which shouldn't happen runtime. Refactor the client init.
+
+        @MainActor
+        fileprivate func setup(userSettings: UserSettings) async throws {
+            
+            // TODO: move this to APIKeys?
+            let key: String
+            if case .ropsten = userSettings.network {
+                key = ApiKeys.alchemyRopsten
+                print("ropsten")
+            } else {
+                key = ApiKeys.alchemyMainnet
+                print("main")
+            }
+            self.client = AlchemyClient(network: userSettings.network, key: key)!
+            
+            if let addressString = userSettings.address?.addressString, let ethBalance = try await client.ethGetBalance(address: addressString).etherValue {
+                self.balance = ethBalance.description
+                print("Balance for \(addressString): \(ethBalance.description)")
+                assert(Thread.isMainThread)
+            } else {
+                self.balance = "0"
+            }
+        }
+        
     }
 }
 
