@@ -14,7 +14,7 @@ let SFSFExtensionResponseErrorKey = "error"
  
 class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
     
-    let userSettings = UserSettings()
+//    let userSettings = UserSettings()
     let logger = Logger()
     
     func beginRequest(with context: NSExtensionContext) {
@@ -54,17 +54,18 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
     // MARK: - Web3 Message handling
 
     func handle(message: Any) async throws -> Any {
-        let providerAPI = ProviderAPI(delegate: userSettings)
-        // Parse method and params
-        if let message = message as? String {
-            return try await providerAPI.parseMessage(method: message, params: nil)
-        } else if let message = message as? [String: Any] {
-            guard let method = message["method"] as? String else { throw WalletError.noMethod }
-            let params = message["params"]
-            logger.critical("Safari-wallet SafariWebExtensionHandler: Received object with method \(method, privacy: .public) and params \(String(describing: params), privacy: .public)")
-            return try await providerAPI.parseMessage(method: method, params: params)
-        } else {
-            throw WalletError.invalidInput(nil)
-        }
+        return Data()
+//        let providerAPI = ProviderAPI(delegate: userSettings)
+//        // Parse method and params
+//        if let message = message as? String {
+//            return try await providerAPI.parseMessage(method: message, params: nil)
+//        } else if let message = message as? [String: Any] {
+//            guard let method = message["method"] as? String else { throw WalletError.noMethod }
+//            let params = message["params"]
+//            logger.critical("Safari-wallet SafariWebExtensionHandler: Received object with method \(method, privacy: .public) and params \(String(describing: params), privacy: .public)")
+//            return try await providerAPI.parseMessage(method: method, params: params)
+//        } else {
+//            throw WalletError.invalidInput(nil)
+//        }
     }
 }

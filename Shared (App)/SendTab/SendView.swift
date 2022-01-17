@@ -12,7 +12,7 @@ import SafariWalletCore
 struct SendView: View {
     
     @EnvironmentObject var userSettings: UserSettings
-    @ObservedObject var viewModel = ViewModel() //(userSettings: userSettings)
+    @ObservedObject var viewModel = ViewModel()
     @State var showConfirmPopup = false
     @State var to: String = ""
     @State var amount: String = ""
@@ -71,14 +71,15 @@ struct SendView: View {
                     .onDisappear {
                             //
                     }
-
                 }
             .task {
                 do {
+                    assert(Thread.isMainThread)
                     try await viewModel.setup(userSettings: self.userSettings)
+                    assert(Thread.isMainThread)
                     print("task")
                 } catch {
-                    print(error.localizedDescription)
+                    print("🚨 \(error.localizedDescription)")
                 }
             }
             .onAppear {
@@ -90,11 +91,16 @@ struct SendView: View {
     @MainActor
     class ViewModel: ObservableObject {
         
+        @Published var balance: String = "" {
+            didSet {
+                print("balance was set: \(balance)")
+                assert(Thread.isMainThread)
+            }
+        }
         
-        @Published var balance: String = ""
         private var client: AlchemyClient = AlchemyClient(network: .ethereum, key: ApiKeys.alchemyMainnet)! // TODO: Init can only fail if the URL is invalid, which shouldn't happen runtime. Refactor the client init.
 
-        @MainActor
+//        @MainActor
         fileprivate func setup(userSettings: UserSettings) async throws {
             
             // TODO: move this to APIKeys?
@@ -109,11 +115,11 @@ struct SendView: View {
             self.client = AlchemyClient(network: userSettings.network, key: key)!
             
             if let addressString = userSettings.address?.addressString, let ethBalance = try await client.ethGetBalance(address: addressString).etherValue {
-                self.balance = ethBalance.description
+                self.balance = ethBalance.description + "hello"
                 print("Balance for \(addressString): \(ethBalance.description)")
                 assert(Thread.isMainThread)
             } else {
-                self.balance = "0"
+                self.balance = "0 zero"
             }
         }
         

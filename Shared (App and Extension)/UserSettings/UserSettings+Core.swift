@@ -8,7 +8,7 @@
 import Foundation
 import SafariWalletCore
 import MEWwalletKit
-
+/*
 extension UserSettings: SafariWalletCoreDelegate {
     
     func addresses() -> [String]? {
@@ -44,3 +44,4 @@ extension UserSettings: SafariWalletCoreDelegate {
         return network
     }
 }
+*/
