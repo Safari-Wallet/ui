@@ -39,21 +39,20 @@ extension ENSResolver: ENSReverseResolvable {
         guard let client = client else { throw ENSError.clientError }
         
         // Normalise and hash the name
-        let hashedEns = hash(address: address)
+        let hashedName = hash(address: address)
         
         // Call resolver() on the ENS registry. This returns the address of the resolver responsible for the name.
-        let resolverCall = ensContract.registry.resolver(hashedEns)
-        let resolverAddressHex: String = try await client.ethCall(call: resolverCall)
+        let resolverAddressHex = try await resolver(forName: hashedName)
         
         guard resolverAddressHex != .nullAddress else { throw ENSError.resolverContractUnknown }
-        let resolverAddress = decode(resolverAddress: resolverAddressHex)
+        let resolverAddress = decode(address: resolverAddressHex)
         
         // Resolve the ENS name with the returned resolver
-        let nameCall = ensContract.nameResolver.name(hashedEns, contractAddress: resolverAddress)
+        let nameCall = ensContract.nameResolver.name(hashedName, contractAddress: Address(raw: resolverAddress))
         let ensNameHex: String = try await client.ethCall(call: nameCall)
         
         guard let ensName = decode(ensName: ensNameHex) else {
-            throw ENSError.failedDecodingEnsName
+            throw ENSError.failedDecoding
         }
         
         guard !ensName.isEmpty else { throw ENSError.ensUnknown }
@@ -66,12 +65,6 @@ extension ENSResolver: ENSReverseResolvable {
         return hash(name: ensReverse).withHexPrefix()
     }
     
-    private func decode(resolverAddress hex: String) -> Address {
-        let index = hex.index(hex.endIndex, offsetBy: -40)
-        let rawAddress = String(hex[index...]).withHexPrefix()
-        return Address(raw: rawAddress)
-    }
-    
     private func decode(ensName hex: String) -> String? {
         return ABIDecoder.decodeSignleType(type: .string, data: Data(hex: hex)).value as? String
     }
@@ -82,8 +75,25 @@ extension ENSResolver: ENSReverseResolvable {
 extension ENSResolver: ENSResolvable {
     
     func resolve(ens: String) async throws -> RawAddress {
-        assertionFailure("Not implemented yet")
-        return ""
+        guard let client = client else { throw ENSError.clientError }
+        
+        // Normalise and hash the name
+        let hashedName = hash(name: ens).withHexPrefix()
+        
+        // Call resolver() on the ENS registry. This returns the address of the resolver responsible for the name.
+        let resolverAddressHex = try await resolver(forName: hashedName)
+        
+        // Resolve the address with the returned resolver
+        guard resolverAddressHex != .nullAddress else { throw ENSError.resolverContractUnknown }
+        let resolverAddress = decode(address: resolverAddressHex)
+        
+        let addrCall = ensContract.addrResolver.addr(hashedName, contractAddress: Address(raw: resolverAddress))
+        let addressHex: String = try await client.ethCall(call: addrCall)
+        let address = decode(address: addressHex)
+        
+        guard address != .nullAddress else { throw ENSError.ensUnknown }
+        
+        return address
     }
 }
 
@@ -101,6 +111,19 @@ private extension ENSResolver {
         }
         return hashedEns.toHexString()
     }
+    
+    func resolver(forName name: String) async throws -> String {
+        guard let client = client else { throw ENSError.clientError }
+        let resolverCall = ensContract.registry.resolver(name)
+        let resolverAddressHex: String = try await client.ethCall(call: resolverCall)
+        return resolverAddressHex
+    }
+    
+    func decode(address hex: String) -> RawAddress {
+        let index = hex.index(hex.endIndex, offsetBy: -40)
+        let rawAddress = String(hex[index...]).withHexPrefix()
+        return rawAddress
+    }
 }
 
 private extension String {
@@ -112,6 +135,6 @@ enum ENSError: Error {
     case invalidName
     case ensUnknown
     case resolverContractUnknown
-    case failedDecodingEnsName
+    case failedDecoding
     case clientError
 }
