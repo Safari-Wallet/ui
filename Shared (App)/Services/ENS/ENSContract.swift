@@ -13,6 +13,7 @@ struct ENSContract {
     
     let registry: Registry
     let nameResolver: NameResolver
+    let addrResolver: AddrResolver
     
     private let network: Network
     
@@ -20,6 +21,7 @@ struct ENSContract {
         self.network = network
         self.registry = Registry(network: network)
         self.nameResolver = NameResolver()
+        self.addrResolver = AddrResolver()
     }
     
     struct Registry {
@@ -64,6 +66,25 @@ struct ENSContract {
         
         func name(_ node: String, contractAddress: Address) -> Call {
             let encodedParameters = NameResolver.nameFunction.encodeParameters([node as AnyObject])
+            let encodedParametersHex = encodedParameters?.toHexString().withHexPrefix()
+            return Call(to: contractAddress, data: encodedParametersHex)
+        }
+    }
+    
+    struct AddrResolver {
+        
+        static let addrFunction: ABI.Element = .function(
+            ABI.Element.Function(
+                name: "addr",
+                inputs: [.init(name: "node", type: .bytes(length: 32))],
+                outputs: [.init(name: "ens", type: .address)],
+                constant: false,
+                payable: false
+            )
+        )
+        
+        func addr(_ node: String, contractAddress: Address) -> Call {
+            let encodedParameters = AddrResolver.addrFunction.encodeParameters([node as AnyObject])
             let encodedParametersHex = encodedParameters?.toHexString().withHexPrefix()
             return Call(to: contractAddress, data: encodedParametersHex)
         }
