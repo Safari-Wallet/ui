@@ -159,7 +159,6 @@ extension SettingsView {
                 self.addresses = bundles.first?.addresses ?? []
                 self.addressIndex = 0
             }
-            assert(Thread.isMainThread)
         }
         
         func showBundle(index: Int) {
@@ -167,7 +166,6 @@ extension SettingsView {
             let bundle = self.bundles[bundleIndex]
             self.addresses = bundle.addresses
             self.addressIndex = bundle.defaultAddressIndex
-            assert(Thread.isMainThread)
         }
         
         func change(networkIndex: Int, defaultBundle: AddressBundle?) async throws {
@@ -177,8 +175,6 @@ extension SettingsView {
             } else if networkIndex == 1 {
                 try await setup(network: .ropsten, defaultBundle: defaultBundle)
             }
-            
-            assert(Thread.isMainThread)
         }
         
         func reset() {
@@ -186,7 +182,6 @@ extension SettingsView {
             self.addresses = [AddressItem]()
             self.bundleIndex = 0
             self.addressIndex = 0
-            assert(Thread.isMainThread)
         }
     }
 }
