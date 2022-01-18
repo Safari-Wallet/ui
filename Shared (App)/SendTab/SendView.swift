@@ -12,7 +12,7 @@ import SafariWalletCore
 struct SendView: View {
     
     @EnvironmentObject var userSettings: UserSettings
-    @ObservedObject var viewModel = ViewModel()
+    @StateObject var viewModel = ViewModel()
     @State var showConfirmPopup = false
     @State var to: String = ""
     @State var amount: String = ""
@@ -82,8 +82,10 @@ struct SendView: View {
                     print("🚨 \(error.localizedDescription)")
                 }
             }
-            .onAppear {
-                print("on appear")
+            .onChange(of: userSettings.bundle?.defaultAddressIndex) { _ in
+                Task {
+                    try await viewModel.setup(userSettings: userSettings)
+                }
             }
         }
     }
@@ -115,11 +117,11 @@ struct SendView: View {
             self.client = AlchemyClient(network: userSettings.network, key: key)!
             
             if let addressString = userSettings.address?.addressString, let ethBalance = try await client.ethGetBalance(address: addressString).etherValue {
-                self.balance = ethBalance.description + "hello"
+                self.balance = ethBalance.description
                 print("Balance for \(addressString): \(ethBalance.description)")
                 assert(Thread.isMainThread)
             } else {
-                self.balance = "0 zero"
+                self.balance = "(ERROR)"
             }
         }
         
