@@ -13,7 +13,7 @@
     ],
     "scripts": {
         "build": "parcel build",
-        "watch": "parcel watch",
+        "watch": "parcel watch --no-hmr",
         "test": "jest",
         "test:watch": "jest --watch"
     },
