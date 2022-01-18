@@ -93,8 +93,7 @@ extension AddressBundle {
 
 extension AddressBundle {
     
-    func account(forAddressIndex: Int, password: String?) async throws -> Account {
-        
+    func account(forAddressIndex: Int, network: Network, password: String?) async throws -> Account {
         // 1. Sanity check
         guard canSign == true else { throw WalletError.viewOnly }
         guard forAddressIndex < self.addresses.count else { throw WalletError.outOfBounds }
@@ -105,10 +104,10 @@ extension AddressBundle {
         case .keystorePassword:
             let bip39 = try await KeystoreV3.load(name: id.uuidString, password: password)
             guard let seed = try bip39.seed() else { throw WalletError.seedError }
-            let wallet = try Wallet<PrivateKeyEth1>(seed: seed)
+            let wallet = try Wallet<PrivateKeyEth1>(seed: seed, network: network).derive(network, index: UInt32(forAddressIndex))
             let account = try Account(privateKey: wallet.privateKey, wallet: id.uuidString, derivationpath: "123") // FIXME: derivationpath
-            assert(account.addresss.address == addresses[forAddressIndex].addressString)
-            assertionFailure()
+            let search = addresses[forAddressIndex].addressString
+            guard account.address.address == search else { throw WalletError.addressNotFound(search) }
             return account
         case .viewOnly:
             throw WalletError.viewOnly

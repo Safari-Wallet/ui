@@ -15,7 +15,7 @@ npm i
 1. Run the following command:
 
 ```sh
-npx gulp
+npm start
 ```
 
 2. Navigate to http://localhost:3000/ in your browser.

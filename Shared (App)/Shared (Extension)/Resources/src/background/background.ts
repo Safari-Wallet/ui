@@ -5,7 +5,7 @@ import { getLogger } from '../utils';
 const log = getLogger('background');
 const Messenger = getMessenger('background', { logger: log });
 
-browser.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
+browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     log(`Received message from browser runtime: ${JSON.stringify(request)}`);
 
     const onMethod: OnMessage = async (methodName, handler) => {
@@ -32,7 +32,7 @@ browser.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
             sessionId,
             {
                 address,
-                block: 'latest',
+                block: 'latest'
             }
         );
 
@@ -45,26 +45,21 @@ browser.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
         });
     });
 
-    //         case `eth_signTypedData_v3`: // * Return requested data from native app to popup.js
-    //             /*
-    //             TODO
-    //             const signature = await browser.runtime.sendNativeMessage({
-    //                 from: request.message.from,
-    //                 message: `eth_signTypedData_v3`,
-    //                 params: request.message.params,
-    //             });
-    //             browser.runtime.sendMessage({
-    //                 message: signature.message,
-    //             });
-    //             */
-    //             break;
-    //         case `cancel`: // * Cancel current method and notify popup.js of cancellation
-    //             browser.runtime.sendMessage({
-    //                 message: {
-    //                     message: `cancel`,
-    //                 },
-    //             });
-    //             break;
+    onMethod('sign', async (params, sessionId) => {
+        log('sign: sending to native', params);
+
+        const signature = await Messenger.sendToNative(
+            'sign',
+            sessionId,
+            params
+        );
+
+        // TODO: Handle user cancelation
+
+        sendResponse({ signature });
+    });
+
+    return true; // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/runtime/onMessage#sending_an_asynchronous_response_using_sendresponse
 });
 
 log(`loaded`);

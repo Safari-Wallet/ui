@@ -1,4 +1,8 @@
+import { getMessenger } from '../messaging';
 import { getLogger } from '../utils';
+
+const logger = getLogger('ethereum');
+const { sendToContent } = getMessenger('ethereum', { logger });
 
 // MARK: - Setup
 
@@ -7,8 +11,6 @@ declare global {
         ethereum: any;
     }
 }
-
-const log = getLogger('ethereum');
 
 // MARK: - Styling prelims
 
@@ -32,6 +34,8 @@ class Ethereum {
     overlay: HTMLDivElement;
     div: HTMLDivElement;
     message: HTMLParagraphElement;
+
+    waitingFor: Record<string, (result: any) => void> = {};
 
     constructor() {
         this.opened = false;
@@ -70,6 +74,25 @@ class Ethereum {
         this.message.innerText = `Open the wallet extension to connect`;
 
         this.div.appendChild(this.message);
+
+        window.addEventListener('message', (event) => {
+            const { method, params, destination } = event.data;
+
+            if (destination !== 'ethereum') return;
+
+            const resolve = this.waitingFor[method];
+            if (!resolve) return;
+            switch (method) {
+                case 'walletConnected':
+                    resolve([params.address]);
+                    window.ethereum.close();
+                    break;
+                case 'sign':
+                    resolve(params.signature);
+                    break;
+            }
+            delete this.waitingFor[method];
+        });
     }
 
     close() {
@@ -102,7 +125,7 @@ class Ethereum {
 
     request(payload: { method: any; params: any; from: any }) {
         return new Promise((resolve, reject) => {
-            log('Request', payload);
+            logger('Request', payload);
 
             const showPrompt = (message: string) => {
                 if (window.ethereum.opened === false) {
@@ -123,37 +146,29 @@ class Ethereum {
                 }
             };
 
-            window.addEventListener(
-                'message',
-                (event) => {
-                    const { method, params } = event.data;
-
-                    log('Received message', method, params, {
-                        awaiting: payload.method
-                    });
-
-                    if (
-                        payload.method === 'eth_requestAccounts' &&
-                        method === 'walletConnected'
-                    ) {
-                        resolve([params.address]);
-                        window.ethereum.close();
-                    }
-                },
-                { once: true }
-            );
-
             switch (payload.method) {
                 case `eth_requestAccounts`:
                     showPrompt(`Open the wallet extension to connect`);
+                    this.waitingFor.walletConnected = resolve;
                     break;
+                case `eth_sign`:
+                case `personal_sign`:
                 case `eth_signTypedData_v3`:
-                    showPrompt(`Open the wallet extension to sign`);
-                    resolve(true);
+                case `eth_signTypedData_v4`:
+                    // showPrompt(`Open the wallet extension to sign`);
+                    sendToContent({
+                        method: 'sign',
+                        params: {
+                            method: payload.method,
+                            address: payload.params[0],
+                            data: payload.params[1]
+                        }
+                    });
+                    this.waitingFor.sign = resolve;
                     break;
                 default:
                     // * Invalid or unimplemented method
-                    log(`Invalid or unimplemented method`, payload.method);
+                    logger(`Invalid or unimplemented method`, payload.method);
                     resolve(false);
             }
         });
@@ -162,18 +177,8 @@ class Ethereum {
 
 // MARK: - Export
 
-(window as any).ethereum = new Ethereum();
-
-export const inject = () => {
-    const $injection = document.createElement('script');
-    $injection.setAttribute('type', 'text/javascript');
-    $injection.setAttribute('async', 'false');
-    $injection.setAttribute('src', browser.runtime.getURL('ethereum/index.js'));
-    document.body.insertBefore($injection, document.body.firstChild);
-
-    log('injected');
-};
-
-log(`loaded`);
-
-export default Ethereum;
+if (!window.browser) {
+    // Injected script is being
+    (window as any).ethereum = new Ethereum();
+    logger(`loaded`);
+}

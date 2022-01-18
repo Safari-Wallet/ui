@@ -157,6 +157,7 @@ type Messengers = {
     background: typeof getBackgroundMessenger;
     popup: typeof getPopupMessenger;
     content: typeof getContentMessenger;
+    ethereum: typeof getEthereumMessenger;
 };
 
 type MessengerReturn<O extends keyof Messengers> = ReturnType<Messengers[O]>;
@@ -176,6 +177,10 @@ export const getMessenger = <O extends keyof Messengers>(
 
     if (origin === 'content') {
         return getContentMessenger(params as any) as MessengerReturn<O>;
+    }
+
+    if (origin === 'ethereum') {
+        return getEthereumMessenger(params as any) as MessengerReturn<O>;
     }
 
     throw new Error(`Unknown origin: ${origin}`);
@@ -267,4 +272,14 @@ export const getContentMessenger = ({
         sendToEthereumJs,
         sendToBackground
     };
+};
+
+export const getEthereumMessenger = ({ logger }: { logger: Logger }) => {
+    const sendToContent = <M extends Method>({
+        method,
+        params
+    }: MessageWithoutDestination<M>) =>
+        getSendWindowMessage(logger)('content', method, params);
+
+    return { sendToContent };
 };
