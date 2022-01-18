@@ -281,7 +281,6 @@
 		3D216A1427539F4700620BB9 /* TransactionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionType.swift; sourceTree = "<group>"; };
 		3D97705E273CD4AE0014CAC7 /* TransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionService.swift; sourceTree = "<group>"; };
 		3DACED592751D5B2004050B7 /* keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keys.swift; sourceTree = "<group>"; };
-		3DB6155A2794E77600816253 /* core */ = {isa = PBXFileReference; lastKnownFileType = folder; name = core; path = ../core; sourceTree = "<group>"; };
 		3DB6155B2797002000816253 /* Sequence+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Async.swift"; sourceTree = "<group>"; };
 		3DEAA239275DAB4200EB8370 /* ContractInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ContractInfo.plist; sourceTree = "<group>"; };
 		3DFFFBA8275C57ED00056A69 /* Contract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contract.swift; sourceTree = "<group>"; };
@@ -388,7 +387,6 @@
 			children = (
 				F8ABEEE227124C5D007F7D11 /* Wallet Extension (iOS).entitlements */,
 				F8ABEEE127124C30007F7D11 /* Wallet (iOS).entitlements */,
-				3DB6155A2794E77600816253 /* core */,
 				F8ABEF3A271297A3007F7D11 /* Shared (App and Extension) */,
 				0A0E1E84270687AA00061EA6 /* Shared (App) */,
 				0A0E1E9E270687AE00061EA6 /* iOS (App) */,
