@@ -39,12 +39,8 @@
 		0A0E1EE8270687AE00061EA6 /* popup.js in Resources */ = {isa = PBXBuildFile; fileRef = 0A0E1E97270687AE00061EA6 /* popup.js */; };
 		0A8BB799272E729200DFC647 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8BB798272E729200DFC647 /* Transaction.swift */; };
 		0A8BB79A272E729200DFC647 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8BB798272E729200DFC647 /* Transaction.swift */; };
-		3D1CE8C52793D60F00A2FE48 /* ENSContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1CE8C42793D60F00A2FE48 /* ENSContract.swift */; };
-		3D1CE8C62793D60F00A2FE48 /* ENSContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1CE8C42793D60F00A2FE48 /* ENSContract.swift */; };
 		3D216A132753246600620BB9 /* TransactionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D216A122753246600620BB9 /* TransactionRowView.swift */; };
 		3D216A1527539F4700620BB9 /* TransactionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D216A1427539F4700620BB9 /* TransactionType.swift */; };
-		3D4CD963279170AE0032C583 /* ENSService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4CD962279170AE0032C583 /* ENSService.swift */; };
-		3D4CD964279170DB0032C583 /* ENSService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4CD962279170AE0032C583 /* ENSService.swift */; };
 		3D97705F273CD4AE0014CAC7 /* TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D97705E273CD4AE0014CAC7 /* TransactionService.swift */; };
 		3D977060273CEEA80014CAC7 /* TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D97705E273CD4AE0014CAC7 /* TransactionService.swift */; };
 		3DACED5A2751D5B2004050B7 /* keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DACED592751D5B2004050B7 /* keys.swift */; };
@@ -197,10 +193,6 @@
 		F8C02DF22787CF5800B7F28D /* ExtensionTutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C02DF02787CF5800B7F28D /* ExtensionTutorialView.swift */; };
 		F8C02DF42788B1E000B7F28D /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C02DF32788B1E000B7F28D /* Color.swift */; };
 		F8C02DF52788B1E000B7F28D /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C02DF32788B1E000B7F28D /* Color.swift */; };
-		F8CABCBA27869C41009F2F91 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CABCB927869C41009F2F91 /* Network.swift */; };
-		F8CABCBB27869C41009F2F91 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CABCB927869C41009F2F91 /* Network.swift */; };
-		F8CABCBC27869C41009F2F91 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CABCB927869C41009F2F91 /* Network.swift */; };
-		F8CABCBD27869C41009F2F91 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CABCB927869C41009F2F91 /* Network.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -281,12 +273,11 @@
 		0A8BB798272E729200DFC647 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		0AE54717270694EB00C4A81F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0AE5471D27091C5800C4A81F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		3D1CE8C42793D60F00A2FE48 /* ENSContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENSContract.swift; sourceTree = "<group>"; };
 		3D216A122753246600620BB9 /* TransactionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRowView.swift; sourceTree = "<group>"; };
 		3D216A1427539F4700620BB9 /* TransactionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionType.swift; sourceTree = "<group>"; };
-		3D4CD962279170AE0032C583 /* ENSService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ENSService.swift; sourceTree = "<group>"; };
 		3D97705E273CD4AE0014CAC7 /* TransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionService.swift; sourceTree = "<group>"; };
 		3DACED592751D5B2004050B7 /* keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keys.swift; sourceTree = "<group>"; };
+		3DB6155A2794E77600816253 /* core */ = {isa = PBXFileReference; lastKnownFileType = folder; name = core; path = ../core; sourceTree = "<group>"; };
 		3DEAA239275DAB4200EB8370 /* ContractInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ContractInfo.plist; sourceTree = "<group>"; };
 		3DFFFBA8275C57ED00056A69 /* Contract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contract.swift; sourceTree = "<group>"; };
 		3DFFFBAA275C588800056A69 /* ContractService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractService.swift; sourceTree = "<group>"; };
@@ -344,7 +335,6 @@
 		F8AD21EE2717B4B40059D754 /* RestoreWalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreWalletView.swift; sourceTree = "<group>"; };
 		F8C02DF02787CF5800B7F28D /* ExtensionTutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionTutorialView.swift; sourceTree = "<group>"; };
 		F8C02DF32788B1E000B7F28D /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		F8CABCB927869C41009F2F91 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -393,6 +383,7 @@
 			children = (
 				F8ABEEE227124C5D007F7D11 /* Wallet Extension (iOS).entitlements */,
 				F8ABEEE127124C30007F7D11 /* Wallet (iOS).entitlements */,
+				3DB6155A2794E77600816253 /* core */,
 				F8ABEF3A271297A3007F7D11 /* Shared (App and Extension) */,
 				0A0E1E84270687AA00061EA6 /* Shared (App) */,
 				0A0E1E9E270687AE00061EA6 /* iOS (App) */,
@@ -517,8 +508,6 @@
 		3D1CE8C32793D5FF00A2FE48 /* ENS */ = {
 			isa = PBXGroup;
 			children = (
-				3D1CE8C42793D60F00A2FE48 /* ENSContract.swift */,
-				3D4CD962279170AE0032C583 /* ENSService.swift */,
 			);
 			path = ENS;
 			sourceTree = "<group>";
@@ -690,7 +679,6 @@
 				F8ABEF41271389D9007F7D11 /* URL.swift */,
 				F8ABEF46271389F5007F7D11 /* NSFileCoordinator.swift */,
 				F8ABEF4B27138E1D007F7D11 /* String.swift */,
-				F8CABCB927869C41009F2F91 /* Network.swift */,
 				F8C02DF32788B1E000B7F28D /* Color.swift */,
 			);
 			path = Extensions;
@@ -1023,11 +1011,9 @@
 				F8AD21E92717B3420059D754 /* CreatePasswordView.swift in Sources */,
 				F8ABEECD27124A8C007F7D11 /* BiometricsAuthentication.swift in Sources */,
 				F846FDC5278503220044815B /* AddViewOnlyView.swift in Sources */,
-				F8CABCBA27869C41009F2F91 /* Network.swift in Sources */,
 				3D216A132753246600620BB9 /* TransactionRowView.swift in Sources */,
 				F8ABEF3227125EFA007F7D11 /* WalletApp.swift in Sources */,
 				F8ABEF42271389D9007F7D11 /* URL.swift in Sources */,
-				3D1CE8C52793D60F00A2FE48 /* ENSContract.swift in Sources */,
 				3DFFFBA9275C57ED00056A69 /* Contract.swift in Sources */,
 				F8C02DF12787CF5800B7F28D /* ExtensionTutorialView.swift in Sources */,
 				F846FDC1278502C80044815B /* ConnectNanoSView.swift in Sources */,
@@ -1050,7 +1036,6 @@
 				F8ABEED927124A8C007F7D11 /* WalletError.swift in Sources */,
 				F846FDBE278502C00044815B /* ConnectTrezorView.swift in Sources */,
 				F8321B5927169A1D00F12938 /* OnboardingView.swift in Sources */,
-				3D4CD963279170AE0032C583 /* ENSService.swift in Sources */,
 				F82D04AA2781347A009C1725 /* KeychainPasswordItem+Convenience.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1086,11 +1071,9 @@
 				F8AD21EA2717B3420059D754 /* CreatePasswordView.swift in Sources */,
 				F8ABEED227124A8C007F7D11 /* FileObserver.swift in Sources */,
 				F846FDC6278503220044815B /* AddViewOnlyView.swift in Sources */,
-				F8CABCBB27869C41009F2F91 /* Network.swift in Sources */,
 				F8ABEEDE27124A8C007F7D11 /* KeychainPasswordItem.swift in Sources */,
 				F8ABEF43271389D9007F7D11 /* URL.swift in Sources */,
 				F8ABEED627124A8C007F7D11 /* SharedDocument.swift in Sources */,
-				3D1CE8C62793D60F00A2FE48 /* ENSContract.swift in Sources */,
 				F8ABEF3627125F16007F7D11 /* ContentView.swift in Sources */,
 				F8C02DF22787CF5800B7F28D /* ExtensionTutorialView.swift in Sources */,
 				F846FDC2278502C80044815B /* ConnectNanoSView.swift in Sources */,
@@ -1113,7 +1096,6 @@
 				F8ABEEDA27124A8C007F7D11 /* WalletError.swift in Sources */,
 				F846FDBF278502C00044815B /* ConnectTrezorView.swift in Sources */,
 				F8321B5A27176EBE00F12938 /* OnboardingView.swift in Sources */,
-				3D4CD964279170DB0032C583 /* ENSService.swift in Sources */,
 				F82D04AB2781347A009C1725 /* KeychainPasswordItem+Convenience.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1127,7 +1109,6 @@
 				0A0E1ED7270687AE00061EA6 /* SafariWebExtensionHandler.swift in Sources */,
 				F8ABEED327124A8C007F7D11 /* FileObserver.swift in Sources */,
 				F82D04AC2781347A009C1725 /* KeychainPasswordItem+Convenience.swift in Sources */,
-				F8CABCBC27869C41009F2F91 /* Network.swift in Sources */,
 				F8ABEF4E27138E1D007F7D11 /* String.swift in Sources */,
 				F82D04A72780335D009C1725 /* Keystore.swift in Sources */,
 				3DFFFBB0275C5F1E00056A69 /* ContractService.swift in Sources */,
@@ -1155,7 +1136,6 @@
 				0A0E1ED8270687AE00061EA6 /* SafariWebExtensionHandler.swift in Sources */,
 				F8ABEED427124A8C007F7D11 /* FileObserver.swift in Sources */,
 				F82D04AD2781347A009C1725 /* KeychainPasswordItem+Convenience.swift in Sources */,
-				F8CABCBD27869C41009F2F91 /* Network.swift in Sources */,
 				F8ABEF4F27138E1D007F7D11 /* String.swift in Sources */,
 				F82D04A82780335D009C1725 /* Keystore.swift in Sources */,
 				3DFFFBB1275C5F1E00056A69 /* ContractService.swift in Sources */,
