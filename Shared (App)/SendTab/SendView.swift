@@ -63,13 +63,12 @@ struct SendView: View {
 
             Button("Pay") {
                 showConfirmPopup = true
-                print("dc: \(Decimal(string: amount))")
             }
             .disabled(amount.count == 0 || Decimal(string: amount) == nil)
             .sheet(isPresented: $showConfirmPopup) {
                 SendConfirmView(amount: "\(amount) \(userSettings.network.symbol.uppercased())")
                     .onDisappear {
-                            //
+                            // do something
                     }
                 }
             .task {
@@ -79,52 +78,43 @@ struct SendView: View {
                     assert(Thread.isMainThread)
                     print("task")
                 } catch {
-                    print("🚨 \(error.localizedDescription)")
+                    print("🚨 view model setup error: \(error.localizedDescription)")
                 }
             }
-            .onChange(of: userSettings.bundle?.defaultAddressIndex) { _ in
+            .onChange(of: userSettings.address?.addressString) { _ in
                 Task {
                     try await viewModel.setup(userSettings: userSettings)
                 }
-            }
+            }            
         }
     }
     
     @MainActor
     class ViewModel: ObservableObject {
         
-        @Published var balance: String = "" {
-            didSet {
-                print("balance was set: \(balance)")
-                assert(Thread.isMainThread)
-            }
-        }
+        @Published var userSettings: UserSettings? = nil
+        
+        @Published var balance: String = ""
         
         private var client: AlchemyClient = AlchemyClient(network: .ethereum, key: ApiKeys.alchemyMainnet)! // TODO: Init can only fail if the URL is invalid, which shouldn't happen runtime. Refactor the client init.
-
-//        @MainActor
+        
         fileprivate func setup(userSettings: UserSettings) async throws {
             
             // TODO: move this to APIKeys?
             let key: String
             if case .ropsten = userSettings.network {
                 key = ApiKeys.alchemyRopsten
-                print("ropsten")
             } else {
                 key = ApiKeys.alchemyMainnet
-                print("main")
             }
             self.client = AlchemyClient(network: userSettings.network, key: key)!
             
             if let addressString = userSettings.address?.addressString, let ethBalance = try await client.ethGetBalance(address: addressString).etherValue {
                 self.balance = ethBalance.description
-                print("Balance for \(addressString): \(ethBalance.description)")
-                assert(Thread.isMainThread)
             } else {
                 self.balance = "(ERROR)"
             }
         }
-        
     }
 }
 
