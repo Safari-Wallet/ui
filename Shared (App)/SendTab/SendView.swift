@@ -92,8 +92,6 @@ struct SendView: View {
     @MainActor
     class ViewModel: ObservableObject {
         
-        @Published var userSettings: UserSettings? = nil
-        
         @Published var balance: String = ""
         
         private var client: AlchemyClient = AlchemyClient(network: .ethereum, key: ApiKeys.alchemyMainnet)! // TODO: Init can only fail if the URL is invalid, which shouldn't happen runtime. Refactor the client init.
