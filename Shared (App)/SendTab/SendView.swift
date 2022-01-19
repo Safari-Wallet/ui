@@ -12,7 +12,8 @@ import SafariWalletCore
 struct SendView: View {
     
     @EnvironmentObject var userSettings: UserSettings
-    @StateObject var viewModel = ViewModel()
+    @StateObject var viewModel = ViewModel()  // Will be kept and reused
+//    @ObservedObject var viewModel: ViewModel    // Will be recreated
     @State var showConfirmPopup = false
     @State var to: String = ""
     @State var amount: String = ""
@@ -85,7 +86,7 @@ struct SendView: View {
                 Task {
                     try await viewModel.setup(userSettings: userSettings)
                 }
-            }            
+            }
         }
     }
     
