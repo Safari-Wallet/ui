@@ -33,7 +33,15 @@ struct ContentView: View {
 
                 // FIXME: TransactionView should use userSettings
 //                TransactionsView(viewModel: TransactionsListViewModel(chain: "1", address: "0x225e9b54f41f44f42150b6aaa730da5f2d23faf2", currency: "USD", symbol: "$"))
-                TransactionsView(viewModel: TransactionsListViewModel(chain: "\(userSettings.network.chainID)", address: userSettings.address?.addressString ?? "0x0", currency: "USD", symbol: "$"))
+                TransactionsView(
+                    viewModel: TransactionsListViewModel(
+                        chain: "\(userSettings.network.chainID)",
+                        address: userSettings.address?.addressString ?? "0x0",
+                        currency: "USD",
+                        symbol: "$",
+                        userSettings: userSettings
+                    )
+                )
                     .tabItem { Label("Transactions", systemImage: "repeat") }
                 
                 ExtensionTutorialView()

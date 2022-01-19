@@ -66,10 +66,15 @@ struct TransactionsView: View {
     
     struct TransactionsView_Previews: PreviewProvider {
         static var previews: some View {
-            TransactionsView(viewModel: TransactionsListViewModel(chain: "1",
-                                                                  address: "ric.eth",
-                                                                  currency: "USD",
-                                                                  symbol: "$"))
+            TransactionsView(
+                viewModel: TransactionsListViewModel(
+                    chain: "1",
+                    address: "ric.eth",
+                    currency: "USD",
+                    symbol: "$",
+                    userSettings: UserSettings()
+                )
+            )
         }
     }
 }

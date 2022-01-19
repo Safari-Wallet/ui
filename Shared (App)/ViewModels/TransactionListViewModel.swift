@@ -5,9 +5,10 @@
 //  Created by Nathan Clark on 10/30/21.
 //
 
+import Combine
 import Foundation
-import SafariWalletCore
 import MEWwalletKit
+import SafariWalletCore
 
 final class TransactionsListViewModel: ObservableObject {
     
@@ -23,6 +24,7 @@ final class TransactionsListViewModel: ObservableObject {
     private var transactions: [TransactionActivity] = []
     // TODO: Implement contract persistence
     private var contracts: [String: Contract] = [:]
+    private var cancellables = Set<AnyCancellable>()
     
     // TODO: Add to user defaults
     private let chain: String
@@ -30,6 +32,7 @@ final class TransactionsListViewModel: ObservableObject {
     private let currency: String
     private let symbol: String
     
+    private let userSettings: UserSettings
     private let txService: TransactionFetchable
     private let contractService: ContractFetchable
     
@@ -37,16 +40,18 @@ final class TransactionsListViewModel: ObservableObject {
          address: String,
          currency: String,
          symbol: String,
+         userSettings: UserSettings,
          txService: TransactionFetchable = TransactionService(),
-         contractService: ContractFetchable = ContractService()
-    ) {
+         contractService: ContractFetchable = ContractService()) {
         self.chain = chain
         self.address = address
         self.currency = currency
         self.symbol = symbol
+        self.userSettings = userSettings
         self.txService = txService
         self.contractService = contractService
         fetchTransactions()
+        listenTo(userSettings: userSettings)
     }
     
     func fetchTransactions() {
@@ -121,6 +126,16 @@ final class TransactionsListViewModel: ObservableObject {
             }
             return contracts
         }
+    }
+    
+    private func listenTo(userSettings: UserSettings) {
+        Publishers.CombineLatest(userSettings.$network, userSettings.$address)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] (network, address) in
+                print(network)
+                print(address)
+            }
+            .store(in: &cancellables)
     }
     
     private func toViewModel(_ tx: TransactionActivity) -> TransactionViewModel {
