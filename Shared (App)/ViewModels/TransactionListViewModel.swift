@@ -27,7 +27,7 @@ final class TransactionsListViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     // TODO: Add to user defaults
-    private let chain: String
+    private let network: Network
     private let address: String
     private let currency: String
     private let symbol: String
@@ -36,14 +36,14 @@ final class TransactionsListViewModel: ObservableObject {
     private let txService: TransactionFetchable
     private let contractService: ContractFetchable
     
-    init(chain: String,
+    init(network: Network,
          address: String,
          currency: String,
          symbol: String,
          userSettings: UserSettings,
          txService: TransactionFetchable = TransactionService(),
          contractService: ContractFetchable = ContractService()) {
-        self.chain = chain
+        self.network = network
         self.address = address
         self.currency = currency
         self.symbol = symbol
@@ -59,7 +59,6 @@ final class TransactionsListViewModel: ObservableObject {
         isFetching = true
         Task {
             do {
-                let network: Network = (chain == "3" ? .ropsten : .ethereum) // FIXME: ;)
                 let fetchedTransactions = try await self.txService.fetchTransactions(network: network, address: address)
                 
                 let contracts = await fetchContracts(fromTxs: fetchedTransactions)
@@ -71,7 +70,7 @@ final class TransactionsListViewModel: ObservableObject {
                 
                 isFetching = false
             } catch let error {
-                //TODO: Error handling / Define error cases and appropriate error messages
+            //TODO: Error handling / Define error cases and appropriate error messages
                 errorMessage = error.localizedDescription
                 showError = true
                 isFetching = false
@@ -131,6 +130,7 @@ final class TransactionsListViewModel: ObservableObject {
     private func listenTo(userSettings: UserSettings) {
         Publishers.CombineLatest(userSettings.$network, userSettings.$address)
             .receive(on: DispatchQueue.main)
+            .dropFirst()
             .sink { [weak self] (network, address) in
                 print(network)
                 print(address)

@@ -68,7 +68,7 @@ struct TransactionsView: View {
         static var previews: some View {
             TransactionsView(
                 viewModel: TransactionsListViewModel(
-                    chain: "1",
+                    network: .ethereum,
                     address: "ric.eth",
                     currency: "USD",
                     symbol: "$",
