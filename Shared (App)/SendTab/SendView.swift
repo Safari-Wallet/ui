@@ -73,20 +73,14 @@ struct SendView: View {
                     }
                 }
             .task {
-                do {
-                    assert(Thread.isMainThread)
-                    try await viewModel.setup(userSettings: self.userSettings)
-                    assert(Thread.isMainThread)
-                    print("task")
-                } catch {
-                    print("🚨 view model setup error: \(error.localizedDescription)")
-                }
+                await viewModel.setup(userSettings: self.userSettings)
             }
             .onChange(of: userSettings.address?.addressString) { _ in
                 Task {
-                    try await viewModel.setup(userSettings: userSettings)
+                    await viewModel.setup(userSettings: userSettings)
                 }
             }
+            .alert(viewModel.error?.localizedDescription ?? "Unknown error occurred", isPresented: $viewModel.showError) { }
         }
     }
     
@@ -95,9 +89,12 @@ struct SendView: View {
         
         @Published var balance: String = ""
         
+        @Published var showError: Bool = false
+        var error: Error?
+        
         private var client: AlchemyClient = AlchemyClient(network: .ethereum, key: ApiKeys.alchemyMainnet)! // TODO: Init can only fail if the URL is invalid, which shouldn't happen runtime. Refactor the client init.
         
-        fileprivate func setup(userSettings: UserSettings) async throws {
+        fileprivate func setup(userSettings: UserSettings) async {
             
             // TODO: move this to APIKeys?
             let key: String
@@ -107,11 +104,19 @@ struct SendView: View {
                 key = ApiKeys.alchemyMainnet
             }
             self.client = AlchemyClient(network: userSettings.network, key: key)!
-            
-            if let addressString = userSettings.address?.addressString, let ethBalance = try await client.ethGetBalance(address: addressString).etherValue {
-                self.balance = ethBalance.description
-            } else {
-                self.balance = "(ERROR)"
+ 
+            do {
+                if let addressString = userSettings.address?.addressString, let ethBalance = try await client.ethGetBalance(address: addressString).etherValue {
+                    self.balance = ethBalance.description
+                } else {
+                    self.balance = "(ERROR)"
+                }
+            } catch URLError.cancelled {
+                // ignore this error
+            } catch {
+                print(error)
+                self.error = error
+                self.showError = true
             }
         }
     }

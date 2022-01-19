@@ -15,7 +15,7 @@ enum WalletError: Error {
     case passwordRequired
     case addressNotFound(String)
     case addressGenerationError
-    case AddressFileError
+    case addressFileError
     case seedError
     case noDefaultWalletSet
     case noDefaultAddressSet
@@ -49,7 +49,7 @@ extension WalletError: LocalizedError {
             return "No account found for address \(address)"
         case .addressGenerationError:
             return "Error generating address"
-        case .AddressFileError:
+        case .addressFileError:
             return "Error opening address file"
         case .seedError:
             return "Invalid recovery phrase"
