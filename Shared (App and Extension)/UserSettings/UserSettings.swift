@@ -9,7 +9,7 @@ import Foundation
 import MEWwalletKit
 import SafariWalletCore
 
-@MainActor
+//@MainActor
 final class UserSettings: ObservableObject {
     
     @Published private (set) var address: AddressItem?
