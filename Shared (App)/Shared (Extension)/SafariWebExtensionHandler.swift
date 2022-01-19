@@ -11,11 +11,11 @@ import os.log
 
 let SFExtensionMessageKey = "message"
 let SFSFExtensionResponseErrorKey = "error"
- 
+let SFSFExtensionResponseFullErrorKey = "fullError"
+
 class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
-    
-//    let userSettings = UserSettings()
     let logger = Logger()
+    let userSettings = UserSettings()
     
     func beginRequest(with context: NSExtensionContext) {
         
@@ -24,48 +24,51 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
         Task {
             let response = NSExtensionItem()
             defer { context.completeRequest(returningItems: [response], completionHandler: nil) }
-
+            
             // Sanity check
+            
             let item = context.inputItems[0] as! NSExtensionItem
             guard let message = item.userInfo?[SFExtensionMessageKey] else {
-                response.userInfo = errorResponse(error: "No message key in message or message is not a string.\(String(describing: item.userInfo))")
+                response.userInfo = errorResponse(error: "No message key in message or message is not a string.\(String(describing: item.userInfo))", fullError: nil)
                 logger.critical("Safari-wallet SafariWebExtensionHandler: No message key in message")
                 return
             }
-                        
+            
             logger.critical("Safari-wallet SafariWebExtensionHandler: Received message from browser.runtime.sendNativeMessage: \(String(describing: message), privacy: .public)")
             
-            // Parse message
-            do {
-                let returnValue = try await handle(message: message)
-                response.userInfo = [SFExtensionMessageKey: returnValue]
-                logger.critical("Safari-wallet SafariWebExtensionHandler received \(String(describing: returnValue), privacy: .public)")
-            } catch {
-                response.userInfo = errorResponse(error: error.localizedDescription)
-                logger.critical("Safari-wallet SafariWebExtensionHandler error: \(error.localizedDescription, privacy: .public))")
+            // Validate incoming message
+            
+            if let message = message as? [String: Any] {
+                guard (message["method"] as? String) != nil else { throw WalletError.noMethod }
+                guard (NativeMessageMethod.init(rawValue: message["method"] as! String)) != nil else { throw WalletError.invalidInput("Unknown method \(String(describing: message["method"]))") }
+                guard (message["params"] as? [String: Any]) != nil else { throw WalletError.invalidInput("Missing params property")}
+                
+                do {
+                    let returnValue = try await handle(message)
+                    response.userInfo = [SFExtensionMessageKey: returnValue]
+                    logger.critical("Safari-wallet SafariWebExtensionHandler received \(String(describing: returnValue), privacy: .public)")
+                } catch {
+                    response.userInfo = errorResponse(error: error.localizedDescription, fullError: "\(error)")
+                    logger.critical("Safari-wallet SafariWebExtensionHandler error: \(error.localizedDescription, privacy: .public)")
+                }
             }
         }
     }
     
-    fileprivate func errorResponse(error: String) -> [String: Any] {
-        return [SFExtensionMessageKey: [SFSFExtensionResponseErrorKey: error]]
+    fileprivate func errorResponse(error: String, fullError: String?) -> [String: Any] {
+        return [
+            SFExtensionMessageKey: [
+                SFSFExtensionResponseErrorKey: error,
+                SFSFExtensionResponseFullErrorKey: fullError
+            ]
+        ]
     }
 
     // MARK: - Web3 Message handling
 
-    func handle(message: Any) async throws -> Any {
-        return Data()
-//        let providerAPI = ProviderAPI(delegate: userSettings)
-//        // Parse method and params
-//        if let message = message as? String {
-//            return try await providerAPI.parseMessage(method: message, params: nil)
-//        } else if let message = message as? [String: Any] {
-//            guard let method = message["method"] as? String else { throw WalletError.noMethod }
-//            let params = message["params"]
-//            logger.critical("Safari-wallet SafariWebExtensionHandler: Received object with method \(method, privacy: .public) and params \(String(describing: params), privacy: .public)")
-//            return try await providerAPI.parseMessage(method: method, params: params)
-//        } else {
-//            throw WalletError.invalidInput(nil)
-//        }
+    // TODO: can we be more explicit about the params errors?
+    func handle(_ message: [String: Any]) async throws -> Any {
+        let parsedParams = try parseMessageParams(message: message)
+        return try await parsedParams.execute(with: userSettings)
     }
 }
