@@ -14,6 +14,7 @@ protocol TransactionFetchable {
 
 final class TransactionService: TransactionFetchable {
     
+    // TODO: move to view model
     private var currentPage = 0
     private let limit = 50
     private let zerionClient = ZerionClient(apiKey: ApiKeys.zerion)

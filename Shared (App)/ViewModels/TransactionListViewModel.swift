@@ -26,9 +26,9 @@ final class TransactionsListViewModel: ObservableObject {
     private var contracts: [String: Contract] = [:]
     private var cancellables = Set<AnyCancellable>()
     
+    private var network: Network
+    private var address: String
     // TODO: Add to user defaults
-    private let network: Network
-    private let address: String
     private let currency: String
     private let symbol: String
     
@@ -132,10 +132,19 @@ final class TransactionsListViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink { [weak self] (network, address) in
-                print(network)
-                print(address)
+                guard let self = self else { return }
+                self.network = network
+                self.address = address?.addressString ?? "0x0"
+                self.reset()
+                self.fetchTransactions()
             }
             .store(in: &cancellables)
+    }
+    
+    private func reset() {
+        transactions = []
+        contracts = [:]
+        viewModels = []
     }
     
     private func toViewModel(_ tx: TransactionActivity) -> TransactionViewModel {
