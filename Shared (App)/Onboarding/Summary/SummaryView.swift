@@ -25,10 +25,10 @@ struct SummaryView: View {
             Spacer()
         
             HStack(spacing: 8) {
-                Button("Skip") {
-                    state = .dismiss
-                }
-                Spacer()
+//                Button("Skip") {
+//                    state = .dismiss
+//                }
+//                Spacer()
                 Button("Continue") {
                     // progress to next tab
                     state = .appIntro

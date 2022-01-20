@@ -13,25 +13,27 @@ struct Intro1View: View {
     @Binding var tabIndex: Int
     
     var body: some View {
+        
         VStack {
-            Text("Safari extension installation tutorial part 1")
-                .font(.title)
             
-            Spacer()
+            ExtensionTutorialView()
             
-            Text("placeholder for image")
-            Spacer()
-            
-            HStack(spacing: 8) {
-                Button("Previous") {
-                    
-                }.disabled(true)
-                Spacer()
-                Button("Next") {
-                    tabIndex += 1
+            HStack {
+                Button {
+                    state = .dismiss
+                } label: {
+                    HStack {
+                        Spacer()
+                        Text("I will do this later")
+                        Spacer()
+                    }
+                    .padding(.vertical, 5)
                 }
+                .foregroundColor(.white)
+                .tint(.extensionBlue)
+                .buttonStyle(.bordered)
+                .padding(.horizontal, 20)
             }
-            .padding(.bottom, 32)
         }
         .padding()        
     }

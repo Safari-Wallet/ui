@@ -1,4 +1,4 @@
-import { $ } from '../../utils';
+import { $, fromHex } from '../../utils';
 import { chainId, chains } from '../popup';
 import { View } from '../types';
 import { closeWindow } from '../utils';
@@ -18,7 +18,7 @@ const view: View<{
         </div>
         <div class="field">
             <label class="field__label" for="balance">ETH Balance</label>
-            <input id="balance" class="field__input" type="text" value="${balance} ${chains[chainId].gasToken}" disabled>
+            <input id="balance" class="field__input" type="text" value="${fromHex(balance) / (10 ** 18)} ${chains[chainId].gasToken}" disabled>
         </div>
         <div class="flex">
             <button id="cancel" class="button button--secondary">Cancel</button>
