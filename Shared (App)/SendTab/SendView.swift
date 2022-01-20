@@ -5,6 +5,8 @@
 //  Created by Ronald Mannak on 1/12/22.
 //
 
+import Combine
+import MEWwalletKit
 import SwiftUI
 import SafariWalletCore
 //import UniformTypeIdentifiers
@@ -15,7 +17,6 @@ struct SendView: View {
     @StateObject var viewModel = ViewModel()  // Will be kept and reused
 //    @ObservedObject var viewModel: ViewModel    // Will be recreated
     @State var showConfirmPopup = false
-    @State var to: String = ""
     @State var amount: String = ""
     @State var assetIndex: Int = 0
     
@@ -53,7 +54,10 @@ struct SendView: View {
             
             // MARK: - To
             Section(header: Text("TO")) {
-                TextField("Address or ENS name", text: $to)
+                HStack(spacing: 5) {
+                    TextField("Address or ENS name", text: $viewModel.toAddress)
+                    toAddressIndicator
+                }
                 
                 HStack {
                     Text("Amount")
@@ -84,15 +88,52 @@ struct SendView: View {
         }
     }
     
+    @ViewBuilder
+    var toAddressIndicator: some View {
+        switch viewModel.toAddressState {
+        case .loading:
+            ProgressView()
+        case .valid:
+            Image(systemName: "checkmark.circle.fill")
+                .renderingMode(.template)
+                .foregroundColor(.green)
+        case .invalid:
+            Image(systemName: "xmark.circle.fill")
+                .renderingMode(.template)
+                .foregroundColor(.red)
+        default:
+            EmptyView()
+        }
+    }
+    
     @MainActor
     class ViewModel: ObservableObject {
         
+        enum ToAddressState {
+            case loading
+            case valid
+            case invalid
+            case initial
+        }
+        
         @Published var balance: String = ""
+        
+        @Published var toAddress: String = ""
+        var toHexAddress: String?
+        
+        @Published var toAddressState: ToAddressState = .initial
         
         @Published var showError: Bool = false
         var error: Error?
         
+        private var cancellables = Set<AnyCancellable>()
+        
         private var client: AlchemyClient = AlchemyClient(network: .ethereum, key: ApiKeys.alchemyMainnet)! // TODO: Init can only fail if the URL is invalid, which shouldn't happen runtime. Refactor the client init.
+        private let ensResolver: ENSResolvable = ENSResolver(network: .ethereum, provider: .alchemy(key: ApiKeys.alchemyMainnet))
+        
+        init() {
+            listenToAddressChange()
+        }
         
         fileprivate func setup(userSettings: UserSettings) async {
             
@@ -117,6 +158,42 @@ struct SendView: View {
                 print(error)
                 self.error = error
                 self.showError = true
+            }
+        }
+        
+        func listenToAddressChange() {
+            $toAddress
+                .dropFirst()
+                .debounce(for: .seconds(0.65), scheduler: RunLoop.main)
+                .sink { [weak self] toAddress in
+                    guard let self = self else { return }
+                    self.handle(toAddress: toAddress)
+                }
+                .store(in: &cancellables)
+        }
+        
+        private func handle(toAddress: String) {
+            
+            if toAddress.contains(".") { // improve ens validation
+                Task {
+                    do {
+                        self.toAddressState = .loading
+                        let address = try await self.ensResolver.resolve(ens: toAddress.lowercased())
+                        self.toHexAddress = address
+                        self.toAddressState = .valid
+                    } catch {
+                        self.error = ENSError.ensUnknown
+                        self.showError = true
+                        self.toAddressState = .invalid
+                    }
+                }
+            } else if let address = Address(ethereumAddress: toAddress) {
+                self.toHexAddress = address.address
+                self.toAddressState = .valid
+            } else if toAddress.isEmpty {
+                self.toAddressState = .initial
+            } else {
+                self.toAddressState = .invalid
             }
         }
     }
