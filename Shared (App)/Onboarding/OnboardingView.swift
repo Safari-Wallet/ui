@@ -75,19 +75,20 @@ struct OnboardingView: View {
                 
             } else if state == .appIntro {
 
+                Intro1View(state: $state, tabIndex: $tabIndex)
                 // Show app intro
-                TabView {
-                    Intro1View(state: $state, tabIndex: $tabIndex)
-                        .tag(0)
-                    Intro2View(state: $state, tabIndex: $tabIndex)
-                        .tag(1)
-                    Intro3View(state: $state, tabIndex: $tabIndex)
-                        .tag(2)
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .tabViewStyle(.page)
-                .indexViewStyle(.page(backgroundDisplayMode: .always))
-                .task { self.tabIndex = 0 }
+//                TabView {
+//                    Intro1View(state: $state, tabIndex: $tabIndex)
+//                        .tag(0)
+//                    Intro2View(state: $state, tabIndex: $tabIndex)
+//                        .tag(1)
+//                    Intro3View(state: $state, tabIndex: $tabIndex)
+//                        .tag(2)
+//                }
+//                .frame(maxWidth: .infinity, maxHeight: .infinity)
+//                .tabViewStyle(.page)
+//                .indexViewStyle(.page(backgroundDisplayMode: .always))
+//                .task { self.tabIndex = 0 }
             } else if state == .dismiss {
 
                 // Dismiss modal view
