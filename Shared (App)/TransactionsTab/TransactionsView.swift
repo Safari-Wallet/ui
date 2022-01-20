@@ -9,12 +9,13 @@ import SwiftUI
 
 struct TransactionsView: View {
     
-    @ObservedObject var viewModel: TransactionsListViewModel
+    @StateObject var viewModel: TransactionsListViewModel
     
     var body: some View {
         NavigationView {
             ZStack {
                 if viewModel.isFetching { ProgressView() }
+//                if viewModel.viewModels.isEmpty { Text("Looks empty 👻") }
                 VStack {
                     List {
                         ForEach(viewModel.viewModels) { tx in

@@ -32,6 +32,9 @@ final class TransactionsListViewModel: ObservableObject {
     private let currency: String
     private let symbol: String
     
+    private var currentPage = 0
+    private let limit = 50
+    
     private let userSettings: UserSettings
     private let txService: TransactionFetchable
     private let contractService: ContractFetchable
@@ -59,7 +62,12 @@ final class TransactionsListViewModel: ObservableObject {
         isFetching = true
         Task {
             do {
-                let fetchedTransactions = try await self.txService.fetchTransactions(network: network, address: address)
+                let fetchedTransactions = try await self.txService.fetchTransactions(
+                    network: network,
+                    address: address,
+                    offset: currentPage * limit,
+                    limit: limit
+                )
                 
                 let contracts = await fetchContracts(fromTxs: fetchedTransactions)
                 contracts.forEach { self.contracts[$0.address] = $0 }
@@ -68,6 +76,7 @@ final class TransactionsListViewModel: ObservableObject {
                 self.viewModels.append(contentsOf: viewModels)
                 self.transactions.append(contentsOf: fetchedTransactions)
                 
+                currentPage += 1
                 isFetching = false
             } catch let error {
             //TODO: Error handling / Define error cases and appropriate error messages
@@ -145,6 +154,7 @@ final class TransactionsListViewModel: ObservableObject {
         transactions = []
         contracts = [:]
         viewModels = []
+        currentPage = 0
     }
     
     private func toViewModel(_ tx: TransactionActivity) -> TransactionViewModel {
