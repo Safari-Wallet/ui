@@ -57,5 +57,7 @@ struct ApiKeys {
     static let infuraMainnet = "<YOUR KEY HERE>"
     static let covalent = "<YOUR KEY HERE>"
     static let unmarshal = "<YOUR KEY HERE>"
+    static let etherscan = "<YOUR KEY HERE>"
+    static let zerion = "Demo.ukEVQp6L5vfgxcz4sBke7XvS873GMYHy"
 }
 ```
