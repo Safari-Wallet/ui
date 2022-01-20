@@ -182,8 +182,6 @@ struct SendView: View {
                         self.toHexAddress = address
                         self.toAddressState = .valid
                     } catch {
-                        self.error = ENSError.ensUnknown
-                        self.showError = true
                         self.toAddressState = .invalid
                     }
                 }
