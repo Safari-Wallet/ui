@@ -44,3 +44,4 @@ extension UserSettings: SafariWalletCoreDelegate {
         return network
     }
 }
+

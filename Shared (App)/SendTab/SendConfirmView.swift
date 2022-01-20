@@ -8,13 +8,19 @@
 import SwiftUI
 
 struct SendConfirmView: View {
+    
+    let amount: String
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        Form {
+            Text("Sending \(amount)")
+        }
     }
 }
 
 struct SendConfirmView_Previews: PreviewProvider {
     static var previews: some View {
-        SendConfirmView()
+        SendConfirmView(amount: "1.0 ETH")
     }
 }

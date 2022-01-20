@@ -24,7 +24,7 @@
         "repositoryURL": "https://github.com/Safari-Wallet/core",
         "state": {
           "branch": "main",
-          "revision": "28ed63b6295dc07ade642727c028225e8e165902",
+          "revision": "bd38ad470568e6fdc34f4043c7bde78926fb5220",
           "version": null
         }
       },
@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/MyEtherWallet/mew-wallet-ios-kit",
         "state": {
           "branch": null,
-          "revision": "43d29973058047be9bcff95191334d42865c3dc9",
-          "version": "1.4.15"
+          "revision": "63823d1623156ba0b9f7f619ff0abad343d6c49b",
+          "version": "1.4.14"
         }
       },
       {

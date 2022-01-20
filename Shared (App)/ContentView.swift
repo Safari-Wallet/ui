@@ -42,10 +42,10 @@ struct ContentView: View {
                 SettingsView()
                     .tabItem { Label("Settings", systemImage: "gear") }
                 
-                #if DEBUG
-                DeveloperView()
-                    .tabItem { Label("Developer", systemImage: "exclamationmark.triangle.fill") }
-                #endif                
+//                #if DEBUG
+//                DeveloperView()
+//                    .tabItem { Label("Developer", systemImage: "exclamationmark.triangle.fill") }
+//                #endif                
             }
         }
     }
