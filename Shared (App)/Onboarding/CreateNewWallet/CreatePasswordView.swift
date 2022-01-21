@@ -108,6 +108,10 @@ extension CreatePasswordView {
         // 3. Save address bundles
         let id = UUID()
         let bundle = AddressBundle(id: id, walletName: ethBundleName, type: .keystorePassword, network: .ethereum, addresses: addresses)
+        try await bundle.addresses.concurrentForEach { address in
+            try await address.fetchENSname(network: .ethereum, provider: .alchemy(key: ApiKeys.alchemyMainnet))
+        }
+        
         try await bundle.save()
         let ropstenBundle = AddressBundle(id: id, walletName: ropstenbundleName, type: .keystorePassword, network: .ropsten, addresses: ropstenAddresses)
         try await ropstenBundle.save()
